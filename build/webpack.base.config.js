@@ -2,15 +2,15 @@ const path = require('path')
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+
+
 module.exports = {
-    entry:{
-        app: path.resolve(__dirname, "../src/index.js"),
-        // vendor: ['vue', 'vue-router', 'echarts']
+    entry: {
+        vendor: ['echarts'],
+        app: path.resolve(__dirname, "../src/index.js")
     },
-    module:{
-        rules: [
-            {
+    module: {
+        rules: [{
                 test: /\.js$/,
                 use: 'babel-loader',
                 exclude: /node_modules/
@@ -33,26 +33,21 @@ module.exports = {
             {
                 test: /\.vue$/,
                 use: 'vue-loader'
-            },
-
+            }
         ]
     },
-    plugins:[
+    plugins: [
         new HtmlWebpackPlugin({
             filename: path.resolve(__dirname, '../dist/index.html'),
             template: path.resolve(__dirname, '../public/index.html'),
-            inject: true 
+            inject: true
         }),
         new VueLoaderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.SplitChunksPlugin(),
-        new MiniCssExtractPlugin({
-            filename: 'css/[name].[hash].css',
-            chunkFilename: '[id].[hash].css'
-        }),
+        new webpack.optimize.SplitChunksPlugin()
     ],
     resolve: {
-        alias:{
+        alias: {
             "vue$": "vue/dist/vue.esm.js",
             "@": path.resolve(__dirname, '../src'),
         },

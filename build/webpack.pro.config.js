@@ -3,21 +3,20 @@ const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = merge(baseConfig, {
     mode: 'production',
-    devtool: 'source-map',
+    devtool: 'cheap-module-source-map',
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'js/[name].[hash].js',
         publicPath: './'
     },
-    module:{
-        rules: [
-            {
+    module: {
+        rules: [{
                 test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader,'css-loader', 'postcss-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
             },
             {
                 test: /.less$/,
@@ -30,6 +29,10 @@ module.exports = merge(baseConfig, {
             root: path.resolve(__dirname, '../'),
             verbose: true,
             dry: false
+        }),
+        new MiniCssExtractPlugin({
+            filename: 'css/[name].[hash].css',
+            chunkFilename: '[id].[hash].css'
         }),
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, '../public/static'),
