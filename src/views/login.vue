@@ -1,6 +1,6 @@
 <template>
     <div id="login">
-
+        hahahah
     </div>
 </template>
 
@@ -23,7 +23,6 @@
 
 <style lang="less">
     #login{
-        position: relative;
-        height: 100%;
+        color:red;
     }
 </style>
