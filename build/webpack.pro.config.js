@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require("webpack")
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
@@ -38,6 +39,19 @@ module.exports = merge(baseConfig, {
             from: path.resolve(__dirname, '../public/static'),
             to: 'static',
             ignore: ['.*']
-        }])
-    ]
+        }]),
+
+    ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: 'vendor',
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: 'all',
+                    priority: 10
+                }
+            }
+        }
+    }
 })

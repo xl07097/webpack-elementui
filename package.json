@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --hide-modules --config build/webpack.dev.config.js",
     "start": "npm run dev",
-    "dll": "webpack --config build/webpack.dll.config.js",
     "build": "node build/build.js"
   },
   "author": "xueliang",
