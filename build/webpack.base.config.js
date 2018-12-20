@@ -2,9 +2,7 @@ const path = require('path')
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
-const AutoDllPlugin = require("autodll-webpack-plugin")
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-
 module.exports = {
     entry:{
         app: path.resolve(__dirname, "../src/index.js"),
@@ -36,14 +34,7 @@ module.exports = {
                 test: /\.vue$/,
                 use: 'vue-loader'
             },
-            {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader,'css-loader', 'postcss-loader']
-            },
-            {
-                test: /.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader']
-            }
+
         ]
     },
     plugins:[
@@ -54,16 +45,6 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        // new AutoDllPlugin({
-        //     cache: true,
-        //     inject: true,
-        //     debug: true,
-        //     filename: '[name].js',
-        //     path: './dll',
-        //     entry: {
-        //         vendor: ['vue']
-        //     }
-        // }),
         new webpack.optimize.SplitChunksPlugin(),
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash].css',

@@ -1,13 +1,29 @@
 <template>
-    $END$
+    <div id="login">
+
+    </div>
 </template>
 
 <script>
     export default {
-        name: "login"
+        name: "login",
+        data() {
+            return {
+
+            };
+        },
+        methods: {
+            login() {
+ 
+            },
+
+        },
     }
 </script>
 
-<style scoped>
-
+<style lang="less">
+    #login{
+        position: relative;
+        height: 100%;
+    }
 </style>
