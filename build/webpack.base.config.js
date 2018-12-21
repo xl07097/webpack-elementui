@@ -6,7 +6,7 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: {
-        vendor: ['echarts'],
+        vendor: ['vue','vue-router','echarts'],
         app: path.resolve(__dirname, "../src/index.js")
     },
     module: {
@@ -43,8 +43,7 @@ module.exports = {
             inject: true
         }),
         new VueLoaderPlugin(),
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.SplitChunksPlugin()
+        new webpack.HotModuleReplacementPlugin()
     ],
     resolve: {
         alias: {
