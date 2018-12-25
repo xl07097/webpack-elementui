@@ -1,7 +1,5 @@
 <template>
-    <div :id="id" :style="{'width':width+'px','height':height+'px'}">
-
-    </div>
+    <div :id="id" :style="{'width':width+'px','height':height+'px'}"></div>
 </template>
 <script>
 import * as echarts from 'echarts'

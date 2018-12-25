@@ -5,10 +5,11 @@ const baseConfig = require('./webpack.base.config')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 module.exports = merge(baseConfig, {
     mode: 'production',
-    devtool: 'cheap-module-source-map',
+    devtool: "cheap-module-source-map",
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'js/[name].[hash].js',
@@ -36,29 +37,22 @@ module.exports = merge(baseConfig, {
             chunkFilename: 'css/[id].[hash].css'
         }),
         new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, '../public/static'),
-            to: 'static',
-            ignore: ['.*']
-        }]),
-        new webpack.optimize.RuntimeChunkPlugin({
-            name: "manifest"
-        }),
-        new webpack.optimize.SplitChunksPlugin({
-            cacheGroups: {
-                default: {
-                    minChunks: 2,
-                    priority: -20,
-                    reuseExistingChunk: true,
-                },
-                //打包重复出现的代码
-                vendor: {
-                    chunks: 'initial',
-                    minChunks: 2,
-                    maxInitialRequests: 5, // The default limit is too small to showcase the effect
-                    minSize: 0, // This is example is too small to create commons chunks
-                    name: 'vendor'
-                }
+                from: path.resolve(__dirname, '../public/static'),
+                to: 'static',
+                ignore: ['.*']
             }
-        })
+        ]),
+        new webpack.DllReferencePlugin({
+            context: path.resolve(__dirname, '..'),
+            manifest: require('./vendor-manifest.json')
+        }),
+        // //这个主要是将生成的vendor.dll.js文件加上hash值插入到页面中。
+        new AddAssetHtmlPlugin([{
+            filepath: path.resolve(__dirname, '../public/js/vendor.dll.js'),
+            outputPath: '../dist/js', // 【坑：不要用path.resolve，否则打包进程结束不了】
+            publicPath: './js',
+            includeSourcemap: false,
+            // hash: true,
+        }])
     ]
 })
