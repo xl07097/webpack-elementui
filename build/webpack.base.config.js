@@ -6,7 +6,8 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "../src/index.js")
+        app: path.resolve(__dirname, "../src/index.js"),
+        vendor: ['vue','vue-router','axios','echarts']
     },
     module: {
         rules: [{
@@ -42,8 +43,28 @@ module.exports = {
             inject: true
         }),
         new VueLoaderPlugin(),
-        new webpack.HotModuleReplacementPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.optimize.SplitChunksPlugin({
+            chunks: "vendor",
+            minSize: 20000,
+            minChunks: 1,
+            maxAsyncRequests: 5,
+            maxInitialRequests: 3,
+            name: true
+        })
     ],
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                vendor: {
+                    name: 'vendor',
+                    test: /[\\/]node_modules[\\/]/,
+                    chunks: 'all',
+                    priority: 10
+                }
+            }
+        }
+    },
     resolve: {
         alias: {
             "vue$": "vue/dist/vue.esm.js",

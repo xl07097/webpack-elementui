@@ -10,15 +10,13 @@ module.exports = merge(baseConfig, {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].js',
         publicPath:'/'
-        // assetsSubDirectory: 'static',
-        // assetsPublicPath: '/',
     },
     devServer: {
         contentBase: '../dist',
         historyApiFallback: true,
         open: true,
         hot: true,
-        port: '9820'
+        port: '9810'
     },
     module:{
         rules:[

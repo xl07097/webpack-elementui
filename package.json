@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.config.js",
-    "dll": "webpack --inline --progress --config build/webpack.dll.config.js",
     "start": "npm run dev",
     "build": "node build/build.js"
   },
