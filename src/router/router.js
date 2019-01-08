@@ -9,9 +9,9 @@ const router = [
     {
         path: '/',
         meta: {
-            title: '登录'
+            title: '首页'
         },
-        component: (resolve) => require(['../views/login.vue'], resolve)
+        component: (resolve) => require(['../views/index.vue'], resolve)
     },
     {
         path: '/index',

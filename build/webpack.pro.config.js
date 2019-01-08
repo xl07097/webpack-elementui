@@ -41,7 +41,6 @@ module.exports = merge(baseConfig, {
                 to: 'static',
                 ignore: ['.*']
             }
-        ]),
-        
+        ])
     ]
 })
