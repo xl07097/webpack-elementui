@@ -15,8 +15,7 @@
         methods: {
             login() {
  
-            },
-
+            }
         },
     }
 </script>

@@ -10,6 +10,11 @@
 
 export default {
     name: "App",
+    provide(){
+        return {
+            msg: '测试依赖与注入'
+        }
+    },
     created(){
 
     }
