@@ -12,7 +12,7 @@ export default {
   provide() {
     return {
       msg: "测试依赖与注入"
-    };
+    }
   },
   created() {}
 };
