@@ -9,12 +9,12 @@
 </template>
 
 <script>
-    import ChartVue from '@/components/ChartVue'
+    // import ChartVue from '@/components/ChartVue'
     export default {
         name: "index",
         inject: ['msg'],
         components:{
-            ChartVue
+            // ChartVue
         },
         mounted(){
             console.log(this.msg)
@@ -25,7 +25,7 @@
 <style scoped lang="less">
     .index {
         span {
-            color: red;
+            color: rgb(255, 8, 1);
         }
     }
 </style>
