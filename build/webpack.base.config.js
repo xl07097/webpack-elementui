@@ -27,7 +27,8 @@ module.exports = {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 51200
+                    limit: 51200,
+                    name: path.posix.join('fonts', 'img/[name].[ext]')
                 }
             },
             {
