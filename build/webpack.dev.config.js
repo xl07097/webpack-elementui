@@ -1,6 +1,5 @@
 const merge = require('webpack-merge')
 const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const baseConfig = require("./webpack.base.config")
 
 module.exports = merge(baseConfig, {
@@ -29,12 +28,5 @@ module.exports = merge(baseConfig, {
                 use: ['style-loader', 'vue-style-loader','css-loader', 'less-loader', 'postcss-loader']
             }
         ]
-    },
-    plugins: [
-        new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, '../public/static'),
-            to: 'static',
-            ignore: ['.*']
-        }])
-    ]
+    }
 })

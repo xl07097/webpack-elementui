@@ -51,7 +51,12 @@ module.exports = {
             maxAsyncRequests: 5,
             maxInitialRequests: 3,
             name: true
-        })
+        }),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, '../public/static'),
+            to: 'static',
+            ignore: ['.*']
+        }])
     ],
     optimization: {
         splitChunks: {
