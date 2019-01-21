@@ -1,6 +1,6 @@
 <template>
     <div id="login">
-        hahahah
+        嘿嘿嘿
     </div>
 </template>
 
@@ -20,7 +20,7 @@
     }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
     #login{
         color:red;
     }
