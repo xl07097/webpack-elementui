@@ -10,7 +10,12 @@ module.exports = {
         vendor: ['vue','vue-router','axios','echarts']
     },
     module: {
-        rules: [{
+        rules: [
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
+            },
+            {
                 test: /\.js$/,
                 use: 'babel-loader',
                 exclude: /node_modules/
@@ -28,12 +33,16 @@ module.exports = {
                 loader: 'url-loader',
                 options: {
                     limit: 51200,
-                    name: path.posix.join('fonts', 'img/[name].[ext]')
+                    name: path.posix.join('static', 'fonts/[name].[ext]')
                 }
             },
             {
-                test: /\.vue$/,
-                use: 'vue-loader'
+                test: /\.(mp4|mp3)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 51200,
+                    name: path.posix.join('static', 'media/[name].[ext]')
+                }
             }
         ]
     },
