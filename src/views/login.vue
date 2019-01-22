@@ -1,27 +1,27 @@
 <template>
-    <div id="login">
-        嘿嘿嘿
-    </div>
+  <div id="login">
+    <b-map></b-map>
+  </div>
 </template>
 
 <script>
-    export default {
-        name: "login",
-        data() {
-            return {
-
-            };
-        },
-        methods: {
-            login() {
- 
-            }
-        },
-    }
+import BMap from '@/components/BMap'
+export default {
+  name: "login",
+  components: {
+    BMap
+  },
+  data() {
+    return {};
+  },
+  methods: {
+    login() {}
+  }
+};
 </script>
 
 <style lang="less" scoped>
-    #login{
-        color:red;
-    }
+#login {
+  color: red;
+}
 </style>

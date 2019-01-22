@@ -3,15 +3,15 @@ const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
     entry: {
         app: path.resolve(__dirname, "../src/index.js"),
-        vendor: ['vue','vue-router','axios','echarts']
+        vendor: ['vue', 'vue-router', 'axios', 'echarts']
     },
     module: {
-        rules: [
-            {
+        rules: [{
                 test: /\.vue$/,
                 use: 'vue-loader'
             },
@@ -66,7 +66,13 @@ module.exports = {
             from: path.resolve(__dirname, '../public/static'),
             to: 'static',
             ignore: ['.*']
-        }])
+        }]),
+        new AddAssetHtmlPlugin({
+            filepath: 'http://api.map.baidu.com/api?v=2.0&ak=eIGwkbkGLzFGy3bVduSUXlBcPMQEM5fi',
+            outputPath: '../dist/js',
+            publicPath: './js',
+            includeSourcemap: false
+        })
     ],
     optimization: {
         splitChunks: {
