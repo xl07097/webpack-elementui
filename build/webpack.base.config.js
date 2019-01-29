@@ -67,7 +67,7 @@ module.exports = {
             to: 'static',
             ignore: ['.*']
         }]),
-        new AddAssetHtmlPlugin({
+        new AddAssetHtmlPlugin({ // 为何没用？
             filepath: 'http://api.map.baidu.com/api?v=2.0&ak=eIGwkbkGLzFGy3bVduSUXlBcPMQEM5fi',
             outputPath: '../dist/js',
             publicPath: './js',
