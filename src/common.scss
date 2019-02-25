@@ -1,0 +1,386 @@
+html, body {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  min-width: 1366px;
+  min-height: 768px;
+  overflow: auto;
+  background-color: #c3e0de !important;
+}
+
+ul, li {
+  list-style: none;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: " ";
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.main-box {
+  position: absolute;
+  width: 100%;
+  top: 70px;
+  bottom: 0;
+  padding: 0 1%;
+  .nav-left {
+    width: 12.6%;
+    position: absolute;
+    top: 34px;
+    bottom: 22px;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #FCFFFE;
+    z-index: 10;
+  }
+
+  .nav-background {
+    position: absolute;
+    top: 22px;
+    bottom: 32px;
+    background-color: #95C5C1;
+    left: 1.5%;
+    transform: rotate(0.5deg);
+    border-radius: 8px;
+  }
+
+  .container-background {
+    position: absolute;
+    top: 20px;
+    bottom: 32px;
+    width: 83%;
+    margin-left: 14.5%;
+    background-color: #95C5C1;
+    border-radius: 8px;
+    transform: rotate(0.25deg);
+
+  }
+
+  .route-container {
+    position: absolute;
+    top: 34px;
+    bottom: 22px;
+    width: 83%;
+    margin-left: 14%;
+    background-color: #FCFFFE;
+    border-radius: 8px;
+    //overflow: hidden;
+    z-index: 10;
+  }
+}
+
+.content-box {
+  background-color: #FCFFFE;
+  border-radius: 8px;
+}
+
+.ivu-menu-light {
+  background: transparent !important;
+}
+
+/*覆盖输入框默认高度*/
+.ivu-input {
+  height: 34px !important;
+}
+
+.textarea .ivu-input {
+  height: auto !important;
+}
+
+.ivu-input:focus,
+.ivu-input:hover,
+.ivu-input-number-focused,
+.ivu-input-number:hover {
+  border-color: #498E8A !important
+}
+
+.ivu-select-visible .ivu-select-selection {
+  border-color: #498E8A !important
+}
+
+.ivu-select-item-selected, .ivu-select-item-selected:hover {
+  color: #498E8A !important
+}
+
+/*form-item间距*/
+.ivu-form-inline .ivu-form-item {
+  margin-right: 40px !important;
+}
+
+/*表单文字样式覆盖*/
+.ivu-form .ivu-form-item-label {
+  font-size: 15px !important;
+  color: #6f6c65 !important;
+}
+
+/*分割线*/
+.divider {
+  height: 1px;
+  background-color: #C7D2CF;
+  opacity: 0.5;
+}
+
+/*查询按钮默认样式*/
+.search-btn {
+  width: 80px;
+  height: 34px;
+}
+
+/*表单按钮默认样式*/
+.submit-btn {
+  width: 70px;
+  height: 34px;
+}
+
+/*primary 按钮样式覆盖*/
+.ivu-btn-primary {
+  background-color: #FF7B10 !important;
+  color: #FEFEFE !important;
+  font-size: 16px !important;
+  border-color: #FF7B10 !important;
+}
+
+.vertical-center-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ivu-modal {
+    top: 0;
+  }
+}
+
+.action-btn {
+  color: #27373C;
+  font-size: 16px;
+}
+
+.btn-box {
+  text-align: left;
+  margin: 24px 0 6px;
+  height: 42px;
+  line-height: 42px;
+}
+
+.action-btn {
+  font-size: 16px;
+  color: #27373C;
+  cursor: pointer;
+  display: inline-block;
+  margin-right: 20px;
+  img {
+    float: left;
+    margin: 10px;
+  }
+}
+
+.action-btn:hover {
+  color: #888;
+}
+
+/*modal 确认按钮样式覆盖*/
+.ivu-modal-footer button + button {
+  width: 70px;
+  height: 30px;
+  line-height: 28px;
+  padding: 0;
+}
+
+/*将文字按钮覆盖为取消按钮样式*/
+.ivu-btn-text {
+  width: 70px !important;
+  height: 30px !important;
+  line-height: 28px !important;
+  font-size: 16px !important;
+  padding: 0 !important;
+  border: 1px solid #ADADAD !important;
+  border-radius: 4px !important;
+  box-sizing: border-box !important;
+}
+
+/*modal 标题文字修改*/
+.ivu-modal-header-inner, .ivu-modal-header p {
+  font-size: 16px !important;
+  color: #011311 !important;
+}
+
+.ivu-table {
+  font-size: 14px !important;
+  background-color: transparent !important;
+}
+
+/*表格斑马纹*/
+.ivu-table-stripe .ivu-table-body tr:nth-child(2n) td, .ivu-table-stripe .ivu-table-fixed-body tr:nth-child(2n) td {
+  background-color: rgba(219, 224, 218, 0.4) !important;
+}
+
+/*表格title颜色*/
+.ivu-table th {
+  //background-color: rgba(73, 142, 138, 0.83) !important;
+  background-color: #67a19e !important;
+  color: #ffffff;
+}
+
+/*表格表头圆角*/
+.ivu-table-wrapper {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.ivu-table-header {
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.ivu-checkbox-checked .ivu-checkbox-inner {
+  border-color: #ffffff !important;
+  background-color: #498E8A !important;
+}
+
+.ivu-page-item-active {
+  border-color: #498E8A !important;
+}
+
+
+.ivu-table-cell {
+  padding: 0 4px !important;
+}
+
+.ivu-switch-checked {
+  border-color: #518783 !important;
+  background-color: #518783 !important;
+}
+
+.ivu-switch-disabled {
+  border-color: #F75858 !important;
+  background-color: #F75858 !important;
+}
+
+.ivu-select-selection-focused, .ivu-select-selection:hover {
+  border-color: #518783 !important;
+}
+
+.ivu-menu-item, .ivu-menu {
+  font-size: 16px !important;
+}
+
+.ivu-menu-vertical .ivu-menu-submenu .ivu-menu-item{
+  font-size: 14px!important;
+}
+
+.ivu-switch-checked:after {
+  left: 14px !important;
+}
+
+.ivu-switch:after {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.ivu-switch {
+  width: 32px !important;
+  height: 18px !important;
+}
+
+/*表格中编辑按钮*/
+.editBtn {
+  padding-top: 6px;
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 30px
+}
+
+.editBtn:hover {
+  opacity: 0.8;
+}
+
+.ivu-modal-body {
+  padding: 20px 28px !important;
+}
+
+.transparent-mask {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.01);
+  height: 100%;
+  z-index: 1998;
+}
+
+/*分页器字体*/
+.ivu-page {
+  font-size: 14px;
+}
+
+/*radio 样式覆盖*/
+.ivu-radio {
+  margin-right: 8px !important;
+}
+
+.ivu-radio-wrapper {
+  margin-right: 18px !important;
+}
+
+.ivu-radio-inner {
+  width: 16px !important;
+  height: 16px !important;
+}
+
+.ivu-radio-checked .ivu-radio-inner {
+  border-color: #498E8A !important;
+}
+
+.ivu-radio-inner:after {
+  width: 10px !important;
+  height: 10px !important;
+  background-color: #498E8A !important;
+}
+
+.ivu-radio-group {
+  line-height: 31px;
+}
+
+textarea.ivu-input {
+  height: auto !important;
+}
+
+.ivu-menu-vertical .ivu-menu-item,
+.ivu-menu-vertical .ivu-menu-submenu-title {
+  padding-right: 0 !important;
+}
+
+.ivu-input[disabled], fieldset[disabled] .ivu-input {
+  background-color: #E9F0F2 !important;
+}
+
+.ivu-select-disabled .ivu-select-selection {
+  background-color: #E9F0F2 !important;
+}
+
+.ivu-select-disabled .ivu-select-selection,
+.ivu-input[disabled],
+fieldset[disabled] .ivu-input {
+  color: #515a6e!important;
+}
+.v-table-header{
+  background-color: #67a19e !important;
+}
+.v-table-title-cell{
+  .table-title{
+    font-size: 14px!important;
+  }
+}
+.v-table-btable{
+  .v-table-body-cell{
+    font-size: 14px!important;
+    color: #515a6e!important;
+  }
+}

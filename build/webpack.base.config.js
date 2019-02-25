@@ -7,7 +7,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "../src/index.js"),
+        app: path.resolve(__dirname, "../src/main.js"),
         //vendor: ['vue', 'vue-router', 'axios', 'echarts']
     },
     module: {
@@ -19,6 +19,10 @@ module.exports = {
                 test: /\.js$/,
                 use: 'babel-loader',
                 exclude: /node_modules/
+            },
+            {
+                test: /iview\/.*?js$/,
+                loader: 'babel-loader'
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,
@@ -67,12 +71,12 @@ module.exports = {
             to: 'static',
             ignore: ['.*']
         }]),
-        new AddAssetHtmlPlugin({ // 为何没用？
-            filepath: 'http://api.map.baidu.com/api?v=2.0&ak=eIGwkbkGLzFGy3bVduSUXlBcPMQEM5fi',
-            outputPath: '../dist/js',
-            publicPath: './js',
-            includeSourcemap: false
-        })
+        // new AddAssetHtmlPlugin({ // 为何没用？
+        //     filepath: 'http://api.map.baidu.com/api?v=2.0&ak=eIGwkbkGLzFGy3bVduSUXlBcPMQEM5fi',
+        //     outputPath: '../dist/js',
+        //     publicPath: './js',
+        //     includeSourcemap: false
+        // })
     ],
     optimization: {
         splitChunks: {
@@ -96,6 +100,7 @@ module.exports = {
         alias: {
             "vue$": "vue/dist/vue.esm.js",
             "@": path.resolve(__dirname, '../src'),
+            'scss-loader': 'sass-loader',
         },
         extensions: [".js", ".json", ".vue"]
     }

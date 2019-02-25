@@ -20,6 +20,10 @@ module.exports = merge(baseConfig, {
             {
                 test: /.less$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader']
+            },
+            {
+                test: /.sass$/,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader']
             }
         ]
     },
