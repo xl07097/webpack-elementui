@@ -58,7 +58,7 @@
     ;
 </script>
 
-<style type="scss" scoped>
+<style lang="scss" scoped>
     .backgroundColor {
         display: none;
     }

@@ -270,7 +270,7 @@
         ,
     };
 </script>
-<style type="scss" scoped>
+<style lang="scss" scoped>
 
     .content-box {
         padding: 30px 44px;
@@ -304,7 +304,6 @@
             height: 80px;
             font-size: 26px;
             line-height: 1;
-            // font-family: SourceHanSansCN-Bold;
             font-weight: bold;
             color: rgba(51, 51, 51, 1);
         }

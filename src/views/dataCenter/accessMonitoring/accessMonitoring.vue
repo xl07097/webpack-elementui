@@ -30,52 +30,6 @@
                   @on-page-size-change="sizeChange"
             />
         </div>
-        <!-- 新增修改 -->
-        <!--<Modal-->
-        <!--class="dicInfoAddModal"-->
-        <!--:title="addtitle"-->
-        <!--v-model="addModal"-->
-        <!--:mask-closable="false"-->
-        <!--width='644'-->
-        <!--:styles="{top: '20px'}"-->
-        <!--class-name="vertical-center-modal">-->
-        <!--<Form :model="addForm" label-position="top">-->
-        <!--<Row>-->
-        <!--<Col span="12" class="leftFormItem">-->
-        <!--<FormItem label="字典表类别">-->
-        <!--<Select v-model="addForm.dictionaryType">-->
-        <!--<Option v-for="item in dictionaryTypeList" :value="item.id" :key="item.id">{{ item.name-->
-        <!--}}-->
-        <!--</Option>-->
-        <!--</Select>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="字典表类别名称">-->
-        <!--<Select v-model="addForm.dictionaryName" >-->
-        <!--<Option v-for="item in dictionaryNameList" :value="item.id" :key="item.id">{{ item.name-->
-        <!--}}-->
-        <!--</Option>-->
-        <!--</Select>-->
-        <!--</FormItem>-->
-        <!--<FormItem>-->
-        <!--<span class="formLabel">禁用状态</span>&emsp;<Switch v-model="addForm.status"/>-->
-        <!--</FormItem>-->
-        <!--</Col>-->
-        <!--<Col span="12" class="rightFormItem">-->
-        <!--<FormItem label="字段名称">-->
-        <!--<Input v-model="addForm.fieldName"></Input>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="字段排序">-->
-        <!--<Input v-model="addForm.order"></Input>-->
-        <!--</FormItem>-->
-        <!--</Col>-->
-        <!--</Row>-->
-        <!--</Form>-->
-        <!--<div class="footer">-->
-        <!--<i-button class="close" type='default' @click='closeaddModal'>取消</i-button>-->
-        <!--<i-button class="confirm" type="primary" @click='confirmaddModal'>保存</i-button>-->
-        <!--</div>-->
-        <!--</Modal>-->
-
     </div>
 </template>
 <script>

@@ -1177,7 +1177,7 @@
         }
     });
 </script>
-<style type='scss'>
+<style lang='scss'>
     .examinationPlan {
         .v-table-title-class {
             font-size: 16px;

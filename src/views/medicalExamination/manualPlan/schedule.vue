@@ -521,7 +521,7 @@
         }
     };
 </script>
-<style type="scss" scoped>
+<style lang="scss" scoped>
 
     .content-box {
         padding: 30px 44px;

@@ -32,48 +32,6 @@
     };
 </script>
 <style lang="scss">
-    /*.dicInfoAddModal{*/
-    /*.ivu-form-item-label{*/
-    /*font-size:14px!important;*/
-    /*font-family:SourceHanSansCN-Regular;*/
-    /*font-weight:400;*/
-    /*color:rgba(126,132,133,1)!important;*/
-    /*}*/
-    /*.ivu-modal-body{*/
-    /*padding-top: 57px!important;*/
-    /*.leftFormItem{*/
-    /*padding-left: 62px;*/
-    /*width: 262px;*/
-    /*.formLabel{*/
-    /*font-size:14px!important;*/
-    /*font-family:SourceHanSansCN-Regular;*/
-    /*font-weight:400;*/
-    /*color:rgba(126,132,133,1)!important;*/
-    /*}*/
-    /*}*/
-    /*.rightFormItem{*/
-    /*padding-left: 66px;*/
-    /*width: 266px;*/
-    /*}*/
-    /*}*/
-    /*.footer {*/
-    /*margin: 139px 38px 22px 0;*/
-    /*text-align: right;*/
-    /*.confirm {*/
-    /*width: 70px;*/
-    /*height: 30px;*/
-    /*}*/
-    /*.close {*/
-    /*width: 70px;*/
-    /*height: 30px;*/
-    /*margin-right: 28px;*/
-    /*}*/
-    /*}*/
-    /*.ivu-modal-footer {*/
-    /*display: none;*/
-    /*}*/
-    /*}*/
-
     .standardizedOut {
         .content-box {
             padding: 30px 44px;
