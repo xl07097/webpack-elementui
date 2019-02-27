@@ -15,6 +15,6 @@
         methods: {}
     };
 </script>
-<style type="scss">
-    @import "common.scss";
+<style lang="scss">
+
 </style>
