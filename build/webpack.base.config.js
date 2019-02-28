@@ -7,7 +7,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "../src/main.js"),
+        app: path.resolve(__dirname, "../src/index.js"),
         //vendor: ['vue', 'vue-router', 'axios', 'echarts']
     },
     module: {

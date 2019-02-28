@@ -3,6 +3,8 @@ import router from './router/index';
 
 import App from './App';
 
+import './router/permission'
+
 new Vue({
     el:"#app",
     router,
