@@ -13,7 +13,6 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "echarts": "^4.2.0-rc.2",
     "iview": "^3.2.2",
     "js-cookie": "^2.2.0",
     "vue": "^2.5.21",
@@ -44,7 +43,6 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
-    "vue-easytable": "^1.7.2",
     "vue-loader": "^15.5.0",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "^2.5.21",
