@@ -8,3 +8,4 @@ export default new VueRouter({
     mode: 'history',
     routes: router
 })
+

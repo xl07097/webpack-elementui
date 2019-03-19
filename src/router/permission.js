@@ -1,17 +1,33 @@
-import router from './index';
+import router from '.';
+import {LoadingBar, Message} from 'iview';
 
 router.beforeEach((to, from, next) => {
-    console.log(to);
-    let user = sessionStorage.getItem("username");
-    if (user == null && to.path != '/login') {
-      next('/login');
+    let user = sessionStorage.getItem('sportHealthUserName');
+    if (!user && to.path !== '/login') {
+        sessionStorage.clear();
+        next('/login');
     } else {
-      if (to.path == '/login') {
-        next();
-      } else if(to.path === '/'){
-        next('/index');
-      }else{
-        next();
-      }
+        if (to.path === '/login' || to.path === '/') {
+            sessionStorage.clear();
+            next();
+        } else if (to.path === '/index') {
+            LoadingBar.start();
+            next();
+        } else {
+            let permission = JSON.parse(sessionStorage.getItem('permission'));
+            if (permission.indexOf(to.name) !== -1) {
+                LoadingBar.start();
+                next();
+            } else {
+                // Message.error('暂无权限');
+                next();
+                // next('/index');
+            }
+        }
     }
-})
+});
+
+router.afterEach(() => {
+    LoadingBar.finish();
+    window.scrollTo(0, 0);
+});

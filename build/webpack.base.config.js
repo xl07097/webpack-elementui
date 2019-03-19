@@ -7,7 +7,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "../src/index.js"),
+        app: path.resolve(__dirname, "../src/main.js"),
         //vendor: ['vue', 'vue-router', 'axios', 'echarts']
     },
     module: {
@@ -22,31 +22,37 @@ module.exports = {
             },
             {
                 test: /iview\/.*?js$/,
-                loader: 'babel-loader'
+                use:'babel-loader'
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 102400,
-                    name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
-                }
+                use:[{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 102400,
+                        name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
+                    }
+                }]
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 51200,
-                    name: path.posix.join('static', 'fonts/[name].[ext]')
-                }
+                use:[{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 51200,
+                        name: path.posix.join('static', 'fonts/[name].[ext]')
+                    }                    
+                }]
             },
             {
                 test: /\.(mp4|mp3)$/,
-                loader: 'url-loader',
-                options: {
-                    limit: 51200,
-                    name: path.posix.join('static', 'media/[name].[ext]')
-                }
+                use:[{
+                    loader: 'url-loader',
+                    options: {
+                        limit: 51200,
+                        name: path.posix.join('static', 'media/[name].[ext]')
+                    }
+                }]
             }
         ]
     },
@@ -58,25 +64,11 @@ module.exports = {
         }),
         new VueLoaderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        // new webpack.optimize.SplitChunksPlugin({
-        //     chunks: "all",
-        //     minSize: 20000,
-        //     minChunks: 1,
-        //     maxAsyncRequests: 5,
-        //     maxInitialRequests: 3,
-        //     name: true
-        // }),
         new CopyWebpackPlugin([{
             from: path.resolve(__dirname, '../public/static'),
             to: 'static',
             ignore: ['.*']
         }]),
-        // new AddAssetHtmlPlugin({ // 为何没用？
-        //     filepath: 'http://api.map.baidu.com/api?v=2.0&ak=eIGwkbkGLzFGy3bVduSUXlBcPMQEM5fi',
-        //     outputPath: '../dist/js',
-        //     publicPath: './js',
-        //     includeSourcemap: false
-        // })
     ],
     optimization: {
         splitChunks: {
@@ -99,7 +91,7 @@ module.exports = {
     resolve: {
         alias: {
             "vue$": "vue/dist/vue.esm.js",
-            // "@": path.resolve(__dirname, '../src'),
+            "@": path.resolve(__dirname, '../src'),
             'scss-loader': 'sass-loader',
         },
         extensions: [".js", ".json", ".vue"]
