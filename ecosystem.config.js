@@ -19,7 +19,7 @@ module.exports = {
 
   deploy : {
     production : {
-      user : 'node',
+      user : 'root',
       host : '192.1.6.55',
       ref  : 'origin/master',
       repo: 'git@192.1.6.46:xl07097/webpack-test.git',
