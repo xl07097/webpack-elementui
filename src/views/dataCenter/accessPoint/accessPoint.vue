@@ -13,7 +13,7 @@
                     新增
                 </div>
             </div>
-            <Table ref="selection" :columns="columns" :data="data"></Table>
+            <Table ref="selection" :i-columns="i-columns" :data="data"></Table>
             <Page style="text-align: center;margin-top: 20px;"
                   :total="totalRecords"
                   :current="filterForm.page"
@@ -38,45 +38,45 @@
                 @on-cancel="closeaddModal">
             <Form ref="addFormValidate" inline :model="addForm" label-position="top" :rules="addFormValidate">
                 <Row>
-                    <Col span="12" class="leftFormItem">
+                    <i-col span="12" class="leftFormItem">
                         <FormItem label="接入代号" prop="prefix">
                             <Select style="width:75px" v-model="addForm.prefix" @on-change="v=>{setCurrnertNum(v)}"
                                     :label-in-value="true">
                                 <Option v-for="item in prefixList" :value="item.id" :key="item.id">{{ item.name }}
                                 </Option>
                             </Select>
-                            <Input v-model="addForm.currentNum" style="width: 75px" disabled></Input>
+                            <i-input v-model="addForm.currentNum" style="width: 75px" disabled></i-input>
                         </FormItem>
-                    </Col>
-                    <Col span="12" class="rightFormItem">
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
                         <FormItem label="所属单位" prop="unit">
-                            <Input v-model.trim="addForm.unit"></Input>
+                            <i-input v-model.trim="addForm.unit"></i-input>
                         </FormItem>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row>
-                    <Col span="12" class="leftFormItem">
+                    <i-col span="12" class="leftFormItem">
                         <FormItem label="IP地址" prop="ip">
-                            <Input v-model.trim="addForm.ip"></Input>
+                            <i-input v-model.trim="addForm.ip"></i-input>
                         </FormItem>
-                    </Col>
-                    <Col span="12" class="rightFormItem">
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
                         <FormItem label="MAC地址" prop="mac">
-                            <Input v-model.trim="addForm.mac"></Input>
+                            <i-input v-model.trim="addForm.mac"></i-input>
                         </FormItem>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row>
-                    <Col span="12" class="leftFormItem">
+                    <i-col span="12" class="leftFormItem">
                         <FormItem label="负责人" prop="leader">
-                            <Input v-model.trim="addForm.leader"></Input>
+                            <i-input v-model.trim="addForm.leader"></i-input>
                         </FormItem>
-                    </Col>
-                    <Col span="12" class="rightFormItem">
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
                         <FormItem label="联系电话" prop="tel">
-                            <Input v-model.trim="addForm.tel"></Input>
+                            <i-input v-model.trim="addForm.tel"></i-input>
                         </FormItem>
-                    </Col>
+                    </i-col>
                 </Row>
             </Form>
             <div class="footer">
@@ -96,45 +96,45 @@
                 @on-cancel="confirmInfoModal">
             <Form ref="addFormValidate" inline :model="addForm" label-position="top">
                 <Row>
-                    <Col span="12" class="leftFormItem">
+                    <i-col span="12" class="leftFormItem">
                         <FormItem label="接入代号" prop="prefix">
                             <Select style="width:75px" v-model="addForm.prefix" @on-change="v=>{setCurrnertNum(v)}"
                                     :label-in-value="true" disabled>
                                 <Option v-for="item in prefixList" :value="item.id" :key="item.id">{{ item.name }}
                                 </Option>
                             </Select>
-                            <Input v-model="addForm.currentNum" style="width: 75px" readonly></Input>
+                            <i-input v-model="addForm.currentNum" style="width: 75px" readonly></i-input>
                         </FormItem>
-                    </Col>
-                    <Col span="12" class="rightFormItem">
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
                         <FormItem label="所属单位" prop="unit">
-                            <Input v-model="addForm.unit" readonly></Input>
+                            <i-input v-model="addForm.unit" readonly></i-input>
                         </FormItem>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row>
-                    <Col span="12" class="leftFormItem">
+                    <i-col span="12" class="leftFormItem">
                         <FormItem label="IP地址" prop="ip">
-                            <Input v-model="addForm.ip" readonly></Input>
+                            <i-input v-model="addForm.ip" readonly></i-input>
                         </FormItem>
-                    </Col>
-                    <Col span="12" class="rightFormItem">
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
                         <FormItem label="MAC地址" prop="mac">
-                            <Input v-model="addForm.mac" readonly></Input>
+                            <i-input v-model="addForm.mac" readonly></i-input>
                         </FormItem>
-                    </Col>
+                    </i-col>
                 </Row>
                 <Row>
-                    <Col span="12" class="leftFormItem">
+                    <i-col span="12" class="leftFormItem">
                         <FormItem label="负责人" prop="leader">
-                            <Input v-model="addForm.leader" readonly></Input>
+                            <i-input v-model="addForm.leader" readonly></i-input>
                         </FormItem>
-                    </Col>
-                    <Col span="12" class="rightFormItem">
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
                         <FormItem label="联系电话" prop="tel">
-                            <Input v-model="addForm.tel" readonly></Input>
+                            <i-input v-model="addForm.tel" readonly></i-input>
                         </FormItem>
-                    </Col>
+                    </i-col>
                 </Row>
             </Form>
             <div class="footer">
