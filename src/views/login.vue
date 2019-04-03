@@ -68,6 +68,7 @@
                 account_animalte: {},
                 fullHeight: '',
                 fullWeight: '',
+                flag:false
             };
         },
         methods: {
@@ -117,9 +118,6 @@
             setImage(width, height) {
                 this.width = width;
                 this.height = height;
-            },
-            changegitImage() {
-
             }
         },
         beforeMount() {
@@ -131,6 +129,7 @@
             that.logFormStyle.height = (window.fullWidth) * 0.31 * 1.29 + 'px';
         },
         mounted() {
+
             if (!this.timer) {
                 this.timer = true;
                 let that = this;

@@ -1,5 +1,5 @@
-import router from '.';
-import {LoadingBar, Message} from 'iview';
+import router from './router';
+import {LoadingBar,Message} from 'iview';
 
 router.beforeEach((to, from, next) => {
     let user = sessionStorage.getItem('sportHealthUserName');

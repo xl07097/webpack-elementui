@@ -990,17 +990,6 @@
 </script>
 <style lang='scss'>
     .examinationPlan {
-        .content-box {
-            padding: 30px 44px;
-        }
-
-        .title {
-            height: 80px;
-            font-size: 26px;
-            font-weight: bold;
-            color: #333333;
-        }
-
         .v-table-title-cell,
         .v-table-body-cell {
             padding-left: 10px !important;

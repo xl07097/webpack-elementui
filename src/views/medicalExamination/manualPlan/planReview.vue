@@ -1,102 +1,65 @@
 <template>
-    <div>
-        <div class="content-box classes">
-            <div class="title">学校班级人数审核</div>
-            <Form v-model="req" inline>
-                <FormItem label="学校名称" :label-width="80">
-                    <i-select style="width:200px" v-model="req.dep_id" @on-change="schoolChange">
-                        <i-option value="-1">全部</i-option>
-                        <i-option v-for="item of schoolList" :key="item.id" :value='item.id'>{{item.name}}</i-option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="学年" :label-width="50">
-                    <DatePicker type="year" v-model="req.year" @on-change="gradeChange" :options="dateOpts"
-                                placeholder="请选择"
-                                style="width: 140px"></DatePicker>
-                </FormItem>
-                <FormItem label="学期" :label-width="50">
-                    <i-select style="width:140px" v-model="req.term" @on-change="gradeChange">
-                        <Option value="-1">全部</Option>
-                        <Option :value="1">第一学期</Option>
-                        <Option :value="2">第二学期</Option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="年级" :label-width="50">
-                    <i-select style="width:140px" v-model="req.grade_no" @on-change="gradeChange">
-                        <i-option value="-1">全部</i-option>
-                        <i-option v-for="item of gradeList" :key="item.id" :value='item.id'>{{item.value}}</i-option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="班级" :label-width="50">
-                    <i-select style="width:140px" v-model="req.class_no">
-                        <i-option value="-1">全部</i-option>
-                        <i-option v-for="item of classList" :key="item.id" :value='item.id'>{{item.class_no}}</i-option>
-                    </i-select>
-                </FormItem>
-                <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
-                </FormItem>
-            </Form>
-            <Divider dashed/>
-            <div>
-                <a href="javascript:void(0)" class="add" style="margin-right: 45px;margin-top: 24px" @click="doReview">
-                    <img src="../../../assets/unit/import.png" alt="add">&nbsp;上报
-                </a>
-            </div>
-            <Table @on-selection-change="selectChange" :columns="columns" :data="tableData"></Table>
-            <div class="page">
-                <Page
-                        :total="pageConfig.total"
-                        show-total
-                        show-elevator
-                        show-sizer
-                        :current='pageConfig.page'
-                        :page-size-opts='pageConfig.opts'
-                        :page-size='pageConfig.size'
-                        @on-change='pageChange'
-                        @on-page-size-change='sizeChange'/>
-            </div>
+    <div class="content-box checkCount">
+        <div class="title">学校班级人数审核</div>
+        <Form v-model="req" inline>
+            <FormItem label="学校名称" :label-width="80">
+                <i-select style="width:200px" v-model="req.dep_id" @on-change="schoolChange">
+                    <i-option value="-1">全部</i-option>
+                    <i-option v-for="item of schoolList" :key="item.id" :value='item.id'>{{item.name}}</i-option>
+                </i-select>
+            </FormItem>
+            <FormItem label="学年" :label-width="50">
+                <i-select style="width:200px" v-model="req.year" @on-change="gradeChange">
+                    <i-option value="-1">全部</i-option>
+                    <i-option v-for="item of yearList" :key="item.value" :value='item.value'>{{item.name}}
+                    </i-option>
+                </i-select>
+                <!--<DatePicker type="year" v-model="req.year" @on-change="gradeChange" :options="dateOpts"-->
+                <!--placeholder="请选择"-->
+                <!--style="width: 140px"></DatePicker>-->
+            </FormItem>
+            <FormItem label="学期" :label-width="50">
+                <i-select style="width:140px" v-model="req.term" @on-change="gradeChange">
+                    <Option value="-1">全部</Option>
+                    <Option :value="1">第一学期</Option>
+                    <Option :value="2">第二学期</Option>
+                </i-select>
+            </FormItem>
+            <FormItem label="年级" :label-width="50">
+                <i-select style="width:140px" v-model="req.grade_no" @on-change="gradeChange">
+                    <i-option value="-1">全部</i-option>
+                    <i-option v-for="item of gradeList" :key="item.id" :value='item.id'>{{item.value}}</i-option>
+                </i-select>
+            </FormItem>
+            <FormItem label="班级" :label-width="50">
+                <i-select style="width:140px" v-model="req.class_no">
+                    <i-option value="-1">全部</i-option>
+                    <i-option v-for="item of classList" :key="item.id" :value='item.id'>{{item.class_no}}</i-option>
+                </i-select>
+            </FormItem>
+            <FormItem style="float: right;">
+                <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
+            </FormItem>
+        </Form>
+        <Divider dashed/>
+        <div>
+            <a href="javascript:void(0)" class="add" style="margin-right: 45px;" @click="doReview">
+                <img src="../../../assets/unit/import.png" alt="add">&nbsp;上报
+            </a>
         </div>
-        <!--<Modal-->
-        <!--title="学校班级人数审核"-->
-        <!--v-model="modal"-->
-        <!--:mask-closable="false"-->
-        <!--:styles="{top: '140px',width:'800px'}"-->
-        <!--&gt;-->
-        <!--<Form inline :model="addFormData" label-position="top" class="modal-form">-->
-        <!--<FormItem label="学校名称">-->
-        <!--<Input style="width:340px" v-model="addFormData.code" disabled/>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="学年">-->
-        <!--<Input style="width:340px" v-model="addFormData.code" disabled/>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="学期">-->
-        <!--<Input style="width:340px" v-model="addFormData.code" disabled/>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="年级">-->
-        <!--<Input style="width:340px" v-model="addFormData.code" disabled/>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="班级">-->
-        <!--<Input style="width:340px" v-model="addFormData.code" disabled/>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="人数">-->
-        <!--<Input style="width:340px" v-model="addFormData.code" disabled/>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="">-->
-        <!--<div>-->
-        <!--<span style="display:inline-block;color: #666666;font-size:14px;font-weight:bold;margin-right: 28px">体检计划状态</span>-->
-        <!--<RadioGroup>-->
-        <!--<Radio label="1" checked>通过</Radio>-->
-        <!--<Radio label="2">驳回</Radio>-->
-        <!--</RadioGroup>-->
-        <!--</div>-->
-        <!--</FormItem>-->
-        <!--<FormItem label="驳回理由" style="width:96%;margin-top: 10px">-->
-        <!--<Input type="textarea" :rows="4" v-model="addFormData.reason" style="height: 98px!important;"/>-->
-        <!--</FormItem>-->
-        <!--</Form>-->
-
-        <!--</Modal>-->
+        <Table @on-selection-change="selectChange" :columns="columns" :data="tableData"></Table>
+        <div class="page">
+            <Page
+                    :total="pageConfig.total"
+                    show-total
+                    show-elevator
+                    show-sizer
+                    :current='pageConfig.page'
+                    :page-size-opts='pageConfig.opts'
+                    :page-size='pageConfig.size'
+                    @on-change='pageChange'
+                    @on-page-size-change='sizeChange'/>
+        </div>
     </div>
 </template>
 <script>
@@ -108,7 +71,7 @@
             return {
                 req: {
                     dep_id: '-1',
-                    year: null,
+                    year: '-1',
                     term: '-1',
                     grade_no: '-1',
                     class_no: '-1'
@@ -139,7 +102,10 @@
                     },
                     {
                         title: '学年',
-                        key: 'year'
+                        key: 'year',
+                        render(h, params) {
+                            return h('span', null, `${params.row.year}-${Number(params.row.year) + 1}`);
+                        }
                     },
                     {
                         title: '学期',
@@ -170,12 +136,24 @@
                     opts: [10, 20, 50, 100]
                 },
                 schoolList: [],
+                yearList: [],
                 gradeList: [],
                 classList: []
             };
         },
         methods: {
             getSelectCondition(type) {
+                let start = 2018;
+                let today = new Date().getFullYear();
+                let m = today - start;
+                let temp = [];
+                for (let i = 0; i <= m; i++) {
+                    temp.push({
+                        value: `${start + i}`,
+                        name: `${start + i}-${start + i + 1}`
+                    });
+                }
+                this.yearList = temp.reverse();
                 /// ===========获取下拉列表查询条件
                 this.$ajax({
                     // 医院
@@ -259,7 +237,7 @@
                         page: this.pageConfig.page,
                         size: this.pageConfig.size,
                         dep_id: this.req.dep_id === '-1' ? null : this.req.dep_id,
-                        year: this.req.year ? this.req.year.getFullYear() : null,
+                        year: this.req.year === '-1' ? null : this.req.year,
                         term: this.req.term === '-1' ? null : this.req.term,
                         grade_no: this.req.grade_no === '-1' ? null : this.req.grade_no,
                         class_no: this.req.class_no === '-1' ? null : this.req.class_no
@@ -317,107 +295,19 @@
         }
     };
 </script>
-<style lang="scss" scoped>
-
-    .content-box {
-        padding: 30px 44px;
-    }
-
-    .title {
-        height: 26px;
-        line-height: 26px;
-        color: #333333;
-        font-size: 26px;
-        font-weight: bold;
-    }
-
-    .modal-form .ivu-form-item {
-        margin-right: 30px !important;
-    }
-
-    .classes {
-        padding: 30px 44px;
-        min-height: 500px;
-        border-radius: 8px;
-
+<style lang="less">
+    .checkCount {
         .ivu-form .ivu-form-item {
             margin-right: 30px !important;
         }
-
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
 
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .ivu-divider {
-            margin: 0 0 24px 0;
-        }
-
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
-        .addBtn {
-            margin-right: 40px;
-        }
-
         .disabled span {
             color: #999999;
-        }
-
-        .editBtn:hover {
-            opacity: 0.8;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
         }
     }
 </style>

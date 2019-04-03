@@ -1,108 +1,92 @@
 <template>
-    <div class="systemDialog">
-        <div class="content-box clearfix">
-            <div class="title">
-                系统日志
-            </div>
-            <Form ref="formInline" :model="req" inline style="margin-top: 34px;">
-                <FormItem label="关键词" :label-width="85">
-                    <i-input v-model.trim="req.keyword" style="width: 200px"/>
-                </FormItem>
-                <FormItem label="日记类型" :label-width="90">
-                    <i-select v-model="req.tpye" style="width:130px">
-                        <Option value="0">全部</Option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="时间" :label-width="85">
-                    <DatePicker type="date" v-model="req.date" style="width: 110px"></DatePicker>
-                </FormItem>
-                <FormItem label="操作人" :label-width="85">
-                    <i-input v-model.trim="req.name" style="width: 100px"/>
-                </FormItem>
-                <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="search()">查询</Button>
-                </FormItem>
-            </Form>
-            <Divider dashed/>
 
-            <Table :columns="columns" :data="tableData"></Table>
-            <Page style="text-align: center;margin-top: 20px;" :total="pageConfig.total"
-                  show-total
-                  show-elevator
-                  show-sizer
-                  :current="pageConfig.page"
-                  :page-size-opts="pageConfig.opts"
-                  :page-size="pageConfig.size"
-                  @on-change="pageChange"
-                  @on-page-size-change="sizeChange"/>
-        </div>
-        <Modal
-                class="dicInfoAddModal"
-                title="详情"
-                v-model="addModal"
-                :mask-closable="false"
-                width='644'
-                :styles="{top: '20px'}"
-                class-name="vertical-center-modal">
-            <Form :model="addForm" label-position="top" inline>
-                <FormItem label="时间" style="width:200px;margin-right: 66px!important;">
-                    <i-input v-model="addForm.fieldName" disabled/>
-                </FormItem>
-                <FormItem label="日志类型" style="width:105px;margin-right: 2px!important;">
-                    <i-input v-model="addForm.fieldName" disabled/>
-                </FormItem>
-                <FormItem label="操作人" style="width:105px;margin-right: 0!important;">
-                    <i-input v-model="addForm.fieldName" disabled/>
-                </FormItem>
-                <FormItem label="日志摘要" style="width:100%;margin-right: 0!important;">
-                    <i-input type="textarea" v-model="addForm.order" disabled/>
-                </FormItem>
-            </Form>
-        </Modal>
+    <div class="systemDialog content-box clearfix">
+        <div class="title">系统日志</div>
+        <Form ref="formInline" :model="req" inline>
+            <FormItem label="关键词" :label-width="70">
+                <i-input v-model.trim="req.content" :maxlength="20" style="width: 200px"/>
+            </FormItem>
+            <FormItem label="日记类型" :label-width="80">
+                <i-select v-model="req.tpye" style="width:140px">
+                    <Option value="-1">全部</Option>
+                </i-select>
+            </FormItem>
+            <FormItem label="时间" :label-width="60">
+                <DatePicker type="datetimerange" format="yyyy/MM/dd hh:MM" v-model="req.time" :split-panels="true"
+                            style="width: 260px"></DatePicker>
+            </FormItem>
+            <FormItem label="操作人" :label-width="85">
+                <i-input v-model.trim="req.name" :maxlength="20" style="width: 100px"/>
+            </FormItem>
+            <FormItem style="float: right;">
+                <Button type="primary" class="search-btn" @click="search()">查询</Button>
+            </FormItem>
+        </Form>
+        <Divider dashed/>
 
+        <Table :columns="columns" center :data="tableData"></Table>
+        <Page style="text-align: center;margin-top: 20px;" :total="pageConfig.total"
+              show-total
+              show-elevator
+              show-sizer
+              :current="pageConfig.page"
+              :page-size-opts="pageConfig.opts"
+              :page-size="pageConfig.size"
+              @on-change="pageChange"
+              @on-page-size-change="sizeChange"/>
+        <component :title="modalTitle" :is='com' :id='id' :flag="flag" @modal-close='ModalClose'></component>
     </div>
 </template>
 <script>
+    import urls from '../../../service/Urls';
+    import {datetimeformatFromString} from '../../../libs/dateUtils';
+    import systemInfo from './systemInfo';
+
     export default {
-        props: [''],
         data() {
             return {
                 addModal: false,
                 req: {
-                    name: '',
-                    tpye: '0',
-                    keyword: '',
+                    'content': '',
+                    'type': '-1',
+                    time: [],
+                    'startcreatetime': 1531190960000,
+                    'endcreatetime': 1531190960000,
+                    name: ''
                 },
                 columns: [
                     {
+                        title: ' ',
+                        width: 60,
+                    },
+                    {
                         title: '序号',
                         type: 'index',
-                        align: 'center'
+                        width: 100,
                     },
                     {
                         title: '时间',
-                        key: 'time',
-                        align: 'center'
+                        key: 'create_time_long',
+                        render: (h, params) => {
+                            return h('span', null, datetimeformatFromString(params.row.create_time_long));
+                        }
                     },
                     {
                         title: '日记类型',
-                        key: 'type',
-                        align: 'center'
+                        key: 'type'
                     },
                     {
                         title: '日记摘要',
-                        key: 'info',
-                        align: 'center'
+                        key: 'content'
                     },
                     {
                         title: '操作人',
-                        key: 'people',
-                        align: 'center'
+                        key: 'create_by'
                     },
                     {
                         title: '操作',
                         key: 'operation',
-                        align: 'center',
+                        width: 150,
                         render: (h, params) => {
                             return h('span', {
                                 attrs: {
@@ -117,7 +101,7 @@
                                         this.info(params.row.id);
                                     }
                                 }
-                            },[
+                            }, [
                                 h('img', {
                                     attrs: {src: require('../../../assets/system/role/info.png')},
                                     style: {
@@ -129,7 +113,7 @@
                                         position: 'relative',
                                         top: '-4px'
                                     }
-                                },'详情')
+                                }, '详情')
                             ]);
                         }
                     }
@@ -149,12 +133,10 @@
                     },
 
                 ],
-                addForm: {
-                    dictionaryName: '',
-                    dictionaryType: '',
-                    fliedName: '',
-                    order: 1,
-                },
+                modalTitle: '详情',
+                id: '',
+                flag: false, // 详情时标志
+                com: null,
                 pageConfig: {
                     page: 1,
                     size: 10,
@@ -170,76 +152,54 @@
             },
             search() {
                 let data = {
+                    content: this.req.content ? this.req.content : null,
+                    type: this.req.type === '-1' ? null : this.req.type,
+                    startcreatetime: this.req.time[0] ? new Date(this.req.time[0]).getTime() : null,
+                    endcreatetime: this.req.time[1] ? new Date(this.req.time[1]).getTime() : null,
                     page: this.pageConfig.page,
                     size: this.pageConfig.size,
                 };
                 this.$ajax({
-                    url: '',
+                    url: urls.system_log,
                     data: data
                 }).then(data => {
                     if (data.code === 200) {
                         this.tableData = data.data;
+                        this.pageConfig.total = data.totalRecords;
+                    } else {
+                        this.tableData = [];
+                        this.pageConfig.total = 0;
                     }
                 });
             },
             info(id) {
                 this.addModal = true;
+                this.com = systemInfo;
+                this.id = id;
             },
             pageChange(page) {
                 this.pageConfig.page = page;
-                // this.getList();
             },
             sizeChange(size) {
                 this.pageConfig.size = size;
                 if (this.pageConfig.page === 1) {
                     this.pageChange(1);
                 }
+            },
+            ModalClose() {
+                this.com = null;
             }
         },
         created() {
-
+            this.search();
         }
     };
 </script>
-<style lang="scss">
+<style lang="less">
     .systemDialog {
-        .content-box {
-            padding: 30px 44px;
-
-            .ivu-form {
-                position: relative;
-                z-index: 100;
-            }
-            .divider {
-                margin-bottom: 20px;
-            }
-            .title {
-                height: 26px;
-                line-height: 26px;
-                color: #333333;
-                font-size: 26px;
-                font-weight: bold;
-            }
-            .editBtn:hover{
-                opacity: 0.7;
-            }
-
-        }
-    }
-
-    .dicInfoAddModal {
-        .ivu-form-item-label {
-            font-size: 14px !important;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(126, 132, 133, 1) !important;
-        }
-        .ivu-modal-body {
-            padding-left: 78px !important;
-            padding-right: 78px !important;
-        }
-        .ivu-modal-footer {
-            display: none;
+        .ivu-form {
+            position: relative;
+            z-index: 100;
         }
     }
 </style>

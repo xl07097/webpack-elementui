@@ -23,15 +23,15 @@
             <div class="divider"/>
             <div class="btn-box">
                 <div class="action-btn">
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/add.png"/>
+                    <img style="margin: 8px 6px;" src="../../../../assets/system/role/add.png"/>
                     新增
                 </div>
                 <div class="action-btn">
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/delete.png"/>
+                    <img style="margin: 8px 6px;" src="../../../../assets/system/role/delete.png"/>
                     删除
                 </div>
                 <div class="action-btn">
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/add.png"/>
+                    <img style="margin: 8px 6px;" src="../../../../assets/system/role/add.png"/>
                     备份
                 </div>
             </div>

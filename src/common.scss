@@ -1,11 +1,13 @@
 html, body {
-  position: absolute;
+  position: relative;
   width: 100%;
   top: 0;
   bottom: 0;
+  height: 100%;
   min-width: 1366px;
   min-height: 768px;
   overflow: auto;
+  font-size: 16px;
   background-color: #c3e0de !important;
 }
 
@@ -76,10 +78,61 @@ ul, li {
 }
 
 .content-box {
+  min-height: 500px;
+  padding: 30px 44px;
   background-color: #FCFFFE;
   border-radius: 8px;
 }
+.title {
+  height: 50px;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: bold;
+  color: rgba(51, 51, 51, 1);
+}
+.operator {
+  float: right;
+  margin-bottom: 15px;
+  text-align: right;
+}
+.searchBtn {
+  width: 80px;
+  height: 34px;
+  line-height: 1;
+  font-size: 14px;
+  font-family: SourceHanSansCN-Medium;
+  font-weight: 500;
+  color: rgba(254, 254, 254, 1);
+  background: rgba(255, 123, 16, 1);
+  border-radius: 3px;
+  border: none;
+}
+.searchBtn:hover {
+  opacity: 0.8;
+}
+.page {
+  margin-top: 24px;
+  text-align: center;
+}
+.add {
+  margin-bottom: 12px;
+  margin-right: 18px;
+  display: inline-block;
+  font-size: 16px;
+  font-family: SourceHanSansCN-Regular;
+  font-weight: 400;
+  color: rgba(39, 55, 60, 1);
+  cursor: pointer;
 
+  &:hover {
+    opacity: 0.8;
+  }
+
+  img {
+    position: relative;
+    top: 4px;
+  }
+}
 .ivu-menu-light {
   background: transparent !important;
 }
@@ -403,4 +456,7 @@ fieldset[disabled] .ivu-input {
     font-size: 14px !important;
     color: #515a6e !important;
   }
+}
+.ivu-divider-dashed{
+  margin: 0 0 10px;
 }

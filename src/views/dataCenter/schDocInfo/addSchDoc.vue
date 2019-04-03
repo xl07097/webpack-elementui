@@ -27,6 +27,7 @@
                     <i-select v-model="obj.education" style="width:200px">
                         <i-option v-for="item of gradeList" :key="item.id" :value='item.id'>{{item.value}}</i-option>
                     </i-select>
+                    <!--<i-input v-model.trim="obj.education" :maxlength="10" style="width: 200px" placeholder="请输入"></i-input>-->
                 </FormItem>
                 <FormItem label="专业" prop="major">
                     <i-input v-model.trim="obj.major" :maxlength="10" style="width: 200px"
@@ -82,7 +83,7 @@
                     name: [{required: true, message: '请输入校医姓名', trigger: 'blur'}],
                     gender: [{required: true,type:'number', message: '请选择性别', trigger: 'change'}],
                     birthday: [{required: true, type: 'date', message: '请选择出生年月'}],
-                    education: [{required: true, message: '请选择学历', trigger: 'change'}],
+                    education: [{required: true, message: '请输入学历', trigger: 'blur'}],
                     major:[{required: true, message: '请输入专业', trigger: 'blur'}],
                     title: [{required: true, message: '请选择职称', trigger: 'change'}],
                     in_queue: [{required: true, type: 'number', message: '请选择是否在编', trigger: 'change'}],

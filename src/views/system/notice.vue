@@ -6,7 +6,8 @@
             </div>
             <Form ref="formInline" :model="formInline" inline style="margin-top: 34px;">
                 <FormItem label="日期" :label-width="50">
-                    <DatePicker type="date" style="width: 180px" placeholder="请选择" v-model="searchList.send_date"></DatePicker>
+                    <DatePicker type="date" style="width: 180px" placeholder="请选择"
+                                v-model="searchList.send_date"></DatePicker>
                 </FormItem>
                 <FormItem style="float: right;">
                     <Button type="primary" class="search-btn" @click="Search()">查询</Button>
@@ -37,8 +38,31 @@
             <Form :model="addForm" label-position="top">
                 <Row>
                     <Col span="12" class="leftFormItem">
-                        <Input type="textarea" v-model="addForm.content" class="functionalName"
-                               style="width: 590px" disabled/>
+                        <FormItem label="标题">
+                            <Input v-model="addForm.title" class="functionalName" style="width: 564px" disabled/>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12" class="leftFormItem" style="margin-right:40px">
+                        <FormItem label="开始时间">
+                            <DatePicker type="date" placeholder="Select date" style="width: 200px"
+                                        v-model="addForm.start_time" disabled></DatePicker>
+                        </FormItem>
+                    </Col>
+                    <Col span="12" class="leftFormItem">
+                        <FormItem label="结束时间">
+                            <DatePicker type="date" placeholder="Select date" style="width: 200px"
+                                        v-model="addForm.end_time" disabled></DatePicker>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12" class="leftFormItem">
+                        <FormItem label="内容">
+                            <Input type="textarea" v-model="addForm.content" class="functionalName"
+                                   style="width: 590px" disabled/>
+                        </FormItem>
                     </Col>
                 </Row>
                 <Row>
@@ -89,8 +113,8 @@
                         type: 'index'
                     },
                     {
-                        title: '状态',
-                        key: 'status'
+                        title: '日期',
+                        key: 'send_date'
                     },
                     {
                         title: '标题',
@@ -235,6 +259,10 @@
                     size: 10
                 },
                 addForm: {
+                    received_by: '',
+                    title: '',
+                    start_time: '',
+                    end_time: '',
                     content: '',
                     accessorys: '',
                     accessorysName: ''
@@ -265,9 +293,12 @@
             info(row) {
                 this.addtitle = '详情';
                 this.addModal = true;
-                this.addForm.content = row.content;
+                this.addForm.title = row.title;
                 this.addForm.accessorysName = this.getNameFromUrl(row.accessorys);
                 this.addForm.accessorys = row.accessorys;
+                this.addForm.content = row.content;
+                this.addForm.start_time = row.start_time;
+                this.addForm.end_time = row.end_time;
             },
             Search() {
                 this.getList();

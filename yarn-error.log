@@ -1,0 +1,81 @@
+Arguments: 
+  D:\Program Files\nodejs\node.exe D:\Program Files\nodejs\node_global\node_modules\yarn\bin\yarn.js
+
+PATH: 
+  C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;d:\Program Files\Git\cmd;D:\Program Files\nodejs\;D:\Program Files\nodejs\node_global;D:\Program Files\Java\jdk1.8.0_151\bin;D:\Program Files\Java\jdk1.8.0_151\jre\bin;D:\Program Files\maven\bin;C:\WINDOWS\system32\config\systemprofile\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\WINDOWS\System32\OpenSSH\;D:\Program Files (x86)\python\Scripts\;D:\Program Files (x86)\python\;C:\Users\xueliang\AppData\Local\Microsoft\WindowsApps;D:\Program Files\Microsoft VS Code\bin;C:\Users\xueliang\AppData\Local\GitHubDesktop\bin;C:\Users\xueliang\AppData\Roaming\npm;C:\Users\xueliang\AppData\Local\atom\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  10.15.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: EPERM: operation not permitted, scandir 'E:\gitCode\webpack-test\node_modules\@types'
+
+npm manifest: 
+  {
+    "name": "webpack-test",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "private": true,
+    "scripts": {
+      "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.config.js",
+      "start": "npm run dev",
+      "build": "node build/build.js"
+    },
+    "author": "xueliang",
+    "license": "ISC",
+    "dependencies": {
+      "axios": "^0.18.0",
+      "iview": "^3.2.2",
+      "js-cookie": "^2.2.0",
+      "echarts": "^4.1.0",
+      "vue": "^2.5.21",
+      "vue-router": "^3.0.2"
+    },
+    "devDependencies": {
+      "add-asset-html-webpack-plugin": "^3.1.2",
+      "autoprefixer": "^9.4.4",
+      "babel-core": "^6.26.3",
+      "babel-loader": "^7.1.5",
+      "babel-preset-env": "^1.7.0",
+      "chalk": "^2.4.2",
+      "clean-webpack-plugin": "^0.1.19",
+      "copy-webpack-plugin": "^4.6.0",
+      "css-loader": "^1.0.1",
+      "eslint": "^5.14.1",
+      "eslint-plugin-html": "^5.0.3",
+      "file-loader": "^2.0.0",
+      "html-webpack-plugin": "^3.2.0",
+      "iview-loader": "^1.2.2",
+      "less": "^3.9.0",
+      "less-loader": "^4.1.0",
+      "mini-css-extract-plugin": "^0.4.5",
+      "node-sass": "^4.11.0",
+      "ora": "^3.1.0",
+      "postcss-loader": "^3.0.0",
+      "rimraf": "^2.6.3",
+      "sass-loader": "^7.1.0",
+      "style-loader": "^0.23.1",
+      "url-loader": "^1.1.2",
+      "vue-loader": "^15.5.0",
+      "vue-style-loader": "^4.1.2",
+      "vue-template-compiler": "^2.5.21",
+      "webpack": "^4.28.3",
+      "webpack-cli": "^3.2.1",
+      "webpack-dev-server": "^3.1.14",
+      "webpack-merge": "^4.2.1",
+      "vue-easytable": "1.7.1"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

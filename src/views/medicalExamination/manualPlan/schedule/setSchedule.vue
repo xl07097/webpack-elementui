@@ -38,7 +38,7 @@
                 title="体检排程编辑"
                 :mask="false"
                 :transfer="false"
-                v-model="addSchoolModal"
+                :value="addSchoolModal"
                 :width="562"
                 @on-cancel="addclose"
         >
@@ -198,8 +198,8 @@
                     school_name: '',
                     grade_no: '',
                     grade_name: '',
-                    time: [],
-                },
+                    time: []
+                }
             };
         },
         methods: {

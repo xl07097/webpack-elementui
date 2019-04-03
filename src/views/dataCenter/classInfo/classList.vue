@@ -9,11 +9,13 @@
                 </i-select>
             </FormItem>
             <FormItem label="学年" :label-width="50">
-                <DatePicker type="year" v-model="req.year_action" style="width: 80px"></DatePicker>
-                <DatePicker type="year" v-model="req.year_end"  style="width: 80px"></DatePicker>
+                <i-select style="width:120px" v-model="req.year">
+                    <Option value="-1">全部</Option>
+                    <i-option v-for="item in yearList" :value="item.value" :key="item.value">{{item.name}}</i-option>
+                </i-select>
 
                 <!--<DatePicker type="daterange" format="yyyy" split-panels v-model="req.year" placement="bottom-end"-->
-                            <!--style="width: 140px"></DatePicker>-->
+                <!--style="width: 140px"></DatePicker>-->
             </FormItem>
             <FormItem label="学期" :label-width="50">
                 <i-select v-model="req.term" style="width:120px">
@@ -43,7 +45,7 @@
             <a href="javascript:void(0)" class="add" @click="imp">
                 <img src="../../../assets/unit/import.png" alt="download">&nbsp;导入
             </a>
-            <a href="javascript:void(0)" class="add" @click="download" style="position: absolute;right: 50px">
+            <a :href="class_down" download="班级信息导入模板.xlsx" class="add" style="position: absolute;right: 50px">
                 <img src="../../../assets/unit/download.png" alt="download">&nbsp;<span
                     style="position: relative;top: -4px;">下载模版</span>
             </a>
@@ -71,15 +73,17 @@
     /* eslint-disable no-undef */
 
     import AddClass from './addClass';
+    import ImportClass from './importClass'
     import urls from '../../../service/Urls';
 
     export default {
         name: 'ClassList',
         data() {
             return {
+                class_down: urls.class_down,
                 req: {
                     dep_id: '-1',
-                    year: [],
+                    year: '-1',
                     term: '-1',
                     grade_no: '-1',
                     year_action: '',
@@ -109,7 +113,10 @@
                     },
                     {
                         title: '学年',
-                        key: 'year'
+                        key: 'year',
+                        render(h, params) {
+                            return h('span', null, `${params.row.year}-${Number(params.row.year) + 1}`);
+                        }
                     },
                     {
                         title: '年级',
@@ -189,6 +196,7 @@
                 ],
                 tableData: [],
                 schoolList: [],
+                yearList: [],
                 gradeList: [],
                 classList: [],
                 is_manage: true, // 登陆人是否是管理员
@@ -206,6 +214,17 @@
         },
         methods: {
             getSelectCondition(type) {
+                let start = 2018;
+                let today = new Date().getFullYear();
+                let m = today - start;
+                let temp = [];
+                for (let i = 0; i <= m; i++) {
+                    temp.push({
+                        value: `${start + i}-${start + i + 1}`,
+                        name: `${start + i}-${start + i + 1}`
+                    });
+                }
+                this.yearList = temp.reverse();
                 /// ===========获取下拉列表查询条件
                 this.$ajax({
                     // 学校
@@ -234,12 +253,12 @@
                 this.search();
             },
             search() {
-                if(this.req.year_action && this.req.year_end){
-                    if(this.req.year_action.getTime()>this.req.year_end.getTime()){
-                        this.$Message.error('开始时间不能大于结束时间');
-                        return false;
-                    }
-                }
+                // if(this.req.year_action && this.req.year_end){
+                //     if(this.req.year_action.getTime()>this.req.year_end.getTime()){
+                //         this.$Message.error('开始时间不能大于结束时间');
+                //         return false;
+                //     }
+                // }
 
                 this.$ajax({
                     url: urls.class_list,
@@ -247,8 +266,9 @@
                         page: this.pageConfig.page,
                         size: this.pageConfig.size,
                         dep_id: this.req.dep_id === '-1' ? null : this.req.dep_id,
-                        year_action: this.req.year_action ? this.req.year_action.getFullYear() : null,
-                        year_end: this.req.year_end ? this.req.year_end.getFullYear() : null,
+                        // year_action: this.req.year === '-1' ? null : Number(this.req.year.substr(0, 4)),
+                        // year_end: this.req.year === '-1' ? null : Number(this.req.year.substr(5, 4)),
+                        year: this.req.year === '-1' ? null : this.req.year.substr(0, 4),
                         term: this.req.term === '-1' ? null : this.req.term,
                         grade_no: this.req.grade_no === '-1' ? null : this.req.grade_no,
                         class_no: this.req.class_no ? this.req.class_no : null
@@ -272,7 +292,10 @@
                 this.modalTitle = '新增';
             },
             imp() {
-
+                this.com = ImportClass;
+                this.id = '';
+                this.flag = false;
+                this.modalTitle = '导入';
             },
             download() {
 
@@ -423,89 +446,16 @@
 
 <style lang="less">
     .classes {
-        padding: 30px 44px;
-        min-height: 500px;
-        border-radius: 8px;
-
         .ivu-form .ivu-form-item {
             margin-right: 30px !important;
         }
-
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
-
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            /*font-family: SourceHanSansCN-Bold;*/
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .ivu-divider {
-            margin: 0 0 24px 0;
-        }
-
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
-        .addBtn {
-            margin-right: 40px;
-        }
-
         .disabled span {
             color: #999999;
-        }
-
-        .editBtn:hover {
-            opacity: 0.8;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
         }
     }
 </style>

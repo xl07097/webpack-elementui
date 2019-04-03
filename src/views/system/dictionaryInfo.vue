@@ -6,9 +6,9 @@
             </div>
             <Form ref="formInline" :model="formInline" inline style="margin-top: 34px;">
                 <FormItem label="字段名称" :label-width="72">
-                    <Input type="text" v-model="formInline.value"/>
+                    <Input type="text" v-model.trim="formInline.value"/>
                 </FormItem>
-                <FormItem label="禁用状态" :label-width="72">
+                <FormItem label="状态" :label-width="72">
                     <Select v-model="formInline.status" style="width:140px">
                         <Option value="-1">全部</Option>
                         <Option :value=1>启用</Option>
@@ -22,7 +22,7 @@
             <div class="divider"/>
             <div class="infoLeft">
                 <div class="inner">
-                    <Tree :data="leftMenu"></Tree>
+                    <Tree :data="leftMenu" @on-select-change="refesh" ref="tree"></Tree>
                 </div>
             </div>
             <div class="infoRight">
@@ -31,10 +31,10 @@
                         <img style="margin: 8px 6px;" src="../../assets/system/role/add.png"/>
                         新增
                     </div>
-                    <div class="action-btn" @click="deleteRole">
-                        <img style="margin: 8px 6px;" src="../../assets/system/role/delete.png"/>
-                        删除
-                    </div>
+                    <!--<div class="action-btn" @click="deleteRole">-->
+                        <!--<img style="margin: 8px 6px;" src="../../assets/system/role/delete.png"/>-->
+                        <!--删除-->
+                    <!--</div>-->
                 </div>
                 <Table ref="selection" :columns="columns" :data="data" @on-selection-change="selectionChange"></Table>
                 <Page style="text-align: center;margin-top: 20px;"
@@ -99,6 +99,7 @@
         props: [''],
         data() {
             return {
+                category_id: '',
                 pageConfig: {
                     page: 1,
                     size: 10,
@@ -107,7 +108,12 @@
                 },
                 rules: {
                     value: [{required: true, message: '请输入字段名称', trigger: 'blur'}],
-                    orderby: [{required: true, message: '请输入字典排序', trigger: 'blur', type: 'number'}],
+                    orderby: [{
+                        required: true,
+                        message: '请输入字典排序',
+                        trigger: 'blur',
+                        type: 'number'
+                    }, {message: '字段排序只能输入数字', trigger: 'change', pattern: /^(([1-9]\d{0,3})|0)(\.\d{0,2})?$/,}],
                     category_id: [{required: true, message: '请选择字典表类别', trigger: 'change'}],
                 },
                 searchList: {
@@ -139,29 +145,29 @@
                         title: '字段名称',
                         key: 'value'
                     },
-                    {
-                        title: '状态',
-                        key: 'status',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('i-switch', {
-                                    props: {
-                                        type: 'primary',
-                                        value: params.row.status === 1
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        'on-change': () => {
-                                            this.switch(params.row.id, params.row.status, params.row.user_name);
-                                        }
-                                    }
-                                }),
-                                h('span', params.row.status === 1 ? '启用' : '禁用')
-                            ]);
-                        }
-                    },
+                    // {
+                    //     title: '状态',
+                    //     key: 'status',
+                    //     render: (h, params) => {
+                    //         return h('div', [
+                    //             h('i-switch', {
+                    //                 props: {
+                    //                     type: 'primary',
+                    //                     value: params.row.status === 1
+                    //                 },
+                    //                 style: {
+                    //                     marginRight: '5px'
+                    //                 },
+                    //                 on: {
+                    //                     'on-change': () => {
+                    //                         this.switch(params.row.id, params.row.status, params.row.user_name);
+                    //                     }
+                    //                 }
+                    //             }),
+                    //             h('span', params.row.status === 1 ? '启用' : '禁用')
+                    //         ]);
+                    //     }
+                    // },
                     {
                         title: '操作',
                         key: 'operation',
@@ -214,52 +220,50 @@
                     orderby: ''
                 },
                 rightForm: {},
-                leftMenu: [{
-                    title: '字典表',
-                    expand: true,
-                    children: [
-                        {
-                            title: '基础代码',
-                            expand: true,
-                            children: [
-                                {
-                                    title: '学历',
-                                    children: [],
-                                },
-                                {
-                                    title: '性别'
-                                },
-                                {
-                                    title: '年级'
-                                },
-                                {
-                                    title: '班级'
-                                },
-
-                            ]
-                        },
-                        {
-                            title: '财务代码',
-                            expand: true,
-                            children: [
-                                {
-                                    title: '财务'
-                                },
-                            ]
-                        }
-                    ]
-                }]
+                leftMenu: []
             };
         },
         methods: {
             pageChange(page) {
                 this.pageConfig.page = page;
-                this.getList();
+                if (this.category_id !== '') {
+                    this.dicInfo(this.category_id);
+                }else {
+                    this.getList();
+                }
             },
             sizeChange(size) {
                 this.pageConfig.size = size;
                 if (this.pageConfig.page === 1) {
                     this.pageChange(1);
+                }
+            },
+            dicInfo(id) {
+                this.$ajax({
+                    url: urls.dictionary_info,
+                    data: {
+                        category_id: id,
+                        page: this.pageConfig.page,
+                        size: this.pageConfig.size,
+                    }
+                })
+                    .then(data => {
+                        if (data.code === 200) {
+                            this.data = data.data;
+                            this.pageConfig.total = data.totalRecords;
+                        } else {
+                            this.data = [];
+                            this.pageConfig.total = 0;
+                        }
+                    })
+            },
+            refesh(data) {
+                if (data[0].id) {
+                    this.category_id = data[0].id;
+                    this.pageConfig.page = 1;
+                    this.dicInfo(this.category_id);
+                } else {
+                    return;
                 }
             },
             addRole() {
@@ -271,6 +275,7 @@
                 this.rightModal = true;
             },
             Search() {
+                this.pageConfig.page = 1;
                 this.getList();
             },
             editRole(row) {
@@ -398,26 +403,19 @@
                     }
                 });
             },
-            // getTree() {
-            //     this.$ajax({
-            //         url: urls.dic_type,
-            //         data: {
-            //             name: this.formInline.dictionaryName,
-            //             page: this.pageConfig.page,
-            //             size: this.pageConfig.size,
-            //             status: this.formInline.status === '-1' ? null : this.formInline.status,
-            //         }
-            //     })
-            //         .then(data => {
-            //             if (data.code === 200) {
-            //                 this.data = data.data;
-            //                 this.pageConfig.total = data.totalRecords;
-            //             } else {
-            //                 this.data = [];
-            //                 this.pageConfig.total = 0;
-            //             }
-            //         })
-            // },
+            getTree() {
+                this.$ajax({
+                    url: urls.dictionary_tree,
+                    data: {}
+                })
+                    .then(data => {
+                        if (data.code === 200) {
+                            this.leftMenu = data.data;
+                        } else {
+                            this.leftMenu = [];
+                        }
+                    })
+            },
             getDicList() {
                 this.$ajax({
                     url: urls.dic_all,
@@ -434,6 +432,8 @@
                     })
             },
             getList() {
+                this.category_id = '';
+                this.selectionValue = [];
                 this.$ajax({
                     url: urls.dictionary_info,
                     data: {
@@ -502,7 +502,7 @@
         },
         mounted() {
             this.getList();
-            // this.getTree();
+            this.getTree();
         },
     };
 </script>

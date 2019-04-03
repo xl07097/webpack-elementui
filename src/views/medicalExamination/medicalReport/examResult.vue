@@ -1,27 +1,24 @@
 <template>
     <div>
         <div class="content-box classes">
-            <div class="title">
-                体检结果通知
-            </div>
-            <Form v-model="filterForm" inline :label-width="72">
+            <div class="title">体检结果通知</div>
+            <Form v-model="req" inline :label-width="72">
                 <FormItem label="学校名称">
-                    <Select style="width:200px" filterable v-model="filterForm.unit_id">
-                        <Option v-for="item in hospital_list" :value="item.id" :key="item.id">{{item.name}}</Option>
-                    </Select>
+                    <i-select style="width:200px" filterable v-model="req.dep_id">
+                        <i-option value="-1">全部</i-option>
+                        <Option v-for="item in schoolList" :value="item.id" :key="item.id">{{item.name}}</Option>
+                    </i-select>
                 </FormItem>
                 <FormItem label="通知状态">
-                    <Select style="width:100px" v-model="filterForm.exam_type">
-                        <Option value="">全部</Option>
-                        <Option :value="1">健康体检</Option>
-                        <Option :value="2">升学体检</Option>
-                    </Select>
+                    <i-select style="width:100px" v-model="req.type">
+                        <i-option value="-1">全部</i-option>
+                    </i-select>
                 </FormItem>
                 <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="getList()">查询</Button>
+                    <Button type="primary" class="search-btn" @click="search">查询</Button>
                 </FormItem>
             </Form>
-            <div class="divider"/>
+            <Divider dashed/>
             <div>
                 <a href="javascript:void(0)" class="add" style="margin-right: 45px;margin-top: 24px" @click="doReview">
                     <img src="../../../assets/unit/phone.png" alt="add">&nbsp;应用
@@ -30,7 +27,19 @@
                     <img src="../../../assets/unit/message.png" alt="add">&nbsp;短信
                 </a>
             </div>
-            <Table ref="selection" :columns="columns" :data="objectList"></Table>
+            <Table ref="selection" :columns="columns" :data="tableData" @on-selection-change="selectChange"></Table>
+            <div class="page">
+                <Page
+                        :total="pageConfig.total"
+                        show-total
+                        show-elevator
+                        show-sizer
+                        :current='pageConfig.page'
+                        :page-size-opts='pageConfig.opts'
+                        :page-size='pageConfig.size'
+                        @on-change='pageChange'
+                        @on-page-size-change='sizeChange'/>
+            </div>
         </div>
         <Modal
                 title="学校班级人数审核"
@@ -75,28 +84,16 @@
     </div>
 </template>
 <script>
-    import Urls from '../../../service/Urls';
+    import urls from '../../../service/Urls';
 
     export default {
         name: 'schedule',
-        props: [''],
-        mounted() {
-            this.getList();
-            this.getUnitList(3);//医院
-        },
         data() {
             return {
-                modal: false,
-                reviewResult: false,
-                Urls: Urls,
-                dateOpts: {
-                    //禁止选择当年之前的年份
-                    disabledDate(date) {
-                        let d = new Date();
-                        return date && date.getFullYear() < d.getFullYear();
-                    }
+                req: {
+                    type: '-1',
+                    dep_id: '-1'
                 },
-                hospital_list: [],
                 columns: [
                     {
                         type: 'selection',
@@ -105,169 +102,114 @@
                     },
                     {
                         title: '序号',
-                        width: 60,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('span', params.index + 1);
-                        }
-                    }, {
+                        type: 'index',
+                        width: 70,
+                        align: 'center'
+                    },
+                    {
                         title: '学校名称',
-                        key: 'code'
-                    }, {
+                        key: 'school_no'
+                    },
+                    {
                         title: '年级',
-                        key: 'year'
-                    }, {
-                        title: '班级',
-                        key: 'exam_type',
-                        render(h, params) {
-                            return h('span', {1: '健康体检', 2: '升学体检'}[params.row.exam_type]);
+                        key: 'term',
+                        render: (h,params) =>{
+                            return params.row.term === 1?'第一学期': '第二学期'
                         }
-                    }, {
+                    },
+                    {
+                        title: '班级',
+                        key: 'class_no'
+                    },
+                    {
                         title: '人数',
-                        key: 'hospital'
+                        key: 'count'
                     },
                     {
                         title: '体检日期',
-                        key: 'hospital'
+                        key: 'time'
                     },
                     {
                         title: '通知状态',
-                        key: 'state',
+                        key: 'status',
+                        render: (h,params) =>{
+                            return params.row.status === 1?'第一学期': '第二学期'
+                        }
                     }
-                    // }, {
-                    //     title: '操作',
-                    //     key: 'action',
-                    //     render: (h, params) => {
-                    //         return h('span', {}, [
-                    //             h('span', {
-                    //                 attrs: {
-                    //                     class: 'editBtn'
-                    //                 },
-                    //                 on: {
-                    //                     click: () => {
-                    //                         this.doReview(params.row.id);
-                    //                     }
-                    //                 }
-                    //             }, [
-                    //                 h('img', {
-                    //                     style: {
-                    //                         marginRight: '8px'
-                    //                     },
-                    //                     attrs: {
-                    //                         src: require('../../../assets/common/review.png')
-                    //                     }
-                    //                 }),
-                    //                 h('span', {
-                    //                     style: {
-                    //                         position: 'relative',
-                    //                         top: '-4px'
-                    //                     }
-                    //                 }, '审核')
-                    //             ])
-                    //         ]);
-                    //     }
-                    // }
                 ],
-                objectList: [],
-                school_columns:
-                    [
-                        {
-                            title: '序号',
-                            width: 60,
-                            align: 'center',
-                            render: (h, params) => {
-                                return h('span', params.index + 1);
-                            }
-                        }, {
-                        title: '学校',
-                        key: 'school'
-                    }, {
-                        title: '年级',
-                        key: 'grade'
-                    }, {
-                        title: '班级',
-                        key: 'class',
-                    }, {
-                        title: '人数',
-                        key: 'count',
-                    }, {
-                        title: '体检队伍',
-                        key: 'team',
-                    }, {
-                        title: '体检时间',
-                        key: 'time',
-                    }
-                    ],
-                school_data:
-                    [],
-                filterForm:
-                    {
-                        page: 1,
-                        size:
-                            10
-                    }
-                ,
+                tableData: [],
                 addFormData: {
                     cost_code_id: '',
-                    require_pay_date:
-                        '',
-                    pay_amount:
-                        0,
-                    remark:
-                        '',
-                    reviewRemark:
-                        ''
-                }
-                ,
-            }
-                ;
+                    require_pay_date: '',
+                    pay_amount: 0,
+                    remark: '',
+                    reviewRemark: ''
+                },
+                schoolList: [],
+                pageConfig: {
+                    page: 1,
+                    size: 10,
+                    total: 0,
+                    opts: [10, 20, 50, 100]
+                },
+                modal: false
+            };
         },
         methods: {
-            getList() {
-                let filterInfo = Object.assign({}, this.filterForm);
-                if (filterInfo.year) {
-                    filterInfo.year = filterInfo.year.getFullYear();
-                } else {
-                    filterInfo.year = null;
-                }
+            getSelectCondition(type) {
+                /// ===========获取下拉列表查询条件
                 this.$ajax({
-                    url: Urls.set_objects_list,
-                    data: filterInfo
-                }).then((res) => {
-                    if (res && res.data) {
-                        this.objectList = res.data;
-                    }
-                });
-            }
-            ,
-            getUnitList(type) {
-                this.$ajax({
-                    url: Urls.unit_opt_list,
+                    // 学校
+                    url: urls.dept_all_list,
                     data: {
                         type: type,
                         status: 1
                     }
-                }).then((res) => {
-                    if (res && res.data) {
-                        if (type == 2) {
-                            this.school_list = res.data;
-                        } else if (type == 3) {
-                            this.hospital_list = res.data;
+                })
+                    .then(data => {
+                        if (data.code === 200) {
+                            this.schoolList = data.data.filter((item) => {
+                                return item.type === 2;
+                            });
+                        } else {
+                            this.schoolList = [];
                         }
-                    }
-                });
-            }
-            ,
+                    })
+                    .catch(err => {
+                        window.console.log(err);
+                    });
+            },
+            search() {
+                // this.$ajax({
+                //     url: urls.set_objects_list,
+                //     data: filterInfo
+                // }).then((res) => {
+                //     if (res && res.data) {
+                //         this.tableData = res.data;
+                //     }
+                // });
+            },
+            selectChange(value){
+
+            },
             doReview() {
                 this.modal = true;
+            },
+            pageChange(page) {
+                this.pageConfig.page = page;
+                this.search();
+            },
+            sizeChange(size) {
+                this.pageConfig.size = size;
+                if (this.pageConfig.page === 1) {
+                    this.pageChange(1);
+                }
             }
-            ,
-            delete() {
-                this.$alert('删除~');
-            }
-            ,
+        },
+        created() {
+            this.getSelectCondition();
+            this.search();
         }
-        ,
     };
 </script>
 <style lang="scss" scoped>
@@ -292,14 +234,17 @@
         padding: 30px 44px;
         min-height: 500px;
         border-radius: 8px;
+
         .ivu-form .ivu-form-item {
             margin-right: 30px !important;
         }
+
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
+
         .title {
             height: 80px;
             font-size: 26px;
@@ -307,11 +252,13 @@
             font-weight: bold;
             color: rgba(51, 51, 51, 1);
         }
+
         .operator {
             float: right;
             margin-bottom: 15px;
             text-align: right;
         }
+
         .searchBtn {
             width: 80px;
             height: 34px;
@@ -324,12 +271,15 @@
             border-radius: 3px;
             border: none;
         }
+
         .searchBtn:hover {
             opacity: 0.8;
         }
+
         .ivu-divider {
             margin: 0 0 24px 0;
         }
+
         .add {
             margin-bottom: 12px;
             display: inline-block;
@@ -337,6 +287,7 @@
             font-family: SourceHanSansCN-Regular;
             font-weight: 400;
             color: rgba(39, 55, 60, 1);
+
             &:hover {
                 opacity: 0.8;
             }
@@ -346,15 +297,19 @@
                 top: 4px;
             }
         }
+
         .addBtn {
             margin-right: 40px;
         }
+
         .disabled span {
             color: #999999;
         }
+
         .editBtn:hover {
             opacity: 0.8;
         }
+
         .page {
             margin-top: 24px;
             text-align: center;

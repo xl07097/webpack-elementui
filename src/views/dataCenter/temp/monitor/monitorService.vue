@@ -7,9 +7,9 @@
                 <div class="headers">
                     <div>数据库</div>
                     <div>
-                        <img src="../../../assets/monitor/alarm.png" alt="">
+                        <img src="../../../../assets/monitor/alarm.png" alt="">
                         <span class="alarmNum">2</span>
-                        <img src="../../../assets/monitor/more.png" alt="">
+                        <img src="../../../../assets/monitor/more.png" alt="">
                     </div>
                 </div>
                 <div class="bg-time">
@@ -20,7 +20,7 @@
                     <div class="item1">
                         <h4>CPU使用情况</h4>
                         <div class="img">
-                            <img src="../../../assets/monitor/i20.png" alt="">
+                            <img src="../../../../assets/monitor/i20.png" alt="">
                             <div class="dd1">
                                 <div class="d1">
                                     <span class="span1">2%</span><br>
@@ -33,7 +33,7 @@
                     <div class="item2">
                         <h4>内存使用情况</h4>
                         <div class="img">
-                            <img src="../../../assets/monitor/i25.png" alt="">
+                            <img src="../../../../assets/monitor/i25.png" alt="">
                             <div class="dd1">
                                 <div class="d1">
                                     <span class="span1">25%</span><br>
@@ -69,22 +69,22 @@
                 </div>
                 <div class="data">
                     <div class="items">
-                        <img src="../../../assets/monitor/icon4.png" alt="">
+                        <img src="../../../../assets/monitor/icon4.png" alt="">
                         <div class="speed">1.64MB/s</div>
                         <div class="tip">语句读取</div>
                     </div>
                     <div class="items">
-                        <img src="../../../assets/monitor/icon3.png" alt="">
+                        <img src="../../../../assets/monitor/icon3.png" alt="">
                         <div class="speed">1.64MB/s</div>
                         <div class="tip">语句读取</div>
                     </div>
                     <div class="items">
-                        <img src="../../../assets/monitor/icon2.png" alt="">
+                        <img src="../../../../assets/monitor/icon2.png" alt="">
                         <div class="speed">1.64MB/s</div>
                         <div class="tip">语句读取</div>
                     </div>
                     <div class="items">
-                        <img src="../../../assets/monitor/icon1.png" alt="">
+                        <img src="../../../../assets/monitor/icon1.png" alt="">
                         <div class="speed">1.64MB/s</div>
                         <div class="tip">语句读取</div>
                     </div>

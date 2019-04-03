@@ -338,9 +338,7 @@
                     hemoglobin: '',
                     bilirubin: '',
                     glutamic_pyruvic: '',
-                    prophylactic: '',
-
-
+                    prophylactic: ''
                 },
                 rules: {
                     year: [{required: true, type: 'date', message: '请选择学年'}],
@@ -403,7 +401,7 @@
             },
             search() {
                 this.$ajax({
-                    url: urls.class_info,
+                    url: urls.elec_get_one,
                     data: {
                         id: this.id
                     }
@@ -499,13 +497,7 @@
             } else {
                 // this.getSelectCondition(2);
             }
-            // if (this.id) { //编辑
-            //     this.search();
-            // }else {
-            //     if(window.localStorage.getItem('is_roles')){
-            //         this.obj.school_id = window.localStorage.getItem('unit_id');
-            //     }
-            // }
+            this.search();
         }
     };
 </script>

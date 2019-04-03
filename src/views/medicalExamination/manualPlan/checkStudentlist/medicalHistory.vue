@@ -1,72 +1,74 @@
 <template>
-    <div>
-        <div class="content-box classes">
-            <div class="title">
-                学生体检名单校对
-            </div>
-            <Form v-model="req" inline>
-                <FormItem label="学校名称" :label-width="80">
-                    <i-select style="width:200px" @on-change="schoolChange" v-model="req.dep_id">
-                        <i-option value="-1">全部</i-option>
-                        <i-option v-for="item in schoolList" :value="item.id" :key="item.id">{{item.name}}</i-option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="学年" :label-width="50">
-                    <DatePicker type="year" v-model="req.year" @on-change="gradeChange" :options="dateOpts"
-                                placeholder="请选择" style="width: 140px"></DatePicker>
-                </FormItem>
-                <FormItem label="学期" :label-width="50">
-                    <i-select style="width:100px" v-model="req.term" @on-change="gradeChange">
-                        <Option value="-1">全部</Option>
-                        <Option :value="1">第一学期</Option>
-                        <Option :value="2">第二学期</Option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="年级" :label-width="50">
-                    <i-select v-model="req.grade_no" @on-change="gradeChange" style="width:140px; margin-right: 0!important;">
-                        <i-option value="-1">全部</i-option>
-                        <i-option v-for="item of gradeList" :key="item.id" :value='item.id'>{{item.value}}</i-option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="班级" :label-width="50">
-                    <i-select style="width:140px" v-model="req.class_no">
-                        <i-option value="-1">全部</i-option>
-                        <Option v-for="item in classList" :value="item.id" :key="item.id">{{item.class_no}}</Option>
-                    </i-select>
-                </FormItem>
-                <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
-                </FormItem>
-            </Form>
-            <Divider dashed style="margin-top: 0;"/>
-            <div class="clearfix">
-                <a href="javascript:void(0)" class="add" style="margin-right: 45px;margin-top: 24px" @click="add">
-                    <img src="../../../../assets/unit/add.png" alt="add">&nbsp;新增
-                </a>
-                <a class="add" style="margin-right: 45px;" @click="trash">
-                    <img src="../../../../assets/system/role/delete.png" alt="trash">&nbsp;
-                    删除
-                </a>
-                <a href="javascript:void(0)" class="add">
-                    <img src="../../../../assets/unit/import.png" alt="upload">&nbsp;导入
-                </a>
-                <a href="javascript:void(0)" class="add" style="position: absolute;right: 50px;margin-top: 20px">
-                    <img src="../../../../assets/unit/download.png" alt="download">&nbsp;<span style="position: relative;top: -4px;">下载模版</span>
-                </a>
-            </div>
-            <Table ref="selection" :columns="columns" @on-selection-change="selectChange" :data="tableData"></Table>
-            <div class="page">
-                <Page
-                        :total="pageConfig.total"
-                        show-total
-                        show-elevator
-                        show-sizer
-                        :current='pageConfig.page'
-                        :page-size-opts='pageConfig.opts'
-                        :page-size='pageConfig.size'
-                        @on-change='pageChange'
-                        @on-page-size-change='sizeChange'/>
-            </div>
+    <div class="content-box chexkStudentList">
+        <div class="title">
+            学生体检名单校对
+        </div>
+        <Form v-model="req" inline>
+            <FormItem label="学校名称" :label-width="80">
+                <i-select style="width:200px" @on-change="schoolChange" v-model="req.dep_id">
+                    <i-option value="-1">全部</i-option>
+                    <i-option v-for="item in schoolList" :value="item.id" :key="item.id">{{item.name}}</i-option>
+                </i-select>
+            </FormItem>
+            <FormItem label="学年" :label-width="50">
+                <i-select style="width:120px" v-model="req.year">
+                    <Option value="-1">全部</Option>
+                    <i-option v-for="item in yearList" :value="item.value" :key="item.value">{{item.name}}</i-option>
+                </i-select>
+            </FormItem>
+            <FormItem label="学期" :label-width="50">
+                <i-select style="width:100px" v-model="req.term" @on-change="gradeChange">
+                    <Option value="-1">全部</Option>
+                    <Option :value="1">第一学期</Option>
+                    <Option :value="2">第二学期</Option>
+                </i-select>
+            </FormItem>
+            <FormItem label="年级" :label-width="50">
+                <i-select v-model="req.grade_no" @on-change="gradeChange"
+                          style="width:140px; margin-right: 0!important;">
+                    <i-option value="-1">全部</i-option>
+                    <i-option v-for="item of gradeList" :key="item.id" :value='item.id'>{{item.value}}</i-option>
+                </i-select>
+            </FormItem>
+            <FormItem label="班级" :label-width="50">
+                <i-select style="width:140px" v-model="req.class_no">
+                    <i-option value="-1">全部</i-option>
+                    <Option v-for="item in classList" :value="item.id" :key="item.id">{{item.class_no}}</Option>
+                </i-select>
+            </FormItem>
+            <FormItem style="float: right;">
+                <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
+            </FormItem>
+        </Form>
+        <Divider dashed style="margin-top: 0;"/>
+        <div class="clearfix">
+            <a href="javascript:void(0)" class="add" @click="add">
+                <img src="../../../../assets/unit/add.png" alt="add">&nbsp;新增
+            </a>
+            <a href="javascript:void(0)" class="add" @click="trash">
+                <img src="../../../../assets/system/role/delete.png" alt="trash">&nbsp;
+                删除
+            </a>
+            <a href="javascript:void(0)" class="add" @click="imports">
+                <img src="../../../../assets/unit/import.png" alt="upload">&nbsp;导入
+            </a>
+            <a :href="student_info_down" class="add" style="position: absolute;right: 50px" download="体检学生信息导入模板.xlsx">
+                <img src="../../../../assets/unit/download.png" alt="download">&nbsp;<span
+                    style="position: relative;top:-4px;">下载模版</span>
+            </a>
+        </div>
+        <Table ref="selection" :columns="columns" @on-selection-change="selectChange" :data="tableData"></Table>
+        <div class="page">
+            <Page
+                    :total="pageConfig.total"
+                    show-total
+                    show-elevator
+                    show-sizer
+                    :current='pageConfig.page'
+                    :page-size-opts='pageConfig.opts'
+                    :page-size='pageConfig.size'
+                    @on-change='pageChange'
+                    @on-page-size-change='sizeChange'/>
         </div>
         <component :title="modalTitle" :is='com' :id='id' :flag="flag" @modal-close='ModalClose'></component>
     </div>
@@ -74,14 +76,16 @@
 <script>
     import urls from '../../../../service/Urls';
     import AddCheckList from './addChecklist';
+    import importStudent from './importStudent';
 
     export default {
         name: 'schedule',
         data() {
             return {
+                student_info_down: urls.student_info_down,
                 req: {
                     dep_id: '-1',
-                    year: '',
+                    year: '-1',
                     term: '-1',
                     grade_no: '-1',
                     class_no: '-1'
@@ -115,7 +119,10 @@
                     }, {
                         title: '学年',
                         key: 'year',
-                        width: 60,
+                        width: 100,
+                        render(h, params) {
+                            return h('span', null, `${params.row.year}-${Number(params.row.year) + 1}`);
+                        }
                     }, {
                         title: '学期',
                         key: 'term',
@@ -236,6 +243,7 @@
                     }
                 ],
                 tableData: [],
+                yearList: [],
                 schoolList: [],
                 gradeList: [],
                 classList: [],
@@ -248,6 +256,17 @@
         },
         methods: {
             getSelectCondition() {
+                let start = 2018;
+                let today = new Date().getFullYear();
+                let m = today - start;
+                let temp = [];
+                for (let i = 0; i <= m; i++) {
+                    temp.push({
+                        value: `${start + i}`,
+                        name: `${start + i}-${start + i + 1}`
+                    });
+                }
+                this.yearList = temp.reverse();
                 this.$ajax({
                     // 学校
                     url: urls.dept_all_list,
@@ -325,7 +344,7 @@
                     url: urls.proofreading_list,
                     data: {
                         dep_id: this.req.dep_id === '-1' ? null : this.req.dep_id,
-                        year: this.req.year ? String(this.req.year.getFullYear()) : null,
+                        year: this.req.year === '-1' ? null : this.req.year,
                         term: this.req.term === '-1' ? null : this.req.term,
                         grade_no: this.req.grade_no === '-1' ? null : this.req.grade_no,
                         class_no: this.req.class_no === '-1' ? null : this.req.class_no,
@@ -348,20 +367,20 @@
                 this.modalTitle = '新增';
                 this.flag = false;
             },
-            info(id){
+            info(id) {
                 this.com = AddCheckList;
                 this.id = id;
                 this.modalTitle = '详情';
                 this.flag = true;
             },
-            edit(id){
+            edit(id) {
                 this.com = AddCheckList;
                 this.id = id;
                 this.modalTitle = '编辑';
                 this.flag = false;
             },
-            trash(){
-                if(!this.selectValue.length){
+            trash() {
+                if (!this.selectValue.length) {
                     this.$Message.error('请选择名单');
                     return false;
                 }
@@ -384,7 +403,13 @@
                     }
                 });
             },
-            selectChange(value){
+            imports(){
+                this.com = importStudent;
+                this.id = '';
+                this.modalTitle = '';
+                this.flag = '';
+            },
+            selectChange(value) {
                 this.selectValue = value;
             },
             pageChange(page) {
@@ -410,108 +435,15 @@
         }
     };
 </script>
-<style lang="scss">
-    .content-box {
-        padding: 30px 44px;
-    }
-
-    .title {
-        height: 26px;
-        line-height: 26px;
-        color: #333333;
-        font-size: 26px;
-        font-weight: bold;
-    }
-
-    .modal-form .ivu-form-item {
-        margin-right: 30px !important;
-    }
-
-    .classes {
-        padding: 30px 44px;
-        min-height: 500px;
-        border-radius: 8px;
-
-        .ivu-form .ivu-form-item {
-            margin-right: 30px !important;
-        }
-
+<style lang="less">
+    .chexkStudentList {
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
-
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .ivu-divider {
-            margin: 0 0 24px 0;
-        }
-
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
-        .addBtn {
-            margin-right: 40px;
-        }
-
         .disabled span {
             color: #999999;
         }
-
-        .editBtn:hover {
-            opacity: 0.8;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
-        }
     }
-
-
 </style>

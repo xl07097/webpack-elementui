@@ -2,7 +2,7 @@
     <div class="medical content-box">
         <h3 class="title">医疗机构信息管理</h3>
         <Form inline label-position="left">
-            <FormItem label="医疗机构职业许可证" :label-width="150">
+            <FormItem label="医疗机构执业许可证" :label-width="150">
                 <i-input v-model.trim="req.licence" :maxlength="20" style="width: 200px"></i-input>
             </FormItem>
             <FormItem label="医疗机构名称" :label-width="110">
@@ -286,85 +286,13 @@
 
 <style lang="less">
     .medical {
-        min-height: 500px;
-        padding: 30px 44px;
-        border-radius: 8px;
-
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            /*font-family: SourceHanSansCN-Bold;*/
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .ivu-divider {
-            margin: 0 0 24px 0;
-        }
-
-        .contents {
-            position: relative;
-        }
-
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
-
-        .addBtn {
-            margin-right: 40px;
-        }
-
         .disabled span {
             color: #ccc;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
         }
     }
 </style>

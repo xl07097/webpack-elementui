@@ -9,11 +9,11 @@
             <div class="divider"/>
             <div class="btn-box">
                 <div class="action-btn" @click="addEncoding">
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/add.png"/>
+                    <img style="margin: 8px 6px;" src="../../../../assets/system/role/add.png"/>
                     新增
                 </div>
             </div>
-            <Table ref="selection" :i-columns="i-columns" :data="data"></Table>
+            <Table ref="selection" :columns="columns" :data="data"></Table>
             <Page style="text-align: center;margin-top: 20px;"
                   :total="totalRecords"
                   :current="filterForm.page"
@@ -38,45 +38,45 @@
                 @on-cancel="closeaddModal">
             <Form ref="addFormValidate" inline :model="addForm" label-position="top" :rules="addFormValidate">
                 <Row>
-                    <i-col span="12" class="leftFormItem">
+                    <Col span="12" class="leftFormItem">
                         <FormItem label="接入代号" prop="prefix">
                             <Select style="width:75px" v-model="addForm.prefix" @on-change="v=>{setCurrnertNum(v)}"
                                     :label-in-value="true">
                                 <Option v-for="item in prefixList" :value="item.id" :key="item.id">{{ item.name }}
                                 </Option>
                             </Select>
-                            <i-input v-model="addForm.currentNum" style="width: 75px" disabled></i-input>
+                            <Input v-model="addForm.currentNum" style="width: 75px" disabled></Input>
                         </FormItem>
-                    </i-col>
-                    <i-col span="12" class="rightFormItem">
+                    </Col>
+                    <Col span="12" class="rightFormItem">
                         <FormItem label="所属单位" prop="unit">
-                            <i-input v-model.trim="addForm.unit"></i-input>
+                            <Input v-model.trim="addForm.unit"></Input>
                         </FormItem>
-                    </i-col>
+                    </Col>
                 </Row>
                 <Row>
-                    <i-col span="12" class="leftFormItem">
+                    <Col span="12" class="leftFormItem">
                         <FormItem label="IP地址" prop="ip">
-                            <i-input v-model.trim="addForm.ip"></i-input>
+                            <Input v-model.trim="addForm.ip"></Input>
                         </FormItem>
-                    </i-col>
-                    <i-col span="12" class="rightFormItem">
+                    </Col>
+                    <Col span="12" class="rightFormItem">
                         <FormItem label="MAC地址" prop="mac">
-                            <i-input v-model.trim="addForm.mac"></i-input>
+                            <Input v-model.trim="addForm.mac"></Input>
                         </FormItem>
-                    </i-col>
+                    </Col>
                 </Row>
                 <Row>
-                    <i-col span="12" class="leftFormItem">
+                    <Col span="12" class="leftFormItem">
                         <FormItem label="负责人" prop="leader">
-                            <i-input v-model.trim="addForm.leader"></i-input>
+                            <Input v-model.trim="addForm.leader"></Input>
                         </FormItem>
-                    </i-col>
-                    <i-col span="12" class="rightFormItem">
+                    </Col>
+                    <Col span="12" class="rightFormItem">
                         <FormItem label="联系电话" prop="tel">
-                            <i-input v-model.trim="addForm.tel"></i-input>
+                            <Input v-model.trim="addForm.tel"></Input>
                         </FormItem>
-                    </i-col>
+                    </Col>
                 </Row>
             </Form>
             <div class="footer">
@@ -96,45 +96,45 @@
                 @on-cancel="confirmInfoModal">
             <Form ref="addFormValidate" inline :model="addForm" label-position="top">
                 <Row>
-                    <i-col span="12" class="leftFormItem">
+                    <Col span="12" class="leftFormItem">
                         <FormItem label="接入代号" prop="prefix">
                             <Select style="width:75px" v-model="addForm.prefix" @on-change="v=>{setCurrnertNum(v)}"
                                     :label-in-value="true" disabled>
                                 <Option v-for="item in prefixList" :value="item.id" :key="item.id">{{ item.name }}
                                 </Option>
                             </Select>
-                            <i-input v-model="addForm.currentNum" style="width: 75px" readonly></i-input>
+                            <Input v-model="addForm.currentNum" style="width: 75px" readonly></Input>
                         </FormItem>
-                    </i-col>
-                    <i-col span="12" class="rightFormItem">
+                    </Col>
+                    <Col span="12" class="rightFormItem">
                         <FormItem label="所属单位" prop="unit">
-                            <i-input v-model="addForm.unit" readonly></i-input>
+                            <Input v-model="addForm.unit" readonly></Input>
                         </FormItem>
-                    </i-col>
+                    </Col>
                 </Row>
                 <Row>
-                    <i-col span="12" class="leftFormItem">
+                    <Col span="12" class="leftFormItem">
                         <FormItem label="IP地址" prop="ip">
-                            <i-input v-model="addForm.ip" readonly></i-input>
+                            <Input v-model="addForm.ip" readonly></Input>
                         </FormItem>
-                    </i-col>
-                    <i-col span="12" class="rightFormItem">
+                    </Col>
+                    <Col span="12" class="rightFormItem">
                         <FormItem label="MAC地址" prop="mac">
-                            <i-input v-model="addForm.mac" readonly></i-input>
+                            <Input v-model="addForm.mac" readonly></Input>
                         </FormItem>
-                    </i-col>
+                    </Col>
                 </Row>
                 <Row>
-                    <i-col span="12" class="leftFormItem">
+                    <Col span="12" class="leftFormItem">
                         <FormItem label="负责人" prop="leader">
-                            <i-input v-model="addForm.leader" readonly></i-input>
+                            <Input v-model="addForm.leader" readonly></Input>
                         </FormItem>
-                    </i-col>
-                    <i-col span="12" class="rightFormItem">
+                    </Col>
+                    <Col span="12" class="rightFormItem">
                         <FormItem label="联系电话" prop="tel">
-                            <i-input v-model="addForm.tel" readonly></i-input>
+                            <Input v-model="addForm.tel" readonly></Input>
                         </FormItem>
-                    </i-col>
+                    </Col>
                 </Row>
             </Form>
             <div class="footer">
@@ -145,7 +145,7 @@
     </div>
 </template>
 <script>
-    import urls from '../../../service/Urls.js';
+    import urls from '../../../../service/Urls.js';
 
     export default {
         props: [''],
@@ -237,7 +237,7 @@
                         render: (h, params) => {
                             return h('div', [
                                 h('img', {
-                                    attrs: {src: require('../../../assets/system/role/info.png')},
+                                    attrs: {src: require('../../../../assets/system/role/info.png')},
                                     style: {
                                         display: 'inline-block',
                                         width: '20px',
@@ -268,7 +268,7 @@
                                     '详情'
                                 ),
                                 h('img', {
-                                    attrs: {src: require('../../../assets/system/role/edit.png')},
+                                    attrs: {src: require('../../../../assets/system/role/edit.png')},
                                     style: {
                                         display: 'inline-block',
                                         width: '20px',

@@ -15,6 +15,16 @@ urls.baseApi = protocol + '//' + host;
 urls.login = '/SysUser/Login';//登录
 urls.getMenuPermision = '/SysFunction/GetFunctionByLogin'; // 获取权限路由
 
+// 模板下载地址
+urls.teacher_down = urls.baseApi + '/static/老师信息导入模板.xlsx';
+urls.student_down = urls.baseApi + '/static/学生名单导入模板.xlsx';
+urls.student_info_down = urls.baseApi + '/static/学生信息导入模板.xlsx';
+urls.class_down = urls.baseApi + '/static/班级信息导入模板.xlsx';
+
+// 导入
+urls.teacher_up = urls.baseApi + '/Teacher/ImportExcel';
+
+
 // 下拉列表
 urls.unit_opt_list = '/UnitInf/GetUnitInfAllListByType';// 1教育局2学校3医院4体科所
 urls.grade_list = '/UnitInf/GetGradesByUnitId'; // 根据学校获取年级下拉列表 // id="2"
@@ -34,11 +44,13 @@ urls.uploadImage = urls.baseApi + '/FileUpload/fileUpload';
 urls.user_list = '/SysUser/GetList';//列表
 urls.user_edit = '/SysUser/Update';//修改
 urls.user_add = '/SysUser/Add';//新增
+urls.user_all = '/SysUser/GetAll';//获取所有
 urls.user_update = '/SysUser/Update';//修改
 urls.user_status = '/SysUser/Operation';//状态
 urls.user_info = '/SysUser/GetById';//根据id获取某一个
 urls.user_reset = '/SysUser/ResetPassord';//重置密码
-
+urls.user_dept = '/SysDepartment/GetAll';//获取部门
+urls.manage_list = '/Taskmanagement/GetTaskManageAll';//获取任务
 // 区域
 urls.area_list = '/Area/GetList';
 urls.area_add = '/Area/Add';
@@ -49,14 +61,15 @@ urls.area_all_list = '/Area/GetAll';
 
 
 //角色信息
-urls.role_list='/SysRole/GetList';//列表
-urls.role_all='/SysRole/GetAll';//获取角色下拉列表
-urls.role_add='/SysRole/Add';//新增
-urls.role_edit='/SysRole/Update';//编辑
-urls.role_operation='/SysRole/Operation';//状态
-urls.role_function='/SysFunction/GetList';//获取菜单普通下拉列表
-urls.add_role_function='/SysRoleFunction/AddRoleFunction';//
-urls.getFunction='/SysRole/GetFunctions';//配置权限
+urls.role_list = '/SysRole/GetList';//列表
+urls.role_all = '/SysRole/GetAll';//获取角色下拉列表
+urls.role_add = '/SysRole/Add';//新增
+urls.role_edit = '/SysRole/Update';//编辑
+urls.role_operation = '/SysRole/Operation';//状态
+urls.role_function = '/SysFunction/GetList';//获取菜单普通下拉列表
+urls.function_all = '/SysFunction/GetAll';//配置权限
+urls.add_role_function = '/SysRoleFunction/AddRoleFunction';//
+urls.getFunction = '/SysRole/GetFunctions';//配置权限
 
 //字典表类别管理
 urls.dic_type = '/DictionaryCategory/GetList';//字典表类别列表
@@ -71,6 +84,7 @@ urls.dictionary_add = '/Dictionary/Add';//新增
 urls.dictionary_edit = '/Dictionary/Update';//修改
 urls.dictionary_status = '/Dictionary/Operation';//状态
 urls.dictionary_id = '/Dictionary/GetById';//状态
+urls.dictionary_tree = '/Dictionary/GetTreeAll';//树
 
 //通知管理
 urls.task_list = '/Taskmanagement/GetList';//通知管理列表
@@ -80,6 +94,9 @@ urls.task_operation = '/Taskmanagement/Operation';//操作
 //字典值
 urls.dictm_all_list = '/Dictionary/GetAll';
 
+//日志
+urls.system_log = '/SysLog/GetList';
+urls.system_info = '/SysLog/GetById';
 
 // // 单位信息管理 // 页面拆分成医疗机构和学校
 // urls.unit_tree = '/UnitInf/GetUnitTreesByKeyWord'; //左侧树
@@ -104,6 +121,7 @@ urls.class_edit = '/ClassManagement/Update'; //编辑
 urls.class_status = '/ClassManagement/Operation'; // 启用。禁用
 urls.class_info = '/ClassManagement/GetById'; // 详情
 urls.class_all_lists = '/ClassManagement/GetAll';
+urls.class_import = '/ClassManagement/ImportExce'; // 导入
 
 // 科室信息管理
 urls.section_list = '/HospitalDep/GetList'; // 列表
@@ -144,6 +162,7 @@ urls.student_edit = '/StudentInfo/Update'; //编辑
 urls.student_status = '/StudentInfo/Operation'; // 启用。禁用
 urls.student_info = '/StudentInfo/GetById'; // 详情
 // urls.get_student_count = '/StudentInf/GetClassTotalByClassId';
+urls.student_import = urls.baseApi + '/StudentInfo/ImportExcel';
 
 //统一体检
 //学生体检名单校对
@@ -158,6 +177,7 @@ urls.student_bao_list = '/StudentListAnamnesis/GetStuAmountList'; //
 urls.student_bao_add = '/CheckClassCount/AddAll'; // 上报
 urls.class_check = '/CheckClassCount/GetClassNo'; //上报班级列表
 urls.class_check_list = '/CheckClassCount/GetAll';
+urls.student_check_import = urls.baseApi + '/StudentListAnamnesis/ImportExcel';
 
 //==========体检计划
 urls.media_list = '/MedicalPlan/GetList';
@@ -204,6 +224,10 @@ urls.examination_team_info = '/PhysicalTeam/GetAllPhysicalTeamById';//详情
 //体检报告
 urls.examination_personsummary_list = '/FinalResult/GetEleFinalResultList'; //个人体检报告列表
 urls.examination_personsummary_analyze = '/PhysicalCourse/GetReportByStudentId';//个人体检报告分析
+
+// 电子体检报告
+urls.elec_list = '/UserResult/GetMedicalList';
+urls.elec_get_one = '/UserResult/GetSingleMedical';
 
 
 //健康体测

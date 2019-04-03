@@ -25,10 +25,10 @@
                     <img style="margin: 8px 6px;" src="../../assets/system/role/add.png"/>
                     新增
                 </div>
-                <div class="action-btn" @click="trash">
-                    <img style="margin: 8px 6px;" src="../../assets/system/role/delete.png"/>
-                    删除
-                </div>
+                <!--<div class="action-btn" @click="trash">-->
+                    <!--<img style="margin: 8px 6px;" src="../../assets/system/role/delete.png"/>-->
+                    <!--删除-->
+                <!--</div>-->
             </div>
             <Table ref="selection" :columns="columns" :data="data" @on-selection-change="selectionChange"></Table>
             <Page style="text-align: center;margin-top: 20px;"
@@ -139,29 +139,29 @@
                         title: '备注',
                         key: 'remark'
                     },
-                    {
-                        title: '状态',
-                        key: 'status',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('i-switch', {
-                                    props: {
-                                        type: 'primary',
-                                        value: params.row.status === 1
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        'on-change': () => {
-                                            this.switch(params.row.id, params.row.status, params.row.user_name);
-                                        }
-                                    }
-                                }),
-                                h('span', params.row.status === 1 ? '启用' : '禁用')
-                            ]);
-                        }
-                    },
+                    // {
+                    //     title: '状态',
+                    //     key: 'status',
+                    //     render: (h, params) => {
+                    //         return h('div', [
+                    //             h('i-switch', {
+                    //                 props: {
+                    //                     type: 'primary',
+                    //                     value: params.row.status === 1
+                    //                 },
+                    //                 style: {
+                    //                     marginRight: '5px'
+                    //                 },
+                    //                 on: {
+                    //                     'on-change': () => {
+                    //                         this.switch(params.row.id, params.row.status, params.row.user_name);
+                    //                     }
+                    //                 }
+                    //             }),
+                    //             h('span', params.row.status === 1 ? '启用' : '禁用')
+                    //         ]);
+                    //     }
+                    // },
                     {
                         title: '操作',
                         key: 'operation',
@@ -229,11 +229,13 @@
                 this.addtitle = '新增字典类别';
                 this.addModal = true;
                 this.addForm = {};
+                this.id = '';
             },
             setRight() {
                 this.rightModal = true;
             },
             Search() {
+                this.pageConfig.page = 1;
                 this.getList();
             },
             edit(row) {
@@ -335,13 +337,11 @@
                                     self.$Message.error('删除信息失败');
                                 }
                             })
-                    },
-                    cancel: function () {
-                        self.search();
                     }
                 });
             },
             getList() {
+                this.selectionValue = [];
                 this.$ajax({
                     url: urls.dic_type,
                     data: {

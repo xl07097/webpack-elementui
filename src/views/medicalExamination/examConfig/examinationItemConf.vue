@@ -19,37 +19,34 @@
             ></v-table>
         </div>
         <Modal
-                :title='bigmodal_title'
+                :title='title'
                 v-model="modal"
                 :loading="loading"
                 :mask-closable="false"
-                :styles="{top: '140px',width:'800px'}"
+                :width="800"
                 ok-text="保存"
-                @on-ok="submit()"
+                @on-ok="confirms()"
         >
             <Form inline :model="addFormData" label-position="top" class="modal-form">
                 <FormItem label="体检项" style="margin-right: 90px!important;">
-                    <Input v-model.trim="addFormData.item" readonly style="width:310px;"/>
+                    <i-input v-model.trim="addFormData.item" readonly style="width:310px;"/>
                 </FormItem>
                 <FormItem label="参考值类型" style="margin-right: 30px !important;">
-                    <Input style="width:140px;" v-model.trim="addFormData.type" readonly/>
+                    <i-input style="width:140px;" v-model.trim="addFormData.type" readonly/>
                 </FormItem>
                 <FormItem label="单位" style="margin-right: 0 !important;">
-                    <Input style="width:140px;" v-model.trim="addFormData.unit" readonly/>
+                    <i-input style="width:140px;" v-model.trim="addFormData.unit" readonly/>
                 </FormItem>
             </Form>
-            <div class="btn-box" style="margin: 6px">
-                <div class="action-btn" @click="addItem">
-                    <img style="margin: 8px 6px;" src="../../assets/common/add.png"/>
-                    新增
-                </div>
+            <div class="action-btn" @click="addItem" style="margin-bottom: 10px;">
+                <img style="margin:0 6px;" src="../../../assets/common/add.png" alt="add"/>
+                <span>新增</span>
             </div>
-            <Table ref="selection1" :columns="item_List_Columns" :data="item_List" height="300"
-                   style="margin-bottom: 40px;"></Table>
+            <Table ref="selection1" :columns="columns1" :data="item_List" height="300"></Table>
         </Modal>
         <Modal
                 title="新增"
-                :mask="false"
+                :mask-closable="false"
                 v-model="addmostModal"
                 :width="562"
                 @close="addclose"
@@ -98,8 +95,8 @@
 </template>
 <script>
     import Vue from 'vue';
-    import {gettexaminationItemConf} from './table_Data.js';
-    import Urls from '../../service/Urls';
+    import {gettexaminationItemConf} from '../table_Data.js';
+    import Urls from '../../../service/Urls';
 
     export default {
         name: 'examinationItemConf',
@@ -107,10 +104,9 @@
             return {
                 loading: true,
                 addmostloading: true,
-                bigmodal_title: '设定正常值范围',
+                title: '设定正常值范围',
                 modal: false,
                 addmostModal: false,
-                item_List_Columns: [],
                 //弹框的表格
                 item_List: [],
                 addFormData: {
@@ -171,6 +167,95 @@
                         componentName: 'table-operation',
                         isResize: true
                     }
+                ],
+                columns1: [],
+                columns_1: [
+                    {
+                        title: '序号',
+                        width: 60,
+                        align: 'center',
+                        type: 'index'
+                    }, {
+                        title: '性别',
+                        key: 'gender_name',
+                        render: (h, params) => {
+                            return h('span', null, params.row.gender === 1 ? '男' : '女');
+                        }
+                    }, {
+                        title: '年龄',
+                        key: 'age'
+                    }, {
+                        title: '下限',
+                        key: 'normal_low'
+                    }, {
+                        title: '上限',
+                        key: 'normal_up',
+                    }, {
+                        title: '操作',
+                        key: 'action',
+                        render: (h, params) => {
+                            return h('span', {
+                                attrs: {
+                                    class: 'editBtn'
+                                },
+                                style: {
+                                    display: 'inline-block',
+                                    padding: '4px',
+                                    cursor: 'pointer',
+                                    color: '#FF7200'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.trash(params.index);
+                                    }
+                                }
+                            }, '删除');
+                        }
+                    }
+                ],
+                columns_2: [
+                    {
+                        title: '序号',
+                        type: 'index',
+                        width: 60,
+                        align: 'center'
+                    }, {
+                        title: '性别',
+                        key: 'gender_name',
+                        render: (h, params) => {
+                            return h('span', null, params.row.gender === 1 ? '男' : '女');
+                        }
+                    }, {
+                        title: '年龄',
+                        key: 'age'
+                    }, {
+                        title: '下限',
+                        key: 'abnormal_low'
+                    }, {
+                        title: '上限',
+                        key: 'abnormal_up',
+                    }, {
+                        title: '操作',
+                        key: 'action',
+                        render: (h, params) => {
+                            return h('span', {
+                                attrs: {
+                                    class: 'editBtn'
+                                },
+                                style: {
+                                    display: 'inline-block',
+                                    padding: '4px',
+                                    cursor: 'pointer',
+                                    color: '#FF7200'
+                                },
+                                on: {
+                                    click: () => {
+                                        this.trash(params.index);
+                                    }
+                                }
+                            }, '删除');
+                        }
+                    }
                 ]
             };
         },
@@ -180,58 +265,10 @@
                 this.addmostModal = true;
             },
             customCompFunc(params) {
-                if (params.type === 'normal') { // do edit operation
+                if (params.type === 'normal') {
                     this.addFormData.isnormal = 'normal';
-                    this.bigmodal_title = '逻辑检验界值';
-                    this.item_List_Columns = [
-                        {
-                            title: '序号',
-                            width: 60,
-                            align: 'center',
-                            render: (h, params) => {
-                                return h('span', null, params.index + 1);
-                            }
-                        }, {
-                            title: '性别',
-                            key: 'gender_name'
-                        }, {
-                            title: '年龄',
-                            key: 'age'
-                        }, {
-                            title: '下限',
-                            key: 'normal_low'
-                        }, {
-                            title: '上限',
-                            key: 'normal_up',
-                        }, {
-                            title: '操作',
-                            key: 'action',
-                            render: (h, params) => {
-                                return h('span', {
-                                    attrs: {
-                                        class: 'editBtn'
-                                    },
-                                    style: {
-                                        display: 'inline-block',
-                                        cursor: 'pointer',
-                                        color: '#FF7200'
-                                    },
-                                    on: {
-                                        click: () => {
-                                            this.Itemdelete(params.row);
-                                        }
-                                    }
-                                }, [
-                                    h('span', {
-                                        style: {
-                                            position: 'relative',
-                                            top: '-4px'
-                                        }
-                                    }, '删除')
-                                ]);
-                            }
-                        }
-                    ];
+                    this.title = '逻辑检验界值';
+                    this.columns1 = this.columns_1;
                     this.addFormData.set_id = params.rowData['action'];
                     this.addFormData.item = params.rowData['item'];
                     this.addFormData.unit = params.rowData['unit'];
@@ -239,8 +276,6 @@
                     this.$ajax({
                         url: Urls.examination_config_list,
                         data: {
-                            'page': 1,
-                            'size': 10,
                             'set_id': params.rowData['action'],
                             'type': 0
                         }
@@ -253,7 +288,7 @@
                 }
                 if (params.type === 'reset') {
                     this.addFormData.isnormal = 'reset';
-                    this.bigmodal_title = '复测参考值';
+                    this.title = '复测参考值';
                     this.addFormData.set_id = params.rowData['action'];
                     this.addFormData.item = params.rowData['item'];
                     this.addFormData.unit = params.rowData['unit'];
@@ -261,63 +296,13 @@
                     this.$ajax({
                         url: Urls.examination_config_list,
                         data: {
-                            'page': 1,
-                            'size': 10,
                             'set_id': params.rowData['action'],
                             'type': 1
                         }
                     }).then((data) => {
                         if (data.code === 200) {
                             this.item_List = data.data;
-                            this.item_List_Columns = [
-                                {
-                                    title: '序号',
-                                    width: 60,
-                                    align: 'center',
-                                    render: (h, params) => {
-                                        return h('span', null, params.index + 1);
-                                    }
-                                }, {
-                                    title: '性别',
-                                    key: 'gender_name'
-                                }, {
-                                    title: '年龄',
-                                    key: 'age'
-                                }, {
-                                    title: '下限',
-                                    key: 'abnormal_low'
-                                }, {
-                                    title: '上限',
-                                    key: 'abnormal_up',
-                                }, {
-                                    title: '操作',
-                                    key: 'action',
-                                    render: (h, params) => {
-                                        return h('span', {
-                                            attrs: {
-                                                class: 'editBtn'
-                                            },
-                                            style: {
-                                                display: 'inline-block',
-                                                cursor: 'pointer',
-                                                color: '#FF7200'
-                                            },
-                                            on: {
-                                                click: () => {
-                                                    this.Itemdelete(params.row);
-                                                }
-                                            }
-                                        }, [
-                                            h('span', {
-                                                style: {
-                                                    position: 'relative',
-                                                    top: '-4px'
-                                                }
-                                            }, '删除')
-                                        ]);
-                                    }
-                                }
-                            ];
+                            this.columns1 = this.columns_2;
                             this.modal = true;
                         }
                     });
@@ -332,44 +317,71 @@
                         this.$Message.error('还有必填项字段未填，请确认后再提交!');
                         return false;
                     }
-                    this.mostAddFormData.gender_name = (this.mostAddFormData.gender === 1 ? '男' : '女');
-                    if (this.addFormData.isnormal === 'normal') {
-                        this.item_List.push({
-                            age: this.mostAddFormData.age,
-                            gender: this.mostAddFormData.gender,
-                            gender_name: this.mostAddFormData.gender_name,
-                            normal_low: this.mostAddFormData.normal_up,
-                            normal_up: this.mostAddFormData.normal_low,
-                        });
-                    } else {
-                        this.item_List.push({
-                            age: this.mostAddFormData.age,
-                            gender: this.mostAddFormData.gender,
-                            gender_name: this.mostAddFormData.gender_name,
-                            abnormal_up: this.mostAddFormData.normal_up,
-                            abnormal_low: this.mostAddFormData.normal_low,
-                        })
+
+                    let arr1 = [], arr2 = [];
+                    for (let i = 0; i < this.item_List.length; i++) {
+                        if (this.item_List[i].gender === 1) {
+                            console.log(this.item_List.slice(i, i + 1)[0])
+                            arr1.push(this.item_List.slice(i, i + 1)[0]);
+                            console.log(90);
+                        } else {
+                            arr2.push(this.item_List.slice(i, i + 1)[0]);
+                        }
                     }
+                    if (this.addFormData.isnormal === 'normal') {
+                        if (this.mostAddFormData.gender === 1) {
+                            arr1.push({
+                                age: this.mostAddFormData.age,
+                                gender: this.mostAddFormData.gender,
+                                normal_low: this.mostAddFormData.normal_low,
+                                normal_up: this.mostAddFormData.normal_up,
+                            });
+                        } else {
+                            arr2.push({
+                                age: this.mostAddFormData.age,
+                                gender: this.mostAddFormData.gender,
+                                normal_low: this.mostAddFormData.normal_low,
+                                normal_up: this.mostAddFormData.normal_up,
+                            });
+                        }
+                    } else {
+                        if (this.mostAddFormData.gender === 1) {
+                            arr1.push({
+                                age: this.mostAddFormData.age,
+                                gender: this.mostAddFormData.gender,
+                                abnormal_up: this.mostAddFormData.normal_up,
+                                abnormal_low: this.mostAddFormData.normal_low,
+                            });
+                        } else {
+                            arr2.push({
+                                age: this.mostAddFormData.age,
+                                gender: this.mostAddFormData.gender,
+                                abnormal_up: this.mostAddFormData.normal_up,
+                                abnormal_low: this.mostAddFormData.normal_low,
+                            });
+                        }
+                    }
+                    let a1 = arr1.sort((a, b) => Number(a.age) - Number(b.age));
+                    let a2 = arr2.sort((a, b) => Number(a.age) - Number(b.age));
+                    this.item_List = a2.concat(a1);
                     this.addmostModal = false;
                 });
             },
-            //从表格中删除数据
-            Itemdelete(para) {
+            //从table中删除数据
+            trash(index) {
+                let self = this;
                 this.$confirm({
                     text: '是否删除此项参数？',
                     onOk: () => {
-                        this.item_List.splice(para.index, 1);
+                        self.item_List.splice(index, 1);
                     },
                     cancel: () => {
-                        this.$message({
-                            type: 'info',
-                            message: '已取消'
-                        });
+                        self.$Message.info('已取消');
                     }
                 });
             },
             //提交数据
-            submit() {
+            confirms() {
                 this.loading = false;
                 this.$nextTick(() => {
                     this.loading = true;
@@ -908,8 +920,6 @@
                     }
                 }
             }
-        },
-        mounted() {
         }
     };
     // 自定义列组件
@@ -966,7 +976,6 @@
             padding-left: 10px !important;
         }
 
-
         .handler-ico {
             margin-right: 5px;
             display: inline-block;
@@ -976,28 +985,14 @@
         }
 
         .normarl {
-            background: url("../../assets/medicalExamination/reference_normal.png") no-repeat 100% 100%;
+            background: url("../../../assets/medicalExamination/reference_normal.png") no-repeat 100% 100%;
         }
 
         .retest {
-            background: url("../../assets/medicalExamination/reference_retest.png") no-repeat 100% 100%;
-        }
-
-        .content-box {
-            padding: 30px 44px;
-        }
-
-        .title {
-            height: 26px;
-            margin-bottom: 50px;
-            line-height: 26px;
-            color: #333333;
-            font-size: 26px;
-            font-weight: bold;
+            background: url("../../../assets/medicalExamination/reference_retest.png") no-repeat 100% 100%;
         }
 
         /*设置表格样式时，style标签不能设置scoped*/
-
         .column-cell {
             background-color: #ffffff;
         }

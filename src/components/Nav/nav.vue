@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-    import menuConf from '../../config/menuConf';
+    import menuConf from '../../constants/menuConf';
     import RenderMenu from './RenderMenu';
 
     export default {
@@ -21,7 +21,7 @@
         },
         data() {
             return {
-                menuConf: menuConf,
+                menuConf: JSON.parse(JSON.stringify(menuConf)),// 拷贝
                 menus: [],
                 theme: 'light',
                 activeMenu: '',
@@ -40,11 +40,10 @@
         mounted() {
             let per = JSON.parse(sessionStorage.getItem('permission'));
             this.permission = per ? per : [];
-
             this.menu_header = require('../../assets/menu/' + this.module + '.png');
             let menu = this.menuConf[this.module][0].children;
-            // this.menus = this.getPerMenu(menu);
-            this.menus = menu;
+            this.menus = this.getPerMenu(menu);
+            // this.menus = menu;
             if (this.menus && this.menus.length) {
                 this.firstLevelMenu = this.menus[0].name;//最外层展开的菜单
                 this.getOpenNames(this.menus);

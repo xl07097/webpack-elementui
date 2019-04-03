@@ -11,7 +11,7 @@
         >
             <Form ref="obj" :model="obj" :rules="rules" inline label-position="top">
                 <FormItem label="医疗机构执业许可证(登记号)" prop="licence" style="margin-left: 40px">
-                    <i-input v-model.trim="obj.licence" :maxlength="15" style="width: 222px" placeholder="请输入"></i-input>
+                    <i-input v-model.trim="obj.licence" :maxlength="20" style="width: 222px" placeholder="请输入"></i-input>
                 </FormItem>
                  <FormItem label="医疗机构名称" prop="name">
                     <i-input v-model.trim="obj.name" :maxlength="20" style="width: 222px" placeholder="请输入"></i-input>
@@ -30,7 +30,7 @@
                     </i-select>
                 </FormItem>
                 <FormItem label="详细地址" prop="location" style="margin-left: 40px">
-                    <i-input v-model.trim="obj.location" :maxlength="10" style="width: 488px" placeholder="请输入"></i-input>
+                    <i-input v-model.trim="obj.location" :maxlength="20" style="width: 488px" placeholder="请输入"></i-input>
                 </FormItem>
             </Form>
             <div slot="footer">

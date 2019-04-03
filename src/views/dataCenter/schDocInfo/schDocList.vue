@@ -113,6 +113,13 @@
                         key: 'title'
                     },
                     {
+                        title: '是否在编',
+                        key: 'in_queue',
+                        render: (h, params) => {
+                            return h('span',null, params.row.in_queue === 1 ? '是' : '否');
+                        }
+                    },
+                    {
                         title: '所属学校',
                         key: 'dep_id'
                     },
@@ -263,7 +270,7 @@
             },
             selectionChange(value){
                 this.selectionValue = [];
-                value.map(item => {
+                value.forEach(item => {
                     this.selectionValue.push(item.id)
                 });
             },
@@ -417,10 +424,6 @@
 
 <style lang="less">
     .scldoc {
-        padding: 30px 44px;
-        min-height: 500px;
-        border-radius: 8px;
-
         .ivu-form .ivu-form-item {
             margin-right: 30px !important;
         }
@@ -431,75 +434,9 @@
             color: #515a6e;
         }
 
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            /* font-family: SourceHanSansCN-Bold;*/
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .ivu-divider {
-            margin: 0 0 24px 0;
-        }
-
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
-        .addBtn {
-            margin-right: 40px;
-        }
-
         .disabled span {
             color: #999999;
         }
 
-        .editBtn:hover {
-            opacity: 0.8;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
-        }
     }
 </style>

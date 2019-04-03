@@ -3,10 +3,10 @@
         <h3 class="title">学生信息管理</h3>
         <Form class="clearfix" inline label-position="left">
             <FormItem label="学生姓名" :label-width='80'>
-                <i-input v-model.trim="req.name" style="width:140px" :maxlength="10"></i-input>
+                <i-input v-model.trim="req.name" style="width:140px" :maxlength="15"></i-input>
             </FormItem>
             <FormItem label="学号" :label-width='50'>
-                <i-input v-model.trim="req.stu_num" style="width:140px" :maxlength="10"></i-input>
+                <i-input v-model.trim="req.stu_num" style="width:140px" :maxlength="9"></i-input>
             </FormItem>
             <FormItem label="性别" :label-width="50">
                 <i-select v-model="req.gender" style="width:100px">
@@ -36,15 +36,25 @@
         </Form>
         <Divider dashed style="margin-top: 0;"/>
         <div class="clearfix">
-            <a href="javascript:void(0)" class="add" style="margin-right: 45px;">
+            <Upload :action="uploadUrl" class="add"
+                    :show-upload-list="false"
+                    name="uploadFile"
+                    :on-success="handleSuccess"
+                    :format="['xls','xlsx']"
+                    :headers="header"
+                    :max-size="1024"
+                    :on-format-error="handleFormatError"
+                    :on-exceeded-size="handleMaxSize">
                 <img src="../../../assets/unit/import.png" alt="download">&nbsp;导入
-            </a>
+            </Upload>
+            <!--<a href="javascript:void(0)" class="add" style="margin-right: 45px;" @click="imports">-->
+                <!--<img src="../../../assets/unit/import.png" alt="download">&nbsp;导入-->
+            <!--</a>-->
             <a href="javascript:void(0)" class="add">
                 <img src="../../../assets/unit/export.png" alt="download">&nbsp;导出
             </a>
-            <a href="javascript:void(0)" class="add" style="float: right;">
-                <img src="../../../assets/unit/download.png" alt="download">&nbsp;<span
-                    style="position: relative;top: -4px;">下载模版</span>
+            <a :href="student_down" class="add" style="position: absolute;right: 50px" download="学生信息导入模板.xlsx">
+                <img src="../../../assets/unit/download.png" alt="download">&nbsp;<span style="position: relative;top:-4px;">下载模版</span>
             </a>
         </div>
         <Table center :disabled-hover='true' :columns="columns" :data="tableData"
@@ -68,6 +78,7 @@
 
 <script>
     import EditStudent from './editStudent';
+    import importStudent from './importStudent'
     import urls from '../../../service/Urls';
     import {dateFormatFromString} from '../../../libs/dateUtils';
 
@@ -75,6 +86,7 @@
         name: 'StudentList',
         data() {
             return {
+                student_down: urls.student_down,
                 req: {
                     name: null,
                     stu_num: null,
@@ -257,7 +269,7 @@
                 ],
                 tableData: [],
                 typeList: [],
-                uploadUrl: urls.import_student,
+                uploadUrl: urls.student_import,
                 yearList: [],
                 areaList: [],
                 schoolList: [],
@@ -270,6 +282,9 @@
                     size: 10,
                     total: 0,
                     opts: [10, 20, 50, 100]
+                },
+                header:{
+                    'auth_token': sessionStorage.getItem('token'),
                 }
             };
         },
@@ -296,6 +311,19 @@
                         window.console.log(err);
                     });
             },
+            handleSuccess(res) {
+                if (res.code === 200) {
+                    this.$Message.success('导入成功');
+                } else {
+                    this.$Message.error(res.error);
+                }
+            },
+            handleFormatError() {
+                this.$Message.error('请选择excel类型的文件');
+            },
+            handleMaxSize() {
+                this.$Message.warning('文件大小限制在1M以内');
+            },
             areaChange() {
                 this.req.school_id = -1;
                 this.getSchoolList();
@@ -304,6 +332,12 @@
                 // 重新查询时页面置为第一页
                 this.pageConfig.page = 1;
                 this.search();
+            },
+            imports(){
+                this.com = importStudent;
+                this.id = '';
+                this.modalTitle = '';
+                this.flag = '';
             },
             search() {
                 let json = {
@@ -414,73 +448,13 @@
 
 <style lang="less">
     .students {
-        min-height: 500px;
-        border-radius: 8px;
-        padding: 30px 44px;
-
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            font-family: SourceHanSansCN-Bold;
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .add {
-            margin-bottom: 10px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
         .disabled span {
             color: #ccc;
         }
-
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
         }
     }
 </style>

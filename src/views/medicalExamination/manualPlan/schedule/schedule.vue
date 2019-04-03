@@ -1,9 +1,7 @@
 <template>
     <div class="content-box">
-        <div class="title">
-            体检排程
-        </div>
-        <Form v-model="req" inline style="margin-top: 34px;" :label-width="72">
+        <div class="title">体检排程</div>
+        <Form v-model="req" inline :label-width="72">
             <FormItem label="体检年份">
                 <DatePicker type="year" v-model="req.year" :options="dateOpts" placeholder="请选择"
                             style="width: 140px"></DatePicker>
@@ -29,7 +27,6 @@
             </FormItem>
         </Form>
         <Divider dashed/>
-        <div class="btn-box" style="margin: 6px"></div>
         <Table :columns="columns" :data="tableData"></Table>
         <div class="page">
             <Page
@@ -279,38 +276,17 @@
         },
     };
 </script>
-<style lang="scss" scoped>
-
-    .content-box {
-        padding: 30px 44px;
-    }
-
-    .title {
-        height: 26px;
-        line-height: 26px;
-        color: #333333;
-        font-size: 26px;
-        font-weight: bold;
-    }
-
+<style lang="less">
     .modal-form-min {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
     }
-
     .modal-form-min .ivu-form-item {
         margin-right: 0 !important;
     }
-
-    .page {
-        margin-top: 24px;
-        text-align: center;
-    }
-
-</style>
-<style>
     .ivu-modal-no-mask {
         z-index: 1999 !important;
     }
 </style>
+

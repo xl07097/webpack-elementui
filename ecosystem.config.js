@@ -24,7 +24,7 @@ module.exports = {
       ref  : 'origin/master',
       repo: 'git@192.1.6.46:xl07097/webpack-test.git',
       path: '/home/www/sports',
-      'post-deploy': 'cd /home/www/sports/source && npm install && npm run build'
+      'post-deploy': 'npm install && npm run build'
       // 'post-deploy' : 'npm install && pm2 reload ecosystem.config.js --env production'
     }
   }

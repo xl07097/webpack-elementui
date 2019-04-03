@@ -1,34 +1,25 @@
 <template>
-    <div class="dateManager">
+    <div class="dataExchangeMonitoring">
         <div class="content-box clearfix">
             <div class="title">
-                数据库同步计划
+                数据交换与共享监控服务
             </div>
             <Form ref="formInline" :model="formInline" inline style="margin-top: 34px;">
-                <FormItem label="数据库代号" :label-width="100">
-                    <Input  style="width: 200px"/>
-                </FormItem>
-                <FormItem label="数据库类型" :label-width="90">
-                    <Select v-model="formInline.newDataBase" style="width:140px">
+                <FormItem label="交换类型" :label-width="90">
+                    <Select v-model="formInline.tpye" style="width:140px">
                         <Option value="0">全部</Option>
                     </Select>
                 </FormItem>
-                <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="Search()">查询</Button>
+                <FormItem label="交换状态" :label-width="90">
+                    <Select v-model="formInline.status" style="width:140px">
+                        <Option value="0">全部</Option>
+                    </Select>
                 </FormItem>
+
             </Form>
             <div class="divider"/>
-            <div class="btn-box">
-                <div class="action-btn" >
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/add.png"/>
-                    新增
-                </div>
-                <div class="action-btn" >
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/delete.png"/>
-                    删除
-                </div>
-            </div>
-            <Table  ref="selection" :columns="columns" :data="data"></Table>
+
+            <Table ref="selection" :columns="columns" :data="data"></Table>
             <Page style="text-align: center;margin-top: 20px;"
                   :total="totalRecords"
                   :current="filterForm.page"
@@ -97,88 +88,59 @@
                 rightModal: false,
                 addtitle: '',
                 formInline: {
-                    oldDataBase:'0',
-                    newDataBase: '0',
+                    tpye: '0',
                     status: '0',
-                    style:'0',
                 },
                 totalRecords: 0,
                 columns: [
-                    {
-                        type: 'selection',
-                        width: 60,
-                        align: 'center'
-                    },
                     {
                         title: '序号',
                         type: 'index',
                         align: 'center'
                     },
                     {
-                        title: '数据库代号',
-                        key: 'oldCode',
+                        title: '时间',
+                        key: 'time',
                         align: 'center'
                     },
                     {
-                        title: '数据库类型',
-                        key: 'oldType',
+                        title: '来源地',
+                        key: 'oldLoc',
                         align: 'center'
                     },
                     {
-                        title: 'IP地址',
-                        key: 'oldIp',
+                        title: '目的地',
+                        key: 'newLoc',
                         align: 'center'
                     },
                     {
-                        title: '帐号密码',
-                        key: 'account',
-                        align: 'center'
-                    },
-
-                    {
-                        title: '容量预警阙值',
-                        key: 'value',
+                        title: '交换类型',
+                        key: 'type',
                         align: 'center'
                     },
                     {
-                        title: '状态',
+                        title: '数据总量',
+                        key: 'total',
+                        align: 'center'
+                    },
+                    {
+                        title: '耗时',
+                        key: 'timeConsuming',
+                        align: 'center'
+                    },
+                    {
+                        title: '交换状态',
                         key: 'status',
-                        render: (h, params) => {
-                            let statusShow = params.row.status === 0 ? '禁用' : '启用';
-                            return h('div', [
-                                h('i-switch', {
-                                    props: {
-                                        type: 'primary',
-                                        value: params.row.status === 1
-                                    },
-                                    style: {
-                                        marginRight: '5px'
-                                    },
-                                    on: {
-                                        'on-change': value => {
-                                            console.log('状态');
-                                        }
-                                    }
-                                }),
-                                h(
-                                    'span',
-                                    {
-                                        style: {
-                                            marginRight: '5px'
-                                        }
-                                    },
-                                    statusShow
-                                )
-                            ]);
-                        }
+                        align: 'center'
                     },
                     {
-                        title: '操作',
+                        title: '明细',
                         key: 'operation',
+                        align: 'center',
                         render: (h, params) => {
                             return h('div', [
                                 h('img', {
-                                    attrs: {src: require('../../../assets/system/role/edit.png')},
+                                    attrs: {src: require('../../../../assets/system/role/info.png')},
                                     style: {
                                         display: 'inline-block',
                                         width: '20px',
@@ -212,35 +174,25 @@
                 ],
                 data: [
                     {
-                        oldCode: 'sdxk',
-                        oldType:'9999',
-                        oldIp: '192.1.6.230',
-                        account: 'admin',
-                        value: '0038',
+                        time: '2018-12-13',
+                        oldLoc: '苏州姑苏区',
+                        newLoc: '苏州工业园区',
+                        type: '转入',
+                        total:'180232',
+                        timeConsuming:'02:32',
+                        status:'等待处理'
                     },
                     {
-                        oldCode: 'sdxk',
-                        oldType:'9999',
-                        oldIp: '192.1.6.230',
-                        account: 'admin',
-                        value: '0038',
+                        time: '2018-12-13',
+                        oldLoc: '苏州姑苏区',
+                        newLoc: '苏州工业园区',
+                        type: '转出',
+                        total:'180232',
+                        timeConsuming:'02:32',
+                        status:'处理完毕'
                     },
-                    {
-                        oldCode: 'sdxk',
-                        oldType:'9999',
-                        oldIp: '192.1.6.230',
-                        account: 'admin',
-                        value: '0038',
-                    },
-                    {
-                        oldCode: 'sdxk',
-                        oldType:'9999',
-                        oldIp: '192.1.6.230',
-                        account: 'admin',
-                        value: '0038',
-                    },
-                ],
 
+                ],
                 filterForm: {
                     page: 1,
                     size: 10
@@ -306,26 +258,26 @@
     };
 </script>
 <style lang="scss">
-    .dicInfoAddModal{
-        .ivu-form-item-label{
-            font-size:14px!important;
-            font-family:SourceHanSansCN-Regular;
-            font-weight:400;
-            color:rgba(126,132,133,1)!important;
+    .dicInfoAddModal {
+        .ivu-form-item-label {
+            font-size: 14px !important;
+            font-family: SourceHanSansCN-Regular;
+            font-weight: 400;
+            color: rgba(126, 132, 133, 1) !important;
         }
-        .ivu-modal-body{
-            padding-top: 57px!important;
-            .leftFormItem{
+        .ivu-modal-body {
+            padding-top: 57px !important;
+            .leftFormItem {
                 padding-left: 62px;
                 width: 262px;
-                .formLabel{
-                    font-size:14px!important;
-                    font-family:SourceHanSansCN-Regular;
-                    font-weight:400;
-                    color:rgba(126,132,133,1)!important;
+                .formLabel {
+                    font-size: 14px !important;
+                    font-family: SourceHanSansCN-Regular;
+                    font-weight: 400;
+                    color: rgba(126, 132, 133, 1) !important;
                 }
             }
-            .rightFormItem{
+            .rightFormItem {
                 padding-left: 66px;
                 width: 266px;
             }
@@ -348,12 +300,15 @@
         }
     }
 
-    .dateManager {
+    .dataExchangeMonitoring {
         .content-box {
             padding: 30px 44px;
             .ivu-form {
                 position: relative;
                 z-index: 100;
+            }
+            .divider {
+                margin-bottom: 20px;
             }
             .title {
                 height: 26px;

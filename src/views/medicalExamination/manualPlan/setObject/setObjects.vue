@@ -1,54 +1,48 @@
 <template>
-    <div>
-        <div class="content-box">
-            <div class="title">
-                设定体检计划
-            </div>
-            <Form v-model="req" inline style="margin-top: 34px;" :label-width="72">
-                <FormItem label="体检年份">
-                    <DatePicker type="year" v-model="req.year" :options="dateOpts" placeholder="请选择"
-                                style="width: 140px"></DatePicker>
-                </FormItem>
-                <FormItem label="体检类型">
-                    <i-select style="width:140px" v-model="req.type">
-                        <Option value="-1">全部</Option>
-                        <Option :value="1">健康体检</Option>
-                        <Option :value="2">升学体检</Option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="体检医院">
-                    <i-select style="width:200px" filterable v-model="req.dep_id">
-                        <i-option value="-1">全部</i-option>
-                        <Option v-for="item in hospitalList" :value="item.id" :key="item.id">{{item.name}}</Option>
-                    </i-select>
-                </FormItem>
-                <FormItem label="体检计划代号" :label-width="102">
-                    <i-input v-model.trim="req.code"/>
-                </FormItem>
-                <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
-                </FormItem>
-            </Form>
-            <Divider dashed/>
-            <div class="btn-box">
-                <div class="action-btn" @click="add">
-                    <img style="margin: 8px 6px;" src="../../../../assets/common/add.png" alt="add"/>
-                    新增
-                </div>
-            </div>
-            <Table :columns="columns" :data="tableData"></Table>
-            <div class="page">
-                <Page
-                        :total="pageConfig.total"
-                        show-total
-                        show-elevator
-                        show-sizer
-                        :current='pageConfig.page'
-                        :page-size-opts='pageConfig.opts'
-                        :page-size='pageConfig.size'
-                        @on-change='pageChange'
-                        @on-page-size-change='sizeChange'/>
-            </div>
+    <div class="content-box">
+        <div class="title">设定体检计划</div>
+        <Form v-model="req" inline :label-width="72">
+            <FormItem label="体检年份">
+                <DatePicker type="year" v-model="req.year" :options="dateOpts" placeholder="请选择"
+                            style="width: 140px"></DatePicker>
+            </FormItem>
+            <FormItem label="体检类型">
+                <i-select style="width:140px" v-model="req.type">
+                    <Option value="-1">全部</Option>
+                    <Option :value="1">健康体检</Option>
+                    <Option :value="2">升学体检</Option>
+                </i-select>
+            </FormItem>
+            <FormItem label="体检医院">
+                <i-select style="width:200px" filterable v-model="req.dep_id">
+                    <i-option value="-1">全部</i-option>
+                    <Option v-for="item in hospitalList" :value="item.id" :key="item.id">{{item.name}}</Option>
+                </i-select>
+            </FormItem>
+            <FormItem label="体检计划代号" :label-width="102">
+                <i-input v-model.trim="req.code"/>
+            </FormItem>
+            <FormItem style="float: right;">
+                <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
+            </FormItem>
+        </Form>
+        <Divider dashed/>
+        <div class="add" @click="add">
+            <img src="../../../../assets/common/add.png" alt="add"/>
+            新增
+        </div>
+        <Table :columns="columns" :data="tableData"></Table>
+        <div class="page">
+            <Page
+                    :total="pageConfig.total"
+                    show-total
+                    show-elevator
+                    show-sizer
+                    :current='pageConfig.page'
+                    :page-size-opts='pageConfig.opts'
+                    :page-size='pageConfig.size'
+                    @on-change='pageChange'
+                    @on-page-size-change='sizeChange'/>
         </div>
         <component :title="modalTitle" :is='com' :id='id' :flag="flag" @modal-close='ModalClose'></component>
     </div>
@@ -104,30 +98,39 @@
                         title: '状态',
                         key: 'status',
                         render: (h, params) => {
-                            return h('div', [
-                                h('i-switch', {
-                                    props: {
-                                        type: 'primary',
-                                        value: params.row.status === 1
-                                    },
-                                    style: {
-                                        marginRight: '8px'
-                                    },
-                                    on: {
-                                        'on-change': () => {
-                                            this.switch(params.row.id, params.row.status);
+                            if (params.row.status === 1 || params.row.status === 2) {
+                                return h('div', [
+                                    h('i-switch', {
+                                        props: {
+                                            type: 'primary',
+                                            value: params.row.status === 1
+                                        },
+                                        style: {
+                                            marginRight: '8px'
+                                        },
+                                        on: {
+                                            'on-change': () => {
+                                                this.switch(params.row.id, params.row.status);
+                                            }
                                         }
-                                    }
-                                }),
-                                h('span', null, params.row.status === 1 ? '启用' : '禁用')
-                            ]);
+                                    }),
+                                    h('span', null, params.row.status === 1 ? '启用' : '禁用')
+                                ]);
+                            }
+                            if (params.row.status === 3) {
+                                return h('span', null, '正在排程');
+                            }
+                            if (params.row.status === 4) {
+                                return h('span', null, '已排程');
+                            }
+
                         }
                     },
                     {
                         title: '操作',
                         key: 'action',
                         render: (h, params) => {
-                            let span1 =  h('span', {
+                            let span1 = h('span', {
                                 attrs: {
                                     class: 'editBtn'
                                 },
@@ -151,7 +154,7 @@
                                         top: '-4px'
                                     }
                                 }, '详情')]);
-                            let span2 =           h('span', {
+                            let span2 = h('span', {
                                 attrs: {
                                     class: 'editBtn'
                                 },
@@ -175,10 +178,10 @@
                                         top: '-4px'
                                     }
                                 }, '编辑')]);
-                            if(params.row.status === 1 || params.row.status === 2){
-                                return h('span', {}, [span1,span2]);
+                            if (params.row.status === 1 || params.row.status === 2) {
+                                return h('span', {}, [span1, span2]);
                             }
-                            if(params.row.status === 3 || params.row.status === 4){
+                            if (params.row.status === 3 || params.row.status === 4) {
                                 return h('span', {}, [span1]);
                             }
 
@@ -330,20 +333,7 @@
         }
     };
 </script>
-<style lang="scss" scoped>
-
-    .content-box {
-        padding: 30px 44px;
-    }
-
-    .title {
-        height: 26px;
-        line-height: 26px;
-        color: #333333;
-        font-size: 26px;
-        font-weight: bold;
-    }
-
+<style lang="less">
     .modal-form-min {
         display: flex;
         flex-wrap: wrap;
@@ -354,8 +344,4 @@
         margin-right: 0 !important;
     }
 
-    .page {
-        margin-top: 24px;
-        text-align: center;
-    }
 </style>

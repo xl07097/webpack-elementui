@@ -11,7 +11,7 @@
         >
             <Form ref="obj" :model="obj" :rules="rules" inline label-position="left">
                 <FormItem label="医生姓名" prop="name" style="margin-left: 66px">
-                    <i-input v-model.trim="obj.name" :maxlength="10" style="width: 200px" placeholder="请输入"></i-input>
+                    <i-input v-model.trim="obj.name" :maxlength="15" style="width: 200px" placeholder="请输入"></i-input>
                 </FormItem>
                 <FormItem label="所属医疗机构" prop="dep_id">
                     <i-select v-model="obj.dep_id" style="width:200px" @on-change="hospitalChange">
@@ -99,7 +99,7 @@
                     }
                 }).then(data => {
                     if (data.code === 200) {
-                        this.hospitalChange(data.data.unit_id);
+                        this.hospitalChange(data.data.dep_id);
                         this.obj = {
                             name: data.data.name,
                             dep_id: data.data.dep_id,

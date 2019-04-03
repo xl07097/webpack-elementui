@@ -8,7 +8,7 @@ const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 module.exports = {
     entry: {
         app: path.resolve(__dirname, "../src/main.js"),
-        //vendor: ['vue', 'vue-router', 'axios', 'echarts']
+        vendor: ['vue', 'iView', 'vue-router', 'axios', 'echarts']
     },
     module: {
         rules: [{
@@ -22,11 +22,11 @@ module.exports = {
             },
             {
                 test: /iview\/.*?js$/,
-                use:'babel-loader'
+                use: 'babel-loader'
             },
             {
                 test: /\.(png|svg|jpe?g|gif)$/,
-                use:[{
+                use: [{
                     loader: 'url-loader',
                     options: {
                         limit: 102400,
@@ -36,17 +36,17 @@ module.exports = {
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use:[{
+                use: [{
                     loader: 'url-loader',
                     options: {
                         limit: 51200,
                         name: path.posix.join('static', 'fonts/[name].[ext]')
-                    }                    
+                    }
                 }]
             },
             {
                 test: /\.(mp4|mp3)$/,
-                use:[{
+                use: [{
                     loader: 'url-loader',
                     options: {
                         limit: 51200,
@@ -79,6 +79,12 @@ module.exports = {
             maxInitialRequests: 3,
             name: true,
             cacheGroups: {
+                styles: {
+                    name: 'style',
+                    test: /\.css$/,
+                    chunks: 'all',
+                    enforce: true
+                },
                 vendor: {
                     name: 'vendor',
                     test: /[\\/]node_modules[\\/]/,

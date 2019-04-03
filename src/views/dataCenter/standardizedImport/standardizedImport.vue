@@ -115,12 +115,8 @@
 <style lang="scss">
     .standardizedImport {
         height: 100%;
-
         .content-box {
             position: relative;
-            height: 100%;
-            padding: 30px 44px;
-
             .ivu-form {
                 position: relative;
                 z-index: 100;
@@ -139,7 +135,6 @@
             .download-group {
                 position: relative;
                 cursor: pointer;
-                margin-bottom: 30px;
                 text-align: right;
                 z-index: 100;
 

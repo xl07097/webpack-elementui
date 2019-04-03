@@ -95,12 +95,13 @@
                     <Col>
                         <Upload :action="action" :max-size="10240" name="uploadFile" :data="fileType "
                                 :on-success="handleSuccess"
-                                :format="['jpg','doc','docx','xls','xlsx','ppt','pptx','rar','zip']"
+                                :format="['jpg','doc','docx','xls','xlsx','ppt','pptx']"
                                 :on-format-error="handleFormatError"
                                 ref="upload"
+                                :on-exceeded-size="exceededSize"
                         >
                             <Button icon="ios-cloud-upload-outline">上传文件</Button>
-                            <span style="margin-left: 9px">支持<span style="color: #D81717;">jpg、doc、docx、xls、xlsx、ppt、pptx、rar、zip</span>文件不得超过<span
+                            <span style="margin-left: 9px">支持<span style="color: #D81717;">jpg、doc、docx、xls、xlsx、ppt、pptx</span>文件不得超过<span
                                     style="color: #D81717;">10M</span></span>
                         </Upload>
                     </Col>
@@ -132,6 +133,20 @@
                     <Col span="12" class="leftFormItem">
                         <FormItem label="标题">
                             <Input v-model="addForm.title" class="functionalName" style="width: 564px" disabled/>
+                        </FormItem>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span="12" class="leftFormItem" style="margin-right:40px">
+                        <FormItem label="开始时间">
+                            <DatePicker type="date" placeholder="Select date" style="width: 200px"
+                                        v-model="addForm.start_time" disabled></DatePicker>
+                        </FormItem>
+                    </Col>
+                    <Col span="12" class="leftFormItem">
+                        <FormItem label="结束时间">
+                            <DatePicker type="date" placeholder="Select date" style="width: 200px"
+                                        v-model="addForm.end_time" disabled></DatePicker>
                         </FormItem>
                     </Col>
                 </Row>
@@ -204,7 +219,7 @@
                     },
                     {
                         title: '日期',
-                        key: 'start_time'
+                        key: 'send_date'
                     },
                     {
                         title: '标题',
@@ -213,6 +228,14 @@
                     {
                         title: '发布内容',
                         key: 'content'
+                    },
+                    {
+                        title: '开始时间',
+                        key: 'start_time'
+                    },
+                    {
+                        title: '结束时间',
+                        key: 'end_time'
                     },
                     {
                         title: '操作',
@@ -335,8 +358,17 @@
                     accessorysName: ''
                 },
                 rules: {
-                    received_by: [{required: true, message: '请选择收件人', trigger: 'change', type: 'array'}],
-                    title: [{required: true, message: '请输入标题', trigger: 'blur'}],
+                    received_by: [{
+                        required: true,
+                        message: '请选择收件人',
+                        trigger: 'change',
+                        type: 'array'
+                    }],
+                    title: [{required: true, message: '请输入标题', trigger: 'blur'}, {
+                        message: '请按照格式填写',
+                        trigger: 'change',
+                        pattern: /^\d{4}-\d{4}\s{1}[\u4e00-\u9fa5]{4}\s{1}[\u4e00-\u9fa5]{1,10}$/,
+                    }],
                     start_time: [{required: true, message: '请输入开始时间', trigger: 'blur', type: 'date'}],
                     end_time: [{required: true, message: '请输入结束时间', trigger: 'blur', type: 'date'}],
                     content: [{required: true, message: '请输入内容', trigger: 'blur'}],
@@ -362,11 +394,8 @@
                 this.addForm = {};
                 this.$refs.upload.clearFiles();
                 this.$ajax({
-                    url: urls.user_list,
-                    data: {
-                        page: 1,
-                        size: 10
-                    }
+                    url: urls.user_all,
+                    data: {}
                 }).then(data => {
                     if (data.code === 200) {
                         this.userList = data.data;
@@ -421,6 +450,7 @@
                 this.addModal = true;
             },
             Search() {
+                this.pageConfig.page = 1;
                 this.getList();
             },
             info(row) {
@@ -431,6 +461,8 @@
                 this.addForm.accessorysName = this.getNameFromUrl(row.accessorys);
                 this.addForm.accessorys = row.accessorys;
                 this.addForm.content = row.content;
+                this.addForm.start_time = row.start_time;
+                this.addForm.end_time = row.end_time;
             },
             closeaddModal() {
                 this.addModal = false;
@@ -441,6 +473,11 @@
                         this.$Message.error('还有必填项字段未填，请确认后再提交！');
                         return false;
                     }
+                    if (new Date(this.addForm.start_time).getTime() > new Date(this.addForm.end_time).getTime()) {
+                        this.$Message.error('开始时间不能大于结束时间！');
+                        return false;
+                    }
+
                     this.$ajax({
                         url: urls.task_add,
                         data: {
@@ -479,7 +516,10 @@
                 }
             },
             handleFormatError() {
-                this.$Message.error('文件类型错误，请上传类型是jpg、doc、docx、xls、xlsx、ppt、pptx、rar、zip的文件!');
+                this.$Message.error('文件类型错误，请上传类型是jpg、doc、docx、xls、xlsx、ppt、pptx的文件!');
+            },
+            exceededSize() {
+                this.$Message.error('上传文件过大，请重新上传!');
             },
             closeRightModal() {
                 this.rightModal = false;
@@ -504,6 +544,7 @@
                 });
             },
             getList() {
+                this.selectionValue = [];
                 this.$ajax({
                     url: urls.task_list,
                     data: {

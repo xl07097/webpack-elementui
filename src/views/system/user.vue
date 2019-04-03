@@ -20,7 +20,7 @@
                     </i-select>
                 </FormItem>
                 <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="getUserList">查询</Button>
+                    <Button type="primary" class="search-btn" @click="Search">查询</Button>
                 </FormItem>
             </Form>
             <div class="divider"/>
@@ -69,16 +69,33 @@
                         </FormItem>
                     </i-col>
                     <i-col span="12" class="rightFormItem">
-                        <FormItem label="所属任务" prop="task_id">
-                            <i-select style="width:200px" v-model="addForm.task_id">
-                                <i-option value="0">2018-2019学期体检</i-option>
+                        <FormItem label="角色" prop="role">
+                            <i-select style="width:200px" v-model="addForm.role">
+                                <i-option v-for="item of roleList" :key="item.id" :value='item.id'>{{item.name}}
+                                </i-option>
                             </i-select>
                         </FormItem>
                     </i-col>
                     <i-col span="12" class="rightFormItem">
-                        <FormItem label="角色" prop="role">
-                            <i-select style="width:200px" v-model="addForm.role">
-                                <i-option v-for="item of roleList" :key="item.id" :value='item.id'>{{item.name}}
+                        <FormItem label="部门" prop="dep_id">
+                            <i-select style="width:200px" v-model="addForm.dep_id">
+                                <i-option v-for="item of deptList" :key="item.id" :value='item.id'>{{item.name}}
+                                </i-option>
+                            </i-select>
+                        </FormItem>
+                    </i-col>
+                    <i-col span="12" class="rightFormItem">
+                        <FormItem label="账户类型" prop="type">
+                            <i-select style="width:200px" v-model="addForm.type" @on-change="typeChange">
+                                <i-option value="1">长期</i-option>
+                                <i-option value="2">短期</i-option>
+                            </i-select>
+                        </FormItem>
+                    </i-col>
+                    <i-col span="12" class="rightFormItem task" :class="{ active: isShow}">
+                        <FormItem label="所属任务">
+                            <i-select style="width:200px" v-model="addForm.task_id">
+                                <i-option v-for="item of manageList" :key="item.id" :value='item.id'>{{item.title}}
                                 </i-option>
                             </i-select>
                         </FormItem>
@@ -106,15 +123,19 @@
                     real_name: '',
                     task_id: '',
                     create_role: '110',
-                    role: ''
+                    role: '',
+                    dep_id: '',
+                    type: ''
                 },
                 rules: {
                     user_name: [{required: true, message: '请输入用户名', trigger: 'blur'}],
                     real_name: [{required: true, message: '请输入姓名', trigger: 'blur'}],
-                    task_id: [{required: true, message: '请选择所属任务', trigger: 'change'}],
                     role: [{required: true, message: '请选择角色', trigger: 'change'}],
+                    dep_id: [{required: true, message: '请选择部门', trigger: 'change'}],
+                    type: [{required: true, message: '请选择账户类型', trigger: 'change'}],
                 },
                 roleList: [],
+                deptList: [],
                 searchList: {
                     user_name: null,
                     real_name: null,
@@ -209,6 +230,8 @@
                     }
                 ],
                 data: [],
+                manageList: [],
+                isShow: true,
                 selectionValue: [],
                 checkedList: {},
                 pageConfig: {
@@ -236,6 +259,8 @@
                 this.addForm = {};
                 this.id = '';
                 this.getRoleList();
+                this.getDeptList();
+                this.GetTaskManageAll();
             },
             editUser(row) {
                 this.addtitle = '修改用户';
@@ -252,11 +277,18 @@
                         this.addForm.real_name = data.data.real_name;
                         this.addForm.task_id = data.data.task_id;
                         this.addForm.role = data.data.roles.toString();
+                        this.addForm.dep_id = data.data.dep_id;
+                        this.addForm.type = data.data.type.toString();
+                        if (data.data.type == 2) {
+                            this.isShow = false;
+                        }
                     } else {
 
                     }
                 });
                 this.getRoleList();
+                this.getDeptList();
+                this.GetTaskManageAll();
             },
             closeaddModal() {
                 this.addModal = false;
@@ -274,7 +306,9 @@
                             user_name: this.addForm.user_name,
                             real_name: this.addForm.real_name,
                             task_id: this.addForm.task_id,
-                            create_role: this.addForm.create_role
+                            create_role: this.addForm.role,
+                            dep_id: this.addForm.dep_id,
+                            type: this.addForm.type
                         };
 
                         let rolelist = {
@@ -307,13 +341,14 @@
                             user_name: this.addForm.user_name,
                             real_name: this.addForm.real_name,
                             task_id: this.addForm.task_id,
-                            create_role: this.addForm.create_role
+                            create_role: this.addForm.role,
+                            dep_id: this.addForm.dep_id,
+                            type: this.addForm.type
                         }
 
                         let rolelist = {
                             role_id: this.addForm.role
                         }
-
                         datas.userinfo = userinfo;
                         datas.roleList = rolelist;
 
@@ -415,6 +450,10 @@
             checkboxChange(checked_id) {
                 this.checkedList[checked_id] ? this.$delete(this.checkedList, checked_id) : this.$set(this.checkedList, checked_id, true);
             },
+            Search() {
+                this.pageConfig.page = 1;
+                this.getUserList();
+            },
             getUserList() {
                 this.$ajax({
                     url: urls.user_list,
@@ -436,23 +475,42 @@
                         }
                     })
             },
-
             getRoleList() {
                 this.$ajax({
-                    url: urls.role_list,
-                    data: {
-                        page: 1,
-                        size: 10
-                    }
+                    url: urls.role_all,
+                    data: {}
+                })
+                    .then(data => {
+                        this.roleList = data;
+                    })
+            },
+            getDeptList() {
+                this.$ajax({
+                    url: urls.user_dept,
+                    data: {}
                 })
                     .then(data => {
                         if (data.code === 200) {
-                            this.roleList = data.data;
+                            this.deptList = data.data;
                         } else {
-                            this.roleList = [];
-                            this.pageConfig.total = 0;
                         }
                     })
+            },
+            GetTaskManageAll() {
+                this.$ajax({
+                    url: urls.manage_list,
+                    data: {}
+                })
+                    .then(data => {
+                        this.manageList = data;
+                    })
+            },
+            typeChange() {
+                if (this.addForm.type == '2') {
+                    this.isShow = false;
+                } else {
+                    this.isShow = true;
+                }
             }
         },
         watch: {//处理表单验证提示信息
@@ -472,6 +530,10 @@
 <style lang="scss">
     .ivu-btn {
         padding: 0;
+    }
+
+    .active {
+        display: none;
     }
 
     .userAddModal {

@@ -1,16 +1,20 @@
 <template>
-    <div class="encoding">
+    <div class="exchangeDefinition">
         <div class="content-box">
             <div class="title">
-                接入编码管理
+                数据交换标准定义
             </div>
             <Form ref="formInline" :model="formInline" inline style="margin-top: 34px;">
             </Form>
             <div class="divider"/>
             <div class="btn-box">
-                <div class="action-btn" @click="addEncoding">
-                    <img style="margin: 8px 6px;" src="../../../assets/system/role/add.png"/>
+                <div class="action-btn">
+                    <img style="margin: 8px 6px;" src="../../../../assets/system/role/add.png"/>
                     新增
+                </div>
+                <div class="action-btn">
+                    <img style="margin: 8px 6px;" src="../../../../assets/system/role/delete.png"/>
+                    删除
                 </div>
             </div>
             <Table ref="selection" :columns="columns" :data="data"></Table>
@@ -68,55 +72,32 @@
                 addtitle: '',
                 editRowIndex: '',
                 formInline: {},
-                totalRecords: 2,
+                totalRecords: 0,
                 columns: [
+                    {
+                        type: 'selection',
+                        width: 60,
+                        align: 'center'
+                    },
                     {
                         title: '序号',
                         type: 'index',
                         align: 'center'
                     },
                     {
-                        title: '前缀',
-                        key: 'prefix'
+                        title: '标准名称',
+                        key: 'name',
+                        align: 'center'
                     },
                     {
-                        title: '起始',
-                        key: 'startNum'
+                        title: '数据结构',
+                        key: 'construction',
+                        align: 'center'
                     },
                     {
-                        title: '结束',
-                        key: 'endNum'
-                    },
-                    {
-                        title: '当前',
-                        key: 'currentNum'
-                    },
-                    {
-                        title: '备注',
-                        key: 'remark'
-                    },
-                    {
-                        title: '状态',
-                        key: 'status',
-                        render: (h, params) => {
-                            return h('div', [
-                                h('i-switch', {
-                                    props: {
-                                        type: 'primary',
-                                        value: params.row.status === 1
-                                    },
-                                    style: {
-                                        marginRight: '8px'
-                                    },
-                                    on: {
-                                        'on-change': () => {
-                                            this.changeStatus(params.row.id, params.row.status, params.index);
-                                        }
-                                    }
-                                }),
-                                h('span',params.row.status === 1 ? '启用' : '禁用')
-                            ])
-                        }
+                        title: '宿主信息',
+                        key: 'info',
+                        align: 'center'
                     },
                     {
                         title: '操作',
@@ -124,7 +105,7 @@
                         render: (h, params) => {
                             return h('div', [
                                 h('img', {
-                                    attrs: {src: require('../../../assets/system/role/edit.png')},
+                                    attrs: {src: require('../../../../assets/system/role/edit.png')},
                                     style: {
                                         display: 'inline-block',
                                         width: '20px',
@@ -133,7 +114,6 @@
                                     },
                                     on: {
                                         click: () => {
-                                            this.editEncoding(params.row);
                                         }
                                     }
                                 }),
@@ -148,7 +128,6 @@
                                         },
                                         on: {
                                             click: () => {
-                                                this.editEncoding(params.row);
                                             }
                                         }
                                     },
@@ -161,20 +140,9 @@
 
                 data: [
                     {
-                        prefix: 'test1',
-                        startNum: '0001',
-                        endNum: '9999',
-                        currentNum: '0011',
-                        remark: '测试1',
-                        status: 1
-                    },
-                    {
-                        prefix: 'test2',
-                        startNum: '0001',
-                        endNum: '9999',
-                        currentNum: '0021',
-                        remark: '测试2',
-                        status: 1
+                        name: '数据交换001',
+                        construction: '学生信息、科室',
+                        info: '122.193.27.194 仅接收 张凡 123456',
                     },
                 ],
                 addFormValidate: {
@@ -205,10 +173,6 @@
             },
             addEncoding() {
                 this.$refs['addFormValidate'].resetFields();
-                this.addForm = {
-                    prefix: '',
-                    remark: ''
-                }
                 this.addtitle = '新增接入编码';
                 this.addModal = true;
             },
@@ -315,7 +279,7 @@
         }
     }
 
-    .encoding {
+    .exchangeDefinition {
         .content-box {
             padding: 30px 44px;
             .title {

@@ -1,39 +1,57 @@
 <template>
     <div>
-        <div class="content-box classes">
+        <div class="content-box retest">
             <div class="title">
                 校医复测
             </div>
-            <Form v-model="filterForm" inline :label-width="45">
+            <Form v-model="req" inline :label-width="50">
+                <FormItem label="学校">
+                    <i-select style="width:180px" v-model="req.dep_id" @on-change="schoolChange">
+                        <i-option value="-1">全部</i-option>
+                        <Option v-for="item in schoolList" :value="item.id" :key="item.id">{{item.name}}</Option>
+                    </i-select>
+                </FormItem>
                 <FormItem label="年级">
-                    <Select style="width:100px" filterable v-model="filterForm.unit_id">
-                        <Option v-for="item in hospital_list" :value="item.id" :key="item.id">{{item.name}}</Option>
-                    </Select>
+                    <i-select style="width:140px" v-model="req.grade_no" @on-change="gradeChange">
+                        <i-option value="-1">全部</i-option>
+                        <Option v-for="item in gradeList" :value="item.id" :key="item.id">{{item.value}}</Option>
+                    </i-select>
                 </FormItem>
-                <FormItem label="班级" :label-width="102">
-                    <Select style="width:100px" filterable v-model="filterForm.unit_id">
-                        <Option v-for="item in hospital_list" :value="item.id" :key="item.id">{{item.name}}</Option>
-                    </Select>
+                <FormItem label="班级">
+                    <i-select style="width:120px" v-model="req.class_no" @on-change="classChange">
+                        <i-option value="-1">全部</i-option>
+                        <Option v-for="item in classList" :value="item.id" :key="item.id">{{item.class_no}}</Option>
+                    </i-select>
                 </FormItem>
-                <FormItem label="学生姓名" :label-width="102">
-                    <Select style="width:100px" filterable v-model="filterForm.unit_id">
-                        <Option v-for="item in hospital_list" :value="item.id" :key="item.id">{{item.name}}</Option>
-                    </Select>
+                <FormItem label="学生姓名" :label-width="80">
+                    <i-select style="width:120px" v-model="req.student_name">
+                        <i-option value="-1">全部</i-option>
+                        <Option v-for="item in studentList" :value="item.id" :key="item.id">{{item.name}}</Option>
+                    </i-select>
                 </FormItem>
                 <FormItem style="float: right;">
-                    <Button type="primary" class="search-btn" @click="getList()">查询</Button>
+                    <Button type="primary" class="search-btn" @click="initSearch()">查询</Button>
                 </FormItem>
             </Form>
-            <div class="divider"/>
-            <div style="height: 61px">
-            </div>
-            <Table ref="selection" :columns="columns" :data="objectList"></Table>
+            <Divider dashed/>
+            <Table ref="selection" :columns="columns" :data="tableData"></Table>
+            <Page style="text-align: center;margin-top: 20px;"
+                  :total="pageConfig.total"
+                  show-total
+                  show-elevator
+                  show-sizer
+                  :current='pageConfig.page'
+                  :page-size-opts='pageConfig.opts'
+                  :page-size='pageConfig.size'
+                  @on-change='pageChange'
+                  @on-page-size-change='sizeChange'/>
         </div>
+        <component :title="modalTitle" :is='com' :id='id' :flag="flag" @modal-close='ModalClose'></component>
         <Modal
                 title="学校班级人数审核"
                 v-model="modal"
                 :mask-closable="false"
-                :styles="{top: '140px',width:'800px'}"
+                :width="800"
         >
             <Form inline :model="addFormData" label-position="top" class="modal-form">
                 <FormItem label="学校名称">
@@ -72,55 +90,40 @@
     </div>
 </template>
 <script>
-    import Urls from '../../../service/Urls';
+    import urls from '../../../service/Urls';
     import physicalReportInfo from './physicalReportInfo';
 
     export default {
-        name: 'schedule',
-        props: [''],
-        mounted() {
-            this.getList();
-            this.getUnitList(3);//医院
-        },
+        name: 'reTest',
         data() {
             return {
-                id: '',
-                com: null,
-                modalTitle: '',
-                flag: false,
-                modal: false,
-                reviewResult: false,
-                Urls: Urls,
-                dateOpts: {
-                    //禁止选择当年之前的年份
-                    disabledDate(date) {
-                        let d = new Date();
-                        return date && date.getFullYear() < d.getFullYear();
-                    }
+                req: {
+                    page: 1,
+                    size: 10,
+                    student_name: '-1'
                 },
-                hospital_list: [],
+                tableData: [],
                 columns: [
                     {
                         title: '序号',
+                        type: 'index',
                         width: 60,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('span', params.index + 1);
-                        }
+                        align: 'center'
                     }, {
                         title: '年级',
-                        key: 'code'
+                        key: 'grade_no'
                     }, {
                         title: '班级',
-                        key: 'year'
+                        key: 'class_no'
                     }, {
                         title: '学生姓名',
-                        key: 'hospital'
+                        key: 'student_name'
                     },
                     {
                         title: '备注',
-                        key: 'hospital'
-                    }, {
+                        key: 'remark'
+                    },
+                    {
                         title: '操作',
                         key: 'action',
                         render: (h, params) => {
@@ -189,40 +192,7 @@
                         }
                     }
                 ],
-                objectList: [],
-                school_columns: [
-                    {
-                        title: '序号',
-                        width: 60,
-                        align: 'center',
-                        render: (h, params) => {
-                            return h('span', params.index + 1);
-                        }
-                    }, {
-                        title: '学校',
-                        key: 'school'
-                    }, {
-                        title: '年级',
-                        key: 'grade'
-                    }, {
-                        title: '班级',
-                        key: 'class',
-                    }, {
-                        title: '人数',
-                        key: 'count',
-                    }, {
-                        title: '体检队伍',
-                        key: 'team',
-                    }, {
-                        title: '体检时间',
-                        key: 'time',
-                    }
-                ],
-                school_data: [],
-                filterForm: {
-                    page: 1,
-                    size: 10
-                },
+                modal: false,
                 addFormData: {
                     cost_code_id: '',
                     require_pay_date: '',
@@ -230,39 +200,102 @@
                     remark: '',
                     reviewRemark: ''
                 },
+                id: '',
+                com: null,
+                modalTitle: '',
+                flag: false,
+                schoolList: [],
+                gradeList: [],
+                classList: [],
+                studentList: [],
+                pageConfig: {
+                    page: 1,
+                    size: 10,
+                    total: 0,
+                    opts: [10, 20, 50, 100]
+                }
             };
         },
         methods: {
-            getList() {
-                let filterInfo = Object.assign({}, this.filterForm);
-                if (filterInfo.year) {
-                    filterInfo.year = filterInfo.year.getFullYear();
-                }else {
-                    filterInfo.year = null;
+            getSelectCondition() {
+                this.$ajax({
+                    // 学校
+                    url: urls.dept_all_list,
+                    data: {}
+                })
+                    .then(data => {
+                        if (data.code === 200) {
+                            this.schoolList = data.data.filter((item) => {
+                                return item.type === 2;
+                            });
+                        } else {
+                            this.schoolList = [];
+                        }
+                    })
+                    .catch(err => {
+                        window.console.log(err);
+                    });
+            },
+            schoolChange(value) {
+                this.req.grade_no = '-1';
+                this.req.class_no = '-1';
+                this.classList = [];
+                if (value === '-1') {
+                    this.gradeList = [];
+                    return;
+                }
+                /// =========== 所属年级
+                this.$ajax({
+                    url: urls.dictm_all_list,
+                    data: {
+                        'category_id': '82649A1FDF4DEA7EE050007F01001901',
+                        'status': 1
+                    }
+                }).then(data => {
+                    if (data.code === 200) {
+                        this.gradeList = data.data;
+                    } else {
+                        this.gradeList = [];
+                    }
+                }).catch(err => {
+                    this.gradeList = [];
+                });
+            },
+            gradeChange(value) {
+                this.req.class_no = '-1';
+                if (value === '-1') {
+                    this.classList = [];
+                    return false;
                 }
                 this.$ajax({
-                    url: Urls.set_objects_list,
-                    data: filterInfo
-                }).then((res) => {
-                    if (res && res.data) {
-                        this.objectList = res.data;
+                    url: urls.class_all_lists,
+                    data: {
+                        dep_id: this.req.dep_id,
+                        year: this.req.year === '-1' ? null : this.req.year,
+                        grade_no: this.req.grade_no ? this.req.grade_no : null
+                    }
+                }).then(data => {
+                    if (data.code === 200) {
+                        this.classList = data.data;
+                    } else {
+                        this.classList = [];
                     }
                 });
             },
-            getUnitList(type) {
+            classChange(value) {
+
+            },
+            initSearch() {
+                this.pageConfig.page = 1;
+                this.search();
+            },
+            search() {
                 this.$ajax({
-                    url: Urls.unit_opt_list,
-                    data: {
-                        type: type,
-                        status: 1
-                    }
+                    url: urls.set_objects_list,
+                    data: {}
                 }).then((res) => {
                     if (res && res.data) {
-                        if (type == 2) {
-                            this.school_list = res.data;
-                        } else if (type == 3) {
-                            this.hospital_list = res.data;
-                        }
+                        this.tableData = res.data;
                     }
                 });
             },
@@ -278,94 +311,58 @@
                 this.flag = true;
                 this.modalTitle = '详情页';
             },
+            pageChange(page) {
+                this.pageConfig.page = page;
+                this.search();
+            },
+            sizeChange(size) {
+                this.pageConfig.size = size;
+                if (this.pageConfig.page === 1) {
+                    this.pageChange(1);
+                }
+            },
+            ModalClose(flag) {
+                this.com = null;
+                if (flag) {
+                    this.search();
+                }
+            }
         },
+        created() {
+            this.getSelectCondition();
+            // this.search();
+        }
     };
 </script>
-<style lang="scss" scoped>
-
-    .content-box {
-        padding: 30px 44px;
-    }
-
-    .title {
-        height: 26px;
-        line-height: 26px;
-        color: #333333;
-        font-size: 26px;
-        font-weight: bold;
-    }
-
-    .modal-form .ivu-form-item {
-        margin-right: 30px !important;
-    }
-
-    .classes {
-        padding: 30px 44px;
+<style lang="less">
+    .retest {
         min-height: 500px;
-        border-radius: 8px;
         .ivu-form .ivu-form-item {
             margin-right: 30px !important;
         }
+
+        .modal-form .ivu-form-item {
+            margin-right: 30px !important;
+        }
+
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
+
         .ivu-divider {
             margin: 0 0 24px 0;
         }
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-            &:hover {
-                opacity: 0.8;
-            }
 
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-        .addBtn {
-            margin-right: 40px;
-        }
         .disabled span {
             color: #999999;
         }
+
         .editBtn:hover {
             opacity: 0.8;
         }
+
         .page {
             margin-top: 24px;
             text-align: center;

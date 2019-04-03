@@ -344,7 +344,7 @@ var gettexaminationItemConf = [
         'itemType': '右眼',
         'item': 'S',
         'unit': '度',
-        'action': 'c8996f32cd6944aeb5b7c6052e4ffd26',
+        'action': '57B47BF710CC401B9E96ACFB7F140F81',
         'result': '数值， _._',
     },
     {
@@ -352,7 +352,7 @@ var gettexaminationItemConf = [
         'itemType': '右眼',
         'item': 'C',
         'unit': '度',
-        'action': 'c8996f32cd6944aeb5b7c6052e4ffd26',
+        'action': '9B07433943F5461F848100DED7BDA06B',
         'result': '数值， _._',
     },
     {
@@ -360,7 +360,7 @@ var gettexaminationItemConf = [
         'itemType': '右眼',
         'item': 'A',
         'unit': '度',
-        'action': 'c8996f32cd6944aeb5b7c6052e4ffd26',
+        'action': 'AFEFD30A4D0D40B89051363E468AC978',
         'result': '数值， _._',
     },
     {
@@ -368,7 +368,7 @@ var gettexaminationItemConf = [
         'itemType': '左眼',
         'item': 'S',
         'unit': '度',
-        'action': 'a407b18e30784039b49e6a65fe2e0045',
+        'action': 'FA0460289C884B6B9B9B9F4F209C3E62',
         'result': '数值， _._',
     },
     {
@@ -376,7 +376,7 @@ var gettexaminationItemConf = [
         'itemType': '左眼',
         'item': 'C',
         'unit': '度',
-        'action': 'a407b18e30784039b49e6a65fe2e0045',
+        'action': '7ACE8E703BC548E08884795E95D031D9',
         'result': '数值， _._',
     },
     {
@@ -384,14 +384,14 @@ var gettexaminationItemConf = [
         'itemType': '左眼',
         'item': 'A',
         'unit': '度',
-        'action': 'a407b18e30784039b49e6a65fe2e0045',
+        'action': 'BFD645DBFD4C4663BE32E2A917092E46',
         'result': '数值， _._',
     },
     {
         'department': '屈光度',
         'itemType': 'PD',
         'item': 'PD',
-        'action': '11',
+        'action': '8A6835A889EF4974AFA4A3427D45372B',
         'unit': 'mm',
         'result': '数值， _._',
     },
@@ -679,7 +679,7 @@ var gettexaminationItemConf = [
         'department': '结核菌素皮肤试验检查',
         'itemType': '硬结直径（横径x纵径）',
         'item': '硬结直径（横径x纵径）',
-        'action': '8',
+        'action': 'cdc1a9ed-8220-4914-bd23-0e2bff92b6e6',
         'unit': 'mm',
         'result': '数值，_ _ ,_ _ @单位为毫米(mm)',
         'type': 'newline'
@@ -688,7 +688,7 @@ var gettexaminationItemConf = [
         'department': '结核菌素皮肤试验检查',
         'itemType': '平均直径',
         'item': '平均直径',
-        'action': '9',
+        'action': '64BE4EE6A5CE4474A443A607AD19D186',
         'unit': 'mm',
         'result': '数值，_ _ ,_ _ @单位为毫米(mm)',
         'type': 'newline'

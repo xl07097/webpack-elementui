@@ -11,7 +11,7 @@
         >
             <Form ref="obj" :model="obj" :rules="rules" inline label-position="left">
                 <FormItem label="科室名称" prop="name" style="margin-left: 66px">
-                    <i-input v-model.trim="obj.name" :maxlength="10" style="width: 160px" placeholder="请输入"></i-input>
+                    <i-input v-model.trim="obj.name" :maxlength="15" style="width: 160px" placeholder="请输入"></i-input>
                 </FormItem>
                 <FormItem label="所属医疗机构" prop="dep_id">
                     <i-select v-model="obj.dep_id" style="width:200px">

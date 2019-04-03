@@ -38,18 +38,22 @@
             <a class="add" style="margin-right: 45px;" @click="trash">
                 <img src="../../../assets/system/role/delete.png" alt="trash">&nbsp;删除
             </a>
-            <Upload class="add"
-                    ref="upload"
-                    action="//jsonplaceholder.typicode.com/posts/"
-                    :on-success="imp"
-                    :format="['xls','xlsx']"
-                    :show-upload-list="false"
-                    :on-format-error="formatErr"
-                    style="display: inline-block;margin-bottom:0;cursor:pointer;">
-                <img src="../../../assets/unit/import.png" alt="download" style="position: relative;top: 4px;">&nbsp;
-                <span style="font-size: 16px;">导入</span>
-            </Upload>
-            <a href="javascript:void(0)" class="add" @click="download" style="position: absolute;right: 50px">
+            <!--<Upload class="add"-->
+                    <!--ref="upload"-->
+                    <!--:action="importUrl"-->
+                    <!--:on-success="imp"-->
+                    <!--name="uploadFile"-->
+                    <!--:format="['xls','xlsx']"-->
+                    <!--:show-upload-list="false"-->
+                    <!--:on-format-error="formatErr"-->
+                    <!--style="display: inline-block;margin-bottom:0;cursor:pointer;">-->
+                <!--<img src="../../../assets/unit/import.png" alt="download" style="position: relative;top: 4px;">&nbsp;-->
+                <!--<span style="font-size: 16px;">导入</span>-->
+            <!--</Upload>-->
+            <a class="add" style="margin-right: 45px;" @click="imp">
+                <img src="../../../assets/unit/import.png" alt="trash">&nbsp;导入
+            </a>
+            <a :href="teacher_down" class="add" style="position: absolute;right: 50px" download="老师信息导入模板.xlsx">
                 <img src="../../../assets/unit/download.png" alt="download">&nbsp;<span style="position: relative;top:-4px;">下载模版</span>
             </a>
         </div>
@@ -75,6 +79,7 @@
     /* eslint-disable no-undef */
 
     import addTeacher from './addTeacher';
+    import addFile from './addFile';
     import urls from '../../../service/Urls';
 
     export default {
@@ -222,7 +227,8 @@
                     total: 0,
                     opts: [10, 20, 50, 100]
                 },
-                importUrl: '',
+                teacher_down: urls.teacher_down,
+                importUrl: urls.teacher_up,
                 selectionValue: []
             };
         },
@@ -293,6 +299,12 @@
                     this.selectionValue.push(item.id)
                 });
             },
+            imp(){
+                this.com = addFile;
+                this.id = '';
+                this.flag = false;
+                this.modalTitle = '导入';
+            },
             trash(){
                 if(!this.selectionValue.length){
                     this.$Message.error('请勾选要删除的老师');
@@ -323,28 +335,9 @@
                             });
                     },
                     cancel: function () {
-                        // self.tableData[index].status = status;
                         self.search();
                     }
                 });
-            },
-            imp(response, file, fileList) {
-                // console.dir(this.$refs.upload.files[0]);
-                // var file = this.$refs.upload.files[0];
-                // if(file){
-                //     let arr = file.split('.');
-                //     let ext = arr[arr.length -1];
-                //     if(ext ==='xls' || ext === 'xlsx' ){
-                //
-                //     }else {
-                //         this.$Message.error('请上传excel类型的文件')
-                //     }
-                // }
-            },
-            formatErr(){
-                this.$Message.error('请上传excel类型的文件');
-            },
-            download() {
             },
             edit(id) {
                 this.com = addTeacher;
@@ -472,89 +465,16 @@
 
 <style lang="less">
     .teacher {
-        padding: 30px 44px;
-        min-height: 500px;
-        border-radius: 8px;
-
         .ivu-form .ivu-form-item {
             margin-right: 30px !important;
         }
-
         .ivu-select-disabled .ivu-select-selection,
         .ivu-input[disabled],
         fieldset[disabled] .ivu-input {
             color: #515a6e;
         }
-
-        .title {
-            height: 80px;
-            font-size: 26px;
-            line-height: 1;
-            /*font-family: SourceHanSansCN-Bold;*/
-            font-weight: bold;
-            color: rgba(51, 51, 51, 1);
-        }
-
-        .operator {
-            float: right;
-            margin-bottom: 15px;
-            text-align: right;
-        }
-
-        .searchBtn {
-            width: 80px;
-            height: 34px;
-            line-height: 1;
-            font-size: 14px;
-            font-family: SourceHanSansCN-Medium;
-            font-weight: 500;
-            color: rgba(254, 254, 254, 1);
-            background: rgba(255, 123, 16, 1);
-            border-radius: 3px;
-            border: none;
-        }
-
-        .searchBtn:hover {
-            opacity: 0.8;
-        }
-
-        .ivu-divider {
-            margin: 0 0 24px 0;
-        }
-
-        .add {
-            margin-bottom: 12px;
-            display: inline-block;
-            font-size: 16px;
-            font-family: SourceHanSansCN-Regular;
-            font-weight: 400;
-            color: rgba(39, 55, 60, 1);
-
-            &:hover {
-                opacity: 0.8;
-            }
-
-            img {
-                position: relative;
-                top: 4px;
-            }
-        }
-
-        .addBtn {
-            margin-right: 40px;
-        }
-
         .disabled span {
             color: #999999;
-        }
-
-        .editBtn:hover {
-            opacity: 0.8;
-        }
-
-        .page {
-            margin-top: 24px;
-            text-align: center;
         }
     }
 </style>

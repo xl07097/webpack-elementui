@@ -598,7 +598,7 @@
                         this.gradeList = [];
                     }
                 }).catch(err => {
-                    this.natureList = [];
+                    this.gradeList = [];
                 });
             },
             gradeChange(value) {
@@ -662,7 +662,6 @@
                             break;
                         }
                     }
-                    debugger;
                     for (let i = 0, len = self.tableData.length; i < len; i++) {
 
                         let term = self.tableform.term === 1 ? '第一学期' : '第二学期';

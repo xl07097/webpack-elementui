@@ -13,7 +13,6 @@
                         <Option value="-1">全部</Option>
                         <Option :value="1">启用</Option>
                         <Option :value="2">禁用</Option>
-                        <Option :value="3">冻结</Option>
                     </Select>
                 </FormItem>
                 <FormItem style="float: right;">
@@ -189,6 +188,8 @@
                         title: '操作',
                         key: 'operation',
                         render: (h, params) => {
+                            // if (params.row.type == 2) {
+                            // if (params.row.type == 1) {
                             return h('div', [
                                 h('img', {
                                     attrs: {src: require('../../assets/system/role/edit.png')},
@@ -251,8 +252,22 @@
                                 )
                             ]);
                         }
-                    }
-                ],
+                        // else {
+                        //     return h('div', [
+                        //         h(
+                        //             'span',
+                        //             {
+                        //                 style: {
+                        //                     marginLeft: '5px'
+                        //                 }
+                        //             },
+                        //             '不可操作'
+                        //         )
+                        //     ]);
+                        // }
+                        //     }
+                        // }
+                    }],
                 data: [],
                 selectionValue: [],
                 rigtTree: [
@@ -344,6 +359,7 @@
             addRole() {
                 this.addtitle = '新增功能';
                 this.addModal = true;
+                this.id = '';
             },
             editUser(row) {
                 this.addtitle = '编辑角色';
@@ -358,11 +374,8 @@
                 this.configForm.name = row.name;
                 this.id = row.id;
                 this.$ajax({
-                    url: urls.role_function,
-                    data: {
-                        page: 1,
-                        size: 10
-                    }
+                    url: urls.function_all,
+                    data: {}
                 }).then(data => {
                     if (data.code === 200) {
                         this.menuList = data.data;
@@ -374,7 +387,7 @@
                 this.$ajax({
                     url: urls.getFunction,
                     data: {
-                        role_id:this.id
+                        role_id: this.id
                     }
                 }).then(data => {
                     if (data.code === 200) {
@@ -385,6 +398,7 @@
 
             },
             Search() {
+                this.pageConfig.page = 1;
                 this.getRoleList();
             },
             editRole() {
@@ -435,6 +449,7 @@
                             if (data.code === 200) {
                                 this.$Message.success('编辑角色成功');
                                 this.getRoleList();
+                                this.addForm = {};
                             } else {
                                 this.$Message.error('编辑角色失败');
                             }
@@ -508,6 +523,7 @@
                 });
             },
             getRoleList() {
+                this.selectionValue = [];
                 this.$ajax({
                     url: urls.role_list,
                     data: {
@@ -601,7 +617,7 @@
             }
             .rightFormItem {
                 padding-left: 66px;
-                width: 266px;
+                /*width: 266px;*/
                 .ivu-input {
                     width: 200px;
                 }

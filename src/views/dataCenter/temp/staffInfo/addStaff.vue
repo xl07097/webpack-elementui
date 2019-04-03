@@ -115,7 +115,7 @@
 <script>
     /* eslint-disable no-undef */
 
-    import urls from '../../../service/Urls';
+    import urls from '../../../../service/Urls';
 
     export default {
         name: 'AddStaff',
@@ -132,7 +132,7 @@
                     hdep_id: '',
                     gender: '',
                     code: '',
-                    photo: require('../../../assets/unit/default.png')
+                    photo: require('../../../../assets/unit/default.png')
                 },
                 rules: {
                     name: [{required: true, message: '请输入姓名', trigger: 'blur'}],

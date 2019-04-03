@@ -40,7 +40,7 @@
         <Divider dashed/>
         <div>
             <a href="javascript:void(0)" class="add" @click="add">
-                <img src="../../../assets/unit/add.png" alt="add">&nbsp;新增
+                <img src="../../../../assets/unit/add.png" alt="add">&nbsp;新增
             </a>
         </div>
         <Table center :disabled-hover='true' :columns="columns" :data="tableData"
@@ -66,7 +66,7 @@
     /* eslint-disable no-undef */
 
     import AddStaff from './addStaff';
-    import urls from '../../../service/Urls';
+    import urls from '../../../../service/Urls';
 
     export default {
         name: 'StaffList',
@@ -153,7 +153,7 @@
                                             marginRight: '5px'
                                         },
                                         attrs: {
-                                            src: require('../../../assets/unit/infos.png')
+                                            src: require('../../../../assets/unit/infos.png')
                                         }
                                     }),
                                     h('span', {
@@ -181,7 +181,7 @@
                                             marginRight: '5px'
                                         },
                                         attrs: {
-                                            src: require('../../../assets/unit/edit_cover.png')
+                                            src: require('../../../../assets/unit/edit_cover.png')
                                         }
                                     }),
                                     h('span', {

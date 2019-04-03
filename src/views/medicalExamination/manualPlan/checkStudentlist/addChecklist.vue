@@ -839,6 +839,12 @@
 
 <style lang="less">
     .addCheckList {
+        .modal-form.ivu-form-item {
+            margin-right: 30px !important;
+        }
+        .ivu-form .ivu-form-item {
+            margin-right: 30px !important;
+        }
         .tables {
             .ivu-date-picker-rel .ivu-input {
                 padding-left: 0;

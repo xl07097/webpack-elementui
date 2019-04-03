@@ -1,26 +1,9 @@
-import NoticeManage from '../views/system/noticeManage';
-import Notice from '../views/system/notice';
-import DictionaryType from '../views/system/dictionaryType';
-import DictionaryInfo from '../views/system/dictionaryInfo';
-import ExaminationItemConf from '../views/medicalExamination/examinationItemConf';
-import ExaminationPlan from '../views/medicalExamination/examinationPlan';
-import SetObjects from '../views/medicalExamination/manualPlan/setObject/setObjects';
-import Schedule from '../views/medicalExamination/manualPlan/schedule/schedule';
-import PhysicalFitnessTest from '../views/physicalFitnessTest/physicalFitnessTest';
-import physicalParaConfig from '../views/physicalFitnessTest/physicalParaConfig/physicalParaConfig';
-import PersonSummaryReport from '../views/medicalExamination/medicalReport/personSummaryReport';
-import ExamResult from '../views/medicalExamination/medicalReport/examResult';
-import TempletSet from '../views/medicalExamination/dataReport/templetSet';
-import SchoolImport from '../views/medicalExamination/medicalReport/schoolImport';
-import ExamImport from '../views/medicalExamination/medicalReport/examImport';
-import ReTest from '../views/medicalExamination/medicalReport/reTest';
-let routers = [
-    {
+const routers = [{
         path: '/login',
         meta: {
             title: '登录'
         },
-        component: (resolve) => require(['../views/login.vue'], resolve)
+        component: (resolve) => require(['./views/login.vue'], resolve)
     },
     {
         path: '/',
@@ -31,7 +14,7 @@ let routers = [
         meta: {
             title: '首页'
         },
-        component: (resolve) => require(['../views/index.vue'], resolve)
+        component: (resolve) => require(['./views/index.vue'], resolve)
     },
     {
         path: '/system',
@@ -39,15 +22,14 @@ let routers = [
         meta: {
             title: '系统管理'
         },
-        component: (resolve) => require(['../views/system/system.vue'], resolve),
-        children: [
-            {
+        component: (resolve) => require(['./views/system/system.vue'], resolve),
+        children: [{
                 path: '/',
                 name: 'system',
                 meta: {
                     title: '系统管理首页'
                 },
-                component: (resolve) => require(['../views/system/systemIndex.vue'], resolve),
+                component: (resolve) => require(['./views/system/systemIndex.vue'], resolve)
             },
             {
                 path: 'user',
@@ -55,7 +37,7 @@ let routers = [
                 meta: {
                     title: '用户管理'
                 },
-                component: (resolve) => require(['../views/system/user.vue'], resolve),
+                component: (resolve) => require(['./views/system/user.vue'], resolve)
             },
             {
                 path: 'role',
@@ -63,7 +45,7 @@ let routers = [
                 meta: {
                     title: '角色管理'
                 },
-                component: (resolve) => require(['../views/system/role.vue'], resolve),
+                component: (resolve) => require(['./views/system/role.vue'], resolve)
             },
             {
                 path: 'functional',
@@ -71,7 +53,7 @@ let routers = [
                 meta: {
                     title: '功能管理'
                 },
-                component: (resolve) => require(['../views/system/functional.vue'], resolve),
+                component: (resolve) => require(['./views/system/functional.vue'], resolve)
             },
             {
                 path: 'noticeManage',
@@ -79,7 +61,7 @@ let routers = [
                 meta: {
                     title: '通知管理'
                 },
-                component: NoticeManage,
+                component: (resolve) => require(['./views/system/noticeManage.vue'], resolve)
             },
             {
                 path: 'notice',
@@ -87,7 +69,7 @@ let routers = [
                 meta: {
                     title: '通知'
                 },
-                component: Notice,
+                component: (resolve) => require(['./views/system/notice.vue'], resolve)
             },
             {
                 path: 'dictionaryType',
@@ -95,7 +77,7 @@ let routers = [
                 meta: {
                     title: '字典表类别管理'
                 },
-                component: DictionaryType,
+                component: (resolve) => require(['./views/system/dictionaryType.vue'], resolve)
             },
             {
                 path: 'dictionaryInfo',
@@ -103,8 +85,8 @@ let routers = [
                 meta: {
                     title: '字典信息管理'
                 },
-                component: DictionaryInfo,
-            },
+                component: (resolve) => require(['./views/system/dictionaryInfo.vue'], resolve)
+            }
         ]
     },
     {
@@ -113,15 +95,14 @@ let routers = [
         meta: {
             title: '统一体检'
         },
-        component: (resolve) => require(['../views/medicalExamination/medicalExamination.vue'], resolve),
-        children: [
-            {
+        component: (resolve) => require(['./views/medicalExamination/medicalExamination.vue'], resolve),
+        children: [{
                 path: '/',
                 name: 'medicalExamination',
                 meta: {
                     title: '体检项目首页'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalIndex.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalIndex.vue'], resolve)
             },
             {
                 path: 'proofreading',
@@ -129,23 +110,15 @@ let routers = [
                 meta: {
                     title: '学生体检名单校对'
                 },
-                component: (resolve) => require(['../views/medicalExamination/manualPlan/checkStudentlist/medicalHistory.vue'], resolve)
+                component: (resolve) => require(['./views/medicalExamination/manualPlan/checkStudentlist/medicalHistory.vue'], resolve)
             },
-            // {
-            //     path: 'medicalHistory',
-            //     name: 'medicalHistory',
-            //     meta: {
-            //         title: '学生既往病史录入'
-            //     },
-            //     component: MedicalHistory,
-            // },
             {
                 path: 'examinationPlan',
                 name: 'examinationPlan',
                 meta: {
                     title: '体检项目规划'
                 },
-                component: ExaminationPlan,
+                component: (resolve) => require(['./views/medicalExamination/examinationPlan.vue'], resolve)
             },
             {
                 path: 'examinationTeamConfig',
@@ -153,7 +126,7 @@ let routers = [
                 meta: {
                     title: '设定体检计划'
                 },
-                component: (resolve) => require(['../views/medicalExamination/manualPlan/setObject/setObjects.vue'],resolve),
+                component: (resolve) => require(['./views/medicalExamination/manualPlan/setObject/setObjects.vue'], resolve)
             },
             {
                 path: 'setObjects',
@@ -161,28 +134,23 @@ let routers = [
                 meta: {
                     title: '设定体检对象'
                 },
-                component: SetObjects,
-            }, {
+                component: (resolve) => require(['./views/medicalExamination/manualPlan/setObject/setObjects.vue'], resolve)
+            },
+            {
                 path: 'schedule',
                 name: 'schedule',
                 meta: {
                     title: '体检排程'
                 },
-                component: Schedule,
-            }, {
+                component: (resolve) => require(['./views/medicalExamination/manualPlan/schedule/schedule.vue'], resolve)
+            },
+            {
                 path: 'review',
                 name: 'review',
                 meta: {
                     title: '审核'
                 },
-                component: (resolve) => require(['../views/medicalExamination/manualPlan/planReview.vue'], resolve),
-            },
-            {
-                path: 'autoPlan',
-                name: 'autoPlan',
-                meta: {
-                    title: '体检计划规划(自动)'
-                }
+                component: (resolve) => require(['./views/medicalExamination/manualPlan/planReview.vue'], resolve)
             },
             {
                 path: 'summaryReport',
@@ -190,7 +158,7 @@ let routers = [
                 meta: {
                     title: '学校汇总报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/summaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/summaryReport.vue'], resolve)
             },
             {
                 path: 'areaSummaryReport',
@@ -198,7 +166,7 @@ let routers = [
                 meta: {
                     title: '区域学校汇总报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/areaSummaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/areaSummaryReport.vue'], resolve)
             },
             {
                 path: 'gradeSummaryReport',
@@ -206,7 +174,7 @@ let routers = [
                 meta: {
                     title: '年级汇总报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/gradeSummaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/gradeSummaryReport.vue'], resolve)
             },
             {
                 path: 'classSummaryReport',
@@ -214,7 +182,7 @@ let routers = [
                 meta: {
                     title: '班级汇总报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/classSummaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/classSummaryReport.vue'], resolve)
             },
             {
                 path: 'genderSummaryReport',
@@ -222,7 +190,7 @@ let routers = [
                 meta: {
                     title: '性别汇总报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/genderSummaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/genderSummaryReport.vue'], resolve)
             },
             {
                 path: 'ageSummaryReport',
@@ -230,7 +198,7 @@ let routers = [
                 meta: {
                     title: '年龄汇总报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/ageSummaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/ageSummaryReport.vue'], resolve)
             },
             {
                 path: 'projectSummaryReport',
@@ -238,7 +206,7 @@ let routers = [
                 meta: {
                     title: '体检项目报告单'
                 },
-                component: (resolve) => require(['../views/medicalExamination/medicalReport/projectSummaryReport.vue'], resolve),
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/projectSummaryReport.vue'], resolve)
             },
             {
                 path: 'schoolImport',
@@ -246,7 +214,7 @@ let routers = [
                 meta: {
                     title: '县市学校体检数据批量导入'
                 },
-                component: SchoolImport,
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/schoolImport'], resolve)
             },
             {
                 path: 'examImport',
@@ -254,7 +222,7 @@ let routers = [
                 meta: {
                     title: '体检数据批量导出'
                 },
-                component: ExamImport,
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/examImport.vue'], resolve)
             },
             {
                 path: 'personSummaryReport',
@@ -262,7 +230,7 @@ let routers = [
                 meta: {
                     title: '电子体检报告'
                 },
-                component: PersonSummaryReport,
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/personSummaryReport.vue'], resolve)
             },
             {
                 path: 'examResult',
@@ -270,7 +238,7 @@ let routers = [
                 meta: {
                     title: '体检结果通知'
                 },
-                component: ExamResult,
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/examResult.vue'], resolve)
             },
             {
                 path: 'templetSet',
@@ -278,7 +246,7 @@ let routers = [
                 meta: {
                     title: '上报体检数据模板设定'
                 },
-                component: TempletSet,
+                component: (resolve) => require(['./views/medicalExamination/dataReport/templetSet.vue'], resolve)
             },
             {
                 path: 'reTest',
@@ -286,7 +254,7 @@ let routers = [
                 meta: {
                     title: '校医复测'
                 },
-                component: ReTest,
+                component: (resolve) => require(['./views/medicalExamination/medicalReport/reTest.vue'], resolve)
             }
         ]
     },
@@ -296,15 +264,14 @@ let routers = [
         meta: {
             title: '基础数据信息'
         },
-        component: (resolve) => require(['../views/dataCenter/dataContent.vue'], resolve),
-        children: [
-            {
+        component: (resolve) => require(['./views/dataCenter/dataContent.vue'], resolve),
+        children: [{
                 path: '/',
                 name: 'dataCenter',
                 meta: {
                     title: '基础数据首页'
                 },
-                component: (resolve) => require(['../views/datacenter/dataIndex.vue'], resolve),
+                component: (resolve) => require(['./views/datacenter/dataIndex.vue'], resolve)
             },
             {
                 path: 'unit',
@@ -312,7 +279,7 @@ let routers = [
                 meta: {
                     title: '医疗机构信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/unit/unitList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/unit/unitList.vue'], resolve)
             },
             {
                 path: 'schDocInfo',
@@ -320,7 +287,7 @@ let routers = [
                 meta: {
                     title: '校医信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/schDocInfo/schDocList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/schDocInfo/schDocList.vue'], resolve)
             },
             {
                 path: 'schoolInfo',
@@ -328,7 +295,7 @@ let routers = [
                 meta: {
                     title: '学校信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/schoolInfo/schoolList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/schoolInfo/schoolList.vue'], resolve)
             },
             {
                 path: 'teacherInfo',
@@ -336,7 +303,7 @@ let routers = [
                 meta: {
                     title: '老师信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/teacherInfo/teacherList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/teacherInfo/teacherList.vue'], resolve)
             },
             {
                 path: 'classInfo',
@@ -344,7 +311,7 @@ let routers = [
                 meta: {
                     title: '班级信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/classInfo/classList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/classInfo/classList.vue'], resolve)
             },
             {
                 path: 'sectionInfo',
@@ -352,7 +319,7 @@ let routers = [
                 meta: {
                     title: '科室信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/sectionInfo/sectionList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/sectionInfo/sectionList.vue'], resolve)
             },
             {
                 path: 'doctorInfo',
@@ -360,7 +327,7 @@ let routers = [
                 meta: {
                     title: '医生信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/doctorInfo/doctorList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/doctorInfo/doctorList.vue'], resolve)
             },
             {
                 path: 'staffInfo',
@@ -368,7 +335,7 @@ let routers = [
                 meta: {
                     title: '工作人员管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/staffInfo/staffList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/temp/staffInfo/staffList.vue'], resolve)
             },
             {
                 path: 'studentInfo',
@@ -376,7 +343,7 @@ let routers = [
                 meta: {
                     title: '学生信息管理'
                 },
-                component: (resolve) => require(['../views/dataCenter/studentInfo/studentList.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/studentInfo/studentList.vue'], resolve)
             },
             {
                 path: 'examinationItemConf',
@@ -384,7 +351,7 @@ let routers = [
                 meta: {
                     title: '体检项目参数配置'
                 },
-                component: ExaminationItemConf,
+                component: (resolve) => require(['./views/medicalExamination/examConfig/examinationItemConf.vue'], resolve)
             },
             {
                 path: 'physicalParaConfig',
@@ -392,39 +359,7 @@ let routers = [
                 meta: {
                     title: '体测项目参数配置'
                 },
-                component: physicalParaConfig,
-            },
-            {
-                path: 'encoding',
-                name: 'encoding',
-                meta: {
-                    title: '接入编码管理'
-                },
-                component: (resolve) => require(['../views/dataCenter/encoding/encoding.vue'], resolve),
-            },
-            {
-                path: 'accessPoint',
-                name: 'accessPoint',
-                meta: {
-                    title: '接入点管理'
-                },
-                component: (resolve) => require(['../views/dataCenter/accessPoint/accessPoint.vue'], resolve),
-            },
-            {
-                path: 'accessEnroll',
-                name: 'accessEnroll',
-                meta: {
-                    title: '接入点注册'
-                },
-                component: (resolve) => require(['../views/dataCenter/accessEnroll/accessEnroll.vue'], resolve),
-            },
-            {
-                path: 'databaseSynchronization',
-                name: 'databaseSynchronization',
-                meta: {
-                    title: '数据库同步计划'
-                },
-                component: (resolve) => require(['../views/dataCenter/databaseSynchronization/databaseSynchronization.vue'], resolve),
+                component: (resolve) => require(['./views/physicalFitnessTest/physicalParaConfig/physicalParaConfig.vue'], resolve)
             },
             {
                 path: 'standardizedImport',
@@ -432,7 +367,7 @@ let routers = [
                 meta: {
                     title: '数据标准化导入'
                 },
-                component: (resolve) => require(['../views/dataCenter/standardizedImport/standardizedImport.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/standardizedImport/standardizedImport.vue'], resolve)
             },
             {
                 path: 'standardizedOut',
@@ -440,15 +375,7 @@ let routers = [
                 meta: {
                     title: '数据标准化导入'
                 },
-                component: (resolve) => require(['../views/dataCenter/standardizedOut/standardizedOut.vue'], resolve),
-            },
-            {
-                path: 'dataExchangeMonitoring',
-                name: 'dataExchangeMonitoring',
-                meta: {
-                    title: '数据交换与共享监控服务'
-                },
-                component: (resolve) => require(['../views/dataCenter/dataExchangeMonitoring/dataExchangeMonitoring.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/standardizedOut/standardizedOut.vue'], resolve)
             },
             {
                 path: 'systemDialog',
@@ -456,63 +383,7 @@ let routers = [
                 meta: {
                     title: '系统日志'
                 },
-                component: (resolve) => require(['../views/dataCenter/systemDialog/systemDialog.vue'], resolve),
-            },
-            {
-                path: 'dataRecovery',
-                name: 'dataRecovery',
-                meta: {
-                    title: '数据恢复'
-                },
-                component: (resolve) => require(['../views/dataCenter/dataRecovery/dataRecovery.vue'], resolve),
-            },
-            {
-                path: 'dateManager',
-                name: 'dateManager',
-                meta: {
-                    title: '数据库管理'
-                },
-                component: (resolve) => require(['../views/dataCenter/dateManager/dateManager.vue'], resolve),
-            },
-            {
-                path: 'automaticBackup',
-                name: 'automaticBackup',
-                meta: {
-                    title: '自动备份计划'
-                },
-                component: (resolve) => require(['../views/dataCenter/automaticBackup/automaticBackup.vue'], resolve),
-            },
-            {
-                path: 'manualBackup',
-                name: 'manualBackup',
-                meta: {
-                    title: '手动备份'
-                },
-                component: (resolve) => require(['../views/dataCenter/manualBackup/manualBackup.vue'], resolve),
-            },
-            {
-                path: 'accessMonitoring',
-                name: 'accessMonitoring',
-                meta: {
-                    title: '接入点运行监控服务'
-                },
-                component: (resolve) => require(['../views/dataCenter/accessMonitoring/accessMonitoring.vue'], resolve),
-            },
-            {
-                path: 'exchangeDefinition',
-                name: 'exchangeDefinition',
-                meta: {
-                    title: '数据交换标准定义'
-                },
-                component: (resolve) => require(['../views/dataCenter/exchangeDefinition/exchangeDefinition.vue'], resolve),
-            },
-            {
-                path: 'monitorService',
-                name: 'monitorService',
-                meta: {
-                    title: '数据运行监控服务'
-                },
-                component: (resolve) => require(['../views/dataCenter/monitor/monitorService.vue'], resolve),
+                component: (resolve) => require(['./views/dataCenter/systemDialog/systemDialog.vue'], resolve)
             }
         ]
     },
@@ -522,15 +393,14 @@ let routers = [
         meta: {
             title: '健康体测'
         },
-        component: PhysicalFitnessTest,
-        children: [
-            {
+        component: (resolve) => require(['./views/physicalFitnessTest/physicalFitnessTest.vue'], resolve),
+        children: [{
                 path: '/',
                 name: 'physicalFitnessTest',
                 meta: {
                     title: '首页'
                 },
-                component: (resolve) => require(['../views/physicalFitnessTest/physicalFitnessIndex.vue'], resolve),
+                component: (resolve) => require(['./views/physicalFitnessTest/physicalFitnessIndex.vue'], resolve)
             },
             {
                 path: '/physicalPrepare',
@@ -538,75 +408,61 @@ let routers = [
                 meta: {
                     title: '体测准备'
                 },
-                component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/physicalPrepare.vue'], resolve),
-                children: [
-                    // {
-                    //     path: '/projectPlan',
-                    //     name: 'projectPlan',
-                    //     meta: {
-                    //         title: '体测项目规划'
-                    //     },
-                    //     component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/projectPlan.vue'], resolve),
-                    // },
-                    {
+                component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/physicalPrepare.vue'], resolve),
+                children: [{
                         path: '/projectPlanNew',
                         name: 'projectPlanNew',
                         meta: {
                             title: '体测项目规划'
                         },
-                        component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/projectPlanNew.vue'], resolve),
+                        component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/projectPlanNew.vue'], resolve)
                     },
-                    // {
-                    //     path: '/scoringStandards',
-                    //     name: 'scoringStandards',
-                    //     meta: {
-                    //         title: '体测项目评分标准设置'
-                    //     },
-                    //     component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/scoringStandards.vue'], resolve),
-                    // },
                     {
                         path: '/physicalTestPlan',
                         name: 'physicalTestPlan',
                         meta: {
                             title: '体测计划规划（手动）'
                         },
-                        component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/physicalPrepare.vue'], resolve),
+                        component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/physicalPrepare.vue'], resolve),
                         children: [{
-                            path: 'physicaltestobject',
-                            name: 'physicaltestobject',
-                            meta: {
-                                title: '设定体测对象'
+                                path: 'physicaltestobject',
+                                name: 'physicaltestobject',
+                                meta: {
+                                    title: '设定体测对象'
+                                },
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/physicalTestPlan/physicalTestPlan.vue'], resolve)
                             },
-                            component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/physicalTestPlan/physicalTestPlan.vue'], resolve)
-                        }, {
-                            path: 'physicalschedule',
-                            name: 'physicalschedule',
-                            meta: {
-                                title: '体测排程'
+                            {
+                                path: 'physicalschedule',
+                                name: 'physicalschedule',
+                                meta: {
+                                    title: '体测排程'
+                                },
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/physicaltestSchedule/physicaltestSchedule.vue'], resolve)
                             },
-                            component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/physicaltestSchedule/physicaltestSchedule.vue'], resolve)
-                        }, {
-                            path: 'physicalaudit',
-                            name: 'physicalaudit',
-                            meta: {
-                                title: '审核'
+                            {
+                                path: 'physicalaudit',
+                                name: 'physicalaudit',
+                                meta: {
+                                    title: '审核'
+                                },
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/physicalTestAudit/physicalTestAudit.vue'], resolve)
                             },
-                            component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/physicalTestAudit/physicalTestAudit.vue'], resolve)
-                        }, {
-                            path: '/elecPhysicalReport',
-                            name: 'elecPhysicalReport',
-                            meta: {
-                                title: '电子体测报告'
+                            {
+                                path: '/elecPhysicalReport',
+                                name: 'elecPhysicalReport',
+                                meta: {
+                                    title: '电子体测报告'
+                                },
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalReport/elecPhysicalReport.vue'], resolve)
                             },
-                            component: (resolve) => require(['../views/physicalFitnessTest/physicalReport/elecPhysicalReport.vue'], resolve)
-                        },
                             {
                                 path: '/physicalData',
                                 name: 'physicalData',
                                 meta: {
                                     title: '县市学校体测数据'
                                 },
-                                component: (resolve) => require(['../views/physicalFitnessTest/physicalReport/physicalData.vue'], resolve)
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalReport/physicalData.vue'], resolve)
                             },
                             {
                                 path: '/resultInform',
@@ -614,7 +470,7 @@ let routers = [
                                 meta: {
                                     title: '体测结果通知'
                                 },
-                                component: (resolve) => require(['../views/physicalFitnessTest/physicalReport/resultInform.vue'], resolve)
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalReport/resultInform.vue'], resolve)
                             },
                             {
                                 path: '/resultSummarizing',
@@ -622,9 +478,9 @@ let routers = [
                                 meta: {
                                     title: '体测结果汇总'
                                 },
-                                component: (resolve) => require(['../views/physicalFitnessTest/physicalReport/resultSummarizing.vue'], resolve)
-                            },
-                        ],
+                                component: (resolve) => require(['./views/physicalFitnessTest/physicalReport/resultSummarizing.vue'], resolve)
+                            }
+                        ]
                     },
                     {
                         path: '/testReport',
@@ -632,15 +488,14 @@ let routers = [
                         meta: {
                             title: '统计汇总'
                         },
-                        component: (resolve) => require(['../views/physicalFitnessTest/physicalPrepare/physicalPrepare.vue'], resolve),
-                        children: [
-                            {
+                        component: (resolve) => require(['./views/physicalFitnessTest/physicalPrepare/physicalPrepare.vue'], resolve),
+                        children: [{
                                 path: '/areaPhysicalReport',
                                 name: 'areaPhysicalReport',
                                 meta: {
                                     title: '区域汇总报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/areaPhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/areaPhysicalReport.vue'], resolve)
                             },
                             {
                                 path: '/schoolPhysicalReport',
@@ -648,7 +503,7 @@ let routers = [
                                 meta: {
                                     title: '学校汇总报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/schoolPhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/schoolPhysicalReport.vue'], resolve)
                             },
                             {
                                 path: '/gradePhysicalReport',
@@ -656,7 +511,7 @@ let routers = [
                                 meta: {
                                     title: '年级汇总报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/gradePhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/gradePhysicalReport.vue'], resolve)
                             },
                             {
                                 path: '/classPhysicalReport',
@@ -664,7 +519,7 @@ let routers = [
                                 meta: {
                                     title: '班级汇总报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/classPhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/classPhysicalReport.vue'], resolve)
                             },
                             {
                                 path: '/agePhysicalReport',
@@ -672,7 +527,7 @@ let routers = [
                                 meta: {
                                     title: '年龄汇总报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/agePhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/agePhysicalReport.vue'], resolve)
                             },
                             {
                                 path: '/genderPhysicalReport',
@@ -680,7 +535,7 @@ let routers = [
                                 meta: {
                                     title: '性别汇总报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/genderPhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/genderPhysicalReport.vue'], resolve)
                             },
                             {
                                 path: '/allPhysicalReport',
@@ -688,18 +543,18 @@ let routers = [
                                 meta: {
                                     title: '体测项目报告单'
                                 },
-                                component: resolve => require(['../views/physicalFitnessTest/physicalReport/allPhysicalReport.vue'], resolve)
+                                component: resolve => require(['./views/physicalFitnessTest/physicalReport/allPhysicalReport.vue'], resolve)
                             }
                         ]
                     }
                 ]
-            }]
+            }
+        ]
     },
     {
         path: '*',
         redirect: '/index'
     }
-
 ];
 
 export default routers;
