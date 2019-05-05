@@ -3,18 +3,9 @@
 </template>
 <script>
     export default {
-        data() {
-            return {};
-        },
-        mounted() {
-
-        },
-        beforeDestroy() {
-
-        },
-        methods: {}
+        name: "app"
     };
 </script>
 <style lang="scss">
-    @import "common.scss";
+
 </style>

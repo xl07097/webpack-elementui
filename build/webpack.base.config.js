@@ -3,7 +3,6 @@ const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin')
 
 module.exports = {
     entry: {
@@ -68,7 +67,7 @@ module.exports = {
             from: path.resolve(__dirname, '../public/static'),
             to: 'static',
             ignore: ['.*']
-        }]),
+        }])
     ],
     optimization: {
         splitChunks: {
@@ -79,12 +78,6 @@ module.exports = {
             maxInitialRequests: 3,
             name: true,
             cacheGroups: {
-                styles: {
-                    name: 'style',
-                    test: /\.css$/,
-                    chunks: 'all',
-                    enforce: true
-                },
                 vendor: {
                     name: 'vendor',
                     test: /[\\/]node_modules[\\/]/,
