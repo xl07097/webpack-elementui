@@ -36,6 +36,14 @@ module.exports = merge(baseConfig, {
         new MiniCssExtractPlugin({
             filename: 'css/[name].[hash].css',
             chunkFilename: 'css/[id].[hash].css'
+        }),
+        new OptimizeCssAssetsWebpackPlugin({
+            assetNameRegExp: /\.css$/g,
+            cssProcessor: require('cssnano'),
+            cssProcessorPluginOptions: {
+                preset: ['default', { discardComments: { removeAll: true } }],
+            },
+            canPrint: true
         })
     ]
 })
