@@ -1,4 +1,4 @@
-import router from './router';
+import router from './index';
 import {LoadingBar,Message} from 'iview';
 
 router.beforeEach((to, from, next) => {
