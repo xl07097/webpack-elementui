@@ -6,8 +6,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "../src/main.js"),
-        vendor: ['vue', 'iView', 'vue-router', 'axios', 'echarts']
+        app: path.resolve(__dirname, "../src/index.js"),
+        // vendor: ['vue', 'vue-router', 'axios']
     },
     module: {
         rules: [{
@@ -82,7 +82,7 @@ module.exports = {
                     name: 'vendor',
                     test: /[\\/]node_modules[\\/]/,
                     chunks: 'all',
-                    priority: 10
+                    priority: -10
                 }
             }
         }
