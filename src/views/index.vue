@@ -1,6 +1,6 @@
 <template>
     <div class="index">
-
+        hahah
     </div>
 </template>
 <script>

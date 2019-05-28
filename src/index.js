@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import router from './router/index';
-import $fetch from './utils/fetch'
 import iView from 'iview';
 
 import 'iview/dist/styles/iview.css'
