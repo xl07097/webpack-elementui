@@ -5,7 +5,14 @@
 </template>
 <script>
 export default {
-    name: 'Index'
+    name: 'Index',
+    mounted(){
+        let obj = {
+            a:1,
+            b:2
+        }
+        console.log({...obj})
+    }
 }
 </script>
 
