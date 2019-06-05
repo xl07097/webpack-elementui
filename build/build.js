@@ -6,7 +6,7 @@ const rm = require('rimraf')
 const path = require('path')
 const spinner = ora('building for production...')
 spinner.start()
-rm(path.join(path.resolve(__dirname, '../dist'), 'static'), err => {
+rm(path.join(path.resolve(__dirname, '../dist')), err => {
     if (err) {
         throw new Error(err)
     }
