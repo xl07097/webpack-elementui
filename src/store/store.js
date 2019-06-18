@@ -4,19 +4,28 @@ import Vuex from 'vuex';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-    state:{
-
+    state:{ // 状态树
+        count: 1
     },
     getters:{
 
     },
-    actions:{
+    actions:{ // 同步
 
     },
-    mutations:{
+    mutations:{ // 异步
 
     },
-    modules:{
-
+    modules:{ // 模块化
+        user:{
+            state:{
+                userCount: 10
+            },
+            mutations:{
+                add(state){
+                    state.userCount++
+                }
+            }
+        }
     }
 })
