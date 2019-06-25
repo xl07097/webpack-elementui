@@ -2,14 +2,19 @@
     <div class="index">
         hahah {{userCount}} {{count}}
         <Button @click="add">count</Button>
+        <MEditor></MEditor>
     </div>
 </template>
 <script>
 import {mapState, mapMutations} from 'vuex';
 import { Promise } from 'q';
+import MEditor from '@/components/MEditor.vue'
 
 export default {
     name: 'Index',
+    components:{
+        // MEditor
+    },
     computed:{
         ...mapState(['count']),
         ...mapState({
@@ -20,14 +25,10 @@ export default {
         ...mapMutations(['add'])
     },
     mounted(){
-        new Promise(() => {
-
-        })
         let obj = {
             a:1,
             b:2
         }
-        new Set([1,2,3,4,5,6,7,8,4,5]);
         console.log({...obj})
     }
 }
