@@ -10,7 +10,7 @@ module.exports = merge(baseConfig, {
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'js/[name].[hash].js',
-        publicPath: './'
+        publicPath: '/'
     },
     module: {
         rules: [{
@@ -19,11 +19,11 @@ module.exports = merge(baseConfig, {
             },
             {
                 test: /.less$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader', 'postcss-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader',  'postcss-loader','less-loader']
             },
             {
                 test: /.(sass|scss)$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader', 'postcss-loader']
+                use: [MiniCssExtractPlugin.loader, 'css-loader','postcss-loader', 'sass-loader' ]
             }
         ]
     },

@@ -25,11 +25,11 @@ module.exports = merge(baseConfig, {
             },
             {
                 test: /.less$/,
-                use: ['style-loader', 'vue-style-loader','css-loader', 'less-loader', 'postcss-loader']
+                use: ['style-loader', 'vue-style-loader','css-loader', 'postcss-loader', 'less-loader']
             },
             {
                 test: /.(sass|scss)$/,
-                use: ['style-loader', 'vue-style-loader','css-loader', 'sass-loader', 'postcss-loader']
+                use: ['style-loader', 'vue-style-loader','css-loader', 'postcss-loader', 'sass-loader']
             }
         ]
     }

@@ -6,7 +6,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 module.exports = {
     entry: {
-        app: path.resolve(__dirname, "../src/index.js"),
+        app: path.resolve(__dirname, "../src/main.js"),
         // vendor: ['vue', 'vue-router', 'axios']
     },
     module: {
@@ -28,7 +28,7 @@ module.exports = {
                 use: [{
                     loader: 'url-loader',
                     options: {
-                        limit: 102400,
+                        limit: 1024*5,
                         name: path.posix.join('static', 'img/[name].[hash:7].[ext]')
                     }
                 }]
