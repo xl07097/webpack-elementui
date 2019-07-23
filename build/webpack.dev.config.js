@@ -5,10 +5,10 @@ const baseConfig = require("./webpack.base.config")
 module.exports = merge(baseConfig, {
     mode: 'development',
     devtool: 'cheap-module-eval-source-map',
-    output:{
+    output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].js',
-        publicPath:'/'
+        publicPath: '/'
     },
     devServer: {
         contentBase: '../dist',
@@ -17,19 +17,19 @@ module.exports = merge(baseConfig, {
         hot: true,
         port: '9810'
     },
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', 'vue-style-loader','css-loader', 'postcss-loader']
+                use: ['style-loader', 'vue-style-loader', 'css-loader', 'postcss-loader']
             },
             {
                 test: /.less$/,
-                use: ['style-loader', 'vue-style-loader','css-loader', 'postcss-loader', 'less-loader']
+                use: ['style-loader', 'vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
             },
             {
                 test: /.(sass|scss)$/,
-                use: ['style-loader', 'vue-style-loader','css-loader', 'postcss-loader', 'sass-loader']
+                use: ['style-loader', 'vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
             }
         ]
     }
