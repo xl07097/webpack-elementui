@@ -84,7 +84,7 @@
                 maxOrNormal: require('../assets/common/full_screen.png'),
             };
         },
-        mounted: function () {
+        mounted() {
 
         },
         methods: {
