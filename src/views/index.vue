@@ -1,8 +1,8 @@
 <template>
   	<div class="index">
     	hahah {{userCount}} {{count}}
-    	<Button @click="add">count</Button>
-    	<!-- <img src="@/assets/qq5.png" id="login-btn" alt="qq" @click="qqLogin" /> -->
+    	<Button type="primary" @click="add">count</Button>
+        <img src="/static/image/163-1.png" alt="163" width="100">
   	</div>
 </template>
 <script>
