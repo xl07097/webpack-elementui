@@ -3,26 +3,47 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+
+/**
+ * store
+ * 仅作学习使用
+ */
+
 export default new Vuex.Store({
-    state:{ // 状态树
-        count: 1
+    state: { // 状态树   辅助函数 mapState
+        count: 1,
+        todos: [{
+            id: 1,
+            name: 'jack'
+        }, {
+            id: 2,
+            name: 'tom'
+        }, {
+            id: 3,
+            name: 'jim'
+        }]
     },
-    getters:{
+    getters: {
+        // 辅助函数 mapGetters
+        todoFilter: (store) => id => {
+            return store.todos.filter(item => item.id === id)
+        }
+    },
+    actions: { // 同步   // 辅助函数 mapActions
+        addTodo(state, payload){
+            state.todos.push(payload.data || {})
+        }
+    },
+    mutations: { // 异步// 辅助函数 mapMutations
 
     },
-    actions:{ // 同步
-
-    },
-    mutations:{ // 异步
-
-    },
-    modules:{ // 模块化
-        user:{
-            state:{
+    modules: { // 模块化
+        user: {
+            state: {
                 userCount: 10
             },
-            mutations:{
-                add(state){
+            mutations: {
+                add(state) {
                     state.userCount++
                 }
             }
