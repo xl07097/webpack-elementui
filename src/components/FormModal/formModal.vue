@@ -36,7 +36,7 @@
                 // modalVisible: false
             };
         },
-        mounted: () => {
+        mounted() {
 
         },
         methods: {
