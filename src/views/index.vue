@@ -2,11 +2,12 @@
   <div class="index">
     hahah {{userCount}} {{count}}
     <i-button type="primary" @click="add">count</i-button>
-    <img src="/static/image/163-1.png" alt="163" width="100" />
+    <!-- <img src="/static/image/163-1.png" alt="163" width="100" /> -->
     <span
       v-drag
       style="display:inline-block;width:40px;height:40px;background:blue;position:absolute;"
     ></span>
+
   </div>
 </template>
 <script>
@@ -29,7 +30,6 @@ export default {
           el.onmousemove = function(e) {
             el.style.left = e.clientX - 15 + "px";
             el.style.top = e.clientY - 15 + "px";
-            console.log(e);
           };
         });
 
