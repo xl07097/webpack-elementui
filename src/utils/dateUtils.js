@@ -150,9 +150,9 @@ export function yearLists() {
     let today = new Date().getFullYear();
     let month = new Date().getMonth() + 1;
     // 发布去除注释
-    // if (month <= 8) {
-    //     today = today - 1;
-    // }
+    if (month <= 8) {
+        today = today - 1;
+    }
     let m = today - start;
     let temp = [];
     for (let i = 0; i <= m; i++) {
