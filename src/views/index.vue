@@ -3,10 +3,11 @@
     hahah {{userCount}} {{count}}
     <i-button type="primary" @click="add">count</i-button>
     <!-- <img src="/static/image/163-1.png" alt="163" width="100" /> -->
-    <span
+    <!-- <span
       v-drag
       style="display:inline-block;width:40px;height:40px;background:blue;position:absolute;"
-    ></span>
+    ></span> -->
+    <span style="color:red;font-size:20px;">{{"★★★★★☆☆☆☆☆".slice(5 - 2, 10 - 2)}}</span>
 
   </div>
 </template>
