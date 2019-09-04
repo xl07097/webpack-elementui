@@ -1,5 +1,5 @@
 import router from './index';
-import {LoadingBar,Message} from 'iview';
+import {LoadingBar} from 'iview';
 
 router.beforeEach((to, from, next) => {
     let user = sessionStorage.getItem('sportHealthUserName');
@@ -19,7 +19,6 @@ router.beforeEach((to, from, next) => {
                 LoadingBar.start();
                 next();
             } else {
-                // Message.error('暂无权限');
                 next();
                 // next('/index');
             }

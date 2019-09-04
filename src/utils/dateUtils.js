@@ -41,7 +41,6 @@ export function stringFromnDateToNormal(date) {
     } else {
         t = new Date();
     }
-    let year = t.getFullYear();
     let month = t.getMonth() + 1;
     if (month < 10) {
         month = '0' + month;
