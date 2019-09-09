@@ -3,17 +3,17 @@ import Vue from 'vue';
 import router from '@/router/index';
 import store from '@/store/store';
 
-import iView from 'iview';
+import ElementUI from 'element-ui';
 
-import 'iview/dist/styles/iview.css'
+import 'element-ui/lib/theme-chalk/index.css';
 
 import App from './App';
 
 
-import 'babel-polyfill';
+// import 'babel-polyfill';
 // import './router/permission'
 
-Vue.use(iView)
+Vue.use(ElementUI, { size: 'small'})
 
 new Vue({
     el:"#app",

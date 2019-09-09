@@ -20,10 +20,6 @@ module.exports = {
             exclude: /node_modules/
         },
         {
-            test: /iview\/.*?js$/,
-            use: 'babel-loader'
-        },
-        {
             test: /\.(png|svg|jpe?g|gif)$/,
             use: [{
                 loader: 'url-loader',
