@@ -19,6 +19,7 @@ module.exports = {
         "vue"
     ],
     "rules": {
-        
+        "no-undef": [0],
+        "no-console": [0]
     }
 };
