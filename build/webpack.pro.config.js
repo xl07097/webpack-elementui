@@ -10,7 +10,7 @@ module.exports = merge(baseConfig, {
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: 'js/[name].[hash].js',
-        publicPath: '/note/'
+        publicPath: '/'
     },
     module: {
         rules: [{
