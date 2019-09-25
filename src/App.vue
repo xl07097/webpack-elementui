@@ -7,5 +7,5 @@
     };
 </script>
 <style lang="scss">
-    //@import "common.scss";
+    @import "common.less";
 </style>
