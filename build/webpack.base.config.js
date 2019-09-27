@@ -3,6 +3,7 @@ const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
     entry: {
@@ -57,6 +58,7 @@ module.exports = {
             template: path.resolve(__dirname, '../public/index.html'),
             inject: true
         }),
+        new BundleAnalyzerPlugin(),
         new VueLoaderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
         new CopyWebpackPlugin([{
