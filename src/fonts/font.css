@@ -1,0 +1,34 @@
+@font-face {
+    font-family: sourceHanSanscn-Bold;
+    src: url('SourceHanSansCN-Bold.otf') format('opentype')
+}
+
+@font-face {
+    font-family: sourceHanSanscn-ExtraLight;
+    src: url('SourceHanSansCN-ExtraLight.otf') format('opentype')
+}
+
+@font-face {
+    font-family: sourceHanSanscn-Heavy;
+    src: url('SourceHanSansCN-Heavy.otf') format('opentype')
+}
+
+@font-face {
+    font-family: sourceHanSanscn-Light;
+    src: url('SourceHanSansCN-Light.otf') format('opentype')
+}
+
+@font-face {
+    font-family: sourceHanSanscn-Medium;
+    src: url('SourceHanSansCN-Medium.otf') format('opentype')
+}
+
+@font-face {
+    font-family: sourceHanSanscn-Normal;
+    src: url('SourceHanSansCN-Normal.otf') format('opentype')
+}
+
+@font-face {
+    font-family: sourceHanSanscn-Regular;
+    src: url('SourceHanSansCN-Regular.otf') format('opentype')
+}
