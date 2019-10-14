@@ -8,7 +8,14 @@ const routers = [
         meta: {
             title: '首页'
         },
-        component: (resolve) => require(['../views/index.vue'], resolve)
+        component: (resolve) => require(['@/views/index.vue'], resolve)
+    },
+    {
+        path: '/animation',
+        meta: {
+            title: '首页'
+        },
+        component: (resolve) => require(['@/components/Animation.vue'], resolve)
     },
     {
         path: '*',
