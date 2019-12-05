@@ -56,6 +56,7 @@ npm run build
 
 ```text
 ps：node 版本最好为 8 或 10
+D:\Program Files\nodejs\node_global 需要添加到环境变量中
 ```
 
 ```text
