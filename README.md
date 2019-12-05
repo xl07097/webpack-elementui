@@ -20,7 +20,7 @@
 
 `package.json` 为模块描述文件，管理包名，依赖包等
 
-`package-lock.json` 为依赖包版本锁定文件，禁止修改
+`package-lock.json` 为依赖包版本锁定文件，禁止手动修改
 
 `postcss.config.js` 为 `css` 样式兼容文件，添加浏览器兼容前缀
 
@@ -53,6 +53,10 @@ npm run build
 ```
 
 `.npmrc（c盘用户文件夹下，若没有，使用npm config set registry "https://registry.npm.taobao.org 命令，会自动生成"）` 配置项，此配置可以直接使用 `npm` 下载 `node_sass、phantomjs、SQLITE3、electron` 等编译包，不用再使用 `cnpm` 代替
+
+```text
+ps：node 版本最好为 8 或 10
+```
 
 ```text
 cache=D:\Program Files\nodejs\node_cache
