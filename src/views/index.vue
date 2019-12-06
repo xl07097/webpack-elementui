@@ -43,10 +43,10 @@ export default {
     })
   },
   methods: {
-    // ...mapMutations(["add"]),
-    add(){
-        this.show = !this.show;
-    },
+    ...mapMutations(["add"]),
+    // add(){
+    //     this.show = !this.show;
+    // },
     userList(){
         fetch("http://122.51.129.51:8080/note/user/getById?id=1")
         .then(data => data.json())
