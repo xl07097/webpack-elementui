@@ -11,12 +11,19 @@ const routers = [
         component: (resolve) => require(['@/views/index.vue'], resolve)
     },
     {
-        path: '/animation',
+        path: '/ws',
         meta: {
             title: '首页'
         },
-        component: (resolve) => require(['@/components/Animation.vue'], resolve)
+        component: (resolve) => require(['@/views/index.vue'], resolve)
     },
+    // {
+    //     path: '/animation',
+    //     meta: {
+    //         title: '首页'
+    //     },
+    //     component: (resolve) => require(['@/components/Animation.vue'], resolve)
+    // },
     {
         path: '*',
         redirect: '/index'
