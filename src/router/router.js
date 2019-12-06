@@ -15,7 +15,7 @@ const routers = [
         meta: {
             title: '首页'
         },
-        component: (resolve) => require(['@/views/index.vue'], resolve)
+        component: (resolve) => require(['@/views/ws.vue'], resolve)
     },
     // {
     //     path: '/animation',

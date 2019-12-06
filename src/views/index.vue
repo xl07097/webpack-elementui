@@ -1,5 +1,6 @@
 <template>
   <div class="index">
+
     hahah {{userCount}} {{count}}
     <el-button type="primary" @click="add">count</el-button>
     <el-button type="primary" @click="visible">visible</el-button>
@@ -47,7 +48,7 @@ export default {
         this.show = !this.show;
     },
     userList(){
-        fetch("http://localhost:9087/note/user/getById?id=1")
+        fetch("http://122.51.129.51:8080/note/user/getById?id=1")
         .then(data => data.json())
         .then(data => {
             console.log(data)
