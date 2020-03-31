@@ -1,13 +1,14 @@
 <template>
-  <div>
-    <router-link to="/">index</router-link>
-    <router-link to="/ws">ws</router-link>
-    <router-view></router-view>
-  </div>
+    <div>
+        <router-link to="/">index</router-link>
+        <router-link to="/ws">ws</router-link>
+        <router-link to="/slot">slot</router-link>
+        <router-view></router-view>
+    </div>
 </template>
 <script>
 export default {
-  name: "App"
+    name: "App"
 };
 </script>
 <style lang="scss">

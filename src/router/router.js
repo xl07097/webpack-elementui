@@ -17,6 +17,13 @@ const routers = [
         },
         component: (resolve) => require(['@/views/ws.vue'], resolve)
     },
+    {
+        path: '/slot',
+        meta: {
+            title: 'slot'
+        },
+        component: (resolve) => require(['@/views/Slot.vue'], resolve)
+    },
     // {
     //     path: '/animation',
     //     meta: {
