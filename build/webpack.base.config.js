@@ -54,6 +54,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
+            title: "vue 练习",
             filename: path.resolve(__dirname, '../dist/index.html'),
             template: path.resolve(__dirname, '../public/index.html'),
             inject: true
