@@ -3,11 +3,9 @@
 </template>
 
 <script>
-    export default {
-        name: "MiddlePage"
-    }
+export default {
+    name: "MiddlePage"
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

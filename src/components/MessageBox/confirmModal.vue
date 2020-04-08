@@ -2,11 +2,11 @@
     <div v-if="show" class="modal" v-show="show">
         <div class="alert-modal">
             <div class="modal-header">
-                <img src="../../assets/alertModal/info.png" alt="info">
-                <span>{{title}}</span>
+                <img src="../../assets/alertModal/info.png" alt="info" />
+                <span>{{ title }}</span>
             </div>
             <div class="modal-body">
-                {{text}}
+                {{ text }}
             </div>
             <div class="modal-footer">
                 <div class="cancel" @click="onCancel">取消</div>
@@ -16,25 +16,25 @@
     </div>
 </template>
 <script>
-    export default {
-        name: 'Alert',
-        data() {
-            return {
-                show: true
-            };
+export default {
+    name: "Alert",
+    data() {
+        return {
+            show: true
+        };
+    },
+    methods: {
+        onCancel() {
+            this.show = false;
+            this.cancel && this.cancel();
         },
-        methods: {
-            onCancel() {
-                this.show = false;
-                this.cancel && this.cancel();
-            },
-            onSure() {
-                this.onOk && this.onOk();
-                this.show = false;
-            }
+        onSure() {
+            this.onOk && this.onOk();
+            this.show = false;
         }
-    };
+    }
+};
 </script>
 <style scoped lang="scss">
-    @import "msgBoxCommon";
+@import "msgBoxCommon";
 </style>

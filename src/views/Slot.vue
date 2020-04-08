@@ -1,19 +1,17 @@
 <template>
-    <div>
-        <Company>
-            <template v-slot:header="scope">
-                <header>[header]hahahaha {{ scope.a1 }}</header>
-            </template>
-            <template v-slot="{sc}">
-                <div>content</div>
-                {{ sc.lpl }}
-            </template>
+    <Company>
+        <template v-slot:header="scope">
+            <header>[header]hahahaha {{ scope.a1 }}</header>
+        </template>
+        <template v-slot="{ sc }">
+            <div>content</div>
+            {{ sc.lpl }}
+        </template>
 
-            <template v-slot:footer>
-                <footer>[footer]</footer>
-            </template>
-        </Company>
-    </div>
+        <template v-slot:footer>
+            <footer>[footer]</footer>
+        </template>
+    </Company>
 </template>
 
 <script>
