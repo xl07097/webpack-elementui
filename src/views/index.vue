@@ -53,6 +53,7 @@ export default {
                 });
         },
         visible() {
+            this.$router.push("/index");
             this.dialogVisible = !this.dialogVisible;
         },
         handleClose() {

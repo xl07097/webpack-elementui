@@ -33,6 +33,7 @@ const routers = [
     // },
     {
         path: '*',
+        name: '404',
         redirect: '/index'
     }
 ];
