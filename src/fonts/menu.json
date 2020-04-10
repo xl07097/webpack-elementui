@@ -1,0 +1,275 @@
+{
+    "result": true,
+    "content": [
+        {
+            "id": 25,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "超链接管理",
+            "url": "LinkManage",
+            "icon": null,
+            "children": null
+        },
+        {
+            "id": 19,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "按图索骥",
+            "url": "Cube",
+            "icon": null,
+            "children": [
+                {
+                    "id": 24,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "图书馆",
+                    "url": "Cube.Library",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 23,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "文化空间",
+                    "url": "Cube.CulturalSpace",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 22,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "文化活动",
+                    "url": "Cube.CulturalActivities",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 21,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "新闻/公告",
+                    "url": "Cube.News",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 20,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "轮播图片",
+                    "url": "Cube.Carousel",
+                    "icon": null,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": 17,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "云行雨施",
+            "url": "Cloud",
+            "icon": null,
+            "children": [
+                {
+                    "id": 18,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "志愿者/组织者",
+                    "url": "Cloud.Volunteer",
+                    "icon": null,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": 14,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "学海无涯",
+            "url": "Knowledge",
+            "icon": null,
+            "children": [
+                {
+                    "id": 16,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "书库管理",
+                    "url": "Knowledge.StackManage",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 15,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "品牌服务",
+                    "url": "Knowledge.Mark",
+                    "icon": null,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "匠心传承",
+            "url": "Originality",
+            "icon": null,
+            "children": [
+                {
+                    "id": 13,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "课程列表",
+                    "url": "Originality.Course",
+                    "icon": null,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "文化园斋",
+            "url": "Calture",
+            "icon": null,
+            "children": [
+                {
+                    "id": 11,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "铜仁文化",
+                    "url": "Calture.tongren",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 10,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "苏州文化",
+                    "url": "Calture.suzhou",
+                    "icon": null,
+                    "children": []
+                }
+            ]
+        },
+        {
+            "id": 1,
+            "state": {
+                "opened": true,
+                "selected": true
+            },
+            "text": "系统管理",
+            "url": "SystemManage",
+            "icon": null,
+            "children": [
+                {
+                    "id": 8,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "字典表管理",
+                    "url": "SystemManage.DictionaryManage",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 7,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "权限管理",
+                    "url": "SystemManage.AuthManage",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 6,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "模块管理",
+                    "url": "SystemManage.ModuleManage",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 5,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "角色管理",
+                    "url": "SystemManage.RoleManage",
+                    "icon": "http://192.1.6.21/",
+                    "children": []
+                },
+                {
+                    "id": 4,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "用户管理",
+                    "url": "SystemManage.UserManage",
+                    "icon": null,
+                    "children": []
+                },
+                {
+                    "id": 3,
+                    "state": {
+                        "opened": true,
+                        "selected": true
+                    },
+                    "text": "系统消息",
+                    "url": "SystemManage.Message",
+                    "icon": null,
+                    "children": []
+                }
+            ]
+        }
+    ]
+}
