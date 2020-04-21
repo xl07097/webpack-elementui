@@ -25,6 +25,7 @@
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
+import {EventEmitter} from 'events';
 
 export default {
     name: "Index",
@@ -62,6 +63,7 @@ export default {
     },
     mounted() {
         this.userList();
+        console.log(new EventEmitter())
     }
 };
 </script>
