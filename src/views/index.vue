@@ -67,14 +67,16 @@ export default {
         em.emit("show", "haha");
     },
     created() {
-        em = new EventEmitter();
+        em = new EventEmitter(); 
         em.on("show", data => {
             console.log(data);
         });
     },
     beforeDestroy() {
-        em.off("show", () => {});
-        em = null;
+        if (em) {
+            em.off("show", () => {});
+            em = null;
+        }
     }
 };
 </script>

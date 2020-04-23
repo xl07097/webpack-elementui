@@ -8,7 +8,15 @@
 </template>
 <script>
 export default {
-    name: "App"
+    name: "App",
+    created(){
+        window.addEventListener("beforeunload",() => {
+            sessionStorage.setItem('tmpData', '909090')
+        })
+
+        console.log(sessionStorage.getItem('tmpData'))
+        sessionStorage.removeItem('tmpData')
+    }
 };
 </script>
 <style lang="scss">
