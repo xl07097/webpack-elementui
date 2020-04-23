@@ -25,8 +25,8 @@
 </template>
 <script>
 import { mapState, mapMutations } from "vuex";
-import {EventEmitter} from 'events';
-
+import { EventEmitter } from "events";
+let em = "";
 export default {
     name: "Index",
     data() {
@@ -63,7 +63,18 @@ export default {
     },
     mounted() {
         this.userList();
-        console.log(new EventEmitter())
+        console.log(new EventEmitter());
+        em.emit("show", "haha");
+    },
+    created() {
+        em = new EventEmitter();
+        em.on("show", data => {
+            console.log(data);
+        });
+    },
+    beforeDestroy() {
+        em.off("show", () => {});
+        em = null;
     }
 };
 </script>
