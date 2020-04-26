@@ -16,7 +16,7 @@ export default {
     },
     created() {
         this.ws = new WebSocket("ws://122.51.129.51:8080/note/websocket/1");
-
+        const that = this;
         //打开事件
         this.ws.onopen = function() {
             console.log("Socket 已打开");
@@ -25,7 +25,7 @@ export default {
                 .then(data => {
                     console.log(data);
                 });
-            //ws.send("这是来自客户端的消息" + location.href + new Date());
+            that.ws.send("这是来自客户端的消息" + location.href + new Date());
         };
 
         //获得消息事件

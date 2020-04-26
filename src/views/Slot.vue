@@ -4,11 +4,15 @@
             <header>[header]hahahaha {{ scope.a1 }}</header>
         </template>
         <template v-slot="{ sc }">
-            <div>content</div>
-            {{ sc.lpl }}
+            <section>
+                <aside>content</aside>
+                <article>
+                    {{ sc.lpl }}
+                </article>
+            </section>
         </template>
 
-        <template v-slot:footer>
+        <template #footer>
             <footer>[footer]</footer>
         </template>
     </Company>

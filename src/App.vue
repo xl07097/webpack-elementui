@@ -9,16 +9,17 @@
 <script>
 export default {
     name: "App",
-    created(){
-        window.addEventListener("beforeunload",() => {
-            sessionStorage.setItem('tmpData', '909090')
-        })
+    created() {
+        window.addEventListener("beforeunload", () => {
+            sessionStorage.setItem("tmpData", "909090");
+        });
 
-        console.log(sessionStorage.getItem('tmpData'))
-        sessionStorage.removeItem('tmpData')
+        console.log(sessionStorage.getItem("tmpData"));
+        sessionStorage.removeItem("tmpData");
     }
 };
 </script>
-<style lang="scss">
+<style lang="less">
+@import "animate.css";
 @import "common.less";
 </style>

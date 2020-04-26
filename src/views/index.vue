@@ -1,5 +1,5 @@
 <template>
-    <div class="index">
+    <div class="index animated fadeInRight">
         hahah {{ userCount }} {{ count }}
         <el-button type="primary" @click="add">count</el-button>
         <el-button type="primary" @click="visible">visible</el-button>
@@ -67,7 +67,7 @@ export default {
         em.emit("show", "haha");
     },
     created() {
-        em = new EventEmitter(); 
+        em = new EventEmitter();
         em.on("show", data => {
             console.log(data);
         });
