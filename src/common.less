@@ -5,22 +5,26 @@ body {
 
 body {
     padding: 40px;
-
     text-align: center;
     overflow: hidden;
 }
 
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: " ";
-}
+//  嵌套
+.clearfix {
+    zoom: 1;
 
-.clearfix:after {
-    clear: both;
-    height: 0;
-    font-size: 0;
-    visibility: hidden;
+    &:before,
+    &:after {
+        display: table;
+        content: " ";
+    }
+
+    &:after {
+        clear: both;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+    }
 }
 
 /** =========================== elementui css 重写 start=============*/
