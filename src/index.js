@@ -9,10 +9,6 @@ import 'element-ui/lib/theme-chalk/index.css';
 
 import App from './App';
 
-
-// import 'babel-polyfill';
-// import './router/permission'
-
 Vue.use(ElementUI, { size: 'small'})
 
 new Vue({
