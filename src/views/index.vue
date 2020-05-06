@@ -77,6 +77,12 @@ export default {
             em.off("show", () => {});
             em = null;
         }
+    },
+    activated (){
+        console.log('进入')
+    },
+    deactivated (){
+        console.log("离开");
     }
 };
 </script>

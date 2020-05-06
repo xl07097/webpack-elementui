@@ -3,7 +3,9 @@
         <router-link to="/">index</router-link>
         <router-link to="/ws">ws</router-link>
         <router-link to="/slot">slot</router-link>
-        <router-view></router-view>
+        <keep-alive :max="10">
+            <router-view></router-view>
+        </keep-alive>
     </div>
 </template>
 <script>
