@@ -3,7 +3,8 @@
         <template v-slot:header="scope">
             <header>[header]hahahaha {{ scope.a1 }}</header>
         </template>
-        <template v-slot="{ sc }">
+        <!-- 使用简写 # ，default 不能省略 -->
+        <template #default="{ sc }">
             <section>
                 <aside>content</aside>
                 <article>

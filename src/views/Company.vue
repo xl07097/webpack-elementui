@@ -1,7 +1,7 @@
 <template>
     <div>
         <slot name="header"></slot>
-        <slot name="default" :sc="sc"></slot>
+        <slot name="default" :sc="sc">哈哈哈哈</slot>
         <slot name="footer"></slot>
     </div>
 </template>
