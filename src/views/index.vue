@@ -3,24 +3,14 @@
         hahah {{ userCount }} {{ count }}
         <el-button type="primary" @click="add">count</el-button>
         <el-button type="primary" @click="visible">visible</el-button>
-        <!-- <img src="/static/image/163-1.png" alt="163" width="100" /> -->
-        <!-- <span style="color:red;font-size:20px;">{{"★★★★★☆☆☆☆☆".slice(5 - 2, 10 - 2)}}</span> -->
         <span class="add" v-show="show">哈哈哈</span>
+        <br>
+        <el-button type="primary" @click="visi(1)">1</el-button>
+        <el-button type="primary" @click="visi(2)">2</el-button>
+        <el-button type="primary" @click="visi(3)">3</el-button>
+        <el-button type="primary" @click="visi(4)">4</el-button>
 
-        <el-dialog
-            title="提示"
-            :visible.sync="dialogVisible"
-            width="30%"
-            :close-on-press-escape="false"
-            :close-on-click-modal="false"
-            :before-close="handleClose"
-        >
-            <span>这是一段信息</span>
-            <div slot="footer" class="dialog-footer">
-                <el-button @click="dialogVisible = false">取 消</el-button>
-                <el-button type="primary">确 定</el-button>
-            </div>
-        </el-dialog>
+        <component :is="com" :dialogVisible='dialogVisible' @com-close='comClose'></component>
     </div>
 </template>
 <script>
@@ -32,6 +22,7 @@ export default {
     data() {
         return {
             show: true,
+            com: null,
             dialogVisible: false
         };
     },
@@ -42,16 +33,19 @@ export default {
         })
     },
     methods: {
+        visi(){
+            this.dialogVisible = true;
+        },
         ...mapMutations(["add"]),
         // add(){
         //     this.show = !this.show;
         // },
         userList() {
-            fetch("http://122.51.129.51:8080/note/user/getById?id=1")
-                .then(data => data.json())
-                .then(data => {
-                    console.log(data);
-                });
+
+        },
+        comClose(){
+            this.dialogVisible = false;
+            this.com = null;
         },
         visible() {
             this.$router.push("/index");
@@ -62,17 +56,25 @@ export default {
         }
     },
     mounted() {
-        this.userList();
         console.log(new EventEmitter());
         em.emit("show", "haha");
     },
+    beforeMount(){
+        console.log(this.$el);
+    },
     created() {
+        console.log(this.$data.show);
+        console.log(this.$el);
         em = new EventEmitter();
         em.on("show", data => {
             console.log(data);
         });
     },
+    destroyed(){
+        console.log('destroyed')
+    },
     beforeDestroy() {
+        console.log('beforeDestroy')
         if (em) {
             em.off("show", () => {});
             em = null;

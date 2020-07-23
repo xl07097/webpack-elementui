@@ -10,11 +10,23 @@ export default {
             ws: ""
         };
     },
-    beforeDestroy() {
-        this.ws.close();
-        this.ws = "";
+    methods:{
+        distroyWs(){
+            if(this.ws){
+                 this.ws.close();
+                this.ws = "";
+            }
+        }
     },
     created() {
+        this.$on("hook:deactivated", () =>{
+            console.log('hook:deactivated')
+            this.distroyWs();
+        })
+        this.$on("hook:beforeDestroy", () =>{
+            console.log('hook:deactivated')
+            this.distroyWs();
+        })
         this.ws = new WebSocket("ws://122.51.129.51:8080/note/websocket/1");
         const that = this;
         //打开事件

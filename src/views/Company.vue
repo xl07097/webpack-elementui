@@ -9,13 +9,20 @@
 <script>
 export default {
     name: "Company",
+    props: ['a'],
     data() {
         return {
             sc: {
                 lpl: "LPL"
             }
         };
-    }
+    },
+    beforeUpdate(){
+        console.log('beforeUpdate:1');
+    },
+    updated(){
+        console.log('updated:1');
+    },
 };
 </script>
 
