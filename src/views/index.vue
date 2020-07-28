@@ -4,13 +4,6 @@
         <el-button type="primary" @click="add">count</el-button>
         <el-button type="primary" @click="visible">visible</el-button>
         <span class="add" v-show="show">哈哈哈</span>
-        <br>
-        <el-button type="primary" @click="visi(1)">1</el-button>
-        <el-button type="primary" @click="visi(2)">2</el-button>
-        <el-button type="primary" @click="visi(3)">3</el-button>
-        <el-button type="primary" @click="visi(4)">4</el-button>
-
-        <component :is="com" :dialogVisible='dialogVisible' @com-close='comClose'></component>
     </div>
 </template>
 <script>
@@ -33,25 +26,12 @@ export default {
         })
     },
     methods: {
-        visi(){
-            this.dialogVisible = true;
-        },
         ...mapMutations(["add"]),
         // add(){
         //     this.show = !this.show;
         // },
-        userList() {
-
-        },
-        comClose(){
-            this.dialogVisible = false;
-            this.com = null;
-        },
         visible() {
             this.$router.push("/index");
-            this.dialogVisible = !this.dialogVisible;
-        },
-        handleClose() {
             this.dialogVisible = !this.dialogVisible;
         }
     },
