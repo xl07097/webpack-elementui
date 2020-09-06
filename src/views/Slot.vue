@@ -1,23 +1,27 @@
 <template>
-    <Company :a="scope.a3">
-        <template v-slot:header="scopes">
-            <header>[header]hahahaha {{ scopes.a3 }}</header>
-        </template>
-        <!-- 使用简写 # ，default 不能省略 -->
-        <template #default="{ sc }">
-            <section>
-                <aside>content</aside>
-                <article>
-                    {{ sc.lpl }}
-                </article>
-                <button type="button" @click="sett">ddd</button>
-            </section>
-        </template>
+    <div>
+        <Company :a="scope.a3">
+            <template v-slot:header="scopes">
+                <header>[header]hahahaha {{ scopes.a3 }}</header>
+            </template>
+            <!-- 使用简写 # ，default 不能省略 -->
+            <template #default="{ sc }">
+                <section>
+                    <aside>content</aside>
+                    <article>
+                        {{ sc.lpl }}
+                    </article>
+                    <button type="button" @click="sett">ddd</button>
+                </section>
+            </template>
 
-        <template #footer>
-            <footer>[footer] {{scope.a3}}</footer>
-        </template>
-    </Company>
+            <template #footer>
+                <footer>[footer] {{scope.a3}}</footer>
+            </template>
+        </Company>
+        <span>{{scope.a2}}</span>
+    </div>
+
 </template>
 
 <script>
@@ -40,7 +44,7 @@ export default {
     methods:{
         sett(){
             console.log(90)
-            this.scope.a3 = 90;
+            this.scope.a2 = 90;
         }
     },
     beforeCreate(){

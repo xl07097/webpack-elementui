@@ -1,11 +1,11 @@
 <template>
     <div>
         <router-link to="/">index</router-link>
-        <router-link to="/ws">ws</router-link>
-        <router-link to="/slot">slot</router-link>
-        <keep-alive :max="10">
-            <router-view></router-view>
-        </keep-alive>
+        <router-link :to="{path:'/ws', query:{id: 10}}">ws</router-link>
+        <router-link :to="{name:'slot',params:{id:10}}">slot</router-link>
+        <!-- <keep-alive :max="10"> -->
+        <router-view></router-view>
+        <!-- </keep-alive> -->
     </div>
 </template>
 <script>

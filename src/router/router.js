@@ -5,6 +5,7 @@ const routers = [
     },
     {
         path: '/index',
+        name: 'index',
         meta: {
             title: '首页'
         },
@@ -12,13 +13,15 @@ const routers = [
     },
     {
         path: '/ws',
+        name: 'ws',
         meta: {
             title: '首页'
         },
         component: (resolve) => require(['@/views/ws.vue'], resolve)
     },
     {
-        path: '/slot',
+        path: '/slot/:id',
+        name: 'slot',
         meta: {
             title: 'slot'
         },
