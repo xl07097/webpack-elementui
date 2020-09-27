@@ -26,9 +26,16 @@
 
 <script>
 import Company from "./Company";
+import events from '@/utils/EventBus';
 
 export default {
     name: "SlotTest",
+    props:{
+        id:{
+            type: [String, Number],
+            default: ''
+        }
+    },
     components: {
         Company
     },
@@ -44,7 +51,7 @@ export default {
     methods:{
         sett(){
             console.log(90)
-            this.scope.a2 = 90;
+            this.scope.a1 = 90;
         }
     },
     beforeCreate(){
@@ -52,12 +59,17 @@ export default {
     },
     created(){
         console.log('created');
+        events.on("name", function(name){
+            console.log(name);
+        })
     },
     beforeMount(){
         console.log('beforeMount');
     },
     mounted(){
         console.log('mounted');
+        console.log(this.id);
+        events.emit("name", 'lplp')
     },
     beforeUpdate(){
         console.log('beforeUpdate');

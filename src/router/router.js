@@ -22,6 +22,7 @@ const routers = [
     {
         path: '/slot/:id',
         name: 'slot',
+        props: true,
         meta: {
             title: 'slot'
         },
