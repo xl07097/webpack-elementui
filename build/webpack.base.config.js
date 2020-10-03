@@ -62,11 +62,11 @@ module.exports = {
         // new BundleAnalyzerPlugin(),
         new VueLoaderPlugin(),
         new webpack.HotModuleReplacementPlugin(),
-        new CopyWebpackPlugin([{
-            from: path.resolve(__dirname, '../public/static'),
-            to: 'static',
-            ignore: ['.*']
-        }])
+        new CopyWebpackPlugin({
+            patterns: [
+                { from: path.resolve(__dirname, '../public/static'), to: 'static' }
+            ]
+        })
     ],
     optimization: {
         splitChunks: {

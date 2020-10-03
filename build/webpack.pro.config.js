@@ -1,5 +1,5 @@
 const path = require('path')
-const merge = require('webpack-merge')
+const {merge} = require('webpack-merge')
 const baseConfig = require('./webpack.base.config')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin')
@@ -15,15 +15,37 @@ module.exports = merge(baseConfig, {
     module: {
         rules: [{
             test: /\.css$/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader']
+            use: [MiniCssExtractPlugin.loader, 'vue-style-loader', {
+                loader: 'css-loader',
+                options: {
+                    esModule: false
+                }
+            }, 'postcss-loader']
         },
         {
             test: /.less$/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'less-loader']
+            use: [MiniCssExtractPlugin.loader, 'vue-style-loader', {
+                loader: 'css-loader',
+                options: {
+                    esModule: false
+                }
+            }, 'postcss-loader', {
+                loader: 'less-loader',
+                options: {
+                    lessOptions: {
+                        javascriptEnabled: true
+                    }
+                }
+            }]
         },
         {
             test: /.(sass|scss)$/,
-            use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+            use: [MiniCssExtractPlugin.loader, {
+                loader: 'css-loader',
+                options: {
+                    esModule: false
+                }
+            }, 'vue-style-loader', 'postcss-loader', 'sass-loader']
         }
         ]
     },

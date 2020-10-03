@@ -1,4 +1,4 @@
-const merge = require('webpack-merge')
+const {merge} = require('webpack-merge')
 const path = require('path')
 const baseConfig = require("./webpack.base.config")
 
@@ -21,15 +21,37 @@ module.exports = merge(baseConfig, {
         rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', 'vue-style-loader', 'css-loader', 'postcss-loader']
+                use: ['style-loader', 'vue-style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        esModule: false
+                    }
+                }, 'postcss-loader']
             },
             {
                 test: /.less$/,
-                use: ['style-loader', 'vue-style-loader', 'css-loader', 'postcss-loader', 'less-loader']
+                use: ['style-loader', 'vue-style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        esModule: false
+                    }
+                }, 'postcss-loader', {
+                        loader: 'less-loader',
+                        options: {
+                            lessOptions: {
+                                javascriptEnabled: true
+                            }
+                        }
+                    }]
             },
             {
                 test: /.(sass|scss)$/,
-                use: ['style-loader', 'vue-style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                use: ['style-loader', 'vue-style-loader', {
+                    loader: 'css-loader',
+                    options: {
+                        esModule: false
+                    }
+                }, 'postcss-loader', 'sass-loader']
             }
         ]
     }
