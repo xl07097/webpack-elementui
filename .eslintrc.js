@@ -22,6 +22,7 @@ module.exports = {
         "no-undef": [0],
         "no-console": [0],
         'indent': 'off',
+        "no-unused-vars": "off",
         // 4代表4个空格 1代表1倍缩进
         // 'vue/script-indent': ['error', 4, { 'baseIndent': 1 }],
         // 配置html 注意html没有第三个参数
