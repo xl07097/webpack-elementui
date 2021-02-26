@@ -27,12 +27,12 @@ export default {
             console.log('hook:deactivated')
             this.distroyWs();
         })
-        this.ws = new WebSocket("ws://122.51.129.51:8080/note/websocket/1");
+        this.ws = new WebSocket("ws://tomcat.zhiqiuge.com/note/websocket/1");
         const that = this;
         //打开事件
         this.ws.onopen = function() {
             console.log("Socket 已打开");
-            fetch("http://122.51.129.51:8080/note/socket/push/1?message=hello")
+            fetch("https://tomcat.zhiqiuge.com/note/socket/push/1?message=hello")
                 .then(data => data.text())
                 .then(data => {
                     console.log(data);
