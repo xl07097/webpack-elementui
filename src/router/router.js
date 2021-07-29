@@ -28,6 +28,15 @@ const routers = [
         },
         component: (resolve) => require(['@/views/Slot.vue'], resolve)
     },
+    {
+        path: '/mail/:id',
+        name: 'mail',
+        props: true,
+        meta: {
+            title: 'mail'
+        },
+        component: (resolve) => require(['@/views/SendMail.vue'], resolve)
+    },
     // {
     //     path: '/animation',
     //     meta: {

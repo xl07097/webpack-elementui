@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 let fetch = axios.create({
-    baseURL: 'http://localhost:9087/note/',
+    baseURL: 'https://tomcat.zhiqiuge.com/note/',
     timeout: 10000,
     withCredentials: true,
 })
