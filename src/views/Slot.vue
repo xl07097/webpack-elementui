@@ -1,5 +1,6 @@
 <template>
     <div>
+        <router-link to="/slot/1">11111</router-link>
         <Company :a="scope.a3">
             <template v-slot:header="scopes">
                 <header>[header]hahahaha {{ scopes.a3 }}</header>
@@ -48,6 +49,11 @@ export default {
             }
         };
     },
+    watch:{
+        id(){
+            // console.log('uo')
+        }
+    },
     methods:{
         sett(){
             console.log(90)
@@ -95,6 +101,7 @@ export default {
     },
     beforeRouteUpdate(to, from, next){
         console.log('beforeRouteUpdate');
+        console.log(this.id);
         next();
     },
     beforeRouteLeave(to, from, next){

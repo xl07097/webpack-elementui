@@ -1,5 +1,8 @@
 <template>
-    <div></div>
+    <div>
+        <button @click="lp">hha</button>
+        {{ko}}
+    </div>
 </template>
 
 <script>
@@ -7,7 +10,8 @@ export default {
     name: "ws",
     data() {
         return {
-            ws: ""
+            ws: "",
+            sa: 0
         };
     },
     methods:{
@@ -16,6 +20,16 @@ export default {
                  this.ws.close();
                 this.ws = "";
             }
+        },
+        lp(){
+            console.log(80);
+            this.sa = Math.random();
+        }
+    },
+    computed:{
+        ko(){
+            console.log(90);
+            return this.sa
         }
     },
     created() {
