@@ -1,6 +1,6 @@
 <template>
     <div class="index animated fadeInRight">
-        hahah {{ userCount }} {{ count }} {{test}} {{lp}}
+        hahah {{ userCount }} {{ count }}
         <el-button type="primary" @click="add">count</el-button>
         <el-button type="primary" @click="visible">visible</el-button>
         <span class="add" v-show="show">哈哈哈</span>
@@ -33,6 +33,9 @@ export default {
     beforeUpdate(){
         console.log('变更');
     },
+    updated(){
+        console.log('变更1');
+    },
     methods: {
         ...mapMutations(["add"]),
         visible() {
@@ -43,7 +46,10 @@ export default {
     mounted() {
         em.emit("show", "haha");
         setTimeout(() => {
-            this.test = 90
+            this.test = 90;
+            setTimeout(() => {
+                console.log(this.test) 
+            })
         }, 2000)
     },
     beforeMount(){

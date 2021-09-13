@@ -22,7 +22,7 @@ export default {
                 form.append("subject", "wuti");
                 form.append("content", "hahahahha");
                 for(let i = 0;i < file.length;i++){
-form.append('upfile', file[i]);
+                    form.append('upfile', file[i]);
                 }
                 
                 fetch("https://tomcat.zhiqiuge.com/note/mail/sendMailData",{
