@@ -12,7 +12,7 @@ import appHeader from '@/components/app-header';
 export default {
     name: "App",
     components:{
-appHeader
+        appHeader
     },
     created() {
         window.addEventListener("beforeunload", () => {
