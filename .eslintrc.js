@@ -4,7 +4,6 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    ecma2020: true,
   },
   extends: ["prettier"],
   globals: {
@@ -20,7 +19,6 @@ module.exports = {
   },
   plugins: ["vue", "prettier"],
   rules: {
-    "prettier/prettier": "error",
     "no-undef": [0],
     "no-console": [0], //禁止使用console
     indent: [2, 2],
