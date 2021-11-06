@@ -1,41 +1,49 @@
 const routers = [
     {
-        path: '/',
-        redirect: '/index'
+        path: "/",
+        redirect: "/excel"
     },
     {
-        path: '/index',
-        name: 'index',
+        path: "/index",
+        name: "index",
         meta: {
-            title: '首页'
+            title: "首页"
         },
-        component: (resolve) => require(['@/views/index.vue'], resolve)
+        component: resolve => require(["@/views/index.vue"], resolve)
     },
     {
-        path: '/ws',
-        name: 'ws',
+        path: "/ws",
+        name: "ws",
         meta: {
-            title: '首页'
+            title: "首页"
         },
-        component: (resolve) => require(['@/views/ws.vue'], resolve)
+        component: resolve => require(["@/views/ws.vue"], resolve)
     },
     {
-        path: '/slot/:id',
-        name: 'slot',
+        path: "/excel",
+        name: "excel",
+        meta: {
+            title: "首页"
+        },
+        component: resolve => require(["@/views/excel.vue"], resolve)
+    },
+    {
+        path: "/slot/:id",
+        name: "slot",
         props: true,
         meta: {
-            title: 'slot'
+            title: "slot"
         },
-        component: (resolve) => require(['@/views/Slot.vue'], resolve)
+        component: resolve => require(["@/views/Slot.vue"], resolve)
     },
     {
-        path: '/mail/:id',
-        name: 'mail',
+        path: "/mail/:id",
+        name: "mail",
         props: true,
         meta: {
-            title: 'mail'
+            title: "mail"
         },
-        component: (resolve) => require(['@/views/SendMail.vue'], resolve)
+        component: resolve => require(["@/views/SendMail.vue"], resolve)
     },
     // {
     //     path: '/animation',
@@ -45,9 +53,9 @@ const routers = [
     //     component: (resolve) => require(['@/components/Animation.vue'], resolve)
     // },
     {
-        path: '*',
-        name: '404',
-        redirect: '/index'
+        path: "*",
+        name: "404",
+        redirect: "/index"
     }
 ];
 
