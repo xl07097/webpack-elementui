@@ -1,76 +1,108 @@
 <template>
-    <div>
-        <button @click="lp">hha</button>
-        {{ko}}
+  <div class="resize">
+    <div class="outer">
+      <!--    <div class="inner"></div>-->
     </div>
+    <div class="flag"></div>
+  </div>
 </template>
 
 <script>
+const src = require('../assets/unit/default.png');
+const src1 = require('../assets/mifeng.jpg');
 export default {
-    name: "ws",
-    data() {
-        return {
-            ws: "",
-            sa: 0
-        };
+  name: 'ws',
+  data() {
+    return {
+      sa: 0,
+      img: '',
+    };
+  },
+  methods: {
+    loadItem() {
+      let co = document.createDocumentFragment();
+
+      for (let i = 1; i < 10; i++) {
+        let img = document.createElement('img');
+        img.className = 'inner';
+        img.src = src.default;
+        img.dataset.src = src1.default;
+        co.appendChild(img);
+      }
+      document.querySelector('.outer').appendChild(co);
     },
-    methods:{
-        distroyWs(){
-            if(this.ws){
-                 this.ws.close();
-                this.ws = "";
-            }
-        },
-        lp(){
-            console.log(80);
-            this.sa = Math.random();
+  },
+  mounted() {
+    console.log(src);
+
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        this.loadItem();
+        for (let entry of entries) {
+          // console.log(entry)
+          const container = entry.target;
+          if (entry.intersectionRatio > 0) {
+            container.src = container.dataset.src;
+            intersectionObserver.unobserve(container);
+          }
         }
-    },
-    computed:{
-        ko(){
-            console.log(90);
-            return this.sa
-        }
-    },
-    created() {
-        this.$on("hook:deactivated", () =>{
-            console.log('hook:deactivated')
-            this.distroyWs();
-        })
-        this.$on("hook:beforeDestroy", () =>{
-            console.log('hook:deactivated')
-            this.distroyWs();
-        })
-        this.ws = new WebSocket("ws://tomcat.zhiqiuge.com/note/websocket/1");
-        const that = this;
-        //打开事件
-        this.ws.onopen = function() {
-            console.log("Socket 已打开");
-            fetch("https://tomcat.zhiqiuge.com/note/socket/push/1?message=hello")
-                .then(data => data.text())
-                .then(data => {
-                    console.log(data);
-                });
-            that.ws.send("这是来自客户端的消息" + location.href + new Date());
-        };
+      },
+      {
+        // root: document.querySelector('body'),
+        rootMargin: '0px',
+        threshold: [0],
+      },
+    );
+    let co = document.createDocumentFragment();
 
-        //获得消息事件
-        this.ws.onmessage = function(msg) {
-            console.log(msg.data);
-            //发现消息进入    开始处理前端触发逻辑
-        };
-
-        //关闭事件
-        this.ws.onclose = function() {
-            console.log("Socket已关闭");
-        };
-
-        //发生了错误事件
-        this.ws.onerror = function() {
-            console.log("Socket发生了错误");
-            //此时可以尝试刷新页面
-        };
+    for (let i = 1; i < 10; i++) {
+      let img = document.createElement('img');
+      img.className = 'inner';
+      img.src = src.default;
+      img.dataset.src = src1.default;
+      co.appendChild(img);
     }
+    document.querySelector('.outer').appendChild(co);
+
+    // intersectionObserver.observe(document.querySelector('.flag'));
+    [].forEach.call(document.querySelectorAll('.inner'), (item) => {
+      intersectionObserver.observe(item);
+    });
+
+    // const resizeObserver = new ResizeObserver(entries => {
+    //   for (let entry of entries) {
+    //     const height = entry.target.getBoundingClientRect().height
+    //     console.log(height)
+    //     window.requestAnimationFrame(() => {
+    //       document.querySelector('.resize').style.width = height+ 'px';
+    //
+    //     })
+    //     // entry.target.style.height = Math.random()*200 + 'px';
+    //   }
+    // });
+    // resizeObserver.observe(document.querySelector('body'));
+  },
 };
 </script>
-<style lang="less"></style>
+<style lang="less">
+.outer {
+  width: 200px;
+}
+
+.flag {
+  height: 20px;
+}
+
+.inner {
+  display: block;
+  width: 100%;
+  background: #00c1c0;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.resize {
+  height: 200px;
+  border: 2px solid green;
+}
+</style>

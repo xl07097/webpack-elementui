@@ -1,8 +1,8 @@
-import SysModal from './SysModal';
+import StarModal from './StarModal';
 
 let myModal = {
-    install: function (Vue) {
-        Vue.component('SysModal', SysModal);
-    }
+  install: function (Vue) {
+    Vue.component('StarModal', StarModal);
+  },
 };
 export default myModal;

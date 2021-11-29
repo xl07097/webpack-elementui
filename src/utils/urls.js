@@ -1,4 +1,3 @@
 export const baseURL = '';
 
-export const loginapi = 'user/userLogin';
-
+export const loginApi = 'user/userLogin';
