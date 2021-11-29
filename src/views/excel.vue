@@ -15,26 +15,31 @@ export default {
     exportExcel() {
       let data = [
         {
-          name: "jack",
-          age: "22",
+          name: "John Smith",
+          dateOfBirth: "John Smith",
+          cost: 1800,
+          paid: true,
         },
         {
-          name: "tom",
-          age: "30",
+          name: "Alice Brown",
+          dateOfBirth: "John Smith",
+          cost: 2599.99,
+          paid: false,
         },
       ];
 
       const schemas = [
         {
-          column: "姓名",
-          value: (row) => row.name,
+          column: "Name",
+          type: String,
+          width: 90,
+          value: (student) => student.name,
         },
         {
-          column: "年龄",
-          value: (row) => row.age,
+          column: "Date of Birth",
+          value: (student) => student.dateOfBirth,
         },
       ];
-
       writeXlsxFile(data, {
         schema: schemas,
         fileName: "file.xlsx",
