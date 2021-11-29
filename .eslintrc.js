@@ -1,29 +1,29 @@
 module.exports = {
   root: true,
-  parser: "babel-eslint",
+  parser: 'babel-eslint',
   env: {
     browser: true,
     es6: true,
     node: true,
   },
-  extends: ['plugin:vue/essential', 'prettier'],
+  extends: ['vue', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
     ecmaVersion: 2020,
-    sourceType: "module",
+    sourceType: 'module',
     ecmaFeatures: {
       jsx: true,
     },
   },
-  plugins: ["vue", "prettier"],
+  plugins: ['vue', 'prettier'],
   rules: {
-    "no-undef": [0],
-    "no-console": [0], //禁止使用console
+    'no-undef': [0],
+    'no-console': [0], //禁止使用console
     indent: [2, 2],
-    quotes: [1, "single"],
+    quotes: [1, 'single'],
     // "no-unused-vars": [2, { vars: "all", args: "after-used" }], //不能有声明后未被使用的变量或参数
     // "no-alert": 0, //禁止使用alert confirm prompt
     // "no-array-constructor": 2, //禁止使用数组构造器
