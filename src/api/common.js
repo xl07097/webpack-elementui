@@ -1,7 +1,5 @@
-import fetch from "../utils/fetch";
+import { uploadPost } from '@/http/request.js';
 
-export function uploadfile(url, formdata) {
-    return fetch.post(url, data, {
-    
-    })
+export function uploadFile(url, formData) {
+  return uploadPost(url, formData, {});
 }

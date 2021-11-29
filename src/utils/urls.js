@@ -1,5 +1,3 @@
-export const baseURL = "";
+export const baseURL = '';
 
-export const loginapi = "user/userLogin";
-
-let apol;
+export const loginApi = 'user/userLogin';

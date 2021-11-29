@@ -5,10 +5,10 @@ module.exports = {
     browser: true,
     es6: true,
   },
-  extends: ["prettier"],
+  extends: ['plugin:vue/essential', 'prettier'],
   globals: {
-    Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
   parserOptions: {
     ecmaVersion: 2020,
