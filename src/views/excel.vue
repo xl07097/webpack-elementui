@@ -14,13 +14,13 @@ export default {
       const data = [
         {
           name: 'John Smith',
-          dateOfBirth: new Date(),
+          dateOfBirth: 'John Smith',
           cost: 1800,
           paid: true,
         },
         {
           name: 'Alice Brown',
-          dateOfBirth: new Date(),
+          dateOfBirth: 'John Smith',
           cost: 2599.99,
           paid: false,
         },
@@ -28,17 +28,20 @@ export default {
       const schema = [
         {
           column: 'Name',
+          type: String,
+          width: 90,
           value: (student) => student.name,
         },
         {
-          column: 'Cost',
-          value: (student) => student.cost,
+          column: 'Date of Birth',
+          value: (student) => student.dateOfBirth,
         },
       ];
-
-      await writeXlsxFile(data, {
-        schema,
+      writeXlsxFile(data, {
+        schema: schemas,
         fileName: 'file.xlsx',
+      }).then((res) => {
+        console.log(res);
       });
     },
   },
