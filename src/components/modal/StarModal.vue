@@ -23,7 +23,11 @@
             <img style="margin-top: 15px" :src="maxOrNormal" alt="fullscreen" />
           </li>
           <li class="close" @click="close">
-            <img style="margin-top: 15px; width: 11px" src="../assets/common/close.png" alt="close" />
+            <img
+              style="margin-top: 15px; width: 11px"
+              src="../assets/common/close.png"
+              alt="close"
+            />
           </li>
         </ul>
       </div>
@@ -33,84 +37,84 @@
 </template>
 
 <script>
-  export default {
-    name: 'StarModal',
-    props: {
-      width: {
-        type: String,
-        default: '940px',
-      },
-      value: {
-        type: Boolean,
-        default: false,
-      },
-      title: {
-        type: String,
-        default: '',
-      },
-      draggable: {
-        type: Boolean,
-        default: false,
-      },
-      fullScreen: {
-        type: Boolean,
-        default: false,
-      },
-      transfer: {
-        type: Boolean,
-        default: true,
-      },
-      closeOnly: {
-        type: Boolean,
-        default: false,
-      },
-      bodyColor: {
-        type: Boolean,
-        default: false,
-      },
-      styles: {
-        type: Object,
-        default() {
-          return {};
-        },
+export default {
+  name: 'StarModal',
+  props: {
+    width: {
+      type: String,
+      default: '940px',
+    },
+    value: {
+      type: Boolean,
+      default: false,
+    },
+    title: {
+      type: String,
+      default: '',
+    },
+    draggable: {
+      type: Boolean,
+      default: false,
+    },
+    fullScreen: {
+      type: Boolean,
+      default: false,
+    },
+    transfer: {
+      type: Boolean,
+      default: true,
+    },
+    closeOnly: {
+      type: Boolean,
+      default: false,
+    },
+    bodyColor: {
+      type: Boolean,
+      default: false,
+    },
+    styles: {
+      type: Object,
+      default() {
+        return {};
       },
     },
-    data() {
-      return {
-        dragBack: false,
-        fullScreenBack: this.fullScreen,
-        draggableBack: this.draggable,
-        maxOrNormal: require('../assets/common/full_screen.png'),
-      };
+  },
+  data() {
+    return {
+      dragBack: false,
+      fullScreenBack: this.fullScreen,
+      draggableBack: this.draggable,
+      maxOrNormal: require('../assets/common/full_screen.png'),
+    };
+  },
+  mounted() {},
+  methods: {
+    close() {
+      this.$emit('on-cancel');
     },
-    mounted() {},
-    methods: {
-      close() {
-        this.$emit('on-cancel');
-      },
-      minimize() {
-        this.$emit('on-min');
-      },
-      toggleMax() {
-        this.fullScreenBack = !this.fullScreenBack;
-        if (this.fullScreenBack) {
-          this.maxOrNormal = require('../assets/common/normal.png');
-        } else {
-          this.maxOrNormal = require('../assets/common/full_screen.png');
+    minimize() {
+      this.$emit('on-min');
+    },
+    toggleMax() {
+      this.fullScreenBack = !this.fullScreenBack;
+      if (this.fullScreenBack) {
+        this.maxOrNormal = require('../assets/common/normal.png');
+      } else {
+        this.maxOrNormal = require('../assets/common/full_screen.png');
+      }
+      if (this.draggableBack) {
+        this.draggableBack = false;
+        this.dragBack = true;
+      } else {
+        if (this.dragBack) {
+          this.draggableBack = true;
+          this.dragBack = false;
         }
-        if (this.draggableBack) {
-          this.draggableBack = false;
-          this.dragBack = true;
-        } else {
-          if (this.dragBack) {
-            this.draggableBack = true;
-            this.dragBack = false;
-          }
-        }
-      },
+      }
     },
-    created() {},
-  };
+  },
+  created() {},
+};
 </script>
 
 <style lang="scss">

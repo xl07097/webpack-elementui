@@ -1,8 +1,8 @@
 <template>
   <div>
-    <!--    <FormRender v-model='searchData' :fields='fields'></FormRender>-->
+    <FormRender v-model="searchData" :fields="fields"></FormRender>
 
-    <el-button @click='getValue'>查询</el-button>
+    <el-button @click="getValue">查询</el-button>
   </div>
 </template>
 
@@ -81,14 +81,12 @@ export default {
     },
   },
   mounted() {
-
     // const local = storage.createStore(locals);
     // console.log(local);
     storage.set('name', {
       name: 'jack',
       age: 20,
     });
-
   },
 };
 </script>

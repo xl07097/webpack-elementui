@@ -9,20 +9,20 @@
 <script>
 // import appHeader from '@/components/app-header';
 
-  export default {
-    name: 'App',
-    components: {
+export default {
+  name: 'App',
+  components: {
     // appHeader
-    },
-    created() {
-      window.addEventListener('beforeunload', () => {
-        sessionStorage.setItem('tmpData', '909090');
-      });
+  },
+  created() {
+    window.addEventListener('beforeunload', () => {
+      sessionStorage.setItem('tmpData', '909090');
+    });
 
-      console.log(sessionStorage.getItem('tmpData'));
-      sessionStorage.removeItem('tmpData');
-    },
-  };
+    console.log(sessionStorage.getItem('tmpData'));
+    sessionStorage.removeItem('tmpData');
+  },
+};
 </script>
 <style lang="less">
 @import 'animate.css';

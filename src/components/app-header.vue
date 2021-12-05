@@ -8,9 +8,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'appHeader'
-  };
+export default {
+  name: 'appHeader',
+};
 </script>
 
 <style lang="less" scoped>

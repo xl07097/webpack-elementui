@@ -13,9 +13,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'Animation',
-  };
+export default {
+  name: 'Animation',
+};
 </script>
 
 <style lang="scss">

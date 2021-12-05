@@ -16,8 +16,8 @@ export default {
   render(h) {
     const tag = 'Input';
     switch (this.tag) {
-      case 'input':
-        break;
+    case 'input':
+      break;
     }
     return h(tag, {
       props: this.props,
