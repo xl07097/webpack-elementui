@@ -1,29 +1,29 @@
 module.exports = {
-  'root': true,
-  'env': {
-    'browser': true,
-    'es6': true
+  root: true,
+  env: {
+    browser: true,
+    es6: true,
   },
-  'extends': ['vue', 'prettier'],
-  'globals': {
-    'Atomics': 'readonly',
-    'SharedArrayBuffer': 'readonly'
+  extends: ['plugin:vue/essential', 'eslint:recommended', 'prettier'],
+  globals: {
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
   },
-  'parserOptions': {
-    'ecmaVersion': 2020,
-    'parser': 'babel-eslint',
-    'sourceType': 'module',
-    'ecmaFeatures': {
-      'jsx': true
-    }
+  parserOptions: {
+    ecmaVersion: 2020,
+    parser: 'babel-eslint',
+    sourceType: 'module',
+    ecmaFeatures: {
+      jsx: true,
+    },
   },
-  'plugins': ['vue', 'prettier'],
-  'rules': {
+  plugins: ['vue', 'prettier'],
+  rules: {
     'no-undef': [0],
-    'no-console': [0], //禁止使用console
-    'indent': [2, 2],
-    'quotes': [1, 'single'],
-    'no-unused-vars': [2, { 'vars': 'all', 'args': 'after-used' }] //不能有声明后未被使用的变量或参数
+    'no-console': [0], // 禁止使用console
+    indent: [2, 2],
+    quotes: [2, 'single'],
+    'no-unused-vars': [2, { vars: 'all', args: 'after-used' }], // 不能有声明后未被使用的变量或参数
     // 'no-alert': 0, //禁止使用alert confirm prompt
     // 'no-array-constructor': 2, //禁止使用数组构造器
     // 'no-bitwise': 0, //禁止使用按位运算符
@@ -195,5 +195,5 @@ module.exports = {
     // 'wrap-iife': [2, 'inside'], //立即执行函数表达式的小括号风格
     // 'wrap-regex': 0, //正则表达式字面量用小括号包起来
     // 'yoda': [2, 'never'] //禁止尤达条件
-  }
+  },
 };

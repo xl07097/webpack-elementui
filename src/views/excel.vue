@@ -29,7 +29,7 @@ export default {
         {
           column: 'Name',
           type: String,
-          width: 90,
+          width: 10,
           value: (student) => student.name,
         },
         {
@@ -38,7 +38,7 @@ export default {
         },
       ];
       writeXlsxFile(data, {
-        schema: schemas,
+        schema: schema,
         fileName: 'file.xlsx',
       }).then((res) => {
         console.log(res);

@@ -1,4 +1,4 @@
-import $http from './base';
+import $http from './fetch';
 import { downloadHandle } from './httpHandle.js';
 
 /**
@@ -31,10 +31,10 @@ export const get = (url, params = {}, config = {}) => {
  */
 export const post = (url, data = {}, config = {}) => {
   return $http.post(url, JSON.stringify(data), {
+    ...config,
     headers: {
       'Content-Type': 'application/json',
     },
-    ...config,
   });
 };
 
@@ -71,11 +71,11 @@ export const downloadGet = (url, params = {}, config = {}) => {
   return $http
     .get(url, {
       params,
+      ...config,
       responseType: 'blob',
       headers: {
         'Content-Type': 'application/json',
       },
-      ...config,
     })
     .then(downloadHandle);
 };
