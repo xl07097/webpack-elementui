@@ -94,11 +94,6 @@
   "jshintConfig": {
     "esversion": 9
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "src/**/*.{js,vue}": [
       "prettier --write",

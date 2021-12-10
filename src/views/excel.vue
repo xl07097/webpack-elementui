@@ -1,5 +1,14 @@
 <template>
-  <el-button @click="exportExcel">导出</el-button>
+  <div>
+    <el-button @click="exportExcel">导出</el-button>
+    <div class="xl-card">
+      <div class="xl-card-img"></div>
+      <div class="xl-card-content">
+        <div class="xl-card-title">ha标题</div>
+        <div class="xl-card-desc">描述</div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -29,7 +38,7 @@ export default {
         {
           column: 'Name',
           type: String,
-          width: 10,
+          width: 12,
           value: (student) => student.name,
         },
         {
@@ -37,15 +46,36 @@ export default {
           value: (student) => student.dateOfBirth,
         },
       ];
-      writeXlsxFile(data, {
+      await writeXlsxFile(data, {
         schema: schema,
         fileName: 'file.xlsx',
-      }).then((res) => {
-        console.log(res);
       });
     },
   },
 };
 </script>
 
-<style></style>
+<style lang="less">
+.xl-card {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 220px;
+  height: 66px;
+  border: 1px solid #eee;
+  padding: 6px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 10%);
+  cursor: pointer;
+  .xl-card-content {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  .xl-card-title {
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .xl-card-desc {
+    font-size: 12px;
+  }
+}
+</style>

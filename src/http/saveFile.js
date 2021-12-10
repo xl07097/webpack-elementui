@@ -30,8 +30,13 @@ export const saveFile = (blob, filename) => {
     a.href = href;
     a.download = filename;
     document.body.appendChild(a);
-    let evt = document.createEvent('MouseEvents');
-    evt.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    let evt = new MouseEvent('click', {
+      bubbles: false,
+      cancelable: true,
+      view: window,
+    });
+    // let evt = document.createEvent('MouseEvents');
+    // evt.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(evt);
     window.URL.revokeObjectURL(href);
     setTimeout(() => {

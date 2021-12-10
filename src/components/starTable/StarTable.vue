@@ -1,141 +1,136 @@
 <template>
-  <div class='star-table-wrap'>
-    <div class='operation'>
-      <div class='left-btn'>
-        <slot class='left'>
-          <template v-for='(button, lbIndex) in leftButton'>
+  <div class="sh-table-wrap">
+    <div class="operation">
+      <div class="left-btn">
+        <slot name="left">
+          <template v-for="(item, opIndex) in operationFilter">
             <ElButton
-              :key='lbIndex'
-              :type='button.type'
-              size='small'
-              @click='operationFun(button.prop)'
+              v-if="item.title === '删除' || item.title === '废弃'"
+              :key="item.prop"
+              type="danger"
+              plain
+              size="small"
+              @click="operationFun(item.prop, item.state, item.menu)"
             >
-              {{ button.title }}
+              {{ item.title }}
+            </ElButton>
+            <ElButton
+              v-else-if="opIndex === 0 || item.prop == 'exportTable'"
+              :key="item.prop"
+              type="primary"
+              size="small"
+              @click="operationFun(item.prop, item.state, item.menu)"
+            >
+              {{ item.title }}
+            </ElButton>
+            <ElButton
+              v-else
+              :key="item.prop"
+              size="small"
+              @click="operationFun(item.prop, item.state, item.menu)"
+            >
+              {{ item.title }}
             </ElButton>
           </template>
+          <div v-if="!!tip" class="table-tip"><i class="el-icon-info" />&nbsp;&nbsp;{{ tip }}</div>
         </slot>
-        <slot name='leftAction' />
+        <slot name="leftAction" />
       </div>
-      <div class='right-btn'>
-        <slot name='operation' />
-
-        <template v-for='(button, rbIndex) in rightButton'>
-          <ElButton
-            :key='rbIndex'
-            :type='button.type'
-            size='small'
-            @click='operationFun(button.prop)'
-          >
-            {{ button.title }}
-          </ElButton>
-        </template>
+      <div class="right-btn">
+        <slot name="operation" />
+        <div class="oper-right">
+          <template v-for="(item, indexs) in getOperationExportExcel">
+            <i
+              :key="indexs"
+              class="iconfont icon icon-daochu"
+              @click="operationFun(item.prop, item.state, item.menu)"
+            />
+          </template>
+        </div>
       </div>
     </div>
-    <div ref='shTable' class='star-table'>
+    <div ref="shTable" class="sh-table">
       <VxeTable
-        ref='tableRef'
-        :data='tableData'
-        :max-height='clientHeight'
+        ref="tableRef"
+        :data="tableData"
+        :max-height="clientHeight"
         stripe
-        :size='size'
-        :align='align'
-        :show-overflow='showOverflow'
+        :size="size"
+        :align="align"
+        :show-overflow="showOverflow"
         highlight-hover-row
-        :show-footer='showFooter'
-        :footer-method='footerMethod'
-        :show-footer-overflow='showFooterOverflow'
-        @checkbox-change='selectionChange'
-        @checkbox-all='selectionChange'
+        :show-footer="showFooter"
+        :footer-method="footerMethod"
+        :show-footer-overflow="showFooterOverflow"
+        :tooltip-config="{
+          theme: tooltipEffect,
+          enterable: true,
+        }"
+        @checkbox-change="selectionChange"
+        @checkbox-all="selectionChange"
       >
         <VxeColumn
-          v-if='index'
-          type='seq'
-          fixed='left'
-          title='序号'
-          align='center'
-          width='60'
+          v-if="index"
+          key="seqIndex"
+          type="seq"
+          fixed="left"
+          title="序号"
+          align="center"
+          width="60"
         />
         <VxeColumn
-          v-if='selection'
-          fixed='left'
-          type='checkbox'
-          title=''
-          align='center'
-          width='60'
+          v-if="selection"
+          key="checkbox"
+          fixed="left"
+          type="checkbox"
+          title=""
+          align="center"
+          width="60"
         />
         <VxeColumn
-          v-if='showAction'
-          fixed='left'
-          title='操作'
-          :width='actionWidth'
-          align='center'
+          v-if="showAction"
+          key="actionWidth"
+          fixed="left"
+          title="操作"
+          :width="actionWidth"
+          align="center"
         >
-          <template v-slot='{ row }'>
-            <slot name='action' :row='row'>
-              <div class='erp-table-edit'>
-                <span
-                  v-for='(i, idx) in tablebutton'
-                  v-show='!i.if_state && functionState(i.prop, row)'
-                  :key='idx'
-                  :class='i.class'
-                  @click='buttonFun(row, i.prop, i.state)'
-                >
-                  {{ i.title }}
-                </span>
-              </div>
-            </slot>
+          <template v-slot="{ row, rowIndex }">
+            <div class="erp-table-edit">
+              <slot name="action" :row="row" :rowIndex="rowIndex"> </slot>
+            </div>
           </template>
         </VxeColumn>
         <VxeColumn
-          v-for='column of tableColumn'
-          :key='column.prop'
-          :title='column.label'
-          :field='column.prop'
-          min-width='140px'
-          :show-overflow='column.tooltip'
-          v-bind='column'
+          v-for="column of tableColumn"
+          :key="column.prop"
+          :title="column.label"
+          :field="column.prop"
+          min-width="140px"
+          :show-overflow="column.tooltip"
+          v-bind="column"
         >
-          <template v-if='column.filer' v-slot='{ row }'>
-            <div class='table-text'>
-              <slot :name='column.prop' :row='row' :column='column'>
-                {{ formatterText(column.filer, row, column.prop) }}
-              </slot>
-            </div>
-          </template>
-          <template v-else-if='!column.tooltip' v-slot='{ row }'>
-            <div class='table-text'>
-              {{ row[column.prop] }}
-            </div>
-          </template>
         </VxeColumn>
       </VxeTable>
     </div>
-
-    <div class='star-table-pagination'>
+    <div class="sh-table-pagination">
       <ElPagination
-        v-if='pageState'
-        :current-page='pageNo'
-        :page-sizes='pageParms.sizes'
-        :page-size.sync='pageSize'
-        :layout='pageParms.layout'
-        :total='total'
-        @size-change='sizeChange'
-        @current-change='currentChange'
+        v-if="pageState"
+        :current-page="pageNo"
+        :page-sizes="pageParms.sizes"
+        :page-size.sync="pageSize"
+        :layout="pageParms.layout"
+        :total="total"
+        @size-change="sizeChange"
+        @current-change="currentChange"
       />
     </div>
-    <!--    <ShowFiled :dialog-visible.sync='dialogVisible' :title='columns' @updateColumn='updateColumn' />-->
   </div>
 </template>
 
 <script>
-// import ShowFiled from './ShowFiled.vue';
-// import excel from '../../config/excel';
-
 export default {
-  name: 'StarTable',
-  components: {
-    // ShowFiled,
-  },
+  name: 'StarTables',
   props: {
     // 是否显示序号
     index: {
@@ -345,6 +340,10 @@ export default {
       type: [Boolean, String], // dark/light
       default: 'tooltip',
     },
+    fileName: {
+      type: String,
+      default: '',
+    },
     // sumText: {
     //   type: String,
     //   default: '合计',
@@ -380,15 +379,11 @@ export default {
       pageSize: this.$store.getters.get_page_parms.size,
       pageThrottle: false,
       selectionList: [],
-      dialogVisible: false,
       clientHeight: 'auto',
       tableColumn: [],
     };
   },
   computed: {
-    getChangeHeight() {
-      return this.$store.getters.get_change_height;
-    },
     pageParms() {
       return this.$store.getters.get_page_parms;
     },
@@ -405,15 +400,15 @@ export default {
       }
     },
     // table 上方功能按钮
-    leftButton() {
-      return this.getOperationBtn.filter(item => this.functionState(item.prop, item));
+    operationFilter() {
+      return this.getOperationBtn.filter((item) => this.functionState(item.prop, item));
     },
     getOperationBtn() {
       if (this.operation === false) {
         if (this.getAuthority.authority.operation === void 0) {
           return [];
         }
-        return this.getAuthority.authority.operation.filter(e => e.prop !== 'exportExcel');
+        return this.getAuthority.authority.operation.filter((e) => e.prop !== 'exportExcel');
       } else {
         return this.operation;
       }
@@ -424,25 +419,16 @@ export default {
         if (operations === void 0) {
           return [];
         }
-        return operations.filter(e => e.prop === 'exportExcel');
+        return operations.filter((e) => e.prop === 'exportExcel');
       } else {
         return this.operation;
       }
     },
     getOperationExportExcel() {
-      return this.getOperationExport.filter(item => item.prop === 'exportExcel');
-    },
-    publicHeight() {
-      return this.$store.getters.get_height.max;
+      return this.getOperationExport.filter((item) => item.prop === 'exportExcel');
     },
   },
   watch: {
-    getChangeHeight() {
-      this.getTableHeight();
-    },
-    publicHeight() {
-      this.getTableHeight();
-    },
     pageIndex(newVal) {
       if (newVal !== 0) {
         this.pageNo = newVal;
@@ -463,9 +449,6 @@ export default {
       });
     },
   },
-  mounted() {
-    this.getTableHeight();
-  },
   methods: {
     selectionChange({ records }) {
       this.selectionList = Object.freeze(records);
@@ -476,8 +459,8 @@ export default {
       if (data.length === 0) {
         return [sum];
       }
-      this.summaryFields.forEach(field => {
-        let index = columns.findIndex(item => item.property === field.prop);
+      this.summaryFields.forEach((field) => {
+        let index = columns.findIndex((item) => item.property === field.prop);
         let count = 0;
         if (field.method) {
           sum[index] = field.method(data);
@@ -527,16 +510,12 @@ export default {
       return true;
     },
     // table上方按钮函数
-    operationFun(prop) {
-      this.$emit('actionMethod', prop, this.selectionList);
+    operationFun(prop, state) {
+      this.$emit('actionMethod', prop, this.selectionList, state);
     },
     // table内部按钮函数
     buttonFun(val, prop) {
       this.$emit('actionMethod', prop, val);
-    },
-    updateColumn(column) {
-      this.tableColumn = this.columns.filter(item => column.includes(item.label));
-      this.refreshColumn();
     },
     // 刷新 列， 去除错位问题
     refreshColumn() {
@@ -561,51 +540,41 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import '~vxe-table/styles/index.scss';
-
-.star-table-wrap {
+.sh-table-wrap {
   padding: 0 10px;
-
-  .star-table {
+  .sh-table {
     .el-table {
       color: #444444;
-
       thead {
         color: #444444;
       }
-
       th.gutter {
         width: 18px !important;
       }
     }
   }
-
   .vxe-table {
     font-family: Microsoft YaHei, STXihei, '\534E\6587\7EC6\9ED1', '\9ED1\4F53', serif !important;
   }
-
   .vxe-table thead th {
     background-color: #ebf5ff;
   }
-
   .vxe-table tfoot .vxe-cell--item {
     padding-left: 6px;
   }
-
   .vxe-table--render-default.vxe-editable.size--medium .vxe-body--column,
   .vxe-table--render-default.size--medium .vxe-header--column.col--ellipsis,
   .vxe-table--render-default.size--medium .vxe-body--column.col--ellipsis,
   .vxe-table--render-default.size--medium .vxe-footer--column.col--ellipsis {
     height: 46px;
   }
-
   .vxe-table--render-default.size--medium .vxe-header--column.col--ellipsis > .vxe-cell,
   .vxe-table--render-default.size--medium .vxe-body--column.col--ellipsis > .vxe-cell,
   .vxe-table--render-default.size--medium .vxe-footer--column.col--ellipsis > .vxe-cell {
     max-height: 46px;
   }
-
   // .vxe-table--render-default.size--medium .vxe-header--column:not(.col--ellipsis), .vxe-table--render-default.size--medium .vxe-body--column:not(.col--ellipsis), .vxe-table--render-default.size--medium .vxe-footer--column:not(.col--ellipsis){
   //   padding: 0!important;
   // }
@@ -614,27 +583,36 @@ export default {
     color: #444;
     // padding: 10px;
   }
-
   .vxe-table--render-default .vxe-cell .erp-table-edit {
     white-space: normal !important;
   }
-
-  .star-table-pagination {
+  .sh-table-pagination {
     padding: 10px 0;
   }
-
   .operation {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     position: relative;
     z-index: 1000;
     height: 60px;
     padding: 14px 10px 14px;
-  }
 
+    .el-button--danger.is-plain {
+      color: #f42430;
+      background: #fff;
+      border-color: #f42430;
+      //opacity: 0.3;
+    }
+  }
   .right-btn {
     display: flex;
     align-items: center;
+    .oper-right {
+      > i {
+        margin-left: 20px;
+      }
+    }
   }
 }
 </style>

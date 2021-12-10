@@ -37,9 +37,7 @@ export default {
 
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
-        this.loadItem();
         for (let entry of entries) {
-          // console.log(entry)
           const container = entry.target;
           if (entry.intersectionRatio > 0) {
             container.src = container.dataset.src;
@@ -48,39 +46,16 @@ export default {
         }
       },
       {
-        // root: document.querySelector('body'),
         rootMargin: '0px',
         threshold: [0],
-      },
+      }
     );
-    let co = document.createDocumentFragment();
+    this.loadItem();
 
-    for (let i = 1; i < 10; i++) {
-      let img = document.createElement('img');
-      img.className = 'inner';
-      img.src = src.default;
-      img.dataset.src = src1.default;
-      co.appendChild(img);
-    }
-    document.querySelector('.outer').appendChild(co);
-
-    // intersectionObserver.observe(document.querySelector('.flag'));
+    intersectionObserver.observe(document.querySelector('.flag'));
     [].forEach.call(document.querySelectorAll('.inner'), (item) => {
       intersectionObserver.observe(item);
     });
-
-    // const resizeObserver = new ResizeObserver(entries => {
-    //   for (let entry of entries) {
-    //     const height = entry.target.getBoundingClientRect().height
-    //     console.log(height)
-    //     window.requestAnimationFrame(() => {
-    //       document.querySelector('.resize').style.width = height+ 'px';
-    //
-    //     })
-    //     // entry.target.style.height = Math.random()*200 + 'px';
-    //   }
-    // });
-    // resizeObserver.observe(document.querySelector('body'));
   },
 };
 </script>
