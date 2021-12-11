@@ -2,12 +2,11 @@
   "root": true,
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
   "extends": [
-    "plugin:vue/essential",
-    "eslint:recommended",
-    "prettier"
+    "plugin:vue/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -22,8 +21,9 @@
     }
   },
   "plugins": [
+    "prettier",
     "vue",
-    "prettier"
+    "html"
   ],
   "rules": {
     "no-undef": [
@@ -39,6 +39,9 @@
     "quotes": [
       2,
       "single"
+    ],
+    "vue/script-setup-uses-vars": [
+      0
     ],
     "no-unused-vars": [
       1,

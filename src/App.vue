@@ -1,18 +1,16 @@
 <template>
   <div>
-    <!-- <app-header /> -->
-    <!-- <keep-alive :max="10"> -->
-    <router-view></router-view>
-    <!-- </keep-alive> -->
+    <app-header />
+    <router-view />
   </div>
 </template>
 <script>
-// import appHeader from '@/components/app-header';
+import appHeader from '@/components/app-header';
 
 export default {
   name: 'App',
   components: {
-    // appHeader
+    appHeader,
   },
   created() {
     window.addEventListener('beforeunload', () => {

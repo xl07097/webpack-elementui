@@ -1,6 +1,6 @@
 <template>
   <div class="wrap">
-    <div class="inner"></div>
+    <div class="inner" />
   </div>
 </template>
 
@@ -11,21 +11,21 @@ export default {
   name: 'SendMail',
   props: {
     id: {
-      type: String,
+      type: [String, Number],
       default: '',
     },
   },
   data() {
     return {};
   },
-  methods: {
-    send() {},
-  },
   mounted() {
     console.log('window窗口高度：%s', window.innerHeight);
     console.log('html元素高度：%s', document.querySelector('html').clientHeight);
     console.log('html元素offset高度：%s', document.querySelector('html').offsetHeight);
     console.log('html元素offset高度：%s', document.querySelector('html').offsetTop);
+  },
+  methods: {
+    send() {},
   },
 };
 </script>
