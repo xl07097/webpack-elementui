@@ -3,7 +3,6 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   entry: {
@@ -65,7 +64,6 @@ module.exports = {
       template: path.resolve(__dirname, '../public/index.html'),
       // inject: true
     }),
-    // new BundleAnalyzerPlugin(),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin({
@@ -74,7 +72,7 @@ module.exports = {
   ],
   optimization: {
     splitChunks: {
-      chunks: 'async',
+      chunks: 'initial',
       minSize: 20000,
       minChunks: 1,
       maxAsyncRequests: 5,
@@ -84,20 +82,20 @@ module.exports = {
         vendor: {
           name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
-          chunks: 'all',
+          // chunks: 'all',
           priority: -10,
         },
         common: {
           name: 'common',
           test: /[\\/]vue|vue-router|vuex[\\/]/,
-          chunks: 'all',
+          // chunks: 'all',
           priority: 1,
         },
         element: {
           name: 'element',
           test: /[\\/]element-ui[\\/]/,
-          chunks: 'all',
-          priority: 0,
+          // chunks: 'all',
+          priority: 5,
         },
       },
     },

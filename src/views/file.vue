@@ -1,5 +1,5 @@
 <template>
-  <div class="wrap"></div>
+  <div class="wrap">hahahah</div>
 </template>
 
 <script>
@@ -10,6 +10,11 @@ export default {
       dateList: [],
       active: 0,
     };
+  },
+  mounted() {
+    Promise.allSettled([]).then(() => {
+      console.log(90);
+    });
   },
 };
 </script>
