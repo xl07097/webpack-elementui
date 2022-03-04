@@ -1,20 +1,25 @@
 <template>
-  <el-form ref="formRender" :model="currentData" :rules="rules" inline>
+  <el-form
+    ref="formRender"
+    :model="currentData"
+    :rules="rules"
+    :label-width="labelWidth"
+    inline
+  >
     <el-form-item
       v-for="field in fields"
-      :key="field.key"
+      :key="field.prop"
       :label="field.label"
-      :label-width="field.labelWidth || labelWidth"
-      :prop="field.key"
+      :label-width="field.labelWidth"
+      :prop="field.prop"
     >
       <item-render
+        v-model="currentData[field.prop]"
         :tag="field.type"
-        v-model="currentData[field.key]"
-        :field="field.key"
+        :field="field.prop"
         :label="field.label"
         :config="field.config"
-      >
-      </item-render>
+      />
     </el-form-item>
   </el-form>
 </template>
@@ -22,6 +27,7 @@
 import ItemRender from './ItemRender';
 
 export default {
+  name: 'FormRender',
   components: { ItemRender },
   props: {
     value: {
@@ -43,6 +49,13 @@ export default {
         return [];
       },
     },
+    labelWidth: {
+      type: String,
+      default: '100px',
+    },
+  },
+  data() {
+    return {};
   },
   computed: {
     currentData: {
@@ -53,11 +66,6 @@ export default {
         this.$emit('input', val);
       },
     },
-  },
-  data() {
-    return {
-      labelWidth: '100px',
-    };
   },
 };
 </script>

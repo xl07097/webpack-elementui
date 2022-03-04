@@ -11,7 +11,7 @@ export default {
       default: '',
     },
     value: {
-      type: [String, Boolean, Object, Array, Number],
+      type: [String, Boolean, Object, Array, Number, Date],
       default() {
         return '';
       },
@@ -31,32 +31,67 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      dateFormat: {
+        year: 'yyyy',
+        month: 'yyyy-MM',
+        date: 'yyyy-MM-dd',
+        dates: 'yyyy-MM-dd',
+        // week: 'yyyy 第 WW 周'
+      },
+    };
   },
+  // computed:{
+  //   currentValue:{
+  //     get(){
+  //       return this.value
+  //     },
+  //     set(val){
+  //       console.log(val)
+  //       this.$emit('input', val)
+  //     }
+  //   }
+  // },
   methods: {
     renderInput(h) {
-      return <el-input value={this.value} on-input={this.input} placeholder={`请输入${this.label}`} />;
+      return (
+        <el-input value={this.value} on-input={this.input} placeholder={`请输入${this.label}`} />
+      );
     },
     renderSelect(h) {
       const { lists = [] } = this.config;
       return (
         <el-select
           value={this.value}
-          on-change={this.selectChange}
-          on-clear={this.selectClear}
+          on-change={this.input}
           clearable
           placeholder={`请选择${this.label}`}
         >
-          {lists.map((list, index) => {
-            return <el-option key={index} label={list.label} value={list.value} />;
+          {lists.map((list) => {
+            return <el-option key={list.value} label={list.label} value={list.value} />;
           })}
         </el-select>
+      );
+    },
+    renderDate(h) {
+      const { tag, dateFormat } = this;
+      return (
+        <el-date-picker
+          value={this.value}
+          type={tag}
+          editable={false}
+          format={dateFormat[tag]}
+          valueFormat={dateFormat[tag]}
+          onInput={this.input}
+          placeholder={`请选择${this.label}`}
+        ></el-date-picker>
       );
     },
     input(value) {
       this.$emit('input', value);
     },
-    selectChange(value) {
+    change(value) {
+      console.log(value);
       this.$emit('input', value);
     },
     selectClear() {
@@ -64,11 +99,24 @@ export default {
     },
   },
   render(h) {
-    if (this.tag === 'input') {
-      return this.renderInput(h);
-    }
-    if (this.tag === 'select') {
+    const tag = this.tag;
+    if (tag === 'select') {
       return this.renderSelect(h);
+    }
+    if (
+      [
+        'year',
+        'month',
+        'date',
+        'dates',
+        'week',
+        'datetime',
+        'datetimerange',
+        'daterange',
+        'monthrange',
+      ].includes(tag)
+    ) {
+      return this.renderDate(h);
     }
     return this.renderInput(h);
   },
