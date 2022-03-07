@@ -1,15 +1,11 @@
 <template>
-  <div>
-    
-  </div>
+  <div>hahah</div>
 </template>
 
 <script>
 export default {
-
-}
+  name: 'AppFile',
+};
 </script>
 
-<style>
-
-</style>
+<style></style>
