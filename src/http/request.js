@@ -1,5 +1,6 @@
-import $http from './fetch';
-import { downloadHandle } from './httpHandle.js';
+import $http from './fetch'
+import { downloadHandle } from './httpHandle.js'
+const qs = require('qs')
 
 /**
  * config 中可以配置上传下载进度函数，取消请求等配置
@@ -9,92 +10,112 @@ import { downloadHandle } from './httpHandle.js';
  * GET 请求
  * @param {*} url
  * @param {*} params
- * @param config
  * @returns
  */
 export const get = (url, params = {}, config = {}) => {
+  const { headers = {}, ...configRest } = config
+
   return $http.get(url, {
     params,
-    ...config,
+    ...configRest,
     headers: {
+      ...headers,
       'Content-Type': 'application/json',
     },
-  });
-};
+  })
+}
 
 /**
  * POST json 求情
  * @param {*} url
  * @param {*} data
- * @param config
  * @returns
  */
 export const post = (url, data = {}, config = {}) => {
+  const { headers = {}, ...configRest } = config
   return $http.post(url, JSON.stringify(data), {
-    ...config,
+    ...configRest,
     headers: {
+      ...headers,
       'Content-Type': 'application/json',
     },
-  });
-};
+  })
+}
 
 /**
  * POST form表单 求情
  * @param {*} url
  * @param {*} data
- * @param config
  * @returns
  */
 export const formPost = (url, data = {}, config = {}) => {
-  return $http.post(url, data, config);
-};
+  const { headers = {}, ...configRest } = config
+  return $http.post(url, qs.stringify(data), {
+    ...configRest,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+  })
+}
 
 /**
  * POST 文件上传请求
  * @param {*} url
  * @param {*} data
- * @param config
  * @returns
  */
-export const uploadPost = (url, data, config = {}) => {
-  return $http.post(url, data, config);
-};
-
+export const postFile = (url, data, config = {}) => {
+  return $http.post(url, data, config)
+}
 /**
  * GET 文件下载请求
  * @param {*} url
  * @param {*} params
- * @param config
  * @returns
  */
 export const downloadGet = (url, params = {}, config = {}) => {
+  const { headers = {}, ...configRest } = config
   return $http
     .get(url, {
       params,
-      ...config,
+      ...configRest,
       responseType: 'blob',
       headers: {
+        ...headers,
         'Content-Type': 'application/json',
       },
     })
-    .then(downloadHandle);
-};
+    .then(downloadHandle)
+}
 
 /**
  * POST 文件下载json请求
  * @param {*} url
  * @param {*} data
- * @param config
  * @returns
  */
 export const downloadPost = (url, data = {}, config = {}) => {
+  const { headers = {}, ...configRest } = config
   return $http
     .post(url, JSON.stringify(data), {
       headers: {
+        ...headers,
         'Content-Type': 'application/json',
       },
+      ...configRest,
       responseType: 'blob',
-      ...config,
     })
-    .then(downloadHandle);
-};
+    .then(downloadHandle)
+}
+
+
+/**
+ * 以链接形式下载(此方法不能处理下载异常)
+ * @param {*} url
+ * @param {*} data
+ * @returns
+ */
+export const downloadLink = (url, data = {}) => {
+  window.location.href = url
+}

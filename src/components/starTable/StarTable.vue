@@ -32,7 +32,12 @@
               {{ item.title }}
             </ElButton>
           </template>
-          <div v-if="!!tip" class="table-tip"><i class="el-icon-info" />&nbsp;&nbsp;{{ tip }}</div>
+          <div
+            v-if="!!tip"
+            class="table-tip"
+          >
+            <i class="el-icon-info" />&nbsp;&nbsp;{{ tip }}
+          </div>
         </slot>
         <slot name="leftAction" />
       </div>
@@ -49,7 +54,10 @@
         </div>
       </div>
     </div>
-    <div ref="shTable" class="sh-table">
+    <div
+      ref="shTable"
+      class="sh-table"
+    >
       <VxeTable
         ref="tableRef"
         :data="tableData"
@@ -95,9 +103,13 @@
           :width="actionWidth"
           align="center"
         >
-          <template v-slot="{ row, rowIndex }">
+          <template #default="{ row, rowIndex }">
             <div class="erp-table-edit">
-              <slot name="action" :row="row" :rowIndex="rowIndex"> </slot>
+              <slot
+                name="action"
+                :row="row"
+                :rowIndex="rowIndex"
+              />
             </div>
           </template>
         </VxeColumn>
@@ -109,8 +121,7 @@
           min-width="140px"
           :show-overflow="column.tooltip"
           v-bind="column"
-        >
-        </VxeColumn>
+        />
       </VxeTable>
     </div>
     <div class="sh-table-pagination">

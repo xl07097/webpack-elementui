@@ -3,7 +3,7 @@
     <div class="outer">
       <!--    <div class="inner"></div>-->
     </div>
-    <div class="flag"></div>
+    <div class="flag" />
   </div>
 </template>
 
@@ -11,29 +11,15 @@
 const src = require('../assets/unit/default.png');
 const src1 = require('../assets/mifeng.jpg');
 export default {
-  name: 'ws',
+  name: 'AppWs',
   data() {
     return {
       sa: 0,
       img: '',
     };
   },
-  methods: {
-    loadItem() {
-      let co = document.createDocumentFragment();
-
-      for (let i = 1; i < 10; i++) {
-        let img = document.createElement('img');
-        img.className = 'inner';
-        img.src = src.default;
-        img.dataset.src = src1.default;
-        co.appendChild(img);
-      }
-      document.querySelector('.outer').appendChild(co);
-    },
-  },
   mounted() {
-    console.log(src);
+    console.log(window.history.length)
 
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
@@ -56,6 +42,20 @@ export default {
     [].forEach.call(document.querySelectorAll('.inner'), (item) => {
       intersectionObserver.observe(item);
     });
+  },
+  methods: {
+    loadItem() {
+      let co = document.createDocumentFragment();
+
+      for (let i = 1; i < 10; i++) {
+        let img = document.createElement('img');
+        img.className = 'inner';
+        img.src = src.default;
+        img.dataset.src = src1.default;
+        co.appendChild(img);
+      }
+      document.querySelector('.outer').appendChild(co);
+    },
   },
 };
 </script>

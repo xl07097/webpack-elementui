@@ -1,16 +1,16 @@
 const routers = [
   {
     path: '/',
-    redirect: '/file',
+    redirect: '/index',
   },
-  // {
-  //   path: '/index',
-  //   name: 'index',
-  //   meta: {
-  //     title: '首页',
-  //   },
-  //   component: (resolve) => require(['@/views/index.vue'], resolve),
-  // },
+  {
+    path: '/index',
+    name: 'index',
+    meta: {
+      title: '首页',
+    },
+    component: (resolve) => require(['@/views/index.vue'], resolve),
+  },
   {
     path: '/file',
     name: 'file',

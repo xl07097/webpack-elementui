@@ -1,9 +1,21 @@
 <template>
   <div class="mail-wrap">
-    <div class="column1" style="min-height: 10px"></div>
-    <div class="column2" style="min-height: 30px"></div>
-    <div class="column3" style="min-height: 20px"></div>
-    <div class="column4" style="min-height: 40px"></div>
+    <div
+      class="column1"
+      style="min-height: 10px"
+    />
+    <div
+      class="column2"
+      style="min-height: 30px"
+    />
+    <div
+      class="column3"
+      style="min-height: 20px"
+    />
+    <div
+      class="column4"
+      style="min-height: 40px"
+    />
   </div>
 </template>
 

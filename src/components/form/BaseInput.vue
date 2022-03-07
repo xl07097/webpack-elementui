@@ -8,7 +8,7 @@ export default {
     },
     props: {
       type: Object,
-      return() {
+      default() {
         return {};
       },
     },

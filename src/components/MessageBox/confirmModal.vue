@@ -1,16 +1,33 @@
 <template>
-  <div v-if="show" class="modal" v-show="show">
+  <div
+    v-if="show"
+    v-show="show"
+    class="modal"
+  >
     <div class="alert-modal">
       <div class="modal-header">
-        <img src="../../assets/alertModal/info.png" alt="info" />
+        <img
+          src="../../assets/alertModal/info.png"
+          alt="info"
+        >
         <span>{{ title }}</span>
       </div>
       <div class="modal-body">
         {{ text }}
       </div>
       <div class="modal-footer">
-        <div class="cancel" @click="onCancel">取消</div>
-        <div class="confirm" @click="onSure">确定</div>
+        <div
+          class="cancel"
+          @click="onCancel"
+        >
+          取消
+        </div>
+        <div
+          class="confirm"
+          @click="onSure"
+        >
+          确定
+        </div>
       </div>
     </div>
   </div>

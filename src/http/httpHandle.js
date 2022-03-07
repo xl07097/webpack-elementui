@@ -5,14 +5,14 @@ import { getExportName, saveFile } from './saveFile';
 // 响应状态码 弹框处理
 export const responseHandle = ({ code, message }) => {
   switch (code) {
-    case 300:
-      showMessage(message);
-      break;
-    case 500:
-      showMessage(message);
-      break;
-    default:
-      break;
+  case 300:
+    showMessage(message);
+    break;
+  case 500:
+    showMessage(message);
+    break;
+  default:
+    break;
   }
 };
 

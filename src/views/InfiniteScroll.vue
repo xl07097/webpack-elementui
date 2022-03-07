@@ -1,13 +1,20 @@
 <template>
   <div class="infiniteScroll">
-    <img class="inner" v-for="(item, index) of imgList" :key="index" :src="item" alt="img" />
-    <div class="bottomFlag">{{ lplp }}</div>
+    <img
+      v-for="(item, index) of imgList"
+      :key="index"
+      class="inner"
+      :src="item"
+      alt="img"
+    >
+    <div class="bottomFlag">
+      {{ lplp }}
+    </div>
   </div>
 </template>
 
 <script>
 const src = require('../assets/unit/default.png');
-const src1 = require('../assets/mifeng.jpg');
 export default {
   name: 'InfiniteScroll',
   data() {
@@ -18,16 +25,6 @@ export default {
   computed: {
     lplp() {
       return this.hhah(0);
-    },
-  },
-  methods: {
-    hhah(index) {
-      console.log(90);
-      return this.imgList[index];
-    },
-    loadItem() {
-      let tmpList = Array.from({ length: 10 }).fill(src.default);
-      this.imgList = this.imgList.concat(tmpList);
     },
   },
   mounted() {
@@ -48,6 +45,16 @@ export default {
     this.$on('hook:beforeDistroy', () => {
       intersectionObserver.disconnect();
     });
+  },
+  methods: {
+    hhah(index) {
+      console.log(90);
+      return this.imgList[index];
+    },
+    loadItem() {
+      let tmpList = Array.from({ length: 10 }).fill(src.default);
+      this.imgList = this.imgList.concat(tmpList);
+    },
   },
 };
 </script>
