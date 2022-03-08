@@ -10,7 +10,7 @@
 
 import writeXlsxFile from 'write-excel-file';
 export default {
-  name: 'Excel',
+  name: 'AppExcel',
   data() {
     return {};
   },

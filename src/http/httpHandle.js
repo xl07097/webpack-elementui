@@ -27,7 +27,7 @@ export const downloadHandle = (res) => {
     };
     fr.readAsText(res.data);
     return {
-      code: 7080,
+      code: 1000,
       message: '',
     };
   }
@@ -35,7 +35,7 @@ export const downloadHandle = (res) => {
   const filename = getExportName(res);
   saveFile(res.data, filename);
   return {
-    code: 0,
+    code: 200,
     message: '导出成功',
   };
 };

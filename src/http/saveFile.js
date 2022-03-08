@@ -1,5 +1,4 @@
 /**
- *
  * @param {*} res 接口返回原始数据
  * @returns
  */
@@ -9,7 +8,6 @@ export const getExportName = (res) => {
 };
 
 /**
- *
  * @param {*} blob blob数据
  * @param {*} filename 文件名
  */
@@ -35,8 +33,6 @@ export const saveFile = (blob, filename) => {
       cancelable: true,
       view: window,
     });
-    // let evt = document.createEvent('MouseEvents');
-    // evt.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(evt);
     window.URL.revokeObjectURL(href);
     setTimeout(() => {

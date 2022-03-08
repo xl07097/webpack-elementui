@@ -62,7 +62,7 @@ export default {
         console.log(path);
         router.addRoute(parent.name, {
           path: `/${parent.path}/${path}`,
-          component: () => import('@/views/file.vue'),
+          component: () => import(`@/views/pages/${path}.vue`),
           name: name, // 命名路由
           // components?: { [name: string]: Component }, // 命名视图组件
         });
