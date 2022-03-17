@@ -1,62 +1,55 @@
 const routers = [
-    {
-        path: "/",
-        redirect: "/excel"
+  {
+    path: '/',
+    redirect: '/index',
+  },
+  {
+    path: '/index',
+    name: 'index',
+    meta: {
+      title: '首页',
     },
-    {
-        path: "/index",
-        name: "index",
-        meta: {
-            title: "首页"
-        },
-        component: resolve => require(["@/views/index.vue"], resolve)
-    },
-    {
-        path: "/ws",
-        name: "ws",
-        meta: {
-            title: "首页"
-        },
-        component: resolve => require(["@/views/ws.vue"], resolve)
-    },
-    {
-        path: "/excel",
-        name: "excel",
-        meta: {
-            title: "首页"
-        },
-        component: resolve => require(["@/views/excel.vue"], resolve)
-    },
-    {
-        path: "/slot/:id",
-        name: "slot",
-        props: true,
-        meta: {
-            title: "slot"
-        },
-        component: resolve => require(["@/views/Slot.vue"], resolve)
-    },
-    {
-        path: "/mail/:id",
-        name: "mail",
-        props: true,
-        meta: {
-            title: "mail"
-        },
-        component: resolve => require(["@/views/SendMail.vue"], resolve)
-    },
-    // {
-    //     path: '/animation',
-    //     meta: {
-    //         title: '首页'
-    //     },
-    //     component: (resolve) => require(['@/components/Animation.vue'], resolve)
-    // },
-    {
-        path: "*",
-        name: "404",
-        redirect: "/index"
-    }
+    component: (resolve) => require(['@/views/index.vue'], resolve),
+  },
+  // {
+  //   path: '/ws',
+  //   name: 'ws',
+  //   meta: {
+  //     title: '首页',
+  //   },
+  //   component: (resolve) => require(['@/views/ws.vue'], resolve),
+  // },
+  // {
+  //   path: '/waterFall',
+  //   name: 'waterFall',
+
+  //   meta: {
+  //     title: 'waterFall',
+  //   },
+  //   component: (resolve) => require(['@/views/WaterFall.vue'], resolve),
+  // },
+  // {
+  //   path: '/excel',
+  //   name: 'excel',
+  //   meta: {
+  //     title: 'excel',
+  //   },
+  //   component: (resolve) => require(['@/views/excel.vue'], resolve),
+  // },
+  // {
+  //   path: '/infiniteScroll',
+  //   name: 'infiniteScroll',
+  //   props: true,
+  //   meta: {
+  //     title: 'infiniteScroll',
+  //   },
+  //   component: (resolve) => require(['@/views/InfiniteScroll.vue'], resolve),
+  // },
+  {
+    path: '*',
+    name: '404',
+    redirect: '/',
+  },
 ];
 
 export default routers;

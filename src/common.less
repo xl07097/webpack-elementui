@@ -1,54 +1,53 @@
 html,
 body {
-    margin: 0;
+  height: 100%;
+  margin: 0;
 }
-
-body {
-    text-align: center;
-    overflow: hidden;
+* {
+  box-sizing: border-box;
 }
 
 //  嵌套
 .clearfix {
-    zoom: 1;
+  zoom: 1;
 
-    &:before,
-    &:after {
-        display: table;
-        content: " ";
-    }
+  &:before,
+  &:after {
+    display: table;
+    content: ' ';
+  }
 
-    &:after {
-        clear: both;
-        height: 0;
-        font-size: 0;
-        visibility: hidden;
-    }
+  &:after {
+    clear: both;
+    height: 0;
+    font-size: 0;
+    visibility: hidden;
+  }
 }
 
 /** =========================== elementui css 重写 start=============*/
 
 // =========== dialog
 .el-dialog__header {
-    padding: 10px 20px 10px;
-    background: #000;
+  padding: 10px 20px 10px;
+  background: #000;
 
-    .el-dialog__title {
-        color: #fff;
-    }
+  .el-dialog__title {
+    color: #fff;
+  }
 
-    .el-dialog__headerbtn {
-        top: 15px;
-    }
+  .el-dialog__headerbtn {
+    top: 15px;
+  }
 }
 
 .el-dialog__body {
-    padding: 20px 20px;
+  padding: 20px 20px;
 }
 
 .el-dialog__footer {
-    padding: 10px 20px 10px;
-    text-align: right;
+  padding: 10px 20px 10px;
+  text-align: right;
 }
 
 /** =========================== elementui css 重写  end=============*/

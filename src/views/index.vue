@@ -1,92 +1,65 @@
 <template>
-    <div class="index animated fadeInRight">
-        hahah {{ userCount }} {{ count }}
-        <el-button type="primary" @click="add">count</el-button>
-        <el-button type="primary" @click="visible">visible</el-button>
-        <span class="add" v-show="show">哈哈哈</span>
-    </div>
+  <div class="index">
+    <FormRender
+      :value="searchData"
+      :fields="fields"
+    />
+    <el-button @click="gets">
+      获取
+    </el-button>
+  </div>
 </template>
 <script>
-import { mapState, mapMutations } from "vuex";
-import { EventEmitter } from "events";
-let em = "";
+import FormRender from '@/components/form/FormRender';
 export default {
-    name: "Index",
-    data() {
-        return {
-            show: true,
-            com: null,
-            test: 1,
-            dialogVisible: false
-        };
+  name: 'AppIndex',
+  components: { FormRender },
+  data() {
+    return {
+      searchData: {
+        name: 'hha',
+        age: '',
+        year: '2019',
+        dates: [],
+        week: '',
+      },
+      value: new Date(),
+      fields: [
+        { type: 'input', prop: 'name', label: '姓名' },
+        { type: 'input', prop: 'age', label: '年龄' },
+        { type: 'select', prop: 'provice', label: '省', config: { lists: [] } },
+        { type: 'year', prop: 'year', label: '年' },
+        { type: 'dates', prop: 'dates', label: 'dates' },
+        { type: 'week', prop: 'week', label: 'week' },
+      ],
+    };
+  },
+  mounted() {
+    this.$nextTick(() => {
+      this.fields[2].config.lists = [
+        { label: 'lp', value: 'lp' },
+        { label: 'lp1', value: 'lp1' },
+        { label: 'lp2', value: 'lp2' },
+      ];
+    });
+  },
+  methods: {
+    gets() {
+      console.log(this.searchData);
     },
-    computed: {
-        ...mapState(["count"]),
-        ...mapState({
-            userCount: state => state.user.userCount
-        }),
-        lp(){
-            console.log(80);
-            return this.test;
-        }
+    selectChange(val) {
+      console.log(val);
+      this.value = new Date(val);
     },
-    beforeUpdate(){
-        console.log('变更');
-    },
-    updated(){
-        console.log('变更1');
-    },
-    methods: {
-        ...mapMutations(["add"]),
-        visible() {
-            this.$router.push("/index");
-            this.dialogVisible = !this.dialogVisible;
-        }
-    },
-    mounted() {
-        em.emit("show", "haha");
-        setTimeout(() => {
-            this.test = 90;
-            setTimeout(() => {
-                console.log(this.test) 
-            })
-        }, 2000)
-    },
-    beforeMount(){
-        // console.log(this.$el);
-    },
-    created() {
-        // console.log(this.$data.show);
-        // console.log(this.$el);
-        em = new EventEmitter();
-        em.on("show", data => {
-            console.log(data);
-        });
-    },
-    destroyed(){
-        // console.log('destroyed')
-    },
-    beforeDestroy() {
-        // console.log('beforeDestroy')
-        if (em) {
-            em.off("show", () => {});
-            em = null;
-        }
-    },
-    activated (){
-        // console.log('进入')
-    },
-    deactivated (){
-        // console.log("离开");
-    }
+  },
 };
 </script>
 
 <style lang="less">
 .dd {
-    position: absolute;
+  position: absolute;
 }
 .add {
-    display: none;
+  display: none;
 }
 </style>

@@ -1,33 +1,32 @@
-const path = require("path");
-const webpack = require("webpack");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const CopyWebpackPlugin = require("copy-webpack-plugin");
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, "../src/index.js"),
+    app: path.resolve(__dirname, '../src/index.js'),
   },
   module: {
     rules: [
       {
         test: /\.vue$/,
-        use: "vue-loader",
+        use: 'vue-loader',
       },
       {
         test: /\.js$/,
-        use: "babel-loader",
+        use: 'babel-loader',
         exclude: /node_modules/,
       },
       {
         test: /\.(png|svg|jpe?g|gif)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 1024 * 5,
-              name: path.posix.join("static", "img/[name].[hash:7].[ext]"),
+              name: path.posix.join('static', 'img/[name].[hash:7].[ext]'),
             },
           },
         ],
@@ -36,10 +35,10 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 51200,
-              name: path.posix.join("static", "fonts/[name].[ext]"),
+              name: path.posix.join('static', 'fonts/[name].[ext]'),
             },
           },
         ],
@@ -48,10 +47,10 @@ module.exports = {
         test: /\.(mp4|mp3)$/,
         use: [
           {
-            loader: "url-loader",
+            loader: 'url-loader',
             options: {
               limit: 51200,
-              name: path.posix.join("static", "media/[name].[ext]"),
+              name: path.posix.join('static', 'media/[name].[ext]'),
             },
           },
         ],
@@ -60,26 +59,20 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "vue 练习",
-      filename: path.resolve(__dirname, "../dist/index.html"),
-      template: path.resolve(__dirname, "../public/index.html"),
-      inject: true,
+      title: 'vue 练习',
+      filename: path.resolve(__dirname, '../dist/index.html'),
+      template: path.resolve(__dirname, '../public/index.html'),
+      // inject: true
     }),
-    // new BundleAnalyzerPlugin(),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: path.resolve(__dirname, "../public/static"),
-          to: "static",
-        },
-      ],
+      patterns: [{ from: path.resolve(__dirname, '../public/static'), to: 'static' }],
     }),
   ],
   optimization: {
     splitChunks: {
-      chunks: "async",
+      chunks: 'initial',
       minSize: 20000,
       minChunks: 1,
       maxAsyncRequests: 5,
@@ -87,26 +80,32 @@ module.exports = {
       name: true,
       cacheGroups: {
         vendor: {
-          name: "vendor",
+          name: 'vendor',
           test: /[\\/]node_modules[\\/]/,
-          chunks: "all",
+          // chunks: 'all',
           priority: -10,
         },
+        common: {
+          name: 'common',
+          test: /[\\/]vue|vue-router|vuex[\\/]/,
+          // chunks: 'all',
+          priority: 1,
+        },
         element: {
-          name: "element",
+          name: 'element',
           test: /[\\/]element-ui[\\/]/,
-          chunks: "all",
-          priority: 0,
+          // chunks: 'all',
+          priority: 5,
         },
       },
     },
   },
   resolve: {
     alias: {
-      vue$: "vue/dist/vue.esm.js",
-      "@": path.resolve(__dirname, "../src"),
-      "scss-loader": "sass-loader",
+      vue$: 'vue/dist/vue.esm.js',
+      '@': path.resolve(__dirname, '../src'),
+      'scss-loader': 'sass-loader',
     },
-    extensions: [".js", ".json", ".vue"],
+    extensions: ['.js', '.json', '.vue'],
   },
 };

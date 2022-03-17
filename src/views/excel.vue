@@ -1,54 +1,56 @@
 <template>
   <div>
-    <el-button @click="exportExcel">导出</el-button>
+    <el-button @click="exportExcel">
+      导出
+    </el-button>
   </div>
 </template>
 
 <script>
-import writeXlsxFile from "write-excel-file";
+
+import writeXlsxFile from 'write-excel-file';
 export default {
-  name: "WriteExcel",
+  name: 'AppExcel',
   data() {
     return {};
   },
   methods: {
-    exportExcel() {
-      let data = [
+    async exportExcel() {
+      const data = [
         {
-          name: "John Smith",
-          dateOfBirth: "John Smith",
+          name: 'John Smith',
+          dateOfBirth: 'John Smith',
           cost: 1800,
           paid: true,
         },
         {
-          name: "Alice Brown",
-          dateOfBirth: "John Smith",
+          name: 'Alice Brown',
+          dateOfBirth: 'John Smith',
           cost: 2599.99,
           paid: false,
         },
       ];
-
-      const schemas = [
+      const schema = [
         {
-          column: "Name",
+          column: 'Name',
           type: String,
-          width: 90,
+          width: 12,
           value: (student) => student.name,
         },
         {
-          column: "Date of Birth",
+          column: 'Date of Birth',
           value: (student) => student.dateOfBirth,
         },
       ];
-      writeXlsxFile(data, {
-        schema: schemas,
-        fileName: "file.xlsx",
-      }).then((res) => {
-        console.log(res);
+      await writeXlsxFile(data, {
+        schema: schema,
+        fileName: 'file.xlsx',
       });
     },
   },
 };
 </script>
 
-<style></style>
+<style lang="less">
+
+</style>

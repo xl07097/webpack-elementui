@@ -1,4 +1,4 @@
-let EventEmitter = require("events");
+let EventEmitter = require('events');
 
 let events = new EventEmitter();
 
