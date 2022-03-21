@@ -7,15 +7,25 @@
     <el-button @click="gets">
       获取
     </el-button>
+    <StarNumber
+      v-model="num"
+      controls-position="right"
+    >
+      <!-- <template #append>
+        %
+      </template> -->
+    </StarNumber>
   </div>
 </template>
 <script>
 import FormRender from '@/components/form/FormRender';
+import StarNumber from '@/components/StarNumber';
 export default {
   name: 'AppIndex',
-  components: { FormRender },
+  components: { FormRender, StarNumber },
   data() {
     return {
+      num: 0,
       searchData: {
         name: 'hha',
         age: '',

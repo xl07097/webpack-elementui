@@ -1,10 +1,7 @@
 import CryptoJS from 'crypto-js';
 //DES加密
 
-export const encryptByDES = function encryptByDES(
-  message,
-  key = 'WDNRTXBRCBFXJBFZ'
-) {
+export const encryptByDES = function encryptByDES(message, key = 'WDNRTXBRCBFXJBFZ') {
   let keyHex = CryptoJS.enc.Utf8.parse(key);
   let encrypted = CryptoJS.DES.encrypt(message, keyHex, {
     mode: CryptoJS.mode.ECB,
