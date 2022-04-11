@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" :style="{ width: width + 'px', height: height + 'px' }"></div>
+  <div :id="id" :style="{ width: width + 'px', height: height + 'px' }" />
 </template>
 <script>
 import * as echarts from 'echarts';
@@ -46,15 +46,12 @@ export default {
       chart: null,
     };
   },
-  methods: {
-    init() {
-      if (!this.chart) {
-        this.chart = echarts.init(document.getElementById(this.id));
-      }
-      this.drawChart();
-    },
-    drawChart() {
-      this.chart.setOption(this.option);
+  watch: {
+    option: {
+      handler() {
+        this.drawChart();
+      },
+      deep: true,
     },
   },
   mounted() {
@@ -66,12 +63,15 @@ export default {
       this.chart = null;
     }
   },
-  watch: {
-    option: {
-      handler() {
-        this.drawChart();
-      },
-      deep: true,
+  methods: {
+    init() {
+      if (!this.chart) {
+        this.chart = echarts.init(document.getElementById(this.id));
+      }
+      this.drawChart();
+    },
+    drawChart() {
+      this.chart.setOption(this.option);
     },
   },
 };

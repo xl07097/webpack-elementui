@@ -1,9 +1,11 @@
-import 'core-js';
+// import 'core-js';
 
 import Vue from 'vue';
 import router from '@/router/index';
 import store from '@/store/store';
 // import './directives/autoHeight';
+
+import './directives/preventClick';
 
 import './importComponent';
 // import './importVxeTable';
