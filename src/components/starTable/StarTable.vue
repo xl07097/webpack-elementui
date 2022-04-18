@@ -1,59 +1,5 @@
 <template>
   <div class="sh-table-wrap">
-    <div class="operation">
-      <div class="left-btn">
-        <slot name="left">
-          <template v-for="(item, opIndex) in operationFilter">
-            <ElButton
-              v-if="item.title === '删除' || item.title === '废弃'"
-              :key="item.prop"
-              type="danger"
-              plain
-              size="small"
-              @click="operationFun(item.prop, item.state, item.menu)"
-            >
-              {{ item.title }}
-            </ElButton>
-            <ElButton
-              v-else-if="opIndex === 0 || item.prop == 'exportTable'"
-              :key="item.prop"
-              type="primary"
-              size="small"
-              @click="operationFun(item.prop, item.state, item.menu)"
-            >
-              {{ item.title }}
-            </ElButton>
-            <ElButton
-              v-else
-              :key="item.prop"
-              size="small"
-              @click="operationFun(item.prop, item.state, item.menu)"
-            >
-              {{ item.title }}
-            </ElButton>
-          </template>
-          <div
-            v-if="!!tip"
-            class="table-tip"
-          >
-            <i class="el-icon-info" />&nbsp;&nbsp;{{ tip }}
-          </div>
-        </slot>
-        <slot name="leftAction" />
-      </div>
-      <div class="right-btn">
-        <slot name="operation" />
-        <div class="oper-right">
-          <template v-for="(item, indexs) in getOperationExportExcel">
-            <i
-              :key="indexs"
-              class="iconfont icon icon-daochu"
-              @click="operationFun(item.prop, item.state, item.menu)"
-            />
-          </template>
-        </div>
-      </div>
-    </div>
     <div
       ref="shTable"
       class="sh-table"
@@ -81,7 +27,6 @@
           v-if="index"
           key="seqIndex"
           type="seq"
-          fixed="left"
           title="序号"
           align="center"
           width="60"
@@ -89,7 +34,6 @@
         <VxeColumn
           v-if="selection"
           key="checkbox"
-          fixed="left"
           type="checkbox"
           title=""
           align="center"
@@ -97,11 +41,9 @@
         />
         <VxeColumn
           v-if="showAction"
-          key="actionWidth"
-          fixed="left"
+          key="action"
           title="操作"
           :width="actionWidth"
-          align="center"
         >
           <template #default="{ row, rowIndex }">
             <div class="erp-table-edit">
@@ -114,12 +56,9 @@
           </template>
         </VxeColumn>
         <VxeColumn
-          v-for="column of tableColumn"
-          :key="column.prop"
-          :title="column.label"
-          :field="column.prop"
+          v-for="column of columns"
+          :key="column.field"
           min-width="140px"
-          :show-overflow="column.tooltip"
           v-bind="column"
         />
       </VxeTable>
@@ -153,6 +92,14 @@ export default {
       type: Boolean,
       default: true,
     },
+    showAction: {
+      type: Boolean,
+      default: true,
+    },
+    actionWidth: {
+      type: [String, Number],
+      default: '160px',
+    },
     // table 列字段配置
     columns: {
       type: Array,
@@ -170,10 +117,6 @@ export default {
       type: String,
       default: 'left',
     },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
     height: {
       type: [String, Number],
       default: 0,
@@ -182,26 +125,13 @@ export default {
       type: Boolean,
       default: true,
     },
+    pageIndex: {
+      type: [String, Number],
+      default: 0,
+    },
     total: {
       type: Number,
       default: 0,
-    },
-    // table 列表操作按钮
-    button: {
-      type: [Array, Boolean],
-      default: () => {
-        return false;
-      },
-    },
-    tip: {
-      type: String,
-      default: '',
-    },
-    functionVerification: {
-      type: Object,
-      default: () => {
-        return {};
-      },
     },
     showOverflow: {
       type: Boolean,
@@ -210,18 +140,6 @@ export default {
     haveTab: {
       type: Boolean,
       default: false,
-    },
-    showAction: {
-      type: Boolean,
-      default: true,
-    },
-    pageIndex: {
-      type: [String, Number],
-      default: 0,
-    },
-    actionWidth: {
-      type: [String, Number],
-      default: '160px',
     },
     scrollX: {
       type: Object,
@@ -239,97 +157,13 @@ export default {
         };
       },
     },
-    delName: {
-      type: String,
-      default: 'id',
-    },
-    url: {
-      type: [Array, Object],
-      default: () => {
-        return {};
-      },
-    },
-    // maxHeight: {
-    //   type: [String, Number],
-    //   default: 'auto',
-    // },
-    // stripe: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // border: {
-    //   type: Boolean,
-    //   default: true,
-    // },
     size: {
       type: String,
       default: 'medium',
     },
-    // fit: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    // showHeader: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    // highlightCurrentRow: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // currentRowKey: {
-    //   type: [Number, String],
-    // },
-    // rowClassName: {
-    //   type: [Function, Object],
-    // },
-    // rowStyle: {
-    //   type: [Function, Object],
-    // },
-    // cellClassName: {
-    //   type: [Function, String],
-    // },
-    // cellStyle: {
-    //   type: [Function, Object],
-    // },
-    // headerRowClassName: {
-    //   type: [Function, Object],
-    // },
-    // headerRowStyle: {
-    //   type: [Function, Object],
-    // },
-    // rowKey: {
-    //   type: [Function, Object],
-    // },
-    // emptyText: {
-    //   type: String,
-    //   default: '暂无数据',
-    // },
-    // defaultExpandAll: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // expandRowKeys: {
-    //   type: Array,
-    //   default() {
-    //     return []
-    //   },
-    // },
-    // defaultSort: {
-    //   type: Object,
-    //   default() {
-    //     return {}
-    //   },
-    // },
     tooltipEffect: {
       type: String, // dark/light
       default: 'dark',
-    },
-    operation: {
-      type: [Array, Boolean],
-      default: () => {
-        return false;
-      },
     },
     filter: {
       type: Object,
@@ -351,38 +185,6 @@ export default {
       type: [Boolean, String], // dark/light
       default: 'tooltip',
     },
-    fileName: {
-      type: String,
-      default: '',
-    },
-    // sumText: {
-    //   type: String,
-    //   default: '合计',
-    // },
-    // selectOnIndeterminate: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    // indent: {
-    //   type: Number,
-    //   default: 16,
-    // },
-    // lazy: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    // load: {
-    //   type: Function,
-    //   default() {
-    //     return () => {}
-    //   },
-    // },
-    // treeProps: {
-    //   type: Object,
-    //   default() {
-    //     return { hasChildren: 'hasChildren', children: 'children' }
-    //   },
-    // },
   },
   data() {
     return {
@@ -391,52 +193,11 @@ export default {
       pageThrottle: false,
       selectionList: [],
       clientHeight: 'auto',
-      tableColumn: [],
     };
   },
   computed: {
     pageParms() {
       return this.$store.getters.get_page_parms;
-    },
-    getAuthority() {
-      return this.$store.getters.get_router_parms_now;
-    },
-    // table 内部操作按钮
-    tablebutton() {
-      if (this.button === false) {
-        const table = this.getAuthority.authority.table || [];
-        return table;
-      } else {
-        return this.button;
-      }
-    },
-    // table 上方功能按钮
-    operationFilter() {
-      return this.getOperationBtn.filter((item) => this.functionState(item.prop, item));
-    },
-    getOperationBtn() {
-      if (this.operation === false) {
-        if (this.getAuthority.authority.operation === void 0) {
-          return [];
-        }
-        return this.getAuthority.authority.operation.filter((e) => e.prop !== 'exportExcel');
-      } else {
-        return this.operation;
-      }
-    },
-    getOperationExport() {
-      if (this.operation === false) {
-        const operations = this.getAuthority.authority.operation;
-        if (operations === void 0) {
-          return [];
-        }
-        return operations.filter((e) => e.prop === 'exportExcel');
-      } else {
-        return this.operation;
-      }
-    },
-    getOperationExportExcel() {
-      return this.getOperationExport.filter((item) => item.prop === 'exportExcel');
     },
   },
   watch: {
@@ -513,21 +274,6 @@ export default {
       this.$emit('pageSizeSearch', this.pageNo, this.pageSize);
       this.pageThrottle = false;
     },
-    functionState(name, val, index) {
-      // 需要从functionVerification 接受一个Object 判断
-      if (this.functionVerification[name] !== void 0) {
-        return this.functionVerification[name](val, index);
-      }
-      return true;
-    },
-    // table上方按钮函数
-    operationFun(prop, state) {
-      this.$emit('actionMethod', prop, this.selectionList, state);
-    },
-    // table内部按钮函数
-    buttonFun(val, prop) {
-      this.$emit('actionMethod', prop, val);
-    },
     // 刷新 列， 去除错位问题
     refreshColumn() {
       this.$nextTick(() => {
@@ -552,7 +298,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~vxe-table/styles/index.scss';
 .sh-table-wrap {
   padding: 0 10px;
   .sh-table {
@@ -599,31 +344,6 @@ export default {
   }
   .sh-table-pagination {
     padding: 10px 0;
-  }
-  .operation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    z-index: 1000;
-    height: 60px;
-    padding: 14px 10px 14px;
-
-    .el-button--danger.is-plain {
-      color: #f42430;
-      background: #fff;
-      border-color: #f42430;
-      //opacity: 0.3;
-    }
-  }
-  .right-btn {
-    display: flex;
-    align-items: center;
-    .oper-right {
-      > i {
-        margin-left: 20px;
-      }
-    }
   }
 }
 </style>
