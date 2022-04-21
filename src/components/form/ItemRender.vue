@@ -37,6 +37,7 @@ export default {
         month: 'yyyy-MM',
         date: 'yyyy-MM-dd',
         dates: 'yyyy-MM-dd',
+        daterange: 'yyyy-MM-dd',
         // week: 'yyyy 第 WW 周'
       },
     };
@@ -63,7 +64,7 @@ export default {
       return (
         <el-select
           value={this.value}
-          on-change={this.input}
+          on-change={this.change}
           clearable
           placeholder={`请选择${this.label}`}
         >
@@ -83,6 +84,7 @@ export default {
           format={dateFormat[tag]}
           valueFormat={dateFormat[tag]}
           onInput={this.input}
+          on-change={this.change}
           placeholder={`请选择${this.label}`}
         ></el-date-picker>
       );
@@ -91,7 +93,7 @@ export default {
       this.$emit('input', value);
     },
     change(value) {
-      console.log(value);
+      console.log('change:', value);
       this.$emit('input', value);
     },
     selectClear() {

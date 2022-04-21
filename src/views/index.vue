@@ -39,7 +39,8 @@ export default {
         { type: 'input', prop: 'age', label: '年龄' },
         { type: 'select', prop: 'provice', label: '省', config: { lists: [] } },
         { type: 'year', prop: 'year', label: '年' },
-        { type: 'dates', prop: 'dates', label: 'dates' },
+        { type: 'daterange', prop: 'createTime', label: '创建时间' },
+        { type: 'date', prop: 'date', label: 'date' },
         { type: 'week', prop: 'week', label: 'week' },
       ],
     };

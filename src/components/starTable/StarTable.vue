@@ -46,13 +46,11 @@
           :width="actionWidth"
         >
           <template #default="{ row, rowIndex }">
-            <div class="erp-table-edit">
-              <slot
-                name="action"
-                :row="row"
-                :rowIndex="rowIndex"
-              />
-            </div>
+            <slot
+              name="action"
+              :row="row"
+              :rowIndex="rowIndex"
+            />
           </template>
         </VxeColumn>
         <VxeColumn
@@ -338,9 +336,6 @@ export default {
     // white-space: normal!important;
     color: #444;
     // padding: 10px;
-  }
-  .vxe-table--render-default .vxe-cell .erp-table-edit {
-    white-space: normal !important;
   }
   .sh-table-pagination {
     padding: 10px 0;

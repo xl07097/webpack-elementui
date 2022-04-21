@@ -2,7 +2,6 @@
   <el-form
     ref="formRender"
     :model="currentData"
-    :rules="rules"
     :label-width="labelWidth"
     inline
   >
@@ -16,7 +15,7 @@
       <item-render
         v-model="currentData[field.prop]"
         :tag="field.type"
-        :field="field.prop"
+        :field="field.field"
         :label="field.label"
         :config="field.config"
       />
@@ -31,13 +30,6 @@ export default {
   components: { ItemRender },
   props: {
     value: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
-    // 规则
-    rules: {
       type: Object,
       default() {
         return {};
