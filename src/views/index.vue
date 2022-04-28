@@ -9,6 +9,10 @@
       <el-form-item label="age" prop="age">
         <el-input v-model="form.age" />
       </el-form-item>
+      <el-form-item label="total" prop="total">
+        <el-input-number v-model="form.total" :min="1" :max="10" label="描述文字" />
+      </el-form-item>
+
       <StarAddress v-model="form.address" />
     </el-form>
   </div>
@@ -41,11 +45,13 @@ export default {
         name: '',
         age: '',
         address: {},
+        total: 0,
       },
       address: {},
       rules: {
         name: { required: true, message: 'name', trigger: 'blur' },
         age: { required: true, message: 'age', trigger: 'blur' },
+        total: { required: true, message: 'age', trigger: 'blur' },
         // 'address.provice': { required: true, message: 'provice', trigger: 'blur' },
         // 'address.city': { required: true, message: 'city', trigger: 'blur' },
       },

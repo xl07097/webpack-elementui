@@ -8,7 +8,8 @@ import store from '@/store/store';
 import './directives/preventClick';
 
 import './importComponent';
-// import './importVxeTable';
+import './importVxeTable';
+import 'vxe-table/styles/index.scss';
 import App from './App';
 
 new Vue({
