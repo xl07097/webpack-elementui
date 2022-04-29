@@ -30,8 +30,19 @@
         width="60"
       />
       <VxeColumn v-if="showAction" key="action" title="操作" :width="actionWidth">
-        <template #default="{ row, rowIndex }">
-          <slot name="action" :row="row" :rowIndex="rowIndex" />
+        <template
+          #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
+        >
+          <slot
+            name="action"
+            :row="row"
+            :rowIndex="rowIndex"
+            :$rowIndex="$rowIndex"
+            :column="column"
+            :columnIndex="columnIndex"
+            :$columnIndex="$columnIndex"
+            :_columnIndex="_columnIndex"
+          />
         </template>
       </VxeColumn>
       <VxeColumn
@@ -42,8 +53,19 @@
         min-width="140px"
         v-bind="column"
       >
-        <template #default="{ row, rowIndex }">
-          <slot :name="column.field" :row="row" :rowIndex="rowIndex" />
+        <template
+          #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
+        >
+          <slot
+            :name="column.field"
+            :row="row"
+            :rowIndex="rowIndex"
+            :$rowIndex="$rowIndex"
+            :column="column"
+            :columnIndex="columnIndex"
+            :$columnIndex="$columnIndex"
+            :_columnIndex="_columnIndex"
+          />
         </template>
       </VxeColumn>
     </VxeTable>
