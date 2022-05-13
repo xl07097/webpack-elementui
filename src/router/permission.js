@@ -5,19 +5,21 @@ router.beforeEach((to, from, next) => {
   if (!user && to.path !== '/login') {
     sessionStorage.clear();
     next('/login');
+    return;
+  }
+  if (to.path === '/login' || to.path === '/') {
+    sessionStorage.clear();
+    next();
+    return;
+  }
+  if (to.path === '/index') {
+    next();
   } else {
-    if (to.path === '/login' || to.path === '/') {
-      sessionStorage.clear();
-      next();
-    } else if (to.path === '/index') {
+    let permission = JSON.parse(sessionStorage.getItem('permission'));
+    if (permission.indexOf(to.name) !== -1) {
       next();
     } else {
-      let permission = JSON.parse(sessionStorage.getItem('permission'));
-      if (permission.indexOf(to.name) !== -1) {
-        next();
-      } else {
-        next('/index');
-      }
+      next('/index');
     }
   }
 });

@@ -1,6 +1,6 @@
 /**
  * Date: 2021-11-03 15:10:10
- * Shtables 表格组件 props 配置文件(未完善)
+ * Startables 表格组件 props 配置文件(未完善)
  */
 
 import { Column as BaseColumn } from 'vxe-table/types/column';

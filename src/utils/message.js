@@ -34,7 +34,7 @@ let toastInstance = null;
  * @param {*} duration
  * @returns
  */
-export const showToast = (message, title = '消息', type = 'info', duration = 2500) => {
+export const showToast = (message, title = '消息', type = 'info', duration = 3500) => {
   if (toastInstance) {
     toastInstance.close();
   }

@@ -1,1 +1,1 @@
-/// <reference lib="ShTables.d" />
+/// <reference lib="StarTables.d" />

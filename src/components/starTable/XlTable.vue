@@ -45,29 +45,7 @@
           />
         </template>
       </VxeColumn>
-      <VxeColumn
-        v-for="column of columns"
-        :key="column.field"
-        :title="column.title"
-        :field="column.field"
-        min-width="140px"
-        v-bind="column"
-      >
-        <template
-          #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
-        >
-          <slot
-            :name="column.field"
-            :row="row"
-            :rowIndex="rowIndex"
-            :$rowIndex="$rowIndex"
-            :column="column"
-            :columnIndex="columnIndex"
-            :$columnIndex="$columnIndex"
-            :_columnIndex="_columnIndex"
-          />
-        </template>
-      </VxeColumn>
+      <slot />
     </VxeTable>
   </div>
 </template>
@@ -93,13 +71,6 @@ export default {
     actionWidth: {
       type: [String, Number],
       default: '160px',
-    },
-    // table 列字段配置
-    columns: {
-      type: Array,
-      default() {
-        return [];
-      },
     },
     tableData: {
       type: Array,
@@ -211,29 +182,11 @@ export default {
 <style lang="scss">
 .sh-table-wrap {
   padding: 0 10px;
-  .vxe-table {
-    font-family: Microsoft YaHei, STXihei, '\534E\6587\7EC6\9ED1', '\9ED1\4F53', serif !important;
-  }
   .vxe-table thead th {
     background-color: #ebf5ff;
   }
   .vxe-table tfoot .vxe-cell--item {
     padding-left: 6px;
-  }
-  // .vxe-table--render-default.vxe-editable.size--medium .vxe-body--column,
-  // .vxe-table--render-default.size--medium .vxe-header--column.col--ellipsis,
-  // .vxe-table--render-default.size--medium .vxe-body--column.col--ellipsis,
-  // .vxe-table--render-default.size--medium .vxe-footer--column.col--ellipsis {
-  //   height: 46px;
-  // }
-  // .vxe-table--render-default.size--medium .vxe-header--column.col--ellipsis > .vxe-cell,
-  // .vxe-table--render-default.size--medium .vxe-body--column.col--ellipsis > .vxe-cell,
-  // .vxe-table--render-default.size--medium .vxe-footer--column.col--ellipsis > .vxe-cell {
-  //   max-height: 46px;
-  // }
-
-  .vxe-table--render-default .vxe-cell {
-    color: #444;
   }
 }
 </style>
