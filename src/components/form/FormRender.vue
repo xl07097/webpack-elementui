@@ -16,7 +16,7 @@
       <item-render
         v-model="currentData[field.prop]"
         :tag="field.type"
-        :field="field.prop"
+        :field="field.field"
         :label="field.label"
         :config="field.config"
       />

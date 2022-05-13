@@ -1,4 +1,4 @@
-// import 'core-js';
+import 'core-js';
 
 import Vue from 'vue';
 import router from '@/router/index';
