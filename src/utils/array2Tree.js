@@ -1,4 +1,4 @@
-function array2Tree(data) {
+export const array2Tree = (data) => {
   let zNodes = data;
   let tmpMap = {};
   let tree = [];
@@ -20,6 +20,4 @@ function array2Tree(data) {
   });
 
   return tree;
-}
-
-module.exports = array2Tree;
+};
