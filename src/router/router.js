@@ -28,14 +28,14 @@ const routers = [
   //   },
   //   component: (resolve) => require(['@/views/WaterFall.vue'], resolve),
   // },
-  // {
-  //   path: '/excel',
-  //   name: 'excel',
-  //   meta: {
-  //     title: 'excel',
-  //   },
-  //   component: (resolve) => require(['@/views/excel.vue'], resolve),
-  // },
+  {
+    path: '/excel',
+    name: 'excel',
+    meta: {
+      title: 'excel',
+    },
+    component: (resolve) => require(['@/views/excel.vue'], resolve),
+  },
   // {
   //   path: '/infiniteScroll',
   //   name: 'infiniteScroll',

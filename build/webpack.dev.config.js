@@ -11,7 +11,9 @@ module.exports = merge(baseConfig, {
     filename: '[name].js',
     publicPath: '/',
   },
-  plugins: [new BundleAnalyzerPlugin()],
+  plugins: [new BundleAnalyzerPlugin({
+    analyzerPort: 10002
+  })],
   devServer: {
     contentBase: '../dist',
     historyApiFallback: true,

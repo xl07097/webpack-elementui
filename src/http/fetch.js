@@ -2,7 +2,7 @@ import axios from 'axios';
 import { showMessage } from '@/utils/message';
 import { LOGIN_TIMEOUT, SUCCESS } from '@/config/statusCode';
 
-const http = axios.create({
+const instance = axios.create({
   baseURL: '/api/',
   // timeout: 10000,
   withCredentials: true,
@@ -11,7 +11,7 @@ const http = axios.create({
   },
 });
 
-http.interceptors.request.use((config) => {
+instance.interceptors.request.use((config) => {
   const token = sessionStorage.getItem('token');
   if (token) {
     config.headers.token = token;
@@ -19,7 +19,7 @@ http.interceptors.request.use((config) => {
   return config;
 });
 
-http.interceptors.response.use(
+instance.interceptors.response.use(
   (res) => {
     if (res.request.responseType === 'blob') {
       return res;
@@ -56,7 +56,7 @@ http.interceptors.response.use(
       break;
     }
     return Promise.reject(err);
-  },
+  }
 );
 
-export default http;
+export default instance;
