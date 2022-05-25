@@ -34,7 +34,10 @@
     ], // 禁止使用console
     "indent": [
       2,
-      2
+      2,
+      {
+        "switch": 2
+      }
     ],
     "quotes": [
       2,
