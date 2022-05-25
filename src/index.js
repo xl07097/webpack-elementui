@@ -11,6 +11,7 @@ import './importComponent';
 import './importVxeTable';
 import 'vxe-table/styles/index.scss';
 import App from './App';
+import './router/permission';
 
 new Vue({
   el: '#app',

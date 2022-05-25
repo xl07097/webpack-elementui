@@ -1,10 +1,6 @@
 <template>
   <div class="app-header">
-    <el-tag
-      v-for="record of records"
-      :key="record.id"
-      @click="push(record.path)"
-    >
+    <el-tag v-for="record of records" :key="record.id" @click="push(record.path)">
       {{ record.name }}
     </el-tag>
   </div>
@@ -34,10 +30,6 @@ export default {
         ...item,
       };
     });
-    setTimeout(() => {
-      // this.records.forEach(({path, name, pid, id}) => {
-      // })
-    }, 1000);
 
     console.log(this.findQuestions(tree.data));
 
@@ -80,10 +72,10 @@ export default {
           ...node,
           children: [],
         });
-        this.add({
-          ...node,
-          children: [],
-        });
+        // this.add({
+        //   ...node,
+        //   children: [],
+        // });
         // 查找到目标，退出
         // if (node.value === target) {
         //   return target

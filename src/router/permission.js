@@ -1,27 +1,33 @@
 import router from './index';
+import store from '../store/store';
 
 router.beforeEach((to, from, next) => {
-  let user = sessionStorage.getItem('sportHealthUserName');
-  if (!user && to.path !== '/login') {
+  if (to.path === '/login') {
     sessionStorage.clear();
+    next();
+    return;
+  }
+
+  let userId = sessionStorage.getItem('loginUserId');
+  if (!userId) {
     next('/login');
     return;
   }
-  if (to.path === '/login' || to.path === '/') {
-    sessionStorage.clear();
+
+  // 刷新状态 ---- 重新获取路由
+  if (store.state.refresh === false) {
+    store.dispatch('getMenu').then(() => {
+      next({ ...to }); // hack方法 确保addRoutes已完成
+    });
+    return;
+  }
+  let perms = store.state.perms || [];
+  if ((perms.length === 1 && perms[0] === '*') || perms.includes(to.name)) {
     next();
     return;
   }
-  if (to.path === '/index') {
-    next();
-  } else {
-    let permission = JSON.parse(sessionStorage.getItem('permission'));
-    if (permission.indexOf(to.name) !== -1) {
-      next();
-    } else {
-      next('/index');
-    }
-  }
+
+  next('/');
 });
 
 router.afterEach(() => {

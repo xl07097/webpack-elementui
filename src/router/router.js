@@ -1,7 +1,11 @@
 const routers = [
   {
-    path: '/',
-    redirect: '/index',
+    path: '/login',
+    name: 'login',
+    meta: {
+      title: 'login',
+    },
+    component: (resolve) => require(['@/views/login.vue'], resolve),
   },
   {
     path: '/index',
@@ -45,11 +49,11 @@ const routers = [
   //   },
   //   component: (resolve) => require(['@/views/InfiniteScroll.vue'], resolve),
   // },
-  {
-    path: '*',
-    name: '404',
-    redirect: '/',
-  },
+  // {
+  //   path: '*',
+  //   name: '404',
+  //   redirect: '/index',
+  // },
 ];
 
 export default routers;

@@ -15,14 +15,13 @@ module.exports = merge(baseConfig, {
     analyzerPort: 10002
   })],
   devServer: {
-    contentBase: '../dist',
     historyApiFallback: true,
     open: true,
     hot: true,
     port: '9810',
     proxy: {
       '/api': {
-        target: 'https://tomcat.zhiqiuge.com/note',
+        target: 'https://sse.zhiqiuge.com/api',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '/',
