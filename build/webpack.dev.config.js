@@ -5,7 +5,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = merge(baseConfig, {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',

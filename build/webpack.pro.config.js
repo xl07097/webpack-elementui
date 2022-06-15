@@ -2,7 +2,8 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -64,18 +65,66 @@ module.exports = merge(baseConfig, {
       },
     ],
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserPlugin({
+        parallel: 4,
+        terserOptions: {
+          parse: {
+            ecma: 10,
+          },
+          compress: {
+            ecma: 5,
+            warnings: false,
+            comparisons: false,
+            inline: 2,
+          },
+          mangle: {
+            safari10: true,
+          },
+          output: {
+            ecma: 5,
+            comments: false,
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
+    splitChunks: {
+      chunks: 'initial',
+      // minSize: 20000,
+      minChunks: 1,
+      // maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      // name: true,
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          test: /[\\/]node_modules[\\/]/,
+          // chunks: 'all',
+          priority: -10,
+        },
+        common: {
+          name: 'common',
+          test: /[\\/]vue|vue-router|vuex[\\/]/,
+          // chunks: 'all',
+          priority: 1,
+        },
+        element: {
+          name: 'element',
+          test: /[\\/]element-ui[\\/]/,
+          // chunks: 'all',
+          priority: 5,
+        },
+      },
+    },
+  },
   plugins: [
     new MiniCssExtractPlugin({
       filename: 'css/[name].[hash].css',
       chunkFilename: 'css/[id].[hash].css',
-    }),
-    new OptimizeCssAssetsWebpackPlugin({
-      assetNameRegExp: /\.css$/g,
-      cssProcessor: require('cssnano'),
-      cssProcessorPluginOptions: {
-        preset: ['default', { discardComments: { removeAll: true } }],
-      },
-      canPrint: true,
     }),
   ],
 });

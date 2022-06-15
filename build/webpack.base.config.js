@@ -70,36 +70,6 @@ module.exports = {
       patterns: [{ from: path.resolve(__dirname, '../public/static'), to: 'static' }],
     }),
   ],
-  optimization: {
-    splitChunks: {
-      chunks: 'initial',
-      minSize: 20000,
-      minChunks: 1,
-      maxAsyncRequests: 5,
-      maxInitialRequests: 3,
-      name: true,
-      cacheGroups: {
-        vendor: {
-          name: 'vendor',
-          test: /[\\/]node_modules[\\/]/,
-          // chunks: 'all',
-          priority: -10,
-        },
-        common: {
-          name: 'common',
-          test: /[\\/]vue|vue-router|vuex[\\/]/,
-          // chunks: 'all',
-          priority: 1,
-        },
-        element: {
-          name: 'element',
-          test: /[\\/]element-ui[\\/]/,
-          // chunks: 'all',
-          priority: 5,
-        },
-      },
-    },
-  },
   resolve: {
     alias: {
       vue$: 'vue/dist/vue.esm.js',

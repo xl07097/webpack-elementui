@@ -19,7 +19,7 @@ export default {
         },
       },
       columns: [
-        { type: 'seq', width: 50, fixed: 'left', width: 100 },
+        { type: 'seq', fixed: 'left', width: 100 },
         { field: 'name', title: 'Name', fixed: 'left', width: 100 },
         { field: 'sex', title: 'Sex', fixed: 'left', width: 100 },
         { field: 'sex1', title: 'Sex' },
