@@ -9,6 +9,8 @@ const instance = axios.create({
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
   },
+  xsrfCookieName: 'xsrf',
+  xsrfHeaderName: 'token',
 });
 
 instance.interceptors.request.use((config) => {
@@ -28,14 +30,14 @@ instance.interceptors.response.use(
     const code = data.code;
 
     switch (code) {
-      case SUCCESS: // 请求成功
-        //   showMessage(msg);
-        break;
-      case LOGIN_TIMEOUT: // 登录超时，token过期，返回 login 页面
-        showMessage('');
-        break;
-      default:
-        break;
+    case SUCCESS: // 请求成功
+      //   showMessage(msg);
+      break;
+    case LOGIN_TIMEOUT: // 登录超时，token过期，返回 login 页面
+      showMessage('');
+      break;
+    default:
+      break;
     }
     console.log(data);
     return data;
@@ -45,15 +47,15 @@ instance.interceptors.response.use(
     console.log(response);
     const { status } = response;
     switch (status) {
-      case 404:
-        showMessage('资源不存在');
-        break;
-      case 500:
-        showMessage('服务器异常');
-        break;
-      default:
-        showMessage('gaga');
-        break;
+    case 404:
+      showMessage('资源不存在');
+      break;
+    case 500:
+      showMessage('服务器异常');
+      break;
+    default:
+      showMessage('gaga');
+      break;
     }
     return Promise.reject(err);
   }

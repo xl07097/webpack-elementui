@@ -6,11 +6,15 @@
     "node": true
   },
   "extends": [
+    "eslint:recommended",
     "plugin:vue/recommended"
   ],
+  "parser": "vue-eslint-parser",
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "document": true,
+    "window": true
   },
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -31,13 +35,11 @@
     ],
     "no-console": [
       0
-    ], // 禁止使用console
+    ],
+    // 禁止使用console
     "indent": [
       2,
-      2,
-      {
-        "switch": 2
-      }
+      2
     ],
     "quotes": [
       2,
@@ -61,7 +63,8 @@
         "vars": "all",
         "args": "after-used"
       }
-    ] // 不能有声明后未被使用的变量或参数
+    ]
+    // 不能有声明后未被使用的变量或参数
     // 'no-alert': 0, //禁止使用alert confirm prompt
     // 'no-array-constructor': 2, //禁止使用数组构造器
     // 'no-bitwise': 0, //禁止使用按位运算符

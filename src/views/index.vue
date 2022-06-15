@@ -1,16 +1,8 @@
 <template>
   <div class="index">
-    <FormRender
-      :value="searchData"
-      :fields="fields"
-    />
-    <el-button @click="gets">
-      获取
-    </el-button>
-    <StarNumber
-      v-model="num"
-      controls-position="right"
-    >
+    <FormRender :value="searchData" :fields="fields" />
+    <el-button @click="gets"> 获取 </el-button>
+    <StarNumber v-model="num" controls-position="right">
       <!-- <template #append>
         %
       </template> -->
@@ -20,6 +12,7 @@
 <script>
 import FormRender from '@/components/form/FormRender';
 import StarNumber from '@/components/StarNumber';
+
 export default {
   name: 'AppIndex',
   components: { FormRender, StarNumber },
@@ -70,6 +63,7 @@ export default {
 .dd {
   position: absolute;
 }
+
 .add {
   display: none;
 }

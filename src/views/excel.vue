@@ -1,11 +1,12 @@
 <template>
   <div>
-    <el-button @click="exportExcel"> 导出 </el-button>
+    <el-button @click="exportExcel">导出</el-button>
   </div>
 </template>
 
 <script>
 import writeXlsxFile from 'write-excel-file';
+
 export default {
   name: 'AppExcel',
   data() {
@@ -75,14 +76,18 @@ export default {
               rowSpan: 1,
               span: 2,
               fontWeight: 'bold',
+              height: 22,
+              alignVertical: 'center',
             },
             {
               value: 'age',
               fontWeight: 'bold',
+              alignVertical: 'center',
             },
             {
               value: 'sex',
               fontWeight: 'bold',
+              alignVertical: 'center',
             },
           ],
           [
@@ -127,6 +132,7 @@ export default {
         ],
         {
           fileName: 'file.xlsx',
+          fontSize: 14,
         }
       );
     },
