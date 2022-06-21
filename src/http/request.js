@@ -110,12 +110,26 @@ export const downloadPost = (url, data = {}, config = {}) => {
 }
 
 
+
+/**
+ * 以链接形式下载(此方法不能处理下载异常),OSS下载
+ * @param {*} url
+ */
+export const downloadOss = url => {
+  window.location.href = `${OSSURIPrefix}${url}`
+}
+
 /**
  * 以链接形式下载(此方法不能处理下载异常)
  * @param {*} url
- * @param {*} data
- * @returns
  */
-export const downloadLink = (url, data = {}) => {
+export const downloadLink = (url) => {
   window.location.href = url
+}
+
+/**
+ * 此方法下载要确保文件存在，或者不会返回错误提示，否则应该用 downloadGet
+ */
+export const downloadData = (url, data = {}) => {
+  window.location.href = `/api/${url}?${qs.stringify(data)}`
 }

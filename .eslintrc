@@ -5,13 +5,12 @@
     "es6": true,
     "node": true
   },
-  "extends": [],
-  "parser": "vue-eslint-parser",
+  "extends": [
+    "plugin:vue/recommended"
+  ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly",
-    "document": true,
-    "window": true
+    "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
     "ecmaVersion": 2020,
@@ -25,5 +24,30 @@
     "prettier",
     "vue"
   ],
-  "rules": {}
+  "rules": {
+    "no-undef": [
+      0
+    ],
+    "no-console": [
+      0
+    ], // 禁止使用console
+    "indent": [
+      2,
+      2
+    ],
+    "quotes": [
+      2,
+      "single"
+    ],
+    "vue/script-setup-uses-vars": [
+      0
+    ],
+    "no-unused-vars": [
+      1,
+      {
+        "vars": "all",
+        "args": "after-used"
+      }
+    ]
+  }
 }

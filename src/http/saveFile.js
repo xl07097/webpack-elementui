@@ -7,14 +7,16 @@ export const getExportName = (res) => {
   return decodeURIComponent(headers['content-disposition'].replace(/\w+;filename=(.*)/, '$1'));
 };
 
+
+  // let blob = new Blob([data], {
+  //     type: type                 // 'application/vnd.ms-excel'
+  // })
+
 /**
  * @param {*} blob blob数据
  * @param {*} filename 文件名
  */
 export const saveFile = (blob, filename) => {
-  // let blob = new Blob([data], {
-  //     type: type                 // 'application/vnd.ms-excel'
-  // })
   if ('msSaveOrOpenBlob' in navigator) {
     // 兼容edge
     window.navigator.msSaveOrOpenBlob(blob, filename);

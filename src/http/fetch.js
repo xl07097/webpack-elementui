@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { showMessage } from '@/utils/message';
-import { LOGIN_TIMEOUT, SUCCESS } from '@/config/statusCode';
 import {responseHandle} from './httpHandle'
 
 const instance = axios.create({
@@ -10,8 +9,8 @@ const instance = axios.create({
   headers: {
     'X-Requested-With': 'XMLHttpRequest',
   },
-  xsrfCookieName: 'xsrf',
-  xsrfHeaderName: 'token',
+  xsrfCookieName: 'xcsrf',
+  xsrfHeaderName: 'xcsrf',
 });
 
 instance.interceptors.request.use((config) => {
