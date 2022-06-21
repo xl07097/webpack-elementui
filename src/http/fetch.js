@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { showMessage } from '@/utils/message';
 import { LOGIN_TIMEOUT, SUCCESS } from '@/config/statusCode';
+import {responseHandle} from './httpHandle'
 
 const instance = axios.create({
   baseURL: '/api/',
@@ -27,19 +28,7 @@ instance.interceptors.response.use(
       return res;
     }
     const data = res.data;
-    const code = data.code;
-
-    switch (code) {
-    case SUCCESS: // 请求成功
-      //   showMessage(msg);
-      break;
-    case LOGIN_TIMEOUT: // 登录超时，token过期，返回 login 页面
-      showMessage('');
-      break;
-    default:
-      break;
-    }
-    console.log(data);
+    responseHandle(data)
     return data;
   },
   (err) => {

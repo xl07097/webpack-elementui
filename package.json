@@ -62,7 +62,6 @@
     "css-loader": "^6.7.1",
     "css-minimizer-webpack-plugin": "^4.0.0",
     "eslint": "^8.17.0",
-    "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-vue": "^9.1.1",
     "file-loader": "^6.1.0",
@@ -94,9 +93,6 @@
     "webpack-merge": "^5.8.0"
   },
   "types": "./src/types/index.d.ts",
-  "jshintConfig": {
-    "esversion": 9
-  },
   "lint-staged": {
     "src/**/*.{js,vue}": [
       "prettier --write",
