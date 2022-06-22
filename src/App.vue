@@ -5,22 +5,22 @@
   </div>
 </template>
 <script>
-import appHeader from '@/components/header/app-header'
+import AppHeader from '@/components/header/app-header';
 
 export default {
   name: 'App',
   components: {
-    appHeader,
+    AppHeader
   },
   created() {
     window.addEventListener('beforeunload', () => {
-      sessionStorage.setItem('tmpData', '909090')
-    })
+      sessionStorage.setItem('tmpData', '909090');
+    });
 
-    console.log(sessionStorage.getItem('tmpData'))
-    sessionStorage.removeItem('tmpData')
-  },
-}
+    console.log(sessionStorage.getItem('tmpData'));
+    sessionStorage.removeItem('tmpData');
+  }
+};
 </script>
 <style lang="less">
 @import 'animate.css';

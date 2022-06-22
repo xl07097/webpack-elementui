@@ -1,8 +1,16 @@
 <template>
   <div class="index">
-    <FormRender :value="searchData" :fields="fields" />
-    <el-button @click="gets"> 获取 </el-button>
-    <StarNumber v-model="num" controls-position="right">
+    <FormRender
+      :value="searchData"
+      :fields="fields"
+    />
+    <el-button @click="gets">
+      获取
+    </el-button>
+    <StarNumber
+      v-model="num"
+      controls-position="right"
+    >
       <!-- <template #append>
         %
       </template> -->
