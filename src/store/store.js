@@ -13,31 +13,20 @@ Vue.use(Vuex);
  */
 
 const add = function add({ path, name, pid, component, id }) {
-  // if (pid === '0') {
   router.addRoute({
     path: path,
-    component: component ? () => import('@/views/InfiniteScroll.vue') : null,
+    component: component ? () => import('@/views/InfiniteScroll.vue') : () => import('@/views/pages/accountInfo.vue'),
     name: name, // 命名路由
-    // components?: { [name: string]: Component }, // 命名视图组件
   });
-  // } else {
-  //   const parent = list.find((item) => pid === item.id);
-  //   router.addRoute(parent.name, {
-  //     path: path,
-  //     component: component ? () => import(component): null,
-  //     name: name, // 命名路由
-  //     // components?: { [name: string]: Component }, // 命名视图组件
-  //   });
-  // }
 };
-let list = [];
+const list = [];
 const findQuestions = function findQuestions(tree) {
   console.time('label');
   // 模拟栈，管理结点
-  let stack = tree;
+  const stack = tree;
   while (stack.length) {
     // 栈顶节点出栈
-    let node = stack.shift();
+    const node = stack.shift();
     list.push({
       ...node,
       children: [],
@@ -80,7 +69,7 @@ export default new Vuex.Store({
   actions: {
     // 异步// 辅助函数 mapMutations
     getMenu({ commit }) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, _reject) => {
         getMenu().then((data) => {
           if (data.code === 200) {
             findQuestions(data.data);

@@ -9,7 +9,7 @@ import './directives/preventClick';
 
 import './importComponent';
 import './importVxeTable';
-import 'vxe-table/styles/index.scss';
+import 'vxe-table/lib/style.min.css'
 import App from './App';
 import './router/permission';
 

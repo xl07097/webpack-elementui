@@ -19,16 +19,16 @@ export const saveFile = (blob, filename) => {
   if ('msSaveOrOpenBlob' in navigator) {
     // 兼容edge
     window.navigator.msSaveOrOpenBlob(blob, filename)
-  } else if (window.navigator && window.navigator.msSaveBlob) {
+  } else if (window.navigator.msSaveBlob) {
     window.navigator.msSaveBlob(blob, filename)
   } else {
     /* 火狐谷歌的文件下载方式 */
-    let a = document.createElement('a')
-    let href = window.URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    const href = window.URL.createObjectURL(blob)
     a.href = href
     a.download = filename
     document.body.appendChild(a)
-    let evt = new MouseEvent('click', {
+    const evt = new MouseEvent('click', {
       bubbles: false,
       cancelable: true,
       view: window,
