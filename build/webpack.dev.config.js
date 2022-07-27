@@ -1,7 +1,7 @@
-const { merge } = require('webpack-merge');
-const path = require('path');
-const baseConfig = require('./webpack.base.config');
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const { merge } = require('webpack-merge')
+const path = require('path')
+const baseConfig = require('./webpack.base.config')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -10,20 +10,22 @@ module.exports = merge(baseConfig, {
     filename: '[name].js',
     publicPath: '/',
   },
-  plugins: [new BundleAnalyzerPlugin({
-    analyzerPort: 10002
-  })],
+  plugins: [
+    new BundleAnalyzerPlugin({
+      analyzerPort: 10002,
+    }),
+  ],
   devServer: {
     historyApiFallback: true,
     open: true,
     hot: true,
     port: '9810',
     proxy: {
-      '/api': {
-        target: 'https://sse.zhiqiuge.com/api',
+      '/note': {
+        target: 'http://localhost:9087/note',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/',
+          '^/note': '/',
         },
       },
     },
@@ -83,4 +85,4 @@ module.exports = merge(baseConfig, {
       },
     ],
   },
-});
+})
