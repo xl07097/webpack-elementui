@@ -32,20 +32,31 @@ export default {
       ];
       const schema = [
         {
-          column: 'Name',
+          column: '姓名',
           type: String,
-          width: 14,
+          width: 30,
           span: 2,
-          height: 10,
+          fontSize: 18,
+          height: 24,
           value: (student) => student.name
         },
         {
-          column: 'Date of Birth',
+          column: '出生日期',
           width: 14,
           color: '#ff0000',
+          fontSize: 18,
           value: (student) => student.dateOfBirth
         }
       ];
+      writeXlsxFile(data,{
+        schema,
+        headerStyle:{
+          height: 30,
+          fontWeight: 'bold',
+          fontSize: 18
+        },
+        fileName: 'file2.xlsx'
+      })
       writeXlsxFile(
         [
           [
@@ -100,18 +111,6 @@ export default {
               value: 'hha'
             }
           ],
-          [
-            {
-              value: 'hha',
-              height: 30,
-            },
-            {
-              value: 'hha'
-            },
-            {
-              value: 'hha'
-            }
-          ]
         ],
         {
           fileName: 'file.xlsx',
