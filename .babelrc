@@ -24,7 +24,16 @@
       {
         "libraryName": "element-ui",
         "styleLibraryName": "theme-chalk"
-      }
+      },
+      "element-ui"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "vxe-table",
+        "style": false // 样式是否也按需加载
+      },
+      "vxe-table"
     ]
   ]
 }

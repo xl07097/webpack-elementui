@@ -31,7 +31,7 @@ instance.interceptors.response.use(
     return data
   },
   (err) => {
-    let response = err.response
+    const response = err.response
     console.log(response)
     const { status } = response
     switch (status) {

@@ -1,14 +1,14 @@
 import router from './index';
 import store from '../store/store';
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
   if (to.path === '/login') {
     sessionStorage.clear();
     next();
     return;
   }
 
-  let userId = sessionStorage.getItem('loginUserId');
+  const userId = sessionStorage.getItem('loginUserId');
   if (!userId) {
     next('/login');
     return;
@@ -21,7 +21,7 @@ router.beforeEach((to, from, next) => {
     });
     return;
   }
-  let perms = store.state.perms || [];
+  const perms = store.state.perms || [];
   if ((perms.length === 1 && perms[0] === '*') || perms.includes(to.name)) {
     next();
     return;

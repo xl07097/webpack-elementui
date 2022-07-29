@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-button @click="exportExcel">导出</el-button>
+    <el-button @click="exportExcel">
+      导出
+    </el-button>
   </div>
 </template>
 
@@ -19,55 +21,42 @@ export default {
           name: 'John Smith',
           dateOfBirth: 'John Smith',
           cost: 1800,
-          paid: true,
+          paid: true
         },
         {
           name: 'Alice Brown',
           dateOfBirth: 'John Smith',
           cost: 2599.99,
-          paid: false,
-        },
-        {
-          name: 'Alice Brown',
-          dateOfBirth: 'John Smith',
-          cost: 2599.99,
-          paid: false,
-        },
-        {
-          name: 'Alice Brown',
-          dateOfBirth: 'John Smith',
-          cost: 2599.99,
-          paid: false,
-        },
-        {
-          name: 'Alice Brown',
-          dateOfBirth: 'John Smith',
-          cost: 2599.99,
-          paid: false,
-        },
-        {
-          name: 'Alice Brown',
-          dateOfBirth: 'John Smith',
-          cost: 2599.99,
-          paid: false,
+          paid: false
         },
       ];
       const schema = [
         {
-          column: 'Name',
+          column: '姓名',
           type: String,
-          width: 14,
+          width: 30,
           span: 2,
-          height: 10,
-          value: (student) => student.name,
+          fontSize: 18,
+          height: 24,
+          value: (student) => student.name
         },
         {
-          column: 'Date of Birth',
+          column: '出生日期',
           width: 14,
           color: '#ff0000',
-          value: (student) => student.dateOfBirth,
-        },
+          fontSize: 18,
+          value: (student) => student.dateOfBirth
+        }
       ];
+      writeXlsxFile(data,{
+        schema,
+        headerStyle:{
+          height: 30,
+          fontWeight: 'bold',
+          fontSize: 18
+        },
+        fileName: 'file2.xlsx'
+      })
       writeXlsxFile(
         [
           [
@@ -76,68 +65,60 @@ export default {
               rowSpan: 1,
               span: 2,
               fontWeight: 'bold',
-              height: 22,
-              alignVertical: 'center',
+              height: 30,
+              alignVertical: 'center'
             },
             {
               value: 'age',
               fontWeight: 'bold',
-              alignVertical: 'center',
+              height: 30,
+              alignVertical: 'center'
             },
             {
               value: 'sex',
               fontWeight: 'bold',
-              alignVertical: 'center',
-            },
+              height: 30,
+              alignVertical: 'center'
+            }
           ],
           [
             {
               value: 'name',
-              fontWeight: 'bold',
+              height: 30,
+              fontWeight: 'bold'
             },
             {
               value: 'age',
-              fontWeight: 'bold',
+              height: 30,
+              fontWeight: 'bold'
             },
             {
               value: 'sex',
-              fontWeight: 'bold',
-            },
+              height: 30,
+              fontWeight: 'bold'
+            }
           ],
           [
             {
               value: 'hha',
               rowSpan: 1,
-              span: 1,
+              span: 1
             },
             {
-              value: 'hha',
+              value: 'hha'
             },
             {
-              value: 'hha',
-            },
-          ],
-          [
-            {
-              value: 'hha',
-              height: 20,
-            },
-            {
-              value: 'hha',
-            },
-            {
-              value: 'hha',
-            },
+              value: 'hha'
+            }
           ],
         ],
         {
           fileName: 'file.xlsx',
-          fontSize: 14,
+          fontSize: 14
         }
       );
-    },
-  },
+    }
+  }
 };
 </script>
 
-<style lang="less"></style>
