@@ -4,7 +4,7 @@ class MyStorage{
 
   prefix;
 
-  constructor(storage=window.sessionStorage, prefix='erp_') {
+  constructor(storage=window.sessionStorage, prefix='note_') {
     this.storage = storage
     this.prefix = prefix
   }
@@ -17,7 +17,7 @@ class MyStorage{
     const value = this.storage.getItem(`${this.prefix}${key}`)
     try {
       return JSON.parse(value).data
-    } catch (e) {
+    } catch (_e) {
       return null
     }
   }

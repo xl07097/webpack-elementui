@@ -17,7 +17,3 @@ export const deepClone = (target) => {
   return result;
 };
 
-class Quene {
-  value = null;
-  _head = '';
-}
