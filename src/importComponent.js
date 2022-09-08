@@ -75,6 +75,7 @@ import {
   Tree,
   Upload,
   MessageBox,
+  Scrollbar,
 } from 'element-ui';
 
 Vue.use(Pagination);
@@ -150,6 +151,7 @@ Vue.use(Calendar);
 Vue.use(Backtop);
 Vue.use(PageHeader);
 Vue.use(CascaderPanel);
+Vue.use(Scrollbar);
 
 Vue.use(Loading.directive);
 

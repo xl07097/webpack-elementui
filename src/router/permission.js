@@ -2,26 +2,27 @@ import router from './index';
 import store from '../store/store';
 
 router.beforeEach((to, _from, next) => {
+  // debugger
   if (to.path === '/login') {
     sessionStorage.clear();
     next();
     return;
   }
 
-  const userId = sessionStorage.getItem('loginUserId');
-  if (!userId) {
+  const token = sessionStorage.getItem('token');
+  if (!token) {
     next('/login');
     return;
   }
 
   // 刷新状态 ---- 重新获取路由
-  if (store.state.refresh === false) {
-    store.dispatch('getMenu').then(() => {
+  if (store.state.menu.refresh === false) {
+    store.dispatch('menu/getMenu').then(() => {
       next({ ...to }); // hack方法 确保addRoutes已完成
     });
     return;
   }
-  const perms = store.state.perms || [];
+  const perms = store.state.menu.perms || [];
   if ((perms.length === 1 && perms[0] === '*') || perms.includes(to.name)) {
     next();
     return;

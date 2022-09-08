@@ -17,6 +17,7 @@ export default {
       }).then((res) => {
         if (res.code === 200) {
           sessionStorage.setItem('token', res.data.token)
+          this.$router.push('/excel')
         }
       })
     },
