@@ -22,13 +22,13 @@ router.beforeEach((to, _from, next) => {
     });
     return;
   }
-  const perms = store.state.menu.perms || [];
-  if ((perms.length === 1 && perms[0] === '*') || perms.includes(to.name)) {
-    next();
-    return;
-  }
+  // const perms = store.state.menu.perms || [];
+  // if ((perms.length === 1 && perms[0] === '*') || perms.includes(to.name)) {
+  //   next();
+  //   return;
+  // }
 
-  next('/');
+  next();
 });
 
 router.afterEach(() => {
