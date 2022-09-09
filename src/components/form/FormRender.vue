@@ -7,7 +7,7 @@
     inline
   >
     <el-form-item
-      v-for="field in fields"
+      v-for="field of fields"
       :key="field.prop"
       :label="field.label"
       :label-width="field.labelWidth"
