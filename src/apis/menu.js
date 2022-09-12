@@ -1,9 +1,9 @@
-import { get } from '@/http/request.js';
+import { get } from '@/http/request.js'
 
 export function getMenu() {
-  return get('/sysMenu/tree');
+  return get('/sysMenu/tree')
 }
 
-export function getPrivilegeMenu (){
+export function getPrivilegeMenu() {
   return get('/sysMenu/getPrivilegeMenu')
 }
