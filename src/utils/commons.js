@@ -6,9 +6,9 @@ export const deepClone = (target) => {
       result.push(deepClone(item));
     });
   } else if (Object.prototype.toString.call(target) === '[object Object]') {
-    target = {};
+    result = {};
     Object.keys(target).forEach((key) => {
-      target[key] = deepClone(target[key]);
+      result[key] = deepClone(target[key]);
     });
   } else {
     result = target;
