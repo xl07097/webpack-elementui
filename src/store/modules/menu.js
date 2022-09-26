@@ -11,8 +11,8 @@ const add = function add({ path, name, pid, component, id }) {
   router.addRoute({
     path: path,
     component: component
-      ? () => import('@/views/InfiniteScroll.vue')
-      : () => import('@/views/pages/accountInfo.vue'),
+      ? () => import(`@/views/${component}`)
+      : () => import('@/components/MiddlePage.vue'),
     name: name, // 命名路由
   })
 }

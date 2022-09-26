@@ -14,7 +14,7 @@
 </template>
 
 <script>
-const src = require('../assets/unit/default.png');
+const src = require('@/assets/unit/default.png');
 export default {
   name: 'InfiniteScroll',
   data() {

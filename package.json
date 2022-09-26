@@ -32,7 +32,7 @@
     "vue": "^2.6.12",
     "vue-router": "^3.5.2",
     "vuex": "^3.6.2",
-    "vxe-table": "^3.6.5",
+    "vxe-table": "^3.6.6",
     "write-excel-file": "^1.4.12",
     "xe-utils": "^3.4.3"
   },

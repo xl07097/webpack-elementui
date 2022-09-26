@@ -12,7 +12,7 @@ export default {
   methods: {
     login() {
       post('/login', {
-        name: 'jack',
+        name: 'xueliang',
         password: '28b064f575db2448c49c1db52e067d6d',
       }).then((res) => {
         if (res.code === 200) {

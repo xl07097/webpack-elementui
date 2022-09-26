@@ -38,7 +38,7 @@ const routers = [
     meta: {
       title: 'excel',
     },
-    component: (resolve) => require(['@/views/excel.vue'], resolve),
+    component: (resolve) => require(['@/views/other/excel.vue'], resolve),
   },
   // {
   //   path: '/infiniteScroll',
