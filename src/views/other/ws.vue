@@ -8,8 +8,8 @@
 </template>
 
 <script>
-const src = require('../assets/unit/default.png');
-const src1 = require('../assets/mifeng.jpg');
+const src = require('@/assets/unit/default.png');
+const src1 = require('@/assets/mifeng.jpg');
 export default {
   name: 'AppWs',
   data() {
