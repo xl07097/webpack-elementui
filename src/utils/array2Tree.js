@@ -20,3 +20,19 @@ export const array2Tree = (data) => {
 
   return tree;
 };
+
+export const tree2Array = (tree) => {
+  const list = []
+  const stack = [...tree]
+  while (stack.length) {
+    const node = stack.shift()
+    list.push({
+      ...node,
+      children: [],
+    })
+    if (node.children && node.children.length) {
+      stack.push(...node.children)
+    }
+  }
+  return list
+};
