@@ -49,7 +49,7 @@ export default {
     refresh: false,
   },
   mutations: {
-    // 同步   // 辅助函数 mapActions
+    // 同步 // 辅助函数 mapMutations  
     setMenu(state, payload) {
       state.menu = payload.menu || []
       state.perms = payload.perms || []
@@ -57,7 +57,7 @@ export default {
     },
   },
   actions: {
-    // 异步// 辅助函数 mapMutations
+    // 异步// 辅助函数 mapActions
     getMenu({ commit }) {
       return new Promise((resolve, _reject) => {
         getPrivilegeMenu().then((data) => {

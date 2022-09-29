@@ -8,7 +8,9 @@
 <script>
 import writeXlsxFile from 'write-excel-file'
 import readXlsxFile from 'read-excel-file'
+import {title, row2, row3, row4, row5 } from './excelData'
 
+const Excel = require('exceljs')
 export default {
   name: 'AppExcel',
   data() {
@@ -17,112 +19,43 @@ export default {
   methods: {
     exportExcel() {
       const data = [
-        {
-          name: 'John Smith',
-          dateOfBirth: 'John Smith',
-          cost: 1800,
-          paid: true,
-        },
-        {
-          name: 'Alice Brown',
-          dateOfBirth: 'John Smith',
-          cost: 2599.99,
-          paid: false,
-        },
+        title,
+        row2,
+        row3,
+        row4,
+        row5
       ]
-      const schema = [
+        console.log(data)
+      writeXlsxFile(data,
         {
-          column: '姓名',
-          type: String,
-          width: 30,
-          span: 2,
-          fontSize: 18,
-          height: 24,
-          value: (student) => student.name,
-        },
-        {
-          column: '出生日期',
-          width: 14,
-          color: '#ff0000',
-          fontSize: 18,
-          value: (student) => student.dateOfBirth,
-        },
-      ]
-      writeXlsxFile(data, {
-        schema,
-        headerStyle: {
-          height: 30,
-          fontWeight: 'bold',
-          fontSize: 18,
-        },
-        fileName: 'file2.xlsx',
-      })
-      writeXlsxFile(
-        [
-          [
-            {
-              value: 'name',
-              rowSpan: 1,
-              span: 2,
-              fontWeight: 'bold',
-              height: 30,
-              alignVertical: 'center',
-            },
-            {
-              value: 'age',
-              fontWeight: 'bold',
-              height: 30,
-              alignVertical: 'center',
-            },
-            {
-              value: 'sex',
-              fontWeight: 'bold',
-              height: 30,
-              alignVertical: 'center',
-            },
-          ],
-          [
-            {
-              value: 'name',
-              height: 30,
-              fontWeight: 'bold',
-            },
-            {
-              value: 'age',
-              height: 30,
-              fontWeight: 'bold',
-            },
-            {
-              value: 'sex',
-              height: 30,
-              fontWeight: 'bold',
-            },
-          ],
-          [
-            {
-              value: 'hha',
-              rowSpan: 1,
-              span: 1,
-            },
-            {
-              value: 'hha',
-            },
-            {
-              value: 'hha',
-            },
-          ],
-        ],
-        {
-          fileName: 'file.xlsx',
-          fontSize: 14,
+          headerStyle: {
+            height: 30,
+            fontSize: 16,
+          },
+          width: 20,
+          fileName: '成功人力资源集团服务计算单.xlsx',
         }
       )
     },
-    upfile(e) {
+    async upfile(e) {
       const file = e.target.files[0]
       readXlsxFile(file).then((rows) => {
         console.log(rows)
       })
+      
+      const workbook = new Excel.Workbook();
+      const data = await workbook.xlsx.load(file)
+      console.log(data)
+      const sheet = data.getWorksheet(1);
+      sheet.eachRow(function(rows, rowNumber){
+        let arr = []
+        rows.eachCell(function(cell, index){
+          arr.push(cell.value)
+        })
+      console.log(arr)
+      })
+      const rows = sheet.getRows()
+      console.log(rows)
     },
   },
 }
