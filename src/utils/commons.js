@@ -17,3 +17,10 @@ export const deepClone = (target) => {
   return result;
 };
 
+export const delay = (ms = 200) => {
+  return new Promise((resovle) => setTimeout(resovle, ms))
+}
+
+export function timeout(ms = 1000) {
+  return new Promise((_, reject) => setTimeout(reject, ms));
+}
