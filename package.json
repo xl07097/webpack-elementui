@@ -18,7 +18,7 @@
     "url": ""
   },
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^1.1.2",
     "core-js": "^3.25.3",
     "crypto-js": "^4.1.1",
     "dayjs": "^1.10.7",
