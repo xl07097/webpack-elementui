@@ -45,17 +45,15 @@ export default {
       
       const workbook = new Excel.Workbook();
       const data = await workbook.xlsx.load(file)
-      console.log(data)
       const sheet = data.getWorksheet(1);
       sheet.eachRow(function(rows, rowNumber){
         let arr = []
         rows.eachCell(function(cell, index){
-          arr.push(cell.value)
+          arr.push(cell.text)
+          // console.log(cell)
         })
-      console.log(arr)
+        console.log(rows)
       })
-      const rows = sheet.getRows()
-      console.log(rows)
     },
   },
 }
