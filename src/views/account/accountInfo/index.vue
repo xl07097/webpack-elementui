@@ -5,6 +5,7 @@
     :show-footer="true"
     show-overflow
     :footer-method="footerMethod"
+    :merge-cells="mergeCells"
     :footer-cell-class-name="footerCellClassName3"
     :data="tableData3"
   >
@@ -101,6 +102,9 @@ export default {
           address: 'test abc',
         },
       ],
+      mergeCells: [
+        {row: 1, col: 5,rowspan: 2, colspan: 2}
+      ]
     };
   },
   methods: {
