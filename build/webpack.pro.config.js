@@ -29,27 +29,6 @@ module.exports = merge(baseConfig, {
         ],
       },
       {
-        test: /.less$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              esModule: false,
-            },
-          },
-          'postcss-loader',
-          {
-            loader: 'less-loader',
-            options: {
-              lessOptions: {
-                javascriptEnabled: true,
-              },
-            },
-          },
-        ],
-      },
-      {
         test: /.(sass|scss)$/,
         use: [
           MiniCssExtractPlugin.loader,
