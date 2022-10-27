@@ -15,6 +15,13 @@ export default {
 };
 </script>
 <style lang="less">
-@import 'animate.css';
-@import 'common.less';
+@import './styles/animate.css';
+@import './styles/common.less';
+
+</style>
+<style lang="scss">
+@import './styles/theme-variable.scss';
+div {
+  background: $--color-primary;
+}
 </style>

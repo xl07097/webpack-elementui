@@ -3,7 +3,6 @@
     class="mytable-footer"
     height="400"
     :show-footer="true"
-    show-overflow
     :footer-method="footerMethod"
     :merge-cells="mergeCells"
     :footer-cell-class-name="footerCellClassName3"
@@ -170,4 +169,14 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+.mytable-footer{
+  .vxe-table--fixed-wrapper{
+    .vxe-table--body-wrapper{
+      .vxe-body--column{
+        user-select: none;
+      }
+    }
+  } 
+}
+</style>
