@@ -1,4 +1,5 @@
 import { showMessage } from '@/utils/message'
+import router from '@/router/index'
 
 import { getExportName, saveFile } from './saveFile'
 
@@ -7,6 +8,7 @@ export const responseHandle = ({ code, msg }) => {
   switch (code) {
     case 300:
       showMessage(msg)
+      router.push('/login')
       break
     case 500:
       showMessage(msg)

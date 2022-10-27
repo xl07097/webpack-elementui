@@ -74,7 +74,7 @@ module.exports = {
     alias: {
       vue$: 'vue/dist/vue.esm.js',
       '@': path.resolve(__dirname, '../src'),
-      'scss-loader': 'sass-loader',
+      // 'scss-loader': 'sass-loader',
     },
     extensions: ['.js', '.json', '.vue'],
   },
