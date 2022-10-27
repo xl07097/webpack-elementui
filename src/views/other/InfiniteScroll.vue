@@ -58,7 +58,7 @@ export default {
   },
 };
 </script>
-<style lang="less">
+<style lang="scss">
 .infiniteScroll {
   .outer {
     width: 200px;

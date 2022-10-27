@@ -53,7 +53,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .mail-wrap {
   display: flex;
   justify-content: space-between;

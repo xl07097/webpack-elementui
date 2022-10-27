@@ -19,7 +19,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="scss">
 .input-wraps {
   display: inline-table;
 }

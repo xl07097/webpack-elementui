@@ -14,12 +14,9 @@ export default {
   },
 };
 </script>
-<style lang="less">
-@import './styles/animate.css';
-@import './styles/common.less';
-
-</style>
 <style lang="scss">
+@import './styles/animate.css';
+@import './styles/common.scss';
 @import './styles/theme-variable.scss';
 div {
   background: $--color-primary;

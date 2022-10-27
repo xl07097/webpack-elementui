@@ -38,7 +38,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .app-header {
   height: 60px;
   display: flex;
