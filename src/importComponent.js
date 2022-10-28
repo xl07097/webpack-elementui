@@ -158,7 +158,7 @@ Vue.use(Loading.directive);
 Vue.prototype.$ELEMENT = { size: 'small', zIndex: 1000 };
 Vue.prototype.$loading = Loading.service;
 // Vue.prototype.$msgbox = MessageBox;
-// Vue.prototype.$alert = MessageBox.alert;
+Vue.prototype.$alert = MessageBox.alert;
 Vue.prototype.$confirm = MessageBox.confirm;
 // Vue.prototype.$prompt = MessageBox.prompt;
 // Vue.prototype.$notify = Notification;
