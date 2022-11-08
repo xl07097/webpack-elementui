@@ -4,15 +4,11 @@
     height="400"
     :show-footer="true"
     :footer-method="footerMethod"
-    :merge-cells="mergeCells"
     :footer-cell-class-name="footerCellClassName3"
     :data="tableData3"
   >
     <vxe-column type="seq" width="60" fixed="left" />
-    <vxe-column type="seq" width="60" fixed="left" />
-    <vxe-column type="seq" width="60" fixed="left" />
-    <vxe-column type="seq" width="60" fixed="left" />
-    <vxe-column type="seq" width="60" fixed="left" />
+    <vxe-column field="address" title="地址" width="100" fixed="left" />
     <vxe-colgroup title="基本信息">
       <vxe-column field="name" title="Name" min-width="600" sortable />
       <vxe-column field="age" title="Age" min-width="600" />
@@ -44,7 +40,7 @@ export default {
           sex: '1',
           age: 22,
           amount: 666,
-          address: 'Guangzhou',
+          address: 'GuangzhouGuangzhouGuangzhouGuangzhou',
         },
         {
           id: 10003,
@@ -172,9 +168,16 @@ export default {
 <style lang="scss">
 .mytable-footer{
   .vxe-table--fixed-wrapper{
+    .vxe-table--fixed-left-wrapper {
+      .vxe-table--body-wrapper.fixed-left--wrapper{
+        // overflow-x: hidden;
+        // padding-bottom: 17px;
+        width: auto;
+      }
+    }
     .vxe-table--body-wrapper{
       .vxe-body--column{
-        user-select: none;
+        // user-select: none;
       }
     }
   } 
