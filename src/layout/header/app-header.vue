@@ -1,13 +1,13 @@
 <template>
   <div class="app-header">
-    <el-tag v-for="record of records" :key="record.id" @click="push(record.path)">
+    <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
       {{ record.name }}
     </el-tag>
   </div>
 </template>
 
 <script>
-import config, { tree } from './config'
+
 export default {
   name: 'AppHeader',
   data() {
@@ -15,23 +15,17 @@ export default {
       records: [],
     }
   },
+  computed:{
+    menuGetter(){
+      return this.$store.getters['menu/menuGetter']
+    }
+  },
   mounted() {
-    this.records = config.records.map((item) => {
-      if (item.pid !== '0') {
-        const parent = config.records.find((record) => item.pid === record.id)
-        return {
-          ...item,
-          path: `${parent.path}/${item.path}`,
-        }
-      }
-      return {
-        ...item,
-      }
-    })
+    console.log(this.$store)
   },
   methods: {
     push(path) {
-      this.$router.push(`/${path}`)
+      this.$router.push(`${path}`)
       window.console.log(path)
     },
   },

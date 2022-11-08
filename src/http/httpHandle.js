@@ -6,6 +6,7 @@ import { getExportName, saveFile } from './saveFile'
 // 响应状态码 弹框处理
 export const responseHandle = ({ code, msg }) => {
   switch (code) {
+    case 1001:
     case 300:
       showMessage(msg)
       router.push('/login')
