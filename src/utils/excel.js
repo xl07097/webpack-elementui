@@ -1,11 +1,14 @@
 import writeXlsxFile from 'write-excel-file';
 
-export const generatorSchema = (columns, title, key) => {
+export const generatorSchema = (columns, option={}) => {
+  const title = option.title || 'title'
+  const key =  option.key || 'prop'
+  const OriginWidth = option.width || 140
   return columns.map((item) => {
-    const field = item[key || 'prop'];
-    const width = item.width || 140;
+    const field = item[key];
+    const width = item.width || OriginWidth;
     return {
-      column: item[title || 'title'],
+      column: item[title],
       width: width / 5,
       height:30,
       value: (row) => row[field],
