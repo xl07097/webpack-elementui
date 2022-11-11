@@ -4,9 +4,11 @@ export const title = [
     rowSpan: 1,
     span: 9,
     height: 30,
-    fontSize: 16,
+    fontSize: 20,
     align: 'center',
+    fontWeight: 'normal',
     alignVertical: 'center',
+    backgroundColor: '#ff0000'
   },
 ]
 
@@ -16,7 +18,7 @@ export const row2 = [
     rowSpan: 1,
     span: 1,
     height: 30,
-    fontSize: 11,
+    fontSize: 20,
     align: 'left',
     alignVertical: 'center',
   },
@@ -25,7 +27,7 @@ export const row2 = [
     rowSpan: 1,
     span: 3,
     height: 30,
-    fontSize: 11,
+    fontSize: 20,
     align: 'left',
     alignVertical: 'center',
   },null,null,
