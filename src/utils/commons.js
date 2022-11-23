@@ -3,6 +3,8 @@
  *
  * @returns
  */
+const _toString = Object.prototype.toString
+
 export const deepClone = (target) => {
   let result
   if (Array.isArray(target)) {
@@ -10,7 +12,7 @@ export const deepClone = (target) => {
     target.forEach((item) => {
       result.push(deepClone(item))
     })
-  } else if (Object.prototype.toString.call(target) === '[object Object]') {
+  } else if (_toString.call(target) === '[object Object]') {
     result = {}
     Object.keys(target).forEach((key) => {
       result[key] = deepClone(target[key])
@@ -27,12 +29,12 @@ export const deepClone = (target) => {
  * @param {*} data
  * @returns
  */
-export const array2Tree = (data) => {
+export const array2Tree = (data, options) => {
   const tmpMap = {}
   const tree = []
-  const key = 'id'
-  const parentKey = 'pid'
-  const childKey = 'children'
+  const key = options.key || 'id'
+  const parentKey = options.parentKey || 'pid'
+  const childKey = options.childKey || 'children'
 
   data.forEach((item) => {
     tmpMap[item[key]] = item

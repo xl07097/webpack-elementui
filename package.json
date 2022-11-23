@@ -52,6 +52,7 @@
     "@typescript-eslint/parser": "^5.28.0",
     "@vue/babel-helper-vue-jsx-merge-props": "^1.2.1",
     "@vue/babel-plugin-transform-vue-jsx": "^1.2.1",
+    "@vue/compiler-dom": "^3.2.45",
     "autoprefixer": "^8.6.5",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
