@@ -79,7 +79,7 @@ export default {
               redirect: '/index',
             })
             commit('setMenu', {
-              menu: data.data,
+              menu: Object.freeze(data.data),
               // perms: ['*'],
             })
             resolve()
