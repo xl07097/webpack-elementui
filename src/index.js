@@ -12,6 +12,11 @@ import './importVxeTable'
 import 'vxe-table/lib/style.min.css'
 import App from './App'
 import './router/permission'
+import alert from './components/MessageBox/alert'
+import confirm from './components/MessageBox/confirm'
+
+Vue.use(alert)
+Vue.use(confirm)
 
 new Vue({
   el: '#app',

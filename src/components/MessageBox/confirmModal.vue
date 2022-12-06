@@ -7,7 +7,7 @@
     <div class="alert-modal">
       <div class="modal-header">
         <img
-          src="../../assets/alertModal/info.png"
+          :src="require('@/assets/alertModal/info.png').default"
           alt="info"
         >
         <span>{{ title }}</span>

@@ -1,7 +1,7 @@
 import Confirm from './confirmModal';
 
 function install(Vue) {
-  Object.defineProperty(Vue.prototype, '$confirm', {
+  Object.defineProperty(Vue.prototype, '$confirms', {
     get() {
       let div = document.createElement('div');
       document.body.appendChild(div);

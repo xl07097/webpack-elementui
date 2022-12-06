@@ -1,7 +1,7 @@
 import Alert from './AlertModal';
 
 function install(Vue) {
-  Object.defineProperty(Vue.prototype, '$alert', {
+  Object.defineProperty(Vue.prototype, '$alerts', {
     get() {
       let div = document.createElement('div');
       document.body.appendChild(div);
