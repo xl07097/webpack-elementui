@@ -29,9 +29,9 @@
       </el-checkbox-group>
       <div class="table-column-popover-footer">
         <el-button type="text">还原</el-button>
-        <el-button type="text">确定</el-button>
+        <el-button type="text" @click="confirm">确定</el-button>
       </div>
-      <el-button slot="reference" @click="visible = !visible">手动激活</el-button>
+      <el-button slot="reference">手动激活</el-button>
     </el-popover>
   </div>
 </template>
@@ -93,6 +93,11 @@ export default {
         console.log(rows)
       })
     },
+    confirm(){
+      this.$nextTick(() => {
+        document.body.click()
+      })
+    }
   },
 }
 </script>
