@@ -29,11 +29,11 @@ class Validate {
   }
 
   static isExcel(name) {
-    return /(\.xls|\.xlsx|\.XLS|\.XLSX)$/.test(name)
+    return /(\.xls|\.xlsx)$/.test(name.toLowerCase())
   }
 
   static isImage(name) {
-    return /(\.jpg|\.jpeg|\.png|\.JPG|\.JPEG|\.PNG)$/.test(name)
+    return /(\.jpg|\.jpeg|\.png)$/.test(name.toLowerCase())
   }
 
   static isOutLimit(size, limit) {

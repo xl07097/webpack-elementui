@@ -87,3 +87,21 @@ export const delay = (ms = 200) => {
 export function timeout(ms = 1000) {
   return new Promise((_, reject) => setTimeout(reject, ms))
 }
+
+
+export const lastIndex = (arr) => {
+  return arr.length - 1
+}
+
+export const lastItem = (arr) => {
+  return arr.at(-1)
+}
+
+export const getUrlParam = function(name) { // 获取url参数
+ let reg = new RegExp('(^|&?)' + name + '=([^&]*)(&|$)', 'i')
+ let r = window.location.href.substring(1).match(reg)
+ if (r != null) {
+   return decodeURI(r[2])
+}
+ return undefined
+}
