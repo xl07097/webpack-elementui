@@ -1,4 +1,7 @@
+
+
 <script>
+import * as obj from '@/http/request'
 export default {
   name: 'ItemRender',
   props: {
@@ -40,19 +43,27 @@ export default {
         daterange: 'yyyy-MM-dd',
         // week: 'yyyy 第 WW 周'
       },
+      lists: [],
     };
   },
-  // computed:{
-  //   currentValue:{
-  //     get(){
-  //       return this.value
-  //     },
-  //     set(val){
-  //       console.log(val)
-  //       this.$emit('input', val)
-  //     }
-  //   }
-  // },
+  computed:{
+    optionList(){
+      return this.config.lists || this.lists || []
+    }
+  },
+  mounted(){
+    const {request={}} = this.config
+    if(request.url){
+      const method = request.method || 'get'
+      obj[method](request.url, request.data).then(res => {
+        if(request.handleData){
+          this.lists = Object.freeze(request.handleData(res))
+        }else {
+          this.lists = Object.freeze(res.data)
+        }
+      })
+    }
+  },
   methods: {
     renderInput(h) {
       return (
@@ -60,7 +71,6 @@ export default {
       );
     },
     renderSelect(h) {
-      const { lists = [] } = this.config;
       return (
         <el-select
           value={this.value}
@@ -68,7 +78,7 @@ export default {
           clearable
           placeholder={`请选择${this.label}`}
         >
-          {lists.map((list) => {
+          {this.optionList.map((list) => {
             return <el-option key={list.value} label={list.label} value={list.value} />;
           })}
         </el-select>
@@ -88,6 +98,17 @@ export default {
           placeholder={`请选择${this.label}`}
         ></el-date-picker>
       );
+    },
+    renderCascader(h){
+      const props = this.config.props || {}
+      return (
+        <el-cascader 
+          value={this.value} 
+          showAllLevels={false} 
+          options={this.optionList} 
+          props={props} 
+          on-change={this.change}></el-cascader>
+      )
     },
     input(value) {
       this.$emit('input', value);
@@ -119,6 +140,9 @@ export default {
       ].includes(tag)
     ) {
       return this.renderDate(h);
+    }
+    if(tag === 'cascader'){
+      return this.renderCascader(h);
     }
     return this.renderInput(h);
   },

@@ -21,7 +21,39 @@ export default {
       fields: [
         { type: 'input', prop: 'name', label: '姓名' },
         { type: 'input', prop: 'age', label: '年龄' },
-        { type: 'select', prop: 'provice', label: '省', config: { lists: [] } },
+        { type: 'select', prop: 'provice', label: '省', 
+          config: { 
+            request:{
+              url: 'sysArea/list',
+              method: 'post',
+              data:{
+                "parentCode": "320500"
+              },
+              handleData: (res) => {
+                return res.data.map(({id, name}) => {
+                  return {
+                    label: name,
+                    value: id
+                  }
+                })
+              }
+            } 
+          } 
+        },
+        { type: 'cascader', prop: 'cascader', label: '年', 
+          config: {
+            request: {
+              url: 'sysMenu/tree'
+            },
+            props: {
+              checkStrictly: true,
+              emitPath: false,
+              value: 'id',
+              label: 'name',
+              children: 'children',
+            }
+          } 
+        },
         { type: 'year', prop: 'year', label: '年' },
         { type: 'daterange', prop: 'createTime', label: '创建时间' },
         { type: 'date', prop: 'date', label: 'date' },
@@ -31,11 +63,11 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.fields[2].config.lists = [
-        { label: 'lp', value: 'lp' },
-        { label: 'lp1', value: 'lp1' },
-        { label: 'lp2', value: 'lp2' },
-      ]
+      // this.fields[2].config.lists = [
+      //   { label: 'lp', value: 'lp' },
+      //   { label: 'lp1', value: 'lp1' },
+      //   { label: 'lp2', value: 'lp2' },
+      // ]
     })
   },
   methods: {

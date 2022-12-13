@@ -33,6 +33,19 @@
       </div>
       <el-button slot="reference">手动激活</el-button>
     </el-popover>
+
+    <el-form size="small">
+      <ElFormItem  label="运营部门:" prop="operationDeptIdList">
+              <ElCascader
+                ref="dept"
+                v-model="operationDeptIdList"
+                placeholder="请选择运营部门"
+                :options="[]"
+                filterable
+                :clearable="false"
+              />
+            </ElFormItem>
+    </el-form>
   </div>
 </template>
 
@@ -49,6 +62,7 @@ export default {
       visible: false,
       checkList: [],
       all: false,
+      operationDeptIdList: []
     }
   },
   methods: {
