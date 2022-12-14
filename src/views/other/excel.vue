@@ -2,49 +2,18 @@
   <div>
     <el-button @click="exportExcel"> 导出 </el-button>
     <input type="file" @change="upfile" class="upfile" />
-    <el-popover
-      placement="bottom-end"
-      title=""
-      width="200"
-      trigger="click"
-      popper-class="table-column-popover"
-      content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
-    >
-      <el-checkbox
-        class="table-column-all-check"
-        v-model="all"
-        label="全选"
-        @change="changeAll"
-      ></el-checkbox>
-      <el-checkbox-group class="table-column-filter" @change="changeSingle" v-model="checkList" size="mini">
-        <el-checkbox label="1">1</el-checkbox>
-        <el-checkbox label="2">2</el-checkbox>
-        <el-checkbox label="3">3</el-checkbox>
-        <el-checkbox label="4">4</el-checkbox>
-        <el-checkbox label="5">5</el-checkbox>
-        <el-checkbox label="6">6</el-checkbox>
-        <el-checkbox label="7">7</el-checkbox>
-        <el-checkbox label="8">8</el-checkbox>
-        <el-checkbox label="9">9</el-checkbox>
-      </el-checkbox-group>
-      <div class="table-column-popover-footer">
-        <el-button type="text">还原</el-button>
-        <el-button type="text" @click="confirm">确定</el-button>
-      </div>
-      <el-button slot="reference">手动激活</el-button>
-    </el-popover>
-
     <el-form size="small">
-      <ElFormItem  label="运营部门:" prop="operationDeptIdList">
-              <ElCascader
-                ref="dept"
-                v-model="operationDeptIdList"
-                placeholder="请选择运营部门"
-                :options="[]"
-                filterable
-                :clearable="false"
-              />
-            </ElFormItem>
+      <ElFormItem label="运营部门:" prop="operationDeptIdList">
+        <ElCascader
+          ref="dept"
+          v-model="operationDeptIdList"
+          placeholder="请选择运营部门"
+          :options="options"
+          :props="props"
+          filterable
+          :clearable="false"
+        />
+      </ElFormItem>
     </el-form>
   </div>
 </template>
@@ -59,23 +28,68 @@ export default {
   name: 'AppExcel',
   data() {
     return {
-      visible: false,
-      checkList: [],
-      all: false,
-      operationDeptIdList: []
+      operationDeptIdList: [],
+      props: { multiple: false },
+      options: [
+        {
+          value: 1,
+          label: '东南',
+          children: [
+            {
+              value: 2,
+              label: '上海',
+              children: [
+                { value: 3, label: '普陀' },
+                { value: 4, label: '黄埔' },
+                { value: 5, label: '徐汇' },
+              ],
+            },
+            {
+              value: 7,
+              label: '江苏',
+              children: [
+                { value: 8, label: '南京' },
+                { value: 9, label: '苏州' },
+                { value: 10, label: '无锡' },
+              ],
+            },
+            {
+              value: 12,
+              label: '浙江',
+              children: [
+                { value: 13, label: '杭州' },
+                { value: 14, label: '宁波' },
+                { value: 15, label: '嘉兴' },
+              ],
+            },
+          ],
+        },
+        {
+          value: 17,
+          label: '西北',
+          children: [
+            {
+              value: 18,
+              label: '陕西',
+              children: [
+                { value: 19, label: '西安' },
+                { value: 20, label: '延安' },
+              ],
+            },
+            {
+              value: 21,
+              label: '新疆维吾尔族自治区',
+              children: [
+                { value: 22, label: '乌鲁木齐' },
+                { value: 23, label: '克拉玛依' },
+              ],
+            },
+          ],
+        },
+      ],
     }
   },
   methods: {
-    changeAll(val) {
-      if(val){
-        this.checkList = ['1','2','3','4','5','6','7','8','9']
-      }else{
-        this.checkList = []
-      }
-    },
-    changeSingle(val){
-      this.all = val.length === 9
-    },
     exportExcel() {
       const data = [title, row2, row3, row4, row5]
       console.log(data)
@@ -107,11 +121,6 @@ export default {
         console.log(rows)
       })
     },
-    confirm(){
-      this.$nextTick(() => {
-        document.body.click()
-      })
-    }
   },
 }
 </script>
