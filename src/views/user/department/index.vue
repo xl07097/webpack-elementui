@@ -1,46 +1,63 @@
 <template>
   <div>
     <el-button @click="toggle">toggle</el-button>
-    <el-button v-auth="tab">按钮1</el-button>
-    <el-button v-auth="tab">按钮2</el-button>
-    <el-input placeholder="kakak">
-      lp
-    </el-input>
-    <el-input v-model="num" @change="change" @blur="blur" @input="input"></el-input>
+    <!-- <el-button v-auth="tab">按钮1</el-button>
+    <el-button v-auth="tab">按钮2</el-button> -->
+    <el-input placeholder="kakak" v-model="keyword"> </el-input>
+    <div>
+      <div v-for="text of list">
+        <KeywordTextVue :text="text" :key="text" :keyword="keyword"></KeywordTextVue>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import KeywordTextVue from '@/components/KeywordText.vue'
 export default {
   name: 'Department',
-  data(){
+  components: { KeywordTextVue },
+  data() {
     return {
       tab: 1,
       num: 0,
-      lp: ''
+      lp: '',
+      keyword: '',
+      list: [
+        'testtzdfhgnmhsnjkhj',
+        'sthgdtyhfj',
+        'testtfgxbzsdsnjkhj',
+        'gsgfdgbdg',
+        'testtxgnb snjkhj',
+        'gtrsfgvrdg',
+        'tesxgbxfvcttsnjkhj',
+        'fvvsrf',
+        'tesdefcttsnjkhj',
+        'bsrfbdr',
+        'testtsrgDfsnjkhj',
+        'srtfdrtb',
+      ],
     }
   },
-  methods:{
-    toggle(){
-      this.tab = this.tab == 1?2:1
+  methods: {
+    toggle() {
+      this.tab = this.tab == 1 ? 2 : 1
     },
-    blur(e){
+    blur(e) {
       console.log(e.target.value)
     },
-    change(currentValue, oldValue){
+    change(currentValue, oldValue) {
       console.log(currentValue, oldValue)
     },
-    input(v){
-      console.log("v:",v)
-
-    }
-  }
-
+    input(v) {
+      console.log('v:', v)
+    },
+  },
 }
 </script>
 
 <style>
-[pseudo="-webkit-input-placeholder"]{
+[pseudo='-webkit-input-placeholder'] {
   display: none;
 }
 </style>

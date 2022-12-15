@@ -55,6 +55,7 @@ module.exports = merge(baseConfig, {
             loader: 'css-loader',
             options: {
               esModule: false,
+              // prependData: `@use "@/styles/function.scss" as *;`
             },
           },
           'postcss-loader',
