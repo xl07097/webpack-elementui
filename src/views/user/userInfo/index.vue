@@ -1,12 +1,14 @@
 <template>
   <div>
-    userInfo
+    <ColumnSetting />
   </div>
 </template>
 
 <script>
+import ColumnSetting from "@/components/ColumnSetting";
 export default {
-  name: 'UserInfo'
+  name: 'UserInfo',
+  components:{ColumnSetting},
 }
 </script>
 
