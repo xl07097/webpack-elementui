@@ -1,8 +1,10 @@
 <template>
   <div class="app-header">
-    <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
-      {{ record.name }}
-    </el-tag>
+    <el-scrollbar>
+      <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
+        {{ record.name }}
+      </el-tag>
+    </el-scrollbar>
   </div>
 </template>
 
@@ -17,7 +19,7 @@ export default {
   },
   computed:{
     menuGetter(){
-      return this.$store.getters['menu/menuGetter']
+      return this.$store.getters['permission/menuGetter']
     }
   },
   mounted() {
@@ -34,10 +36,13 @@ export default {
 
 <style lang="scss" scoped>
 .app-header {
+  // width: 400px;
   height: 60px;
   display: flex;
   align-items: center;
   background: #eaeaea;
+  overflow: hidden;
+  overflow-x: auto;
   .el-tag {
     cursor: pointer;
     margin-right: 10px;

@@ -16,7 +16,7 @@ export default {
     }
   },
   mounted(){
-    this.token = sessionStorage.getItem('token')
+    this.token = storage.getItem('token')
   },
   methods:{
     onSuccess(res){

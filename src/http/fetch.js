@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { showMessage } from '@/utils/message'
 import { responseHandle } from './httpHandle'
+import { storage } from '@/utils/storage'
 
 const instance = axios.create({
   baseURL: '/note',
@@ -14,7 +15,7 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
-  const token = sessionStorage.getItem('token')
+  const token = storage.getItem('token')
   if (token) {
     config.headers.token = token
   }

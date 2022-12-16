@@ -1,31 +1,27 @@
 import router from './index'
 import store from '../store/store'
+import { storage } from '@/utils/storage'
 
 router.beforeEach((to, _from, next) => {
   if (to.path === '/login') {
-    sessionStorage.clear()
+    storage.clear()
     next()
     return
   }
 
-  const token = sessionStorage.getItem('token')
+  const token = storage.getItem('token')
   if (!token) {
     next('/login')
     return
   }
 
   // 刷新状态 ---- 重新获取路由
-  if (store.state.menu.refresh === false) {
-    store.dispatch('menu/getMenu').then(() => {
+  if (store.state.permission.refresh === false) {
+    store.dispatch('permission/getMenu').then(() => {
       next({ ...to }) // hack方法 确保addRoutes已完成
     })
     return
   }
-  // const perms = store.state.menu.perms || [];
-  // if ((perms.length === 1 && perms[0] === '*') || perms.includes(to.name)) {
-  //   next();
-  //   return;
-  // }
   console.log(to.meta)
   next()
 })
