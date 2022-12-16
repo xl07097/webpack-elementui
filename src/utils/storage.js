@@ -38,3 +38,5 @@ class MyStorage{
 export default MyStorage
 
 export const storage = new MyStorage()
+
+export const baseStorage = new MyStorage(window.localStorage)
