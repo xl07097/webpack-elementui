@@ -1,10 +1,11 @@
 export const title = [
   {
-    value: '成功人力资源集团服务计算单\n\r计算单',
+    value: '成功人力资源集团服务计算单\n计算单',
     rowSpan: 1,
     span: 9,
     height: 30,
     fontSize: 20,
+    wrap: true,
     align: 'center',
     fontWeight: 'normal',
     alignVertical: 'center',

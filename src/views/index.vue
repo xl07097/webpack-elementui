@@ -51,6 +51,7 @@ export default {
               value: 'id',
               label: 'name',
               children: 'children',
+              multi: true
             }
           } 
         },

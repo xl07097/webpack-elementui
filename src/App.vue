@@ -35,7 +35,7 @@ export default {
 <style lang="scss">
 @import './styles/animate.css';
 @import './styles/common.scss';
-@import './styles/theme-variable.scss';
+
 // div {
 //   background: $--color-primary;
 // }

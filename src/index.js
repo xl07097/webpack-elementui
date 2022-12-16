@@ -7,6 +7,7 @@ import store from '@/store/store'
 
 import './directives/auth'
 
+import './styles/theme-variable.scss';
 import './importComponent'
 import './importVxeTable'
 import 'vxe-table/lib/style.min.css'

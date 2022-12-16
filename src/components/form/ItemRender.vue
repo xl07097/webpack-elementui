@@ -101,12 +101,13 @@ export default {
     },
     renderCascader(h){
       const props = this.config.props || {}
+      console.log(props)
       return (
         <el-cascader 
           value={this.value} 
           showAllLevels={false} 
           options={this.optionList} 
-          props={props} 
+          props={{props}} 
           on-change={this.change}></el-cascader>
       )
     },

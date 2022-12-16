@@ -19,14 +19,14 @@
     "@babel/plugin-proposal-object-rest-spread",
     "@babel/plugin-syntax-jsx",
     "@vue/babel-plugin-transform-vue-jsx",
-    [
-      "component",
-      {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-chalk"
-      },
-      "element-ui"
-    ],
+    // [
+    //   "component",
+    //   {
+    //     "libraryName": "element-ui",
+    //     "styleLibraryName": "theme-chalk"
+    //   },
+    //   "element-ui"
+    // ],
     [
       "import",
       {
