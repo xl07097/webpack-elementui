@@ -1,29 +1,24 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import menu from './modules/menu';
-
+import permission from './modules/permission';
+import {storage} from '@/utils/storage';
 
 Vue.use(Vuex);
-
-/**
- * store
- * 仅作学习使用
- */
-
 
 export default new Vuex.Store({
   state: {
     // 状态树   辅助函数 mapState
+    loginUser: storage.getItem('loginUser') || {}
   },
   getters: {},
   mutations: {
-    
-  },
-  actions: {
-    
+    setLoginUser(state, payload){
+      storage.setItem('loginUser', payload)
+      state.loginUser = payload
+    }
   },
   modules: {
     // 模块化
-    menu,
+    permission,
   },
 });
