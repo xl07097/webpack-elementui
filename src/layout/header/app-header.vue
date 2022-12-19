@@ -1,6 +1,6 @@
 <template>
   <div class="app-header">
-    <el-scrollbar>
+    <el-scrollbar ref="scrollContainer" class="scroll-container " :vertical="false" @wheel.native.prevent="handleScroll">
       <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
         {{ record.name }}
       </el-tag>
@@ -20,11 +20,20 @@ export default {
   computed:{
     menuGetter(){
       return this.$store.getters['permission/menuGetter']
+    },
+    scrollWrapper(){
+      return this.$refs.scrollContainer.$refs.wrap
     }
   },
   methods: {
     push(path) {
       this.$router.push(`${path}`)
+    },
+    
+    handleScroll(e) {
+      const eventDelta = e.wheelDelta || -e.deltaY * 40
+      const $scrollWrapper = this.scrollWrapper
+      $scrollWrapper.scrollLeft = $scrollWrapper.scrollLeft + eventDelta / 4
     },
   },
 }
@@ -39,6 +48,12 @@ export default {
   background: #eaeaea;
   overflow: hidden;
   overflow-x: auto;
+  .scroll-container {
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
   .el-tag {
     cursor: pointer;
     margin-right: 10px;
