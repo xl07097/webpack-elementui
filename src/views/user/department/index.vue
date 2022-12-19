@@ -1,8 +1,5 @@
 <template>
   <div>
-    <el-button @click="toggle">toggle</el-button>
-    <!-- <el-button v-auth="tab">按钮1</el-button>
-    <el-button v-auth="tab">按钮2</el-button> -->
     <el-input placeholder="kakak" v-model="keyword"> </el-input>
     <div>
       <div v-for="text of list">

@@ -1,6 +1,7 @@
 <template>
   <div class="sh-table-wrap">
     <VxeTable
+      :key="columnKey"
       ref="tableRef"
       :data="tableData"
       :max-height="height"
@@ -46,14 +47,15 @@
         </template>
       </VxeColumn>
       <VxeColumn
-        v-for="column of columns"
-        :key="column.field"
-        :title="column.title"
-        :field="column.field"
+        v-for="clm of columns"
+        :key="clm.field"
+        :title="clm.title"
+        :field="clm.field"
         min-width="140px"
-        v-bind="column"
+        v-bind="clm"
       >
         <template
+          v-if="$slots[clm.field]"
           #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
         >
           <slot
@@ -73,8 +75,10 @@
 </template>
 
 <script>
+import TableColumn from './TableColumn.vue'
 export default {
   name: 'StarTables',
+  components: { TableColumn },
   props: {
     // 是否显示序号
     index: {
@@ -98,13 +102,13 @@ export default {
     columns: {
       type: Array,
       default() {
-        return [];
+        return []
       },
     },
     tableData: {
       type: Array,
       default() {
-        return [];
+        return []
       },
     },
     align: {
@@ -124,7 +128,7 @@ export default {
       default() {
         return {
           gt: -1,
-        };
+        }
       },
     },
     scrollY: {
@@ -132,7 +136,7 @@ export default {
       default() {
         return {
           gt: -1,
-        };
+        }
       },
     },
     size: {
@@ -150,62 +154,60 @@ export default {
     summaryFields: {
       type: Array,
       default() {
-        return [];
+        return []
       },
+    },
+  },
+  computed: {
+    columnKey() {
+      return this.columns.map((item) => item.field).join('')
     },
   },
   data() {
     return {
       selectionList: [],
-    };
+    }
   },
   watch: {
     tableData() {
-      this.selectionList = [];
-      this.$nextTick(() => {
-        try {
-          let bodyWrapper = this.$refs.tableRef.$el.querySelector('.vxe-table--body-wrapper');
-          setTimeout(() => {
-            bodyWrapper.scrollTo && bodyWrapper.scrollTo(0, 0);
-          }, 5);
-        } catch (error) {
-          window.console.log(error);
-        }
-      });
+      this.selectionList = []
     },
+  },
+  mounted(){
+    console.log(this.$slots.name)
   },
   methods: {
     selectionChange({ records }) {
-      this.selectionList = Object.freeze(records);
-      this.$emit('selectionChange', records);
+      this.selectionList = Object.freeze(records)
+      this.$emit('selectionChange', records)
     },
     footerMethod({ columns, data }) {
-      let sum = ['合计'];
+      let sum = ['合计']
       if (data.length === 0) {
-        return [sum];
+        return [sum]
       }
       this.summaryFields.forEach((field) => {
-        let index = columns.findIndex((item) => item.property === field.prop);
-        let count = 0;
+        let index = columns.findIndex((item) => item.property === field.prop)
+        let count = 0
         if (field.method) {
-          sum[index] = field.method(data);
+          sum[index] = field.method(data)
         } else {
           count = data.reduce((total, current) => {
-            return total + (Number(current[field.prop]) || 0);
-          }, 0);
-          sum[index] = Number(count.toFixed(2));
+            return total + (Number(current[field.prop]) || 0)
+          }, 0)
+          sum[index] = Number(count.toFixed(2))
         }
-      });
-      return [sum];
+      })
+      return [sum]
     },
     // 刷新 列， 去除错位问题
     refreshColumn() {
       this.$nextTick(() => {
-        this.$refs.tableRef.refreshColumn();
-      });
+        this.$refs.tableRef.refreshColumn()
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="scss">

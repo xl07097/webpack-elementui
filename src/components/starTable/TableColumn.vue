@@ -3,7 +3,7 @@
     :title="column.title"
     :field="column.field" -->
   <VxeColumn min-width="140px" v-bind="columns">
-    <template #header>
+    <template #header v-if="$slots.header">
       <slot name="header" />
     </template>
     <template
@@ -33,6 +33,9 @@ export default {
       },
     },
   },
+  mounted(){
+    console.log(this.$slots.default)
+  }
 };
 </script>
 
