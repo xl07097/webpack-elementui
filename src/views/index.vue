@@ -6,6 +6,7 @@
 </template>
 <script>
 import FormRender from '@/components/form/FormRender'
+import { post } from '@/http/request'
 export default {
   name: 'AppIndex',
   components: { FormRender },
@@ -15,7 +16,7 @@ export default {
         name: 'hha',
         age: '',
         year: '2019',
-        dates: [],
+        createTime: [],
         week: '',
       },
       fields: [
@@ -24,8 +25,12 @@ export default {
         { type: 'select', prop: 'provice', label: '省', 
           config: { 
             request:{
-              url: 'sysArea/list',
+              // url: 'sysArea/list',
               method: 'post',
+              remote: true,
+              remoteMethod: (keyword) => {
+                return post('sysArea/list',{"parentCode": keyword})
+              },
               data:{
                 "parentCode": "320500"
               },
@@ -37,10 +42,10 @@ export default {
                   }
                 })
               }
-            } 
+            }
           } 
         },
-        { type: 'cascader', prop: 'cascader', label: '年', 
+        { type: 'cascader', prop: 'cascader', label: '菜单', 
           config: {
             request: {
               url: 'sysMenu/tree'

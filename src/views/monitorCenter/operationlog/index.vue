@@ -15,9 +15,6 @@ export default {
       token: ''
     }
   },
-  mounted(){
-    this.token = storage.getItem('token')
-  },
   methods:{
     onSuccess(res){
       this.fileList.push({

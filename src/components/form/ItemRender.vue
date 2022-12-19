@@ -2,6 +2,9 @@
 
 <script>
 import * as obj from '@/http/request'
+const cacheRequest = {
+
+}
 export default {
   name: 'ItemRender',
   props: {
@@ -55,28 +58,29 @@ export default {
     const {request={}} = this.config
     if(request.url){
       const method = request.method || 'get'
-      obj[method](request.url, request.data).then(res => {
-        if(request.handleData){
-          this.lists = Object.freeze(request.handleData(res))
-        }else {
-          this.lists = Object.freeze(res.data)
-        }
-      })
+      obj[method](request.url, request.data).then(this.handleRes)
+    }else if(request.cacheRequest){
+      cacheRequest[request.cacheRequest](request.data).then(this.handleRes)
     }
   },
   methods: {
     renderInput(h) {
       return (
-        <el-input value={this.value} on-input={this.input} placeholder={`请输入${this.label}`} />
+        <el-input value={this.value} on-input={this.input} clearable placeholder={`请输入${this.label}`} />
       );
     },
     renderSelect(h) {
+      const {request={}} = this.config
+      const placeholder = request.remote? '请输入关键字':`请选择${this.label}`
       return (
         <el-select
           value={this.value}
           on-change={this.change}
           clearable
-          placeholder={`请选择${this.label}`}
+          filterable
+          remote={request.remote}
+          remoteMethod={this.remoteMethod}
+          placeholder={placeholder}
         >
           {this.optionList.map((list) => {
             return <el-option key={list.value} label={list.label} value={list.value} />;
@@ -91,6 +95,7 @@ export default {
           value={this.value}
           type={tag}
           editable={false}
+          clearable
           format={dateFormat[tag]}
           valueFormat={dateFormat[tag]}
           onInput={this.input}
@@ -101,13 +106,14 @@ export default {
     },
     renderCascader(h){
       const props = this.config.props || {}
-      console.log(props)
       return (
         <el-cascader 
           value={this.value} 
           showAllLevels={false} 
           options={this.optionList} 
           props={{props}} 
+          filterable
+          clearable
           on-change={this.change}></el-cascader>
       )
     },
@@ -115,12 +121,23 @@ export default {
       this.$emit('input', value);
     },
     change(value) {
-      console.log('change:', value);
       this.$emit('input', value);
     },
     selectClear() {
       this.$emit('input', '');
     },
+    remoteMethod(keyword){
+      const {request={}} = this.config
+      request.remoteMethod(keyword).then(this.handleRes)
+    },
+    handleRes(res){
+      const {request={}} = this.config
+      if(request.handleData){
+          this.lists = Object.freeze(request.handleData(res))
+        }else {
+          this.lists = Object.freeze(res.data)
+        }
+    }
   },
   render(h) {
     const tag = this.tag;
