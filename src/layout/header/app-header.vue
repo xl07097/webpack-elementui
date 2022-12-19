@@ -22,13 +22,9 @@ export default {
       return this.$store.getters['permission/menuGetter']
     }
   },
-  mounted() {
-    console.log(this.$store)
-  },
   methods: {
     push(path) {
       this.$router.push(`${path}`)
-      window.console.log(path)
     },
   },
 }

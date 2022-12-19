@@ -173,9 +173,6 @@ export default {
       this.selectionList = []
     },
   },
-  mounted(){
-    console.log(this.$slots.name)
-  },
   methods: {
     selectionChange({ records }) {
       this.selectionList = Object.freeze(records)

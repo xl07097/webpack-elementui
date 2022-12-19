@@ -116,7 +116,6 @@ export default {
         let arr = []
         rows.eachCell(function (cell, index) {
           arr.push(cell.text)
-          // console.log(cell)
         })
         console.log(rows)
       })

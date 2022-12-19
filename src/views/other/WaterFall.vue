@@ -41,7 +41,6 @@ export default {
         const h2 = column2.getBoundingClientRect().height;
         const h3 = column3.getBoundingClientRect().height;
         const h4 = column4.getBoundingClientRect().height;
-        // console.log(h1, h2, h3, h4)
         let arr = [h1, h2, h3, h4];
         const index = arr.indexOf(Math.min.apply(null, arr));
 

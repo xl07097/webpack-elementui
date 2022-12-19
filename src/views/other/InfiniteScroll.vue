@@ -48,7 +48,6 @@ export default {
   },
   methods: {
     hhah(index) {
-      console.log(90);
       return this.imgList[index];
     },
     loadItem() {

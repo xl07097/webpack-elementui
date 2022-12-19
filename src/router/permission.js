@@ -22,7 +22,6 @@ router.beforeEach((to, _from, next) => {
     })
     return
   }
-  console.log(to.meta)
   next()
 })
 

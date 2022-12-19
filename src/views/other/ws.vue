@@ -19,7 +19,6 @@ export default {
     };
   },
   mounted() {
-    console.log(window.history.length)
 
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
