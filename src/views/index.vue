@@ -26,7 +26,7 @@ export default {
           config: { 
             request:{
               // url: 'sysArea/list',
-              method: 'post',
+              // method: 'post',
               remote: true,
               remoteMethod: (keyword) => {
                 return post('sysArea/list',{"parentCode": keyword})
