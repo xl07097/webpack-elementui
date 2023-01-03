@@ -1,5 +1,3 @@
-
-
 <script>
 import * as obj from '@/http/request'
 const cacheRequest = {
@@ -107,14 +105,28 @@ export default {
     renderCascader(h){
       const props = this.config.props || {}
       return (
-        <el-cascader 
-          value={this.value} 
-          showAllLevels={false} 
-          options={this.optionList} 
-          props={{props}} 
+        <el-cascader
+          value={this.value}
+          showAllLevels={false}
+          options={this.optionList}
+          props={{props}}
           filterable
           clearable
           on-change={this.change}></el-cascader>
+      )
+    },
+    renderAutocomplete(h){
+      // const placeholder = request.remote? '请输入关键字':`请选择${this.label}`
+      return (
+        <el-autocomplete
+          value={this.value}
+          fetch-suggestions={this.querySearch}
+          placeholder={'请输入关键字'}
+        >
+          <template #default="{item}">
+            { item.label }
+          </template>
+        </el-autocomplete>
       )
     },
     input(value) {
@@ -130,13 +142,27 @@ export default {
       const {request={}} = this.config
       request.remoteMethod(keyword).then(this.handleRes)
     },
+    querySearch(keyword, cb){
+      if(!keyword){
+        cb([])
+        return
+      }
+      const {request={}} = this.config
+      request.remoteMethod(keyword).then((res) => {
+        if(request.handleData){
+          cb(Object.freeze(request.handleData(res)))
+        }else {
+          cb(Object.freeze(res.data))
+        }
+      })
+    },
     handleRes(res){
       const {request={}} = this.config
       if(request.handleData){
-          this.lists = Object.freeze(request.handleData(res))
-        }else {
-          this.lists = Object.freeze(res.data)
-        }
+        this.lists = Object.freeze(request.handleData(res))
+      }else {
+        this.lists = Object.freeze(res.data)
+      }
     }
   },
   render(h) {
@@ -161,6 +187,9 @@ export default {
     }
     if(tag === 'cascader'){
       return this.renderCascader(h);
+    }
+    if(tag === 'autocomplete'){
+      return this.renderAutocomplete(h);
     }
     return this.renderInput(h);
   },
