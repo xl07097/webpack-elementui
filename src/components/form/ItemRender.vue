@@ -123,7 +123,7 @@ export default {
           fetch-suggestions={this.querySearch}
           placeholder={'请输入关键字'}
         >
-          <template #default="{item}">
+          <template v-slot:default="{item}">
             { item.label }
           </template>
         </el-autocomplete>

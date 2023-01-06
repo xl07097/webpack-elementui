@@ -1,6 +1,7 @@
 <template>
   <el-form
     ref="formRender"
+    class="search-form"
     :model="currentData"
     :rules="rules"
     :label-width="labelWidth"
@@ -20,6 +21,10 @@
         :label="field.label"
         :config="field.config"
       />
+    </el-form-item>
+
+    <el-form-item class="search-form-item">
+      <el-button type="primary">查询</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -51,7 +56,7 @@ export default {
     },
     labelWidth: {
       type: String,
-      default: '100px',
+      default: '80px',
     },
   },
   data() {
@@ -69,3 +74,13 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.search-form{
+  display: inline-flex;
+  flex-wrap: wrap;
+  .search-form-item{
+    margin-left: auto;
+  }
+}
+</style>
