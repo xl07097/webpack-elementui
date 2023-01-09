@@ -16,11 +16,14 @@ import './router/permission'
 import alert from './components/MessageBox/alert'
 import confirm from './components/MessageBox/confirm'
 
+import i18n from './i18n'
+
 Vue.use(alert)
 Vue.use(confirm)
 
 new Vue({
   el: '#app',
+  i18n,
   router,
   store,
   render: (h) => h(App),

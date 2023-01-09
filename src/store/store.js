@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import permission from './modules/permission';
+import app from './modules/app';
 import {storage} from '@/utils/storage';
 
 Vue.use(Vuex);
@@ -20,5 +21,6 @@ export default new Vuex.Store({
   modules: {
     // 模块化
     permission,
+    app
   },
 });
