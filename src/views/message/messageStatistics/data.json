@@ -1,0 +1,919 @@
+[
+  {
+    "children": null,
+    "id": "0c4773c74adc404c9debac42133025d8",
+    "name": "西藏人加"
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": null,
+            "id": "4dab03b95d4e1b48645e636f1e0b09b9",
+            "name": "运营"
+          },
+          {
+            "children": null,
+            "id": "c7be2a2eb9bff2f806ee0bc7916d81c3",
+            "name": "销售组"
+          },
+          {
+            "children": null,
+            "id": "e9912f2c48396b40e380306a33164d42",
+            "name": "运营组"
+          }
+        ],
+        "id": "aa13a0ef493c3422ac97b03764a822aa",
+        "name": "销售部"
+      }
+    ],
+    "id": "2865734aab8e0ec87cfb14f200645a0b",
+    "name": "预见诚功"
+  },
+  {
+    "children": null,
+    "id": "34095b4a1c64aa666bfd8f11583a1458",
+    "name": "日照孵化器"
+  },
+  {
+    "children": null,
+    "id": "72c174f32788a3054e352a736df3c85e",
+    "name": "总经办"
+  },
+  {
+    "children": [
+      {
+        "children": null,
+        "id": "29b8a72888b36483468285057ddcb8ca",
+        "name": "敏速招聘部"
+      },
+      {
+        "children": null,
+        "id": "456378e0ddce62551858bffcb7ad9d5d",
+        "name": "重庆B8&M2"
+      },
+      {
+        "children": null,
+        "id": "7700ffc3355266b5f2911e9fcdf5ebad",
+        "name": "合肥B5"
+      },
+      {
+        "children": null,
+        "id": "921dfae2af90d4fe470a7d0fd15a97a2",
+        "name": "武汉B17"
+      },
+      {
+        "children": null,
+        "id": "a19a2fdf07147425e1c09a1bd17d3b2c",
+        "name": "敏速行政部"
+      },
+      {
+        "children": null,
+        "id": "aed2d87decc0956ade7923c7836b3e4e",
+        "name": "福清B10"
+      },
+      {
+        "children": null,
+        "id": "c1d750b9b092f580ce324ffa08db9fa9",
+        "name": "南京B18"
+      },
+      {
+        "children": null,
+        "id": "d9710d1d2b4ca4dea6437f452a262f6d",
+        "name": "敏速财务部"
+      },
+      {
+        "children": null,
+        "id": "fb5a7ab9e50f699e266e29c1465dfce1",
+        "name": "西安奕斯伟"
+      }
+    ],
+    "id": "7b2907e290c342a23e6a843b1af7e87b",
+    "name": "敏速"
+  },
+  {
+    "children": null,
+    "id": "7e4adbb9a04e4ca296ec3895a0aa2b71",
+    "name": "广州分公司"
+  },
+  {
+    "children": null,
+    "id": "a58249eed770cf56c590a380f1a969b5",
+    "name": "广州合资公司"
+  },
+  {
+    "children": null,
+    "id": "ab7e0afbccac5ba88a7b4ee710e1dcc5",
+    "name": "苏州君威"
+  },
+  {
+    "children": [
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": null,
+                "id": "87faba1e1a8b41da9cfb7afc73a7cec7",
+                "name": "大客户二部"
+              },
+              {
+                "children": null,
+                "id": "9deeb9f97aa44d659c628cfa068fed0d",
+                "name": "大客户三部"
+              },
+              {
+                "children": null,
+                "id": "b77e9e10eff8b14cad044dcc91ee4f6b",
+                "name": "大客户一部"
+              }
+            ],
+            "id": "ba2799b7d1c32b90e86dbb2847cff925",
+            "name": "大客户部"
+          },
+          {
+            "children": null,
+            "id": "f965a442835c3f83d8beed434e18b8e9",
+            "name": "品牌中心"
+          }
+        ],
+        "id": "03c30036e28dafaac782a4f87aac3a92",
+        "name": "营销中心"
+      },
+      {
+        "children": null,
+        "id": "39a62c96bb18dab92acbe40ba115ee45",
+        "name": "总裁办"
+      },
+      {
+        "children": null,
+        "id": "40239387fa7cebc24b80f66e59475507",
+        "name": "公共外包事业部"
+      },
+      {
+        "children": null,
+        "id": "46484e4da2f373c0f5221c3076602e16",
+        "name": "DMS"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "3baaf723c52ff547e7782705fba39d0c",
+                    "name": "客服部"
+                  },
+                  {
+                    "children": null,
+                    "id": "68afc54d9b6e3c23e4e8a41be612e62a",
+                    "name": "蚂蚁网运营部"
+                  }
+                ],
+                "id": "02d8e7236cc1704baecb92294dce7347",
+                "name": "蚂蚁网"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "a0afce7ab578eaec8656dfbc6ed25888",
+                    "name": "招聘三部"
+                  },
+                  {
+                    "children": null,
+                    "id": "a69b1697de04a08b2ca8abdfe87e647b",
+                    "name": "招聘一部"
+                  },
+                  {
+                    "children": null,
+                    "id": "ec23104a7f5602763e8c46ed3c5434e8",
+                    "name": "招聘二部"
+                  }
+                ],
+                "id": "bff382b00c023ed774e676ff7b712a2e",
+                "name": "苏州招聘部"
+              }
+            ],
+            "id": "0edebbdaa5e8f52e1a362c9913a70c5b",
+            "name": "招聘资源中心"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "13210b31dcfd2b9935584bad3ae02b02",
+                    "name": "东莞分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "87513600cfcf8c7e88dfdb36d7c49011",
+                    "name": "长沙分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "948a4acd7e1865121916ef97be13809a",
+                    "name": "深圳分公司"
+                  }
+                ],
+                "id": "123ab6a5723fd91a415ed7c07242e41c",
+                "name": "制造业三大区"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "1da0b69ffbda2c9695cd44f29f741dc8",
+                    "name": "九分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "69968461cbbfc9ef451f08a918628588",
+                    "name": "七分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "f2218ebbfb378644804e7c03940da069",
+                    "name": "十分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "f42fec84f7ff3e54d2c4f04c115fc15e",
+                    "name": "八分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "ff36b645978090a0f8d147be54760abc",
+                    "name": "六分公司"
+                  }
+                ],
+                "id": "24cc5c04b8cf8cae4424ce46924ab31d",
+                "name": "制造业五大区"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "38737a2736be23462244f7871615f27c",
+                    "name": "重庆分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "7d290de5283208e3b50740ff56f68b4d",
+                    "name": "成都分公司"
+                  }
+                ],
+                "id": "284d73bf2c9db1bc05d9f0d1f6e2e8e9",
+                "name": "制造业四大区"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "0d51e297d004a50eb438df3c6755a1c6",
+                    "name": "合肥分公司"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": null,
+                        "id": "05019d17391cf819abc509d8fc1f65ac",
+                        "name": "南京"
+                      }
+                    ],
+                    "id": "6e74bf6c0fcdc847decf71c3808dda1e",
+                    "name": "南京分公司"
+                  }
+                ],
+                "id": "5aa2765d7f20e9a95ada0a2ad6aa17f2",
+                "name": "制造业二大区"
+              },
+              {
+                "children": null,
+                "id": "8a185ae216c3f90ee0beb2856b6e5068",
+                "name": "越南分公司"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "children": null,
+                        "id": "38f3aefc930bf71bd16b73a90cd5e308",
+                        "name": "项目一部（高精）"
+                      },
+                      {
+                        "children": null,
+                        "id": "677f156692fe1da47492a097db023a3f",
+                        "name": "项目二部（安特）"
+                      },
+                      {
+                        "children": null,
+                        "id": "c27695f49a78179bef50422b97a0d3d5",
+                        "name": "项目三部（高露洁）"
+                      }
+                    ],
+                    "id": "05a73067e07d2a71b6ed6bf0df95c897",
+                    "name": "生产外包事业部"
+                  },
+                  {
+                    "children": null,
+                    "id": "853c2d5972b3ddf7333568dc179fab97",
+                    "name": "非标外包事业部"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": null,
+                        "id": "3e142d52d2e17ee90af0c46c2b553528",
+                        "name": "项目三组"
+                      },
+                      {
+                        "children": null,
+                        "id": "806dc9acaece25b8fe9262268c8b1c50",
+                        "name": "项目二组"
+                      },
+                      {
+                        "children": null,
+                        "id": "aa4f2868f0b85ee6ffaec5b99b60a028",
+                        "name": "项目一组"
+                      }
+                    ],
+                    "id": "c917cc1faa2577933970929bd7d4e9d4",
+                    "name": "Sorting事业部"
+                  }
+                ],
+                "id": "953e8df28a0aa5f9ce3269f9821e787c",
+                "name": "BPO事业部"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "0ac487f83a5fa54a27ad327a6296abd5",
+                    "name": "一分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "486ac8ee132f0714aea388bffebb3aad",
+                    "name": "五分公司"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": null,
+                        "id": "90d26f373608230bba4a8786ba493336",
+                        "name": "吴中一部"
+                      },
+                      {
+                        "children": null,
+                        "id": "bf30c80ce90d361c5bc103be9aa4f101",
+                        "name": "吴中二部"
+                      }
+                    ],
+                    "id": "5dd772d69bcf8e2ff5e50e61ac392c16",
+                    "name": "三分公司"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": null,
+                        "id": "cc5676ef13e9c7ef1aec23673e2a5fa3",
+                        "name": "园区二分公司项目一部"
+                      }
+                    ],
+                    "id": "7e9d15fb8d2ce38bd8237a46fd82ae00",
+                    "name": "二分公司"
+                  },
+                  {
+                    "children": null,
+                    "id": "abeea1423c27ecd060c97b867cda75f8",
+                    "name": "四分公司"
+                  }
+                ],
+                "id": "d9cf6d7ff84b884e19e0b4d98b52bd79",
+                "name": "制造业一大区"
+              }
+            ],
+            "id": "405c7e5a6bb14804cdad878fc3147f0c",
+            "name": "制造业运营中心"
+          },
+          {
+            "children": null,
+            "id": "d88a0c112ec0708ffb2b56771f049733",
+            "name": "销售中心"
+          }
+        ],
+        "id": "50a20a7c419435d64a253adf1a5009a6",
+        "name": "制造业外包事业部"
+      },
+      {
+        "children": [
+          {
+            "children": null,
+            "id": "52c0431e70726f4c5287843b0e05dae9",
+            "name": "中心1"
+          }
+        ],
+        "id": "60a7f29cd37616ea6766a0440fccf066",
+        "name": "产业园区发展部"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "0cbdd041c9d40c2785b3832604b515a0",
+                    "name": "服务外包财务部"
+                  },
+                  {
+                    "children": null,
+                    "id": "4a780094f5c74b9b3844ef55f775e93e",
+                    "name": "制造业财务部"
+                  },
+                  {
+                    "children": null,
+                    "id": "7abf6a7a724caa11f9a57d9dc1bf9f99",
+                    "name": "建筑外包财务部"
+                  },
+                  {
+                    "children": null,
+                    "id": "b6606c19dae6c7e2528c8e26930e280c",
+                    "name": "合资公司财务部"
+                  }
+                ],
+                "id": "76fdb801465d9e625b0fd46aa2a3e9aa",
+                "name": "传统事业线"
+              },
+              {
+                "children": null,
+                "id": "98a96983389e562b9046dcd44a0adafb",
+                "name": "报表模块"
+              },
+              {
+                "children": null,
+                "id": "bd003ad8408c5eeb17d481a7f3ccf53f",
+                "name": "资金部"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "2f8a0fbc16bd9b5a97f967dd85c90477",
+                    "name": "资管组"
+                  },
+                  {
+                    "children": null,
+                    "id": "4f4311b95fb7e47954472d547e9da44e",
+                    "name": "孵化器"
+                  },
+                  {
+                    "children": null,
+                    "id": "65a68d55cb8e938a8aa427570aa23c07",
+                    "name": "税务组"
+                  }
+                ],
+                "id": "f3d93e78d4894ba2f0c5f9d2b249657f",
+                "name": "人加科技财务部"
+              }
+            ],
+            "id": "02757e56a2350c45baae9b9a15969b33",
+            "name": "财务共享中心"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "9d1ed687833bbb64c7429d7a060bf715",
+                    "name": "社保中心"
+                  }
+                ],
+                "id": "384894d831052b27f1ff2763e757ceee",
+                "name": "社保部"
+              },
+              {
+                "children": null,
+                "id": "4adb28372e24e6429621200a4ce2de18",
+                "name": "审计部"
+              },
+              {
+                "children": null,
+                "id": "79617a238c1e4e96f429f1e76b4c771a",
+                "name": "法务部"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "2d51647fac284e0dba8bced58877b6b5",
+                    "name": "薪资核算"
+                  }
+                ],
+                "id": "e5206fe0959f3c8fdf7633c7e5540a75",
+                "name": "薪资核算部"
+              }
+            ],
+            "id": "38c02e9cd7efc7740d01d0dcda1f5c95",
+            "name": "运营中心"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "30a97c812987a48ceb8b10e6d1cceaf7",
+                    "name": "薪酬&员工关系"
+                  },
+                  {
+                    "children": null,
+                    "id": "7d2a9ea7f0516c0d96eece64a84e14c1",
+                    "name": "培训"
+                  },
+                  {
+                    "children": null,
+                    "id": "91a803a96651b6c4a57fc8dffd7899f7",
+                    "name": "行政部"
+                  },
+                  {
+                    "children": [
+                      {
+                        "children": [
+                          {
+                            "children": null,
+                            "id": "1c2d23d0b961693b9dc16919e44ca090",
+                            "name": "招聘三组"
+                          },
+                          {
+                            "children": null,
+                            "id": "d34f8fc0e3f4215072694dbb55801b04",
+                            "name": "招聘七组"
+                          },
+                          {
+                            "children": null,
+                            "id": "d80f71e84bc774a6221176542b36eaec",
+                            "name": "招聘六组"
+                          }
+                        ],
+                        "id": "60d0f10b806fe105fef41e49bef93705",
+                        "name": "上海招聘组"
+                      },
+                      {
+                        "children": [
+                          {
+                            "children": null,
+                            "id": "1bffd764655d5e0a248dc6be5e79b705",
+                            "name": "招聘一组"
+                          },
+                          {
+                            "children": null,
+                            "id": "6cd097077db0f1d3d2b1e56d0daf230e",
+                            "name": "招聘二组"
+                          },
+                          {
+                            "children": null,
+                            "id": "d42fc59f6e952b83c3da0cdc7bd62661",
+                            "name": "招聘五组"
+                          },
+                          {
+                            "children": null,
+                            "id": "dd38273cf8f56746639be1fc631364b1",
+                            "name": "招聘四组"
+                          }
+                        ],
+                        "id": "ae628017ecf80d0812736b2ec3d0dbcb",
+                        "name": "苏州招聘组"
+                      }
+                    ],
+                    "id": "e8f5b506e302d9c2da06dc43f8f7b6e3",
+                    "name": "招聘"
+                  }
+                ],
+                "id": "3353d4267360df220a67cad8a7d7c1da",
+                "name": "SSC"
+              },
+              {
+                "children": null,
+                "id": "8af70b01b7b726d75b32aa415e82b40e",
+                "name": "HRBP"
+              },
+              {
+                "children": null,
+                "id": "eb9065e0bcb5d669c9baf563460deef8",
+                "name": "COE"
+              }
+            ],
+            "id": "879fd0288630207b3583da0af9e9b7e9",
+            "name": "人力资源中心"
+          },
+          {
+            "children": [
+              {
+                "children": null,
+                "id": "2e24f533dbcbb1154dc34d43f03cebf6",
+                "name": "前端组"
+              },
+              {
+                "children": null,
+                "id": "5c0a9a4e79407dea31ab3d8910b8966a",
+                "name": "后端组"
+              },
+              {
+                "children": null,
+                "id": "86b3171a4f22f443bdf98c869442e5b0",
+                "name": "产品组"
+              },
+              {
+                "children": null,
+                "id": "d978bf540a62cc7a742f75cfe95177ef",
+                "name": "运维组"
+              },
+              {
+                "children": null,
+                "id": "e48c53d2ab9aefb0eb315ceee11c328b",
+                "name": "测试组"
+              }
+            ],
+            "id": "b2b9e82ae7a4ede18e95293ad6710546",
+            "name": "信息中心"
+          }
+        ],
+        "id": "9c7cb4888b60661cd79f56752fea19e2",
+        "name": "经营支持中心"
+      },
+      {
+        "children": [
+          {
+            "children": null,
+            "id": "39f8c6d084a5ade68b3d439246aa4988",
+            "name": "建筑销售部"
+          },
+          {
+            "children": null,
+            "id": "4006014645f8be7051d726b56198b069",
+            "name": "建筑运营部"
+          }
+        ],
+        "id": "9ccf7058f1a5d110492d0df310859b22",
+        "name": "建筑外包事业部"
+      },
+      {
+        "children": null,
+        "id": "a61a361eb80a0310a3e408752a5fbb66",
+        "name": "基建办"
+      },
+      {
+        "children": null,
+        "id": "aaf88051a1814934b09bd839f0a4337f",
+        "name": "才薪事业部"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": null,
+                "id": "57befa10b0eae26f998c060f7ec00c59",
+                "name": "悠客上海"
+              },
+              {
+                "children": null,
+                "id": "664bca5057ca2f3a5d517c83bd7acf95",
+                "name": "悠客深圳"
+              }
+            ],
+            "id": "4dcb30b4133283588c28e3f902a3fea2",
+            "name": "悠客销售部"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "4fe7b1631383d328fe4644efd0604991",
+                    "name": "四部"
+                  },
+                  {
+                    "children": null,
+                    "id": "ced764c1f9bd9cb1f86e5b27f1833c8d",
+                    "name": "一部"
+                  }
+                ],
+                "id": "19d9c70234b44a48e5e77b7d2eb42127",
+                "name": "三大区"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "05af0a092873001892ce52e9de59eb76",
+                    "name": "三部"
+                  },
+                  {
+                    "children": null,
+                    "id": "0fec5dd10bf2dd614ba3189428cf20c5",
+                    "name": "二部"
+                  }
+                ],
+                "id": "2562e4cef057d5e980bf9d5566fccc62",
+                "name": "一大区"
+              },
+              {
+                "children": null,
+                "id": "8a2dc53d4e243bda3ed6c9d2456848e1",
+                "name": "二大区"
+              }
+            ],
+            "id": "8212122c6019ea2ff7652d096e5725b1",
+            "name": "大客户部"
+          },
+          {
+            "children": null,
+            "id": "b48e327ed9c4931f27ab6cb8bbd6bb05",
+            "name": "公共支持部"
+          }
+        ],
+        "id": "b6aa4c2e5d47ce115d8daf21912ec78d",
+        "name": "悠客事业部"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": null,
+                "id": "098b71fdec58e74f1bc30f0c0417f1ed",
+                "name": "河内"
+              },
+              {
+                "children": null,
+                "id": "4ad9a3194221f68d366886d6b5b66b42",
+                "name": "海防"
+              }
+            ],
+            "id": "08a46de4ffc796c3b63a7a8a89558dfe",
+            "name": "越南分公司"
+          }
+        ],
+        "id": "b71f4412524c8704df7c3a2ef2ccdf1e",
+        "name": "海外事业部"
+      },
+      {
+        "children": null,
+        "id": "c2337eaf9cc0ac382bb23d29eeb73116",
+        "name": "管培生"
+      },
+      {
+        "children": null,
+        "id": "c87dc821147956ffa3c7f1de0edb05f5",
+        "name": "研究院"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": null,
+                "id": "37b7bc875ba2f0981846439792c63d5e",
+                "name": "成都区域"
+              },
+              {
+                "children": null,
+                "id": "39e13f5b03e8026cee72b9f6d42d09a0",
+                "name": "青岛区域1"
+              },
+              {
+                "children": null,
+                "id": "66a3712b4d382a473d803fb335c78463",
+                "name": "青岛区域2"
+              },
+              {
+                "children": null,
+                "id": "66cf5ee71db57a7c0f73c30463f9da29",
+                "name": "苏州区域"
+              }
+            ],
+            "id": "01d301fef951c88c5ac031d7e889a11f",
+            "name": "交付部"
+          },
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "37a64a7af1c2e7e5b53ae3c0509818df",
+                    "name": "青岛运营组"
+                  },
+                  {
+                    "children": null,
+                    "id": "ede4e2bc91c3b0f6631a6b6d13ed5bf1",
+                    "name": "青岛项目组"
+                  }
+                ],
+                "id": "69c79c5529c9fb83539aa6a35e4033bc",
+                "name": "青岛项目部"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "3810b62150cbc132d03c913172ebc775",
+                    "name": "北京运营组"
+                  },
+                  {
+                    "children": null,
+                    "id": "8523ed416b7d570fa3ebc592fbce2428",
+                    "name": "北京项目组"
+                  }
+                ],
+                "id": "75bc7d8eaae251e9cbed0c2af60b98fb",
+                "name": "北京项目部"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "51d28aff3ca470ff67170a5b208295fa",
+                    "name": "成都运营组"
+                  }
+                ],
+                "id": "788935c264eea42e495cd805283ea8aa",
+                "name": "成都项目部"
+              },
+              {
+                "children": [
+                  {
+                    "children": null,
+                    "id": "8ea733eec102d4ee4546cbc75212bddd",
+                    "name": "上海项目组"
+                  },
+                  {
+                    "children": null,
+                    "id": "bb48470b8e4af91e218e8a5aa8d22a86",
+                    "name": "上海运营组"
+                  }
+                ],
+                "id": "c7aefe76839deb36ee0cde9eef857655",
+                "name": "上海项目部"
+              }
+            ],
+            "id": "66739659c33ebd2ca6a52e8e8061778d",
+            "name": "项目运营部"
+          },
+          {
+            "children": [
+              {
+                "children": null,
+                "id": "446534479b717d7cd363c6ef99169df7",
+                "name": "成都"
+              },
+              {
+                "children": null,
+                "id": "acd91d749663725cdad55e46fde5845c",
+                "name": "上海"
+              },
+              {
+                "children": null,
+                "id": "d9dcf5f7c24cffbf06a797209288460b",
+                "name": "北京"
+              },
+              {
+                "children": null,
+                "id": "fce9b116d7f0019c5dc8c6ee62ff947c",
+                "name": "青岛"
+              }
+            ],
+            "id": "9ae64ae80d27cc3c22b9dd37c9baa4cc",
+            "name": "营销部"
+          }
+        ],
+        "id": "cb370383feb9896f10102c5af72f5f51",
+        "name": "服务业外包事业部"
+      }
+    ],
+    "id": "ad1c810d5f2a5883ac95d6448ad59411",
+    "name": "成功人力资源集团"
+  },
+  {
+    "children": null,
+    "id": "d6053c480dcd23421522c6fa24144a20",
+    "name": "前润成功"
+  },
+  {
+    "children": null,
+    "id": "e4528e6aa3d07fef3f07481b06eb1781",
+    "name": "才薪"
+  }
+]
