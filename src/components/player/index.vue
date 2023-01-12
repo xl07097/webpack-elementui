@@ -19,7 +19,25 @@ export default {
     }
   },
   mounted() {
-    this.init()
+    const intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            this.init()
+            intersectionObserver.disconnect();
+          }
+        })
+      },
+      {
+        rootMargin: '16px',
+        threshold: [0],
+      },
+    );
+    intersectionObserver.observe(document.querySelector(`#${this.id}`));
+    this.$on('hook:beforeDistroy', () => {
+      intersectionObserver.disconnect();
+    });
+    // this.init()
   },
   methods: {
     init() {
@@ -27,6 +45,8 @@ export default {
         id: this.id,
         url: 'https://files.zhiqiuge.com/123.mkv',
         lang: 'zh-cn',
+        width: 200,
+        height: 140,
         videoInit: true
       })
     },
@@ -36,7 +56,7 @@ export default {
 
 <style lang="scss" scoped>
 .player-div{
-  width: 100%;
-  height: 600px;
+  margin-bottom: 16px;
+  min-height: 140px;
 }
 </style>
