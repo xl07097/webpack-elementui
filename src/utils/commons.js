@@ -5,6 +5,12 @@
  */
 const _toString = Object.prototype.toString
 
+/**
+ * 深克隆
+ * ps：循环依赖有问题
+ * @param {*} target 
+ * @returns 
+ */
 export const deepClone = (target) => {
   let result
   if (Array.isArray(target)) {
@@ -22,6 +28,16 @@ export const deepClone = (target) => {
   }
 
   return result
+}
+
+export const channelDeepClone = (data) => {
+  return new Promise((resovle, reject) => {
+    const {port1, port2} = new MessageChannel()
+    port2.onmessage(event => {
+      resovle(event.data)
+    })
+    port1.postMessage(data)
+  })
 }
 
 /**
