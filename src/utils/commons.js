@@ -88,7 +88,6 @@ export function timeout(ms = 1000) {
   return new Promise((_, reject) => setTimeout(reject, ms))
 }
 
-
 export const lastIndex = (arr) => {
   return arr.length - 1
 }
@@ -97,11 +96,45 @@ export const lastItem = (arr) => {
   return arr.at(-1)
 }
 
-export const getUrlParam = function(name) { // 获取url参数
- let reg = new RegExp('(^|&?)' + name + '=([^&]*)(&|$)', 'i')
- let r = window.location.href.substring(1).match(reg)
- if (r != null) {
-   return decodeURI(r[2])
+export const getUrlParam = function (name) {
+  // 获取url参数
+  let reg = new RegExp('(^|&?)' + name + '=([^&]*)(&|$)', 'i')
+  let r = window.location.href.substring(1).match(reg)
+  if (r != null) {
+    return decodeURI(r[2])
+  }
+  return undefined
 }
- return undefined
+import dayjs from "dayjs"
+export const copyRightConsole = (packageInfo) => {
+  /* 样式代码 */
+  const projectNameStyle = 'font-size: 20px;font-weight: 600;color: rgb(244,167,89);'
+  const descriptionStyle =
+    'font-style: oblique;font-size:14px;color: rgb(244,167,89);font-weight: 400;'
+  const versionStyle = 'color: rgb(30,152,255);padding:8px 0 2px;'
+  const contentStyle = 'color: rgb(30,152,255);padding:0 0 2px;'
+  const dateTimeStyle = 'color: rgb(30,152,255);padding:0 0 5px;'
+
+  /* 内容代码 */
+  const projectName = packageInfo.name || ''
+  const description = packageInfo.description || ''
+  const version = `版 本 号：${packageInfo.version}`
+  const dateTime = `编译日期：${dayjs().format('YYYY-MM-DD HH:mm:ss')}`
+  const releaseDateTime = `发布时间：${dayjs(window.REALEASE_DATE_TIME).format(
+    'YYYY-MM-DD HH:mm:ss'
+  )}`
+
+
+  // 空格有意义，不要格式化
+  console.log(
+    `%c${description} %c${projectName}
+%c${version}
+%c${releaseDateTime}
+%c${dateTime}`,
+    projectNameStyle,
+    descriptionStyle,
+    versionStyle,
+    contentStyle,
+    dateTimeStyle
+  )
 }

@@ -43,11 +43,18 @@ const routers = [
   {
     path: '/infiniteScroll',
     name: 'infiniteScroll',
-    props: true,
     meta: {
       title: 'infiniteScroll',
     },
     component: (resolve) => require(['@/views/other/InfiniteScroll.vue'], resolve),
+  },
+  {
+    path: '/three',
+    name: 'three',
+    meta: {
+      title: 'three',
+    },
+    component: (resolve) => require(['@/views/tools/three/index.vue'], resolve),
   },
   // {
   //   path: '*',

@@ -2,6 +2,8 @@
   <div class="index">
     <FormRender :value="searchData" :fields="fields" />
     <el-button @click="gets"> 获取 </el-button>
+
+    <i class="el-icon-circle-plus-outline"></i>
   </div>
 </template>
 <script>

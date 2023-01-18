@@ -15,6 +15,8 @@
         />
       </ElFormItem>
     </el-form>
+
+        <i class="el-icon-circle-plus-outline" style="font-size:22px;"></i>
   </div>
 </template>
 
@@ -123,3 +125,14 @@ export default {
   },
 }
 </script>
+<style lang="scss">
+@keyframes moveX {
+  to{
+    transform: translateY(200px) translateX(100px);
+  }
+}
+.el-icon-circle-plus-outline{
+  font-size: 22px;
+  animation: 2s moveX cubic-bezier(0.5, -0.5, 1, 1) forwards;
+}
+</style>

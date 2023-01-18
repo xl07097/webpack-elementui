@@ -6,7 +6,8 @@
 </template>
 <script>
 import AppHeader from '@/layout/header/app-header';
-
+import {copyRightConsole} from '@/utils/commons'
+const packageInfo = require('../package.json')
 export default {
   name: 'App',
   components: {
@@ -29,6 +30,8 @@ export default {
       }
       eventErr.preventDefault()
     }, true)
+
+    copyRightConsole(packageInfo)
   },
 };
 </script>

@@ -31,7 +31,7 @@ export default {
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
         for (let entry of entries) {
-          if (entry.intersectionRatio > 0) {
+          if (entry.isIntersecting) {
             this.loadItem();
           }
         }
