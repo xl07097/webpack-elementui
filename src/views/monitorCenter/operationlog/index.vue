@@ -1,29 +1,28 @@
 <template>
-  <div>
-    <el-upload :headers="{token}" action="/note/upload/file" :file-list="fileList" name="upfile" :on-success="onSuccess">
-      <el-button>上传</el-button>
-    </el-upload>
-  </div>
+  <div><div id="app1"></div></div>
 </template>
 
 <script>
+import { loadMicroApp } from 'qiankun';
 export default {
   name: 'OperationLog',
   data(){
     return {
-      fileList: [],
-      token: ''
     }
   },
+  mounted(){
+    const app = loadMicroApp({ 
+      name: 'lp-app', 
+      entry: 'http://localhost:8081/app1/',
+      container: '#app1', 
+    });
+    this.$on('hook:beforeDestroy', function(){
+      app.mountPromise.then(() => app.unmount())
+    })
+  },
   methods:{
-    onSuccess(res){
-      this.fileList.push({
-        name: 'jj',
-        url: res.data
-      })
-      
-    }
-  }
+    
+  },
 }
 </script>
 
