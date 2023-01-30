@@ -24,33 +24,39 @@ export default {
       fields: [
         { type: 'input', prop: 'name', label: '姓名' },
         { type: 'input', prop: 'age', label: '年龄' },
-        { type: 'select', prop: 'provice', label: '省', 
-          config: { 
-            request:{
+        {
+          type: 'select',
+          prop: 'provice',
+          label: '省',
+          config: {
+            request: {
               // url: 'sysArea/list',
               // method: 'post',
               remote: true,
               remoteMethod: (keyword) => {
-                return post('sysArea/list',{"parentCode": keyword})
+                return post('sysArea/list', { parentCode: keyword })
               },
-              data:{
-                "parentCode": "320500"
+              data: {
+                parentCode: '320500',
               },
               handleData: (res) => {
-                return res.data.map(({id, name}) => {
+                return res.data.map(({ id, name }) => {
                   return {
                     label: name,
-                    value: id
+                    value: id,
                   }
                 })
-              }
-            }
-          } 
+              },
+            },
+          },
         },
-        { type: 'cascader', prop: 'cascader', label: '菜单', 
+        {
+          type: 'cascader',
+          prop: 'cascader',
+          label: '菜单',
           config: {
             request: {
-              url: 'sysMenu/tree'
+              url: 'sysMenu/tree',
             },
             props: {
               checkStrictly: true,
@@ -58,12 +64,23 @@ export default {
               value: 'id',
               label: 'name',
               children: 'children',
-              multi: true
-            }
-          } 
+              multi: true,
+            },
+          },
         },
         { type: 'year', prop: 'year', label: '年' },
-        { type: 'daterange', prop: 'createTime', label: '创建时间' },
+        {
+          type: 'daterange',
+          prop: 'createTime',
+          label: '创建时间',
+          config: {
+            pickerOptions: {
+              disabledDate(date) {
+                return date.getTime() > Date.now()
+              },
+            },
+          },
+        },
         { type: 'date', prop: 'date', label: 'date' },
         { type: 'week', prop: 'week', label: 'week' },
       ],
