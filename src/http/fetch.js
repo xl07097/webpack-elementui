@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { showMessage } from '@/utils/message'
-import { responseHandle } from './httpHandle'
 import { storage } from '@/utils/storage'
 
 let isRefresh = false // 是否在重新自动登录
@@ -8,7 +7,7 @@ let isRefresh = false // 是否在重新自动登录
 let retryQueue = [] // 需要重新请求的队列
 
 const instance = axios.create({
-  baseURL: '/note',
+  baseURL: '/api',
   // timeout: 10000,
   withCredentials: true,
   headers: {
