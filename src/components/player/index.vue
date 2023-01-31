@@ -3,7 +3,9 @@
 </template>
 
 <script>
-import Player from 'xgplayer'
+// import Player from 'xgplayer'
+import 'xgplayer'
+import HlsPlayer from 'xgplayer-hls'
 export default {
   props: {
     src: {
@@ -21,33 +23,33 @@ export default {
   mounted() {
     const intersectionObserver = new IntersectionObserver(
       (entries) => {
-        entries.forEach(entry => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.init()
-            intersectionObserver.disconnect();
+            intersectionObserver.disconnect()
           }
         })
       },
       {
         rootMargin: '16px',
         threshold: [0],
-      },
-    );
-    intersectionObserver.observe(document.querySelector(`#${this.id}`));
+      }
+    )
+    intersectionObserver.observe(document.querySelector(`#${this.id}`))
     this.$on('hook:beforeDistroy', () => {
-      intersectionObserver.disconnect();
-    });
+      intersectionObserver.disconnect()
+    })
     // this.init()
   },
   methods: {
     init() {
-      this.player = new Player({
+      this.player = new HlsPlayer({
         id: this.id,
-        url: 'https://files.zhiqiuge.com/123.mkv',
+        url: 'https://xiangshuye.oss-cn-shanghai.aliyuncs.com/xiangshuye/m3u8/lp.m3u8 ',
         lang: 'zh-cn',
-        width: 200,
-        height: 140,
-        videoInit: true
+        width: 600,
+        height: 340,
+        videoInit: true,
       })
     },
   },
@@ -55,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.player-div{
+.player-div {
   margin-bottom: 16px;
   min-height: 140px;
 }

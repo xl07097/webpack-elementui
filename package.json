@@ -41,7 +41,8 @@
     "vxe-table": "^3.6.9",
     "write-excel-file": "^1.4.15",
     "xe-utils": "^3.4.3",
-    "xgplayer": "^2.32.2"
+    "xgplayer": "^2.32.2",
+    "xgplayer-hls": "^2.5.2"
   },
   "devDependencies": {
     "@babel/compat-data": "^7.18.5",
