@@ -21,11 +21,11 @@ module.exports = merge(baseConfig, {
     hot: true,
     port: '9810',
     proxy: {
-      '/note': {
+      '/api': {
         target: 'https://note.zhiqiuge.com',
         changeOrigin: true,
         pathRewrite: {
-          '^/note': '/',
+          '^/api': '/',
         },
       },
     },

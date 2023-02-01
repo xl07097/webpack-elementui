@@ -88,6 +88,7 @@ export default {
     },
     renderDate(h) {
       const { tag, dateFormat } = this;
+      const {pickerOptions={}} = this.config
       return (
         <el-date-picker
           value={this.value}
@@ -96,6 +97,7 @@ export default {
           clearable
           format={dateFormat[tag]}
           valueFormat={dateFormat[tag]}
+          picker-options={pickerOptions}
           onInput={this.input}
           on-change={this.change}
           placeholder={`请选择${this.label}`}
