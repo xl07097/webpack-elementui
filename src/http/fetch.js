@@ -43,13 +43,10 @@ instance.interceptors.response.use(
         if (!isRefresh) {
           isRefresh = true
           return instance
-            .post('/login', {
-              name: 'xueliang',
-              password: '28b064f575db2448c49c1db52e067d6d',
-            })
+            .get('/refreshToken')
             .then((res) => {
               if (res.code === 200) {
-                storage.setItem('token', res.data.token)
+                storage.setItem('token', res.data)
                 isRefresh = false
                 retryQueue.forEach((cb) => cb())
                 retryQueue = []
