@@ -38,6 +38,7 @@ export default {
     intersectionObserver.observe(document.querySelector(`#${this.id}`))
     this.$on('hook:beforeDistroy', () => {
       intersectionObserver.disconnect()
+      this.player && this.player.destroy()
     })
     // this.init()
   },
@@ -45,7 +46,7 @@ export default {
     init() {
       this.player = new HlsPlayer({
         id: this.id,
-        url: 'https://xiangshuye.oss-cn-shanghai.aliyuncs.com/xiangshuye/m3u8/lp.m3u8 ',
+        url: 'https://files.zhiqiuge.com/xiangshuye/m3u8/lp.m3u8 ',
         lang: 'zh-cn',
         width: 600,
         height: 340,

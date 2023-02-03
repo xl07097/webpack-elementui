@@ -8,8 +8,8 @@ const _toString = Object.prototype.toString
 /**
  * 深克隆
  * ps：循环依赖有问题
- * @param {*} target 
- * @returns 
+ * @param {*} target
+ * @returns
  */
 export const deepClone = (target) => {
   let result
@@ -32,8 +32,8 @@ export const deepClone = (target) => {
 
 export const channelDeepClone = (data) => {
   return new Promise((resovle, reject) => {
-    const {port1, port2} = new MessageChannel()
-    port2.onmessage(event => {
+    const { port1, port2 } = new MessageChannel()
+    port2.onmessage((event) => {
       resovle(event.data)
     })
     port1.postMessage(data)
@@ -121,7 +121,7 @@ export const getUrlParam = function (name) {
   }
   return undefined
 }
-import dayjs from "dayjs"
+import dayjs from 'dayjs'
 export const copyRightConsole = (packageInfo) => {
   /* 样式代码 */
   const projectNameStyle = 'font-size: 20px;font-weight: 600;color: rgb(244,167,89);'
@@ -140,7 +140,6 @@ export const copyRightConsole = (packageInfo) => {
     'YYYY-MM-DD HH:mm:ss'
   )}`
 
-
   // 空格有意义，不要格式化
   console.log(
     `%c${description} %c${projectName}
@@ -153,4 +152,31 @@ export const copyRightConsole = (packageInfo) => {
     contentStyle,
     dateTimeStyle
   )
+}
+
+export const debounce = function (fn, delay = 300) {
+  let timerId = null
+  return function (...args) {
+    const ctx = this
+    if (timerId) {
+      clearTimeout(timerId)
+    }
+    timerId = setTimeout(() => {
+      fn.apply(ctx, ...args)
+    }, delay)
+  }
+}
+
+export const throttle = function throttle(fn, delay = 300) {
+  let timerId = null
+  return function(...args){
+    const ctx = this
+    if (timerId) {
+      return
+    }
+    timerId = setTimeout(() => {
+      fn.apply(ctx, ...args)
+      timerId = null
+    }, delay)
+  }
 }
