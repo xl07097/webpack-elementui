@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import Address from '@/views/other/Address'
+import Address from './Address'
 export default {
   name: 'NoticeInfo',
   components:{Address},
@@ -35,8 +35,8 @@ export default {
   },
   methods:{
     submit() {
-      this.$refs.form.validate(() => {
-        console.log(this.obj)
+      this.$refs.form.validate((isValid, err) => {
+        console.log(err)
       })
     },
   }
