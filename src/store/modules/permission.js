@@ -87,5 +87,9 @@ export default {
         })
       })
     },
+    resetLogin(){
+      router.push('/login')
+      window.location.reload()
+    }
   },
 }

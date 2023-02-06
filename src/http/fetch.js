@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { showMessage } from '@/utils/message'
 import { storage } from '@/utils/storage'
+import store from '@/store/store'
 
 let isRefresh = false // 是否在重新自动登录
 
@@ -39,7 +40,7 @@ instance.interceptors.response.use(
     // 此时需要重新登录
     if (data.code === 300 || data.code === 1001) {
       const config = res.config
-      if (!res.config.url.includes('/login')) {
+      if (!res.config.url.includes('/login') && !res.config.url.includes('/refreshToken')) {
         if (!isRefresh) {
           isRefresh = true
           return instance
@@ -52,6 +53,7 @@ instance.interceptors.response.use(
                 retryQueue = []
                 return instance.request(config)
               }
+              store.dispatch('permission/resetLogin')
             })
         } else {
           return new Promise((resolve) => {
