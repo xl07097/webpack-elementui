@@ -26,7 +26,7 @@
 
     <el-form-item class="search-form-item">
       <el-button @click="expand">展开</el-button>
-      <el-button type="primary">查询</el-button>
+      <el-button type="primary" @click="search">查询</el-button>
     </el-form-item>
   </el-form>
 </template>
@@ -98,6 +98,7 @@ export default {
   },
   methods: {
     init() {
+      console.log(90)
       if (this.showAll) {
         return
       }
@@ -132,6 +133,13 @@ export default {
     expand() {
       this.showAll = !this.showAll
     },
+    search(){
+      const fields = this.fields
+      let data = {}
+      fields.forEach(item => {
+        
+      })
+    }
   },
 }
 </script>
