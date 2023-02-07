@@ -25,12 +25,8 @@
     "vue"
   ],
   "rules": {
-    "no-undef": [
-      0
-    ],
-    "no-console": [
-      0
-    ], // 禁止使用console
+    "no-undef": "off",
+    "no-console": "off", // 禁止使用console
     "indent": [
       2,
       2
@@ -39,24 +35,20 @@
       2,
       "single"
     ],
-    "vue/script-setup-uses-vars": [
-      0
-    ],
+    "vue/script-setup-uses-vars": "off",
     "no-unused-vars": [
       1,
       {
         "vars": "all",
         "args": "after-used"
       }
-    ]
-  },
-  "vue/max-attributes-per-line": [
-    "warn",
-    {
-      "singleline": 3
-    }
-  ],
-  "vue/multi-word-component-names": [
-    "off"
-  ]
+    ],
+    "vue/max-attributes-per-line": [
+      1,
+      {
+        "singleline": 3
+      }
+    ],
+    "vue/multi-word-component-names": "off"
+  }
 }
