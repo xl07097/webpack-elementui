@@ -1,19 +1,21 @@
 <template>
-  <div class="quill-demo1"><QuillEditor></QuillEditor></div>
+  <div class="quill-demo1">
+    <QuillEditor />
+  </div>
 </template>
 
 <script>
 import QuillEditor from '@/components/QuillEditor.vue';
 export default {
-components:{ QuillEditor },
-data(){
-  return {
+  components:{ QuillEditor },
+  data(){
+    return {
+
+    }
+  },
+  mounted(){
 
   }
-},
-mounted(){
-
-}
 }
 </script>
 

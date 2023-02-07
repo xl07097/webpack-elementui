@@ -1,6 +1,8 @@
 <template>
   <div>
-    <el-button @click="test">测试token</el-button> 
+    <el-button @click="test">
+      测试token
+    </el-button> 
   </div>
 </template>
 
@@ -27,7 +29,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

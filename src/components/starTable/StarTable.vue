@@ -4,13 +4,8 @@
       :key="columnKey"
       ref="tableRef"
       :data="tableData"
-      :max-height="height"
-      stripe
       :size="size"
-      :align="align"
-      :show-overflow="showOverflow"
       highlight-hover-row
-      :show-footer="showFooter"
       :footer-method="footerMethod"
       :tooltip-config="{
         theme: tooltipEffect,
@@ -18,10 +13,19 @@
         leaveDelay: 10,
         enterable: true,
       }"
+      v-bind="$attrs"
       @checkbox-change="selectionChange"
       @checkbox-all="selectionChange"
+      v-on="$listeners"
     >
-      <VxeColumn v-if="index" key="seqIndex" type="seq" title="序号" align="center" width="60" />
+      <VxeColumn
+        v-if="index"
+        key="seqIndex"
+        type="seq"
+        title="序号"
+        align="center"
+        width="60"
+      />
       <VxeColumn
         v-if="selection"
         key="checkbox"
@@ -30,43 +34,36 @@
         align="center"
         width="60"
       />
-      <VxeColumn v-if="showAction" key="action" title="操作" :width="actionWidth">
+      <VxeColumn
+        v-if="showAction"
+        key="action"
+        title="操作"
+        :width="actionWidth"
+      >
         <template
-          #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
+          #default="scope"
         >
           <slot
             name="action"
-            :row="row"
-            :rowIndex="rowIndex"
-            :$rowIndex="$rowIndex"
-            :column="column"
-            :columnIndex="columnIndex"
-            :$columnIndex="$columnIndex"
-            :_columnIndex="_columnIndex"
+            v-bind="scope"
           />
         </template>
       </VxeColumn>
       <VxeColumn
-        v-for="clm of columns"
-        :key="clm.field"
-        :title="clm.title"
-        :field="clm.field"
-        min-width="140px"
-        v-bind="clm"
+        v-for="column of columns"
+        :key="column.field"
+        :title="column.title"
+        :field="column.field"
+        min-width="100px"
+        v-bind="column"
       >
         <template
-          v-if="$slots[clm.field]"
-          #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
+          v-if="$slots[column.field]"
+          #default="scope"
         >
           <slot
             :name="column.field"
-            :row="row"
-            :rowIndex="rowIndex"
-            :$rowIndex="$rowIndex"
-            :column="column"
-            :columnIndex="columnIndex"
-            :$columnIndex="$columnIndex"
-            :_columnIndex="_columnIndex"
+            v-bind="scope"
           />
         </template>
       </VxeColumn>
@@ -75,10 +72,8 @@
 </template>
 
 <script>
-import TableColumn from './TableColumn.vue'
 export default {
   name: 'StarTables',
-  components: { TableColumn },
   props: {
     // 是否显示序号
     index: {
@@ -111,34 +106,6 @@ export default {
         return []
       },
     },
-    align: {
-      type: String,
-      default: 'left',
-    },
-    height: {
-      type: [String, Number],
-      default: 0,
-    },
-    showOverflow: {
-      type: Boolean,
-      default: false,
-    },
-    scrollX: {
-      type: Object,
-      default() {
-        return {
-          gt: -1,
-        }
-      },
-    },
-    scrollY: {
-      type: Object,
-      default() {
-        return {
-          gt: -1,
-        }
-      },
-    },
     size: {
       type: String,
       default: 'medium',
@@ -147,10 +114,6 @@ export default {
       type: String, // dark/light
       default: 'dark',
     },
-    showFooter: {
-      type: Boolean,
-      default: false,
-    },
     summaryFields: {
       type: Array,
       default() {
@@ -158,15 +121,15 @@ export default {
       },
     },
   },
-  computed: {
-    columnKey() {
-      return this.columns.map((item) => item.field).join('')
-    },
-  },
   data() {
     return {
       selectionList: [],
     }
+  },
+  computed: {
+    columnKey() {
+      return this.columns.map((item) => item.field).join('')
+    },
   },
   watch: {
     tableData() {
