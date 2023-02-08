@@ -36,7 +36,6 @@
 </template>
 <script>
 import ItemRender from './ItemRender'
-import { debounce } from '@/utils/commons'
 
 export default {
   name: 'FormRender',
@@ -91,18 +90,27 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
-      this.init()
-    })
-    const deFn = debounce(this.init)
-    window.addEventListener('resize', deFn)
-    this.$on('hook:beforeDestroy', () => {
-      window.removeEventListener('resize', deFn)
-    })
+    this.init()
   },
   methods: {
     init() {
-      console.log(90)
+      let timer = null
+      const observe = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            const rect = entry.target.getBoundingClientRect()
+            this.calcsWidth(rect.width)
+          }, 300)
+        }
+      })
+      const formRender =  this.$refs.formRender.$el
+      observe.observe(formRender);
+      this.$on('hook:beforeDestroy', () => {
+        observe.disconnect()
+      })
+    },
+    calcsWidth(searchWidth){
       if (this.showAll) {
         return
       }
@@ -115,13 +123,9 @@ export default {
         week: 220,
         daterange: 350,
       }, this.widthConfig) 
-      const searchWidth = document.querySelector('.search-form').getBoundingClientRect().width
-      const searchBtnWidth = document
-        .querySelector('.search-form-item')
-        .getBoundingClientRect().width
 
       const fields = this.fields
-      let totalWidth = searchBtnWidth
+      let totalWidth = 130
       for (let index = 0; index < fields.length; index++) {
         const item = fields[index]
         const labelWidth = item.labelWidth || this.labelWidth
