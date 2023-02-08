@@ -1,3 +1,4 @@
+<!-- eslint-disable no-unused-vars -->
 <script>
 import * as obj from '@/http/request'
 const cacheRequest = {
@@ -105,7 +106,13 @@ export default {
       );
     },
     renderCascader(h){
-      const props = this.config.props || {}
+      const props = Object.assign({
+        checkStrictly: true,
+        value: 'id',
+        label: 'name',
+        children: 'children',
+        emitPath: false
+      }, this.config.props||{})
       return (
         <el-cascader
           value={this.value}
