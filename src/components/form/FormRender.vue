@@ -9,8 +9,8 @@
   >
     <el-form-item
       v-for="(field, index) of fields"
-      :class="{ 'form-item-hide': showAll ? false : index > showNumber }"
       :key="field.prop"
+      :class="{ 'form-item-hide': showAll ? false : index > showNumber }"
       :label="field.label"
       :label-width="field.labelWidth"
       :prop="field.prop"
@@ -25,8 +25,12 @@
     </el-form-item>
 
     <el-form-item class="search-form-item">
-      <el-button @click="expand">展开</el-button>
-      <el-button type="primary" @click="search">查询</el-button>
+      <el-button @click="expand">
+        展开
+      </el-button>
+      <el-button type="primary" @click="search">
+        查询
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
