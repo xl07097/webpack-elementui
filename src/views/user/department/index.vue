@@ -1,9 +1,9 @@
 <template>
   <div>
-    <el-input placeholder="kakak" v-model="keyword"> </el-input>
+    <el-input v-model="keyword" placeholder="kakak" />
     <div>
-      <div v-for="text of list">
-        <KeywordTextVue :text="text" :key="text" :keyword="keyword"></KeywordTextVue>
+      <div v-for="(text, index) of list" :key="index">
+        <KeywordTextVue :key="text" :text="text" :keyword="keyword" />
       </div>
     </div>
   </div>

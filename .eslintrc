@@ -29,7 +29,10 @@
     "no-console": "off", // 禁止使用console
     "indent": [
       2,
-      2
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
     "quotes": [
       2,
