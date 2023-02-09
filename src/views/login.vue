@@ -18,13 +18,14 @@ export default {
       }).then((res) => {
         if (res.code === 200) {
           storage.setItem('token', res.data.token)
+          storage.setItem('accessToken', res.data.accessToken)
           this.$store.commit('setLoginUser', res.data.user)
           this.$router.push('/excel')
         }
       })
     },
     exportss() {
-      downloadPost('/user/export').then((res) => {})
+      downloadPost('/user/export')
     },
   },
 }

@@ -43,8 +43,13 @@ instance.interceptors.response.use(
       if (!res.config.url.includes('/login') && !res.config.url.includes('/refreshToken')) {
         if (!isRefresh) {
           isRefresh = true
+          console.log(storage.getItem('accessToken'))
           return instance
-            .get('/refreshToken')
+            .get('/refreshToken', {
+              params:{
+                accessToken: storage.getItem('accessToken')
+              }
+            })
             .then((res) => {
               if (res.code === 200) {
                 storage.setItem('token', res.data)
