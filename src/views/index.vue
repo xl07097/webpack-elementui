@@ -2,8 +2,8 @@
   <div class="index">
     <FormRender :value="searchData" :fields="fields" />
     <el-button @click="gets"> 获取 </el-button>
-
-    <i class="el-icon-circle-plus-outline"></i>
+    <el-button @click="test">测试</el-button>
+    <el-button @click="gets1">获取</el-button>
   </div>
 </template>
 <script>
@@ -57,15 +57,7 @@ export default {
           config: {
             request: {
               url: 'sysMenu/tree',
-            },
-            props: {
-              checkStrictly: true,
-              emitPath: false,
-              value: 'id',
-              label: 'name',
-              children: 'children',
-              multi: true,
-            },
+            }
           },
         },
         { type: 'year', prop: 'year', label: '年' },
@@ -82,7 +74,6 @@ export default {
           },
         },
         { type: 'date', prop: 'date', label: 'date' },
-        { type: 'week', prop: 'week', label: 'week' },
       ],
     }
   },
@@ -99,6 +90,18 @@ export default {
     gets() {
       console.log(this.searchData)
     },
+    test(){
+      const key =  `id_${~~(Math.random()*100000)}`
+      localStorage.setItem(key, key)
+      // console.log(this.$store)
+      // this.$store.commit('app/setAppData', {
+      //   type: 'dict',
+      //   data: []
+      // })
+    },
+    gets1(){
+      console.log(this.$store.getters['app/getAppData']('dict'))
+    }
   },
 }
 </script>

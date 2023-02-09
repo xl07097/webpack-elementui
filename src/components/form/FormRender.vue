@@ -3,7 +3,7 @@
     ref="formRender"
     class="search-form"
     :model="currentData"
-    :rules="rules"
+    size="small"
     :label-width="`${labelWidth}px`"
     inline
   >
@@ -20,13 +20,19 @@
         :tag="field.type"
         :field="field.field"
         :label="field.label"
+        :width="width"
         :config="field.config"
       />
     </el-form-item>
 
     <el-form-item class="search-form-item">
-      <el-button @click="expand">
-        展开
+      <el-button
+        v-if="showNumber<fields.length"
+        :icon="`${showAll?'el-icon-arrow-up':'el-icon-arrow-down'}`"
+        type="text"
+        @click="expand"
+      >
+        {{ showAll ? '收起':'展开' }}
       </el-button>
       <el-button type="primary" @click="search">
         查询
@@ -47,13 +53,6 @@ export default {
         return {}
       },
     },
-    // 规则
-    rules: {
-      type: Object,
-      default() {
-        return {}
-      },
-    },
     fields: {
       type: Array,
       default() {
@@ -62,7 +61,11 @@ export default {
     },
     labelWidth: {
       type: Number,
-      default: 80,
+      default: 84,
+    },
+    width: {
+      type: Number,
+      default: 200,
     },
     widthConfig:{
       type: Object,
@@ -94,14 +97,15 @@ export default {
   },
   methods: {
     init() {
-      let timer = null
+      // let timer = null
       const observe = new ResizeObserver((entries) => {
+        console.log(entries)
         for (let entry of entries) {
-          clearTimeout(timer)
-          timer = setTimeout(() => {
-            const rect = entry.target.getBoundingClientRect()
-            this.calcsWidth(rect.width)
-          }, 300)
+          // console.log(entry)
+          // clearTimeout(timer)
+          // timer = setTimeout(() => {
+          this.calcsWidth(entry.contentRect.width)
+          // }, 300)
         }
       })
       const formRender =  this.$refs.formRender.$el
@@ -115,13 +119,13 @@ export default {
         return
       }
       const widthMap = Object.assign({
-        input: 215,
-        select: 215,
-        cascader: 215,
-        year: 220,
-        date: 220,
-        week: 220,
-        daterange: 350,
+        input: 200,
+        select: 200,
+        cascader: 200,
+        year: 200,
+        date: 200,
+        week: 200,
+        daterange: 200,
       }, this.widthConfig) 
 
       const fields = this.fields
@@ -129,7 +133,7 @@ export default {
       for (let index = 0; index < fields.length; index++) {
         const item = fields[index]
         const labelWidth = item.labelWidth || this.labelWidth
-        const width = item.width || widthMap[item.type]
+        const width = item.width || this.width // widthMap[item.type]
         const margin = 10
         if (totalWidth + labelWidth + width + margin > searchWidth) {
           this.showNumber = index - 1
@@ -144,9 +148,17 @@ export default {
     search(){
       const fields = this.fields
       let data = {}
+      const value = this.value
       fields.forEach(item => {
-        
+        if(item.endProp){
+          const currentData = value[item.prop] || []
+          data[item.prop] = currentData[0]
+          data[item.endProp] = currentData[1]
+        }else{
+          data[item.prop] = value[item.prop]
+        }
       })
+      this.$emit('search', data)
     }
   },
 }

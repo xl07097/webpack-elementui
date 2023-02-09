@@ -34,6 +34,10 @@ export default {
         };
       },
     },
+    width: {
+      type: Number,
+      default: 200,
+    },
   },
   data() {
     return {
@@ -51,7 +55,13 @@ export default {
   computed:{
     optionList(){
       return this.config.lists || this.lists || []
-    }
+    },
+    style() {
+      let styleWidth = this.config.width || this.width
+      return {
+        width: `${styleWidth}px`,
+      }
+    },
   },
   mounted(){
     const {request={}} = this.config
@@ -65,7 +75,7 @@ export default {
   methods: {
     renderInput(h) {
       return (
-        <el-input value={this.value} on-input={this.input} clearable placeholder={`请输入${this.label}`} />
+        <el-input value={this.value} style={this.style} on-input={this.input} clearable placeholder={`请输入${this.label}`} />
       );
     },
     renderSelect(h) {
@@ -80,6 +90,7 @@ export default {
           remote={request.remote}
           remoteMethod={this.remoteMethod}
           placeholder={placeholder}
+          style={this.style} 
         >
           {this.optionList.map((list) => {
             return <el-option key={list.value} label={list.label} value={list.value} />;
@@ -102,6 +113,7 @@ export default {
           onInput={this.input}
           on-change={this.change}
           placeholder={`请选择${this.label}`}
+          style={this.style} 
         ></el-date-picker>
       );
     },
@@ -121,7 +133,7 @@ export default {
           props={{props}}
           filterable
           clearable
-          on-change={this.change}></el-cascader>
+          on-change={this.change} style={this.style} ></el-cascader>
       )
     },
     renderAutocomplete(h){
@@ -131,6 +143,7 @@ export default {
           value={this.value}
           fetch-suggestions={this.querySearch}
           placeholder={'请输入关键字'}
+          style={this.style} 
         >
           <template v-slot:default="{item}">
             { item.label }
