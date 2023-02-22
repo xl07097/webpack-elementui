@@ -121,7 +121,7 @@ export default {
       const props = Object.assign({
         checkStrictly: true,
         value: 'id',
-        label: 'name',
+        label: 'title',
         children: 'children',
         emitPath: false
       }, this.config.props||{})

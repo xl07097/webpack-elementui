@@ -2,7 +2,6 @@
   <el-form
     ref="formRender"
     class="search-form"
-    :model="currentData"
     size="small"
     :label-width="`${labelWidth}px`"
     inline
@@ -34,8 +33,11 @@
       >
         {{ showAll ? '收起':'展开' }}
       </el-button>
-      <el-button type="primary" @click="search">
+      <el-button type="primary" icon="el-icon-search" @click="search">
         查询
+      </el-button>
+      <el-button icon="el-icon-refresh-right" @click="reset">
+        重置
       </el-button>
     </el-form-item>
   </el-form>
@@ -93,19 +95,20 @@ export default {
     },
   },
   mounted() {
+    const searchWidth = document.querySelector('.search-form').getBoundingClientRect().width
+    this.handleWidth(searchWidth)
     this.init()
   },
   methods: {
     init() {
-      // let timer = null
+      let timer = null
       const observe = new ResizeObserver((entries) => {
-        console.log(entries)
         for (let entry of entries) {
           // console.log(entry)
-          // clearTimeout(timer)
-          // timer = setTimeout(() => {
-          this.calcsWidth(entry.contentRect.width)
-          // }, 300)
+          clearTimeout(timer)
+          timer = setTimeout(() => {
+            this.handleWidth(entry.contentRect.width)
+          }, 300)
         }
       })
       const formRender =  this.$refs.formRender.$el
@@ -114,22 +117,22 @@ export default {
         observe.disconnect()
       })
     },
-    calcsWidth(searchWidth){
+    handleWidth(searchWidth){
       if (this.showAll) {
         return
       }
-      const widthMap = Object.assign({
-        input: 200,
-        select: 200,
-        cascader: 200,
-        year: 200,
-        date: 200,
-        week: 200,
-        daterange: 200,
-      }, this.widthConfig) 
+      // const widthMap = Object.assign({
+      //   input: 200,
+      //   select: 200,
+      //   cascader: 200,
+      //   year: 200,
+      //   date: 200,
+      //   week: 200,
+      //   daterange: 200,
+      // }, this.widthConfig) 
 
       const fields = this.fields
-      let totalWidth = 130
+      let totalWidth = 230
       for (let index = 0; index < fields.length; index++) {
         const item = fields[index]
         const labelWidth = item.labelWidth || this.labelWidth
@@ -159,6 +162,19 @@ export default {
         }
       })
       this.$emit('search', data)
+    },
+    reset(){
+      const data = {}
+      this.fields.forEach(item => {
+        // if(item.endProp){
+        //   const currentData = value[item.prop] || []
+        //   data[item.prop] = currentData[0]
+        //   data[item.endProp] = currentData[1]
+        // }else{
+        data[item.prop] = null
+        // }
+      })
+      this.currentData = data
     }
   },
 }
