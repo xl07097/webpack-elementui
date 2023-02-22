@@ -29,14 +29,17 @@ const findQuestions = function findQuestions(tree) {
       ...node,
       children: [],
     })
-    add({
-      ...node,
-      children: [],
-    })
-    if (node.children && node.children.length) {
-      // 将候选顶点入栈，进行下一次循环
-      stack.push(...node.children)
+    if(!node.nodeType === 3){
+      
     }
+    add({
+        ...node,
+        children: [],
+      })
+      if (node.children && node.children.length) {
+        // 将候选顶点入栈，进行下一次循环
+        stack.push(...node.children)
+      }
   }
 
   console.timeEnd('label')

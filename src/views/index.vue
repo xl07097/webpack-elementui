@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <FormRender :value="searchData" :fields="fields" />
+    <FormRender v-model="searchData" :fields="fields" />
     <el-button @click="gets"> 获取 </el-button>
     <el-button @click="test">测试</el-button>
     <el-button @click="gets1">获取</el-button>

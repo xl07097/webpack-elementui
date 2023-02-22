@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ColumnSetting from "@/components/ColumnSetting";
+import ColumnSetting from '@/components/ColumnSetting';
 export default {
   name: 'UserInfo',
   components:{ColumnSetting},
