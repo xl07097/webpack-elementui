@@ -1,17 +1,26 @@
 <template>
-  <div class="app-header">
-    <el-scrollbar ref="scrollContainer" class="scroll-container " :vertical="false" @wheel.native.prevent="handleScroll">
-      <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
-        {{ record.name }}
-      </el-tag>
-    </el-scrollbar>
+  <div>
+    <div class="app-header">
+      <el-scrollbar
+        ref="scrollContainer"
+        class="scroll-container "
+        :vertical="false"
+        @wheel.native.prevent="handleScroll"
+      >
+        <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
+          {{ record.name }}
+        </el-tag>
+      </el-scrollbar>
+    </div>
+    <TagsView />
   </div>
 </template>
 
 <script>
-
+import TagsView from '../tagsView/Index.vue'
 export default {
   name: 'AppHeader',
+  components:{TagsView},
   data() {
     return {
       records: [],
@@ -42,7 +51,7 @@ export default {
 <style lang="scss" scoped>
 .app-header {
   // width: 400px;
-  height: 60px;
+  // height: 60px;
   display: flex;
   align-items: center;
   background: #eaeaea;

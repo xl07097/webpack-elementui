@@ -8,13 +8,16 @@ import router from '@/router/index'
 import { getPrivilegeMenu } from '@/apis/menu'
 import { deepClone, tree2Array } from '@/utils/commons'
 
-const add = function add({ path, name, pid, component, id }) {
+const add = function add({ path, name, pid, component, id,meta }) {
   router.addRoute({
     path: path,
     component: component
       ? () => import(`@/views/${component}`)
       : () => import('@/components/MiddlePage.vue'),
     name: name, // 命名路由
+    meta:{
+      ...meta
+    }
   })
 }
 const findQuestions = function findQuestions(tree) {
@@ -29,9 +32,6 @@ const findQuestions = function findQuestions(tree) {
       ...node,
       children: [],
     })
-    if(!node.nodeType === 3){
-      
-    }
     add({
         ...node,
         children: [],
@@ -57,6 +57,9 @@ export default {
     menuGetter(state) {
       return tree2Array(state.menu)
     },
+    routes(state){
+      return state.menu
+    }
   },
   mutations: {
     // 同步 // 辅助函数 mapMutations

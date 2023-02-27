@@ -10,7 +10,7 @@
         ref="tag"
         :key="tag.path"
         :class="isActive(tag) ? 'active' : ''"
-        :to="{ path: tag.path, query: tag.query, fullPath: tag.fullPath }"
+        :to="{ path: tag.path, query: tag.query }"
         tag="span"
         class="tags-view-item"
         :style="activeStyle(tag)"
@@ -31,30 +31,30 @@
       class="contextmenu"
     >
       <li @click="refreshSelectedTag(selectedTag)">
-        <i class="el-icon-refresh-right"></i> 刷新页面
+        <i class="el-icon-refresh-right" /> 刷新页面
       </li>
       <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">
-        <i class="el-icon-close"></i> 关闭当前
+        <i class="el-icon-close" /> 关闭当前
       </li>
       <li @click="closeOthersTags">
-        <i class="el-icon-circle-close"></i> 关闭其他
+        <i class="el-icon-circle-close" /> 关闭其他
       </li>
       <li v-if="!isFirstView()" @click="closeLeftTags">
-        <i class="el-icon-back"></i> 关闭左侧
+        <i class="el-icon-back" /> 关闭左侧
       </li>
       <li v-if="!isLastView()" @click="closeRightTags">
-        <i class="el-icon-right"></i> 关闭右侧
+        <i class="el-icon-right" /> 关闭右侧
       </li>
       <li @click="closeAllTags(selectedTag)">
-        <i class="el-icon-circle-close"></i> 全部关闭
+        <i class="el-icon-circle-close" /> 全部关闭
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import ScrollPane from "./ScrollPane";
-import path from "path";
+import ScrollPane from './ScrollPane';
+// import path from 'path';
 
 export default {
   components: { ScrollPane },
@@ -72,27 +72,30 @@ export default {
       return this.$store.state.tagsView.visitedViews;
     },
     routes() {
-      return this.$store.state.permission.routes;
+      return this.$store.getters['permission/routes']
     },
-    theme() {
-      return this.$store.state.settings.theme;
-    },
+    // theme() {
+    //   return this.$store.state.settings.theme;
+    // },
   },
   watch: {
+    routes(){
+      this.initTags();
+      this.addTags();
+    },
     $route() {
       this.addTags();
       this.moveToCurrentTag();
     },
     visible(value) {
       if (value) {
-        document.body.addEventListener("click", this.closeMenu);
+        document.body.addEventListener('click', this.closeMenu);
       } else {
-        document.body.removeEventListener("click", this.closeMenu);
+        document.body.removeEventListener('click', this.closeMenu);
       }
     },
   },
   mounted() {
-    this.initTags();
     this.addTags();
   },
   methods: {
@@ -102,8 +105,8 @@ export default {
     activeStyle(tag) {
       if (!this.isActive(tag)) return {};
       return {
-        "background-color": this.theme,
-        "border-color": this.theme,
+        'background-color': this.theme,
+        'border-color': this.theme,
       };
     },
     isAffix(tag) {
@@ -113,7 +116,7 @@ export default {
       try {
         return (
           this.selectedTag.fullPath === this.visitedViews[1].fullPath ||
-          this.selectedTag.fullPath === "/index"
+          this.selectedTag.fullPath === '/index'
         );
       } catch (err) {
         return false;
@@ -129,11 +132,11 @@ export default {
         return false;
       }
     },
-    filterAffixTags(routes, basePath = "/") {
+    filterAffixTags(routes=[], basePath = '/') {
       let tags = [];
       routes.forEach((route) => {
         if (route.meta && route.meta.affix) {
-          const tagPath = path.resolve(basePath, route.path);
+          const tagPath = route.path // path.resolve(basePath, route.path);
           tags.push({
             fullPath: tagPath,
             path: tagPath,
@@ -155,26 +158,27 @@ export default {
       for (const tag of affixTags) {
         // Must have tag name
         if (tag.name) {
-          this.$store.dispatch("tagsView/addVisitedView", tag);
+          this.$store.dispatch('tagsView/addVisitedView', tag);
         }
       }
     },
     addTags() {
+      console.log(this.$route)
       const { name } = this.$route;
       if (name) {
-        this.$store.dispatch("tagsView/addView", this.$route);
+        this.$store.dispatch('tagsView/addView', this.$route);
       }
       return false;
     },
     moveToCurrentTag() {
-      const tags = this.$refs.tag;
+      const tags = this.$refs.tag || [];
       this.$nextTick(() => {
         for (const tag of tags) {
           if (tag.to.path === this.$route.path) {
             this.$refs.scrollPane.moveToTarget(tag);
             // when query is different then update
             if (tag.to.fullPath !== this.$route.fullPath) {
-              this.$store.dispatch("tagsView/updateVisitedView", this.$route);
+              this.$store.dispatch('tagsView/updateVisitedView', this.$route);
             }
             break;
           }
@@ -226,11 +230,11 @@ export default {
       } else {
         // now the default is to redirect to the home page if there is no tags-view,
         // you can adjust it according to your needs.
-        if (view.name === "Dashboard") {
+        if (view.name === 'Dashboard') {
           // to reload home page
-          this.$router.replace({ path: "/redirect" + view.fullPath });
+          this.$router.replace({ path: '/redirect' + view.fullPath });
         } else {
-          this.$router.push("/");
+          this.$router.push('/');
         }
       }
     },
@@ -275,7 +279,7 @@ export default {
       position: relative;
       cursor: pointer;
       height: 26px;
-      line-height: 26px;
+      line-height: 24px;
       border: 1px solid #d8dce5;
       color: #495060;
       background: #fff;
@@ -283,6 +287,8 @@ export default {
       font-size: 12px;
       margin-left: 5px;
       margin-top: 4px;
+      box-sizing: border-box;
+      border-radius: 0;
       &:first-of-type {
         margin-left: 15px;
       }
