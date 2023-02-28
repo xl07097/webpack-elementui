@@ -3,16 +3,16 @@
     :class="isActive(tag) ? 'active' : ''"
     class="tags-view-item"
     :style="activeStyle(tag)"
-    @click="push(tag)"
-    @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
+    @click="push"
+    @click.middle="!isAffix() ? closeSelectedTag : ''"
     @contextmenu.prevent="openMenu(tag, $event)"
   >
     {{ tag.title }}
     <span
-      v-if="!isAffix(tag)"
+      v-if="!isAffix()"
       class="el-icon-close"
       role="link"
-      @click.prevent.stop="closeSelectedTag(tag)"
+      @click.prevent.stop="closeSelectedTag"
     />
   </div>
 </template>
@@ -37,7 +37,8 @@ export default {
     isActive(route) {
       return route.path === this.$route.path
     },
-    closeSelectedTag(view) {
+    closeSelectedTag() {
+      const view = this.tag
       this.$tab.closePage(view).then(({ visitedViews }) => {
         if (this.isActive(view)) {
           this.toLastView(visitedViews, view)
@@ -66,14 +67,15 @@ export default {
         'border-color': this.theme,
       }
     },
-    isAffix(tag) {
+    isAffix() {
+      const tag = this.tag
       return tag.meta && tag.meta.affix
     },
     openMenu(tag, e) {
       this.$emit('openMenu', tag, e)
     },
-    push(tag) {
-      this.$emit('push', tag)
+    push() {
+      this.$emit('push', this.tag)
     },
   },
 }
