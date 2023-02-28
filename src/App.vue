@@ -7,6 +7,7 @@
 <script>
 import AppHeader from '@/layout/header/app-header';
 import {copyRightConsole} from '@/utils/commons'
+import UAParser from 'ua-parser-js'
 const packageInfo = require('../package.json')
 export default {
   name: 'App',
@@ -32,6 +33,10 @@ export default {
     }, true)
 
     copyRightConsole(packageInfo)
+
+    let parser = new UAParser()
+
+    console.log(parser.getResult())
   },
 };
 </script>

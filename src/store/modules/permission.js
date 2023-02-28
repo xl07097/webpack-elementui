@@ -22,7 +22,6 @@ const add = function add({ path, name, pid, component, id,meta }) {
 }
 const findQuestions = function findQuestions(tree) {
   const list = []
-  console.time('label')
   // 模拟栈，管理结点
   const stack = tree
   while (stack.length) {
@@ -42,7 +41,6 @@ const findQuestions = function findQuestions(tree) {
       }
   }
 
-  console.timeEnd('label')
   return list
 }
 export default {

@@ -40,26 +40,11 @@ instance.interceptors.response.use(
     // 此时需要重新登录
     if (data.code === 300 || data.code === 1001) {
       const config = res.config
-      if (!res.config.url.includes('/login') && !res.config.url.includes('/refreshToken')) {
+      const url = res.config.url
+      if (!url.includes('/login') && !url.includes('/refreshToken')) {
         if (!isRefresh) {
           isRefresh = true
-          console.log(storage.getItem('accessToken'))
-          return instance
-            .get('/refreshToken', {
-              params:{
-                accessToken: storage.getItem('accessToken')
-              }
-            })
-            .then((res) => {
-              if (res.code === 200) {
-                storage.setItem('token', res.data)
-                isRefresh = false
-                retryQueue.forEach((cb) => cb())
-                retryQueue = []
-                return instance.request(config)
-              }
-              store.dispatch('permission/resetLogin')
-            })
+          return retryLogin(config)
         } else {
           return new Promise((resolve) => {
             // 将resolve放进队列，用一个函数形式来保存，等token刷新后直接执行
@@ -91,3 +76,26 @@ instance.interceptors.response.use(
 )
 
 export default instance
+
+function retryLogin(config){
+  const accessToken = storage.getItem('accessToken')
+  if(!accessToken){
+    store.dispatch('permission/resetLogin')
+    return
+  }
+  return instance
+    .get('/refreshToken', {
+      params:{
+        accessToken: accessToken
+      }
+    }).then((res) => {
+      if (res.code === 200) {
+        storage.setItem('token', res.data)
+        isRefresh = false
+        retryQueue.forEach((cb) => cb())
+        retryQueue = []
+        return instance.request(config)
+      }
+      store.dispatch('permission/resetLogin')
+    })
+}

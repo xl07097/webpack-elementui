@@ -104,7 +104,6 @@ export default {
       let timer = null
       const observe = new ResizeObserver((entries) => {
         for (let entry of entries) {
-          // console.log(entry)
           clearTimeout(timer)
           timer = setTimeout(() => {
             this.handleWidth(entry.contentRect.width)

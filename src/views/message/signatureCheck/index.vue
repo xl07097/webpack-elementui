@@ -16,9 +16,6 @@ export default {
 
     }
   },
-  mounted(){
-    console.log(window.lp?.lk)
-  },
   methods:{
     test(){
       storage.removeItem('token')

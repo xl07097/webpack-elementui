@@ -6,5 +6,4 @@ Vue.directive('auth', function (el, binding) {
   } else {
     el.style.display = ''
   }
-  console.log(binding)
 })
