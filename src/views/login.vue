@@ -1,12 +1,11 @@
 <template>
   <div>
     <button type="button" @click="login">登录</button>
-    <button type="button" @click="exportss">导出</button>
   </div>
 </template>
 
 <script>
-import { post, downloadPost } from '@/http/request'
+import { post } from '@/http/request'
 import { storage } from '@/utils/storage'
 export default {
   name: 'Login',
@@ -23,9 +22,6 @@ export default {
           this.$router.push('/excel')
         }
       })
-    },
-    exportss() {
-      downloadPost('/user/export')
     },
   },
 }
