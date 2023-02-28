@@ -8,16 +8,16 @@ import router from '@/router/index'
 import { getPrivilegeMenu } from '@/apis/menu'
 import { deepClone, tree2Array } from '@/utils/commons'
 
-const add = function add({ path, name, pid, component, id,meta }) {
+const add = function add({ path, name, pid, component, id, meta }) {
   router.addRoute({
     path: path,
     component: component
       ? () => import(`@/views/${component}`)
       : () => import('@/components/MiddlePage.vue'),
     name: name, // 命名路由
-    meta:{
-      ...meta
-    }
+    meta: {
+      ...meta,
+    },
   })
 }
 const findQuestions = function findQuestions(tree) {
@@ -32,13 +32,13 @@ const findQuestions = function findQuestions(tree) {
       children: [],
     })
     add({
-        ...node,
-        children: [],
-      })
-      if (node.children && node.children.length) {
-        // 将候选顶点入栈，进行下一次循环
-        stack.push(...node.children)
-      }
+      ...node,
+      children: [],
+    })
+    if (node.children && node.children.length) {
+      // 将候选顶点入栈，进行下一次循环
+      stack.push(...node.children)
+    }
   }
 
   return list
@@ -48,16 +48,16 @@ export default {
   state: {
     menu: [], // 菜单树
     perms: [], // 权限list
-    currentRouterInfo: {}, // 当前路由信息快照
+    shapshot: {}, // 当前路由信息快照
     refresh: false, // 页面是否刷新，false 为刷新
   },
   getters: {
     menuGetter(state) {
       return tree2Array(state.menu)
     },
-    routes(state){
+    routes(state) {
       return state.menu
-    }
+    },
   },
   mutations: {
     // 同步 // 辅助函数 mapMutations
@@ -66,8 +66,8 @@ export default {
       state.perms = payload.perms || []
       state.refresh = true
     },
-    setCurrentRouterInfo(state, payload) {
-      state.currentRouterInfo = payload.data || {}
+    setShapshot(state, payload) {
+      state.shapshot = payload.data || {}
     },
   },
   actions: {
@@ -91,9 +91,9 @@ export default {
         })
       })
     },
-    resetLogin(){
+    resetLogin() {
       router.push('/login')
       window.location.reload()
-    }
+    },
   },
 }
