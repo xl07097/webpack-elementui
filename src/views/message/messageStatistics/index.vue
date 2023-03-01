@@ -5,42 +5,37 @@
 </template>
 
 <script>
-import data from './data.json'
 import { Document, Packer, Paragraph, TextRun } from 'docx'
 import {saveFile} from '@/http/saveFile'
 export default {
   name: 'MessageStatistics',
-  mounted(){
-    // console.log(data)
-    this.findQuestions(data)
-  },
   methods:{
     exportDoc(){
       const doc = new Document({
         sections: [{
-            properties: {},
-            children: [
-                new Paragraph({
-                    children: [
-                        new TextRun("Hello World"),
-                        new TextRun({
-                            text: "Foo Bar",
-                            bold: true,
-                            color: '#FF0000',
-                            size: 36
-                        }),
-                        new TextRun({
-                            text: "\tGithub is the best",
-                            bold: true,
-                        }),
-                    ],
+          properties: {},
+          children: [
+            new Paragraph({
+              children: [
+                new TextRun('Hello World'),
+                new TextRun({
+                  text: 'Foo Bar',
+                  bold: true,
+                  color: '#FF0000',
+                  size: 36
                 }),
-            ],
+                new TextRun({
+                  text: '\tGithub is the best',
+                  bold: true,
+                }),
+              ],
+            }),
+          ],
         }],
       });
       Packer.toBlob(doc).then(blob => {
         console.log(blob);
-        saveFile(blob, "example.docx");
+        saveFile(blob, 'example.docx');
       });
     },
     findQuestions(tree) {
