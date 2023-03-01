@@ -5,10 +5,8 @@
 </template>
 
 <script>
-import StarTable from '@/components/starTable/StarTable.vue';
 export default {
   name: 'MonitorMsg',
-  components:{StarTable},
   data(){
     return {
 
