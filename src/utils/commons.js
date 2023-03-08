@@ -201,13 +201,31 @@ export const throttle = function throttle(fn, delay = 300) {
 export const formatSize = function (size, pointLength, units) {
   let unit
 
-  units = units || ['B', 'K', 'M', 'G', 'TB']
+  units = units || ['B', 'K', 'M', 'G', 'TB', 'P', 'E']
 
   while ((unit = units.shift()) && size > 1024) {
     size = size / 1024
   }
 
   return (unit === 'B' ? size : size.toFixed(pointLength || 2)) + unit
+}
+
+export const timeAgo = function(time, units){
+  let unit;
+  units = units || [' minute', ' hour', ' day']
+  const between = Date.now() / 1000 - Number(time)
+
+  while ((unit = units.shift()) && between >= 3600) {
+    unit = ~~(between / 60)
+  }
+  return between + unit + 's'
+  // if (between < 3600) {
+  //   return pluralize(~~(between / 60), ' minute')
+  // } else if (between < 86400) {
+  //   return pluralize(~~(between / 3600), ' hour')
+  // } else {
+  //   return pluralize(~~(between / 86400), ' day')
+  // }
 }
 
 /**

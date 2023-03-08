@@ -8,6 +8,7 @@ import './directives/auth'
 
 import './styles/theme-variable.scss';
 import './importComponent'
+import './importVxeTable'
 import App from './App'
 import './router/permission'
 import alert from './components/MessageBox/alert'

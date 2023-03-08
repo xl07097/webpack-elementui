@@ -5,7 +5,7 @@
  * 数据验证工具库
  */
 
-class Validate {
+export default class Validate {
   constructor() {}
 
   static isEmpty(value) {
