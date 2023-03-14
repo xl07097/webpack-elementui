@@ -78,32 +78,32 @@ export default {
   .wrap{
     position: relative;
   }
-  .wrap.active{
-    .left {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-bottom: 12px solid rgb(2, 57, 63);
-      border-right: 12px solid rgb(2, 57, 63);
-      left: -12px;
-      bottom: 0;
-      border-bottom-right-radius: 12px;
-      z-index: 2;
-    }
-    .right {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 0;
-      border-bottom: 12px solid rgb(2, 57, 63);
-      border-left: 12px solid rgb(2, 57, 63);
-      right: -12px;
-      bottom: 0;
-      border-bottom-left-radius: 12px;
-      z-index: 2;
-    }
-  }
+  // .wrap.active{
+  //   .left {
+  //     content: '';
+  //     position: absolute;
+  //     width: 0;
+  //     height: 0;
+  //     border-bottom: 12px solid rgb(2, 57, 63);
+  //     border-right: 12px solid rgb(2, 57, 63);
+  //     left: -12px;
+  //     bottom: 0;
+  //     border-bottom-right-radius: 12px;
+  //     z-index: 2;
+  //   }
+  //   .right {
+  //     content: '';
+  //     position: absolute;
+  //     width: 0;
+  //     height: 0;
+  //     border-bottom: 12px solid rgb(2, 57, 63);
+  //     border-left: 12px solid rgb(2, 57, 63);
+  //     right: -12px;
+  //     bottom: 0;
+  //     border-bottom-left-radius: 12px;
+  //     z-index: 2;
+  //   }
+  // }
   .lplp-item {
     display: flex;
     justify-content: space-between;
@@ -121,23 +121,24 @@ export default {
     &::before {
       content: '';
       position: absolute;
-      width: 0;
-      height: 0;
-      border-bottom: 12px solid #045b62;
-      border-right: 12px solid #045b62;
-      left: -12px;
+      left: -10px;
       bottom: 0;
+      width: 10px;
+      height: 10px;
+      background-image: radial-gradient(cicle to bottom right, transparent 10px, #045b62 100%);
+      // border-bottom: 12px solid #045b62;
+      // border-right: 12px solid #045b62;
       z-index: 1;
     }
     &::after {
       content: '';
       position: absolute;
-      width: 0;
-      height: 0;
-      border-bottom: 12px solid #045b62;
-      border-left: 12px solid #045b62;
       right: -12px;
       bottom: 0;
+      width: 0;
+      height: 0;
+      // border-bottom: 12px solid #045b62;
+      // border-left: 12px solid #045b62;
       z-index: 1;
     }
   }
