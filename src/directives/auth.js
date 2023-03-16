@@ -1,9 +1,10 @@
 import Vue from 'vue'
+import store from '@/store/store'
 
 Vue.directive('auth', function (el, binding) {
-  if (binding.value === 2) {
-    el.style.display = 'none'
-  } else {
-    el.style.display = ''
+  const meta = store.state.permission.shapshot || {}
+  const authrity = meta.authrity || []
+  if (!authrity.some(item => item.functionName === binding.value)) {
+    el.parentNode && el.parentNode.removeChild(el)
   }
 })

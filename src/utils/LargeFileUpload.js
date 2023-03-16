@@ -1,37 +1,59 @@
-export default class Updater {
-
-  static uploader(){
-    const updater = new Updater()
-    console.log(updater)
+export default class LargeFileUpload {
+  constructor(file, uploadUrl, options) {
+    this.file = file;
+    this.uploadUrl = uploadUrl;
+    this.options = options;
+    this.fileSize = file.size;
+    this.chunkSize = options.chunkSize || 10 * 1024 * 1024; // 10MB
+    this.rangeEnd = this.chunkSize;
+    this.rangeStart = 0;
+    this.fileContent = null;
+    this.fileReader = new FileReader();
+    this.fileReader.onload = this.fileReaderOnLoad.bind(this);
+    this.fileReader.onerror = this.fileReaderOnError.bind(this);
+    this.fileReader.onabort = this.fileReaderOnAbort.bind(this);
+    this.fileReader.readAsArrayBuffer(this.file.slice(this.rangeStart, this.rangeEnd));
   }
 
-  constructor(options) {
-    this.dispatch = {}
-    this.init() //初始化
-    // this.timing(options?.timer)//轮询
+  fileReaderOnLoad(e) {
+    this.fileContent = e.target.result;
+    this.uploadFileContent();
   }
 
-
-  async init() {
-    // const html = await this.getHtml()
-    // this.oldScript = this.parserScript(html)
+  fileReaderOnError(e) {
+    console.log('FileReader error: ', e);
   }
 
-
-  //发布订阅通知'no-update' | 'update'
-  on(key, fn) {
-    this.dispatch[key] = fn
-    return this;
+  fileReaderOnAbort(e) {
+    console.log('FileReader abort: ', e);
   }
 
-
-  timing(time = 10000) {
-    //轮询
-    setInterval(async () => {
-      const newHtml = await this.getHtml()
-      this.newScript = this.parserScript(newHtml)
-      this.compare(this.oldScript, this.newScript)
-    }, time)
+  uploadFileContent() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/octet-stream');
+    headers.append('Content-Range', `bytes ${this.rangeStart}-${this.rangeEnd - 1}/${this.fileSize}`);
+    const options = {
+      method: 'PUT',
+      headers,
+      body: this.fileContent
+    };
+    fetch(this.uploadUrl, options)
+      .then(response => {
+        if (response.status === 201) {
+          console.log('File uploaded successfully');
+          return;
+        }
+        if (response.status === 202) {
+          this.rangeStart = this.rangeEnd;
+          this.rangeEnd = this.rangeStart + this.chunkSize;
+          if (this.rangeEnd > this.fileSize) {
+            this.rangeEnd = this.fileSize;
+          }
+          this.fileReader.readAsArrayBuffer(this.file.slice(this.rangeStart, this.rangeEnd));
+        }
+      })
+      .catch(error => {
+        console.log('Error while uploading file: ', error);
+      });
   }
-
-} 
+}

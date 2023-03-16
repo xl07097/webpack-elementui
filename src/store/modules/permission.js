@@ -67,7 +67,7 @@ export default {
       state.refresh = true
     },
     setShapshot(state, payload) {
-      state.shapshot = payload.data || {}
+      state.shapshot = Object.freeze(payload || {}) 
     },
   },
   actions: {
