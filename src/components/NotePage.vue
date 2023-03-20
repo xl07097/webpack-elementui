@@ -1,14 +1,13 @@
 <template>
   <el-pagination
-    @size-change="handleSizeChange"
-    @current-change="handleCurrentChange"
     :current-page="pageNo"
     :page-sizes="pageSizes"
     :page-size="pageSize"
     :layout="layout"
     :total="total"
-  >
-  </el-pagination>
+    @size-change="handleSizeChange"
+    @current-change="handleCurrentChange"
+  />
 </template>
 
 <script>
@@ -47,5 +46,3 @@ export default {
   },
 }
 </script>
-
-<style></style>

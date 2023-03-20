@@ -1,5 +1,5 @@
 <template>
-  <div :id="id" class="quill-editor"></div>
+  <div :id="id" class="quill-editor" />
 </template>
 
 <script>

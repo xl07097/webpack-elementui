@@ -1,6 +1,6 @@
 <script>
 export default {
-  name: "KeywordText",
+  name: 'KeywordText',
   props:{
     keyword:{
       type: String,

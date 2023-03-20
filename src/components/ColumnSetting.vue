@@ -8,22 +8,24 @@
     content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
   >
     <el-checkbox
-      class="table-column-all-check"
       v-model="all"
+      class="table-column-all-check"
       label="全选"
       @change="changeAll"
-    ></el-checkbox>
+    />
     <el-checkbox-group
-      class="table-column-filter"
-      @change="changeSingle"
       v-model="checkList"
+      class="table-column-filter"
       size="mini"
+      @change="changeSingle"
     >
       <draggable v-model="list">
         <transition-group>
-          <el-checkbox v-for="item of list" :label="item.id" :key="item.id">{{
-            item.label
-          }}</el-checkbox>
+          <el-checkbox v-for="item of list" :key="item.id" :label="item.id">
+            {{
+              item.label
+            }}
+          </el-checkbox>
         </transition-group>
       </draggable>
     </el-checkbox-group>
