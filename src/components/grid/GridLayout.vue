@@ -37,26 +37,6 @@ export default {
 	align-items: flex-start;
 	flex-wrap: wrap;
 	gap: 16px 0;
-	font-size: 14px;
-
-	.grid-layout-item {
-		display: inline-flex;
-		padding-right: 24px;
-		width: 25%;
-		line-height: 22px;
-		box-sizing: border-box;
-		color: #484949;
-
-		.grid-layout-label {
-			flex: none;
-		}
-
-		.grid-layout-value {
-			flex: 1;
-			word-break: break-all;
-			color: #0b0b0b;
-		}
-	}
 }
 @media screen and (max-width: 600px) {
 	.grid-layout-wrap .grid-layout-item {

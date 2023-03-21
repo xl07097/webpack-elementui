@@ -24,3 +24,25 @@ export default {
   },
 }
 </script>
+
+<style lang="scss">
+.grid-layout-item {
+  display: inline-flex;
+  padding-right: 24px;
+  width: 25%;
+  line-height: 22px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #484949;
+
+  .grid-layout-label {
+    flex: none;
+  }
+
+  .grid-layout-value {
+    flex: 1;
+    word-break: break-all;
+    color: #0b0b0b;
+  }
+}
+</style>
