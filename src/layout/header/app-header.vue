@@ -7,7 +7,7 @@
         :vertical="false"
         @wheel.native.prevent="handleScroll"
       >
-        <el-tag v-for="record of menuGetter" :key="record.id" @click="push(record.path)">
+        <el-tag v-for="record of filterMenu" :key="record.id" @click="push(record.path)">
           {{ record.name }}
         </el-tag>
       </el-scrollbar>
@@ -32,6 +32,9 @@ export default {
     },
     scrollWrapper(){
       return this.$refs.scrollContainer.$refs.wrap
+    },
+    filterMenu(){
+      return this.menuGetter.filter(item => item.nodeType === 2)
     }
   },
   methods: {

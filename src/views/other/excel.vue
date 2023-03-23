@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-button @click="exportExcel"> 导出 </el-button>
-    <input type="file" @change="upfile" class="upfile" />
+    <input type="file" class="upfile" @change="upfile">
   </div>
 </template>
 
@@ -21,7 +21,6 @@ export default {
   methods: {
     exportExcel() {
       const data = [title, row2, row3, row4, row5]
-      console.log(data)
       writeXlsxFile(data, {
         headerStyle: {
           height: 30,

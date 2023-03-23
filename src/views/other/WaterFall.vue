@@ -29,7 +29,6 @@ export default {
     const column4 = document.querySelector('.column4');
     let dom = [column1, column2, column3, column4];
     setInterval(() => {
-      console.time('label');
       let att = [1, 2, 3, 4, 5, 6, 6, 6, 6, 6, 6, 6, 6];
       att.forEach(() => {
         let co = document.createDocumentFragment();
@@ -46,7 +45,6 @@ export default {
 
         dom[index].appendChild(co);
       });
-      console.timeEnd('label');
     }, 5000);
   },
 };

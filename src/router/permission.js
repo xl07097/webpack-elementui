@@ -3,7 +3,6 @@ import store from '../store/store'
 import { storage } from '@/utils/storage'
 
 router.beforeEach((to, _from, next) => {
-  console.log(to)
   store.commit('permission/setShapshot', to.meta)
   if (to.path === '/login') {
     storage.clear()

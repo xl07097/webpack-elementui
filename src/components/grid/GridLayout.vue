@@ -1,11 +1,13 @@
 <template>
   <div class="grid-layout-wrap">
-    <GridItem
-      v-for="item of fields"
-      :key="item.label"
-      :label="item.label"
-      :value="value[item.prop]"
-    />
+    <slot>
+      <GridItem
+        v-for="item of fields"
+        :key="item.label"
+        :label="item.label"
+        :value="value[item.prop]"
+      />
+    </slot>
   </div>
 </template>
 

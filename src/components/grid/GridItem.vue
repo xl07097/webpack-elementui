@@ -1,10 +1,10 @@
 <template>
   <div class="grid-layout-item">
     <div class="grid-layout-label">
-      {{ `${label}：` }}
+      {{ label }}
     </div>
     <div class="grid-layout-value">
-      {{ value || '' }}
+      {{ value }}
     </div>
   </div>
 </template>
