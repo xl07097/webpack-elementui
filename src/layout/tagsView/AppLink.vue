@@ -4,12 +4,12 @@
     class="tags-view-item"
     :style="activeStyle(tag)"
     @click="push"
-    @click.middle="!isAffix() ? closeSelectedTag : ''"
+    @click.middle="!isAffix ? closeSelectedTag : ''"
     @contextmenu.prevent="openMenu(tag, $event)"
   >
     {{ tag.title }}
     <span
-      v-if="!isAffix()"
+      v-if="!isAffix"
       class="el-icon-close"
       role="link"
       @click.prevent.stop="closeSelectedTag"
@@ -32,6 +32,12 @@ export default {
         return {}
       },
     },
+  },
+  computed:{
+    isAffix(){
+      const tag = this.tag
+      return tag.meta && tag.meta.affix
+    }
   },
   methods: {
     isActive(route) {
@@ -66,10 +72,6 @@ export default {
         'background-color': this.theme,
         'border-color': this.theme,
       }
-    },
-    isAffix() {
-      const tag = this.tag
-      return tag.meta && tag.meta.affix
     },
     openMenu(tag, e) {
       this.$emit('openMenu', tag, e)
