@@ -8,7 +8,7 @@ let isRefresh = false // 是否在重新自动登录
 let retryQueue = [] // 需要重新请求的队列
 
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://localhost:9087/note',
   // timeout: 10000,
   withCredentials: true,
   headers: {
@@ -39,21 +39,22 @@ instance.interceptors.response.use(
     }
     // 此时需要重新登录
     if (data.code === 300 || data.code === 1001) {
-      const config = res.config
-      const url = res.config.url
-      if (!url.includes('/login') && !url.includes('/refreshToken')) {
-        if (!isRefresh) {
-          isRefresh = true
-          return retryLogin(config)
-        } else {
-          return new Promise((resolve) => {
-            // 将resolve放进队列，用一个函数形式来保存，等token刷新后直接执行
-            retryQueue.push(() => {
-              resolve(instance.request(config))
-            })
-          })
-        }
-      }
+      // store.dispatch('permission/resetLogin')
+    //   const config = res.config
+    //   const url = res.config.url
+    //   if (!url.includes('/login') && !url.includes('/refreshToken')) {
+    //     if (!isRefresh) {
+    //       isRefresh = true
+    //       return retryLogin(config)
+    //     } else {
+    //       return new Promise((resolve) => {
+    //         // 将resolve放进队列，用一个函数形式来保存，等token刷新后直接执行
+    //         retryQueue.push(() => {
+    //           resolve(instance.request(config))
+    //         })
+    //       })
+    //     }
+    //   }
     }
     return Promise.resolve(data)
   },

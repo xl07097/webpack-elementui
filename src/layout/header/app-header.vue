@@ -53,8 +53,6 @@ export default {
 
 <style lang="scss" scoped>
 .app-header {
-  // width: 400px;
-  // height: 60px;
   display: flex;
   align-items: center;
   background: #eaeaea;
@@ -64,6 +62,7 @@ export default {
     white-space: nowrap;
     position: relative;
     overflow: hidden;
+    padding: 2px 0;
     width: 100%;
   }
   .el-tag {
