@@ -1,27 +1,3 @@
-<template>
-  <!-- 
-    :title="column.title"
-    :field="column.field" -->
-  <VxeColumn min-width="140px" v-bind="columns">
-    <template #header v-if="$slots.header">
-      <slot name="header" />
-    </template>
-    <template
-      #default="{ row, rowIndex, $rowIndex, column, columnIndex, $columnIndex, _columnIndex }"
-    >
-      <slot
-        :row="row"
-        :rowIndex="rowIndex"
-        :$rowIndex="$rowIndex"
-        :column="column"
-        :columnIndex="columnIndex"
-        :$columnIndex="$columnIndex"
-        :_columnIndex="_columnIndex"
-      />
-    </template>
-  </VxeColumn>
-</template>
-
 <script>
 export default {
   name: 'TableColumn',
@@ -33,7 +9,21 @@ export default {
       },
     },
   },
+  render(h){
+    const { field, title, render, renderHeader, renderFooter, ...attrs } = this.columns
+    const slot = {}
+    if (renderHeader) {
+      slot.header = (props) => renderHeader(h, props)
+    }
+    if (render) {
+      slot.default = (props) => render(h, props)
+    }    
+    if (renderFooter) {
+      slot.footer = (props) => renderFooter(h, props)
+    }
+    Object.keys(slot).length > 0 && (attrs.scopedSlots = slot)
+
+    return (<vxe-column field={field} title={title} minWidth="120px" props={attrs} {...attrs}></vxe-column>)
+  }
 };
 </script>
-
-<style></style>

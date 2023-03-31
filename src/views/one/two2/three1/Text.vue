@@ -6,8 +6,11 @@ export default {
       default: '',
     },
   },
+  mounted(){
+    console.log(this.$listeners)
+  },
   render(h) {
     return <span>{this.text}</span>
-  },
+  }
 }
 </script>
