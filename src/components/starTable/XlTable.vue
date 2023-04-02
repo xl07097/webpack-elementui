@@ -1,36 +1,30 @@
 <script>
 import TableColumn from '@/components/starTable/TableColumn.vue'
 export default {
-  props:{
-    columns:{
+  props: {
+    columns: {
       type: Array,
-      default(){
+      default() {
         return []
-      }
+      },
     },
-    data:{
+    data: {
       type: Array,
-      default(){
+      default() {
         return []
-      }
-    }
+      },
+    },
   },
   data() {
-    return {
-
-    }
+    return {}
   },
-  methods: {
-    renderHeader(h, columns) {
-      return <TableColumn columns={columns} />
-    },
-  },
+  methods: {},
   render(h, ctx) {
     console.log('ctx', ctx)
     const { columns, data } = this
     const attrs = this.$attrs
     const props = {
-      ...attrs
+      ...attrs,
     }
     return (
       <vxe-table data={data} size="small" props={props}>

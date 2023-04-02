@@ -5,11 +5,11 @@ export default {
     columns: {
       type: Object,
       default() {
-        return {};
+        return {}
       },
     },
   },
-  render(h){
+  render(h) {
     const { field, title, render, renderHeader, renderFooter, ...attrs } = this.columns
     const slot = {}
     if (renderHeader) {
@@ -17,13 +17,21 @@ export default {
     }
     if (render) {
       slot.default = (props) => render(h, props)
-    }    
+    }
     if (renderFooter) {
       slot.footer = (props) => renderFooter(h, props)
     }
     Object.keys(slot).length > 0 && (attrs.scopedSlots = slot)
 
-    return (<vxe-column field={field} title={title} minWidth="120px" props={attrs} {...attrs}></vxe-column>)
-  }
-};
+    return (
+      <vxe-column
+        field={field}
+        title={title}
+        minWidth="160px"
+        props={attrs}
+        {...attrs}
+      ></vxe-column>
+    )
+  },
+}
 </script>

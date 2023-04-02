@@ -19,12 +19,14 @@
       size="mini"
       @change="changeSingle"
     >
-      <draggable v-model="list">
+      <draggable v-model="columnsList">
         <transition-group>
-          <el-checkbox v-for="item of list" :key="item.id" :label="item.id">
-            {{
-              item.label
-            }}
+          <el-checkbox
+            v-for="item of columnsList"
+            :key="item.field"
+            :label="item.field"
+          >
+            {{ item.title }}
           </el-checkbox>
         </transition-group>
       </draggable>
@@ -33,19 +35,30 @@
       <el-button type="text" @click="reset">还原</el-button>
       <el-button type="text" @click="confirm">确定</el-button>
     </div>
-    <el-button slot="reference">手动激活</el-button>
+    <el-button slot="reference">配置</el-button>
   </el-popover>
 </template>
 
 <script>
+import { storage } from '@/utils/storage'
 import draggable from 'vuedraggable'
+import { deepClone } from '@/utils/commons'
 export default {
   components: { draggable },
+  props: {
+    columns: {
+      type: Array,
+      default() {
+        return []
+      },
+    },
+  },
   data() {
     return {
       visible: false,
       checkList: [],
-      all: false,
+      all: true,
+      columnsList: [],
       list: [
         { label: '111', id: '111' },
         { label: '112', id: '112' },
@@ -65,22 +78,81 @@ export default {
       ],
     }
   },
+  created() {
+    // debugger
+    const storageColumns = storage.getItem('operationlog') || []
+    const columns = this.columns
+    if (storageColumns.length === 0) {
+      this.columnsList = deepClone(columns)
+      this.checkList = columns.map((item) => item.field)
+    } else {
+      const originFields = columns.map((item) => item.field)
+      columns.forEach((item, index) => {
+        // debugger
+        const findIndex = storageColumns.findIndex(
+          (sf) => sf.field === item.field
+        )
+        if (findIndex === -1) {
+          if (index === 0) {
+            storageColumns.unshift({
+              ...item,
+              select: true,
+            })
+          } else {
+            const preItem = columns[index - 1]
+            const findPreIndex = storageColumns.findIndex(
+              (sf) => sf.field === preItem.field
+            )
+            storageColumns.splice(findPreIndex + 1, 0, {
+              ...item,
+              select: true,
+            })
+          }
+        }
+      })
+
+      const filterColumns = storageColumns.filter((item) => {
+        return originFields.includes(item.field)
+      })
+      this.columnsList = filterColumns
+      this.checkList = filterColumns
+        .filter((item) => item.select)
+        .map((item) => item.field)
+      this.all = this.checkList.length === filterColumns.length
+    }
+  },
+  mounted() {
+    this.confirm()
+    // this.$emit(
+    //   'confirm',
+    //   this.columnsList.filter((item) => item.select)
+    // )
+  },
   methods: {
-    changeAll(val) {
-      if (val) {
-        this.checkList = ['1', '2', '3', '4', '5', '6', '7', '8', '9']
+    changeAll(flag) {
+      if (flag) {
+        this.checkList = this.columnsList.map((item) => item.field)
       } else {
         this.checkList = []
       }
     },
-    changeSingle(val) {
-      this.all = val.length === 9
+    changeSingle(rows) {
+      this.all = rows.length === this.columnsList.length
     },
     reset() {},
     confirm() {
       this.$nextTick(() => {
         document.body.click()
       })
+      const checkList = this.checkList
+      this.columnsList.forEach((item) => {
+        item.select = checkList.includes(item.field)
+      })
+      const columns = this.columnsList.filter((item) =>
+        checkList.includes(item.field)
+      )
+      storage.setItem('operationlog', this.columnsList)
+      this.$emit('confirm', columns)
     },
   },
 }
@@ -114,9 +186,8 @@ export default {
       background: #f5f7fa;
       cursor: pointer;
     }
-    .el-checkbox:active{
+    .el-checkbox:active {
       cursor: pointer;
-
     }
   }
   .table-column-popover-footer {

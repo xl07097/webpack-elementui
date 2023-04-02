@@ -1,5 +1,12 @@
 <template>
   <div class="sh-table-wrap">
+    <div class="sh-tool-wrap">
+      <ColumnSetting
+        :visible.sync="settingVisible"
+        :columns="columns"
+        @confirm="confirm"
+      />
+    </div>
     <VxeTable
       :key="columnKey"
       ref="tableRef"
@@ -40,31 +47,20 @@
         title="操作"
         :width="actionWidth"
       >
-        <template
-          #default="scope"
-        >
-          <slot
-            name="action"
-            v-bind="scope"
-          />
+        <template #default="scope">
+          <slot name="action" v-bind="scope" />
         </template>
       </VxeColumn>
       <VxeColumn
-        v-for="column of columns"
+        v-for="column of tableColumns"
         :key="column.field"
         :title="column.title"
         :field="column.field"
         min-width="100px"
         v-bind="column"
       >
-        <template
-          v-if="$slots[column.field]"
-          #default="scope"
-        >
-          <slot
-            :name="column.field"
-            v-bind="scope"
-          />
+        <template v-if="$slots[column.field]" #default="scope">
+          <slot :name="column.field" v-bind="scope" />
         </template>
       </VxeColumn>
     </VxeTable>
@@ -72,8 +68,10 @@
 </template>
 
 <script>
+import ColumnSetting from '../ColumnSetting.vue'
 export default {
   name: 'StarTables',
+  components: { ColumnSetting },
   props: {
     // 是否显示序号
     index: {
@@ -124,17 +122,31 @@ export default {
   data() {
     return {
       selectionList: [],
+      settingVisible: false,
+      tableColumns: [],
     }
   },
   computed: {
     columnKey() {
-      return this.columns.map((item) => item.field).join('')
+      return this.tableColumns.map((item) => item.field).join('')
+    },
+    settingColumns() {
+      const list = this.tableColumns.map((item) => {
+        return {
+          title: item.title,
+          field: item.field,
+        }
+      })
+      return Object.freeze(list)
     },
   },
   watch: {
     tableData() {
       this.selectionList = []
     },
+  },
+  created() {
+    this.tableColumns = Object.freeze(this.columns)
   },
   methods: {
     selectionChange({ records }) {
@@ -166,6 +178,12 @@ export default {
         this.$refs.tableRef.refreshColumn()
       })
     },
+    setting() {
+      this.settingVisible = true
+    },
+    confirm(columns) {
+      this.tableColumns = Object.freeze(columns)
+    },
   },
 }
 </script>
@@ -174,7 +192,8 @@ export default {
 .sh-table-wrap {
   padding: 0 10px;
   .vxe-table {
-    font-family: Microsoft YaHei, STXihei, '\534E\6587\7EC6\9ED1', '\9ED1\4F53', serif !important;
+    font-family: Microsoft YaHei, STXihei, '\534E\6587\7EC6\9ED1', '\9ED1\4F53',
+      serif !important;
   }
   .vxe-table thead th {
     background-color: #ebf5ff;
