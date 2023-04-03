@@ -19,7 +19,7 @@
       size="mini"
       @change="changeSingle"
     >
-      <draggable v-model="columnsList">
+      <draggable v-model="columnsList" scroll>
         <transition-group>
           <el-checkbox
             v-for="item of columnsList"
@@ -59,23 +59,6 @@ export default {
       checkList: [],
       all: true,
       columnsList: [],
-      list: [
-        { label: '111', id: '111' },
-        { label: '112', id: '112' },
-        { label: '113', id: '113' },
-        { label: '114', id: '114' },
-        { label: '115', id: '115' },
-        { label: '116', id: '116' },
-        { label: '117', id: '117' },
-        { label: '118', id: '118' },
-        { label: '119', id: '119' },
-        { label: '120', id: '120' },
-        { label: '121', id: '121' },
-        { label: '123', id: '123' },
-        { label: '124', id: '124' },
-        { label: '125', id: '125' },
-        { label: '126', id: '126' },
-      ],
     }
   },
   created() {

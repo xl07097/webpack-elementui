@@ -21,8 +21,8 @@ export default {
     if (renderFooter) {
       slot.footer = (props) => renderFooter(h, props)
     }
-    Object.keys(slot).length > 0 && (attrs.scopedSlots = slot)
-
+    // Object.keys(slot).length > 0 && (attrs.scopedSlots = slot)
+    attrs.scopedSlots = slot
     return (
       <vxe-column
         field={field}

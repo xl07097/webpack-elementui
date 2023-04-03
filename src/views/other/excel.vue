@@ -10,7 +10,6 @@ import writeXlsxFile from 'write-excel-file'
 import readXlsxFile from 'read-excel-file'
 import { title, row2, row3, row4, row5 } from './excelData'
 
-// import Excel from 'exceljs'
 export default {
   name: 'AppExcel',
   data() {
@@ -36,17 +35,6 @@ export default {
       readXlsxFile(file).then((rows) => {
         console.log(rows)
       })
-
-      // const workbook = new Excel.Workbook()
-      // const data = await workbook.xlsx.load(file)
-      // const sheet = data.getWorksheet(1)
-      // sheet.eachRow(function (rows, rowNumber) {
-      //   let arr = []
-      //   rows.eachCell(function (cell, index) {
-      //     arr.push(cell.text)
-      //   })
-      //   console.log(rows)
-      // })
     },
   },
 }
@@ -59,6 +47,6 @@ export default {
 }
 .el-icon-circle-plus-outline{
   font-size: 22px;
-  animation: 2s moveX cubic-bezier(0.5, -0.5, 1, 1) forwards;
+  animation: moveX 2s cubic-bezier(0.5, -0.5, 1, 1) forwards;
 }
 </style>
