@@ -42,7 +42,7 @@
     </el-table>
 
     <MenuEdit
-      :row="row"
+      :detail="detail"
       :visible.sync="editVisible"
       :oper-type="operType"
       @submit="getData"
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       tableData: [],
-      row: {},
+      detail: {},
       editVisible: false,
       operType: 'add',
     }
@@ -74,12 +74,12 @@ export default {
       this.tableData = data.data
     },
     add(){
-      this.row = { }
+      this.detail = { }
       this.operType = 'add'
       this.editVisible = true
     },
     edit(row) {
-      this.row = { ...row, children: null }
+      this.detail = { ...row, children: null }
       this.operType = 'edit'
       this.editVisible = true
     },

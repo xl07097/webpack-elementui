@@ -59,7 +59,7 @@
 import { post } from '@/http/request'
 export default {
   props:{
-    row:{
+    detail:{
       type: Object,
       default(){
         return {}
@@ -92,7 +92,7 @@ export default {
   },
   methods:{
     open(){
-      this.form = Object.assign({}, this.row)
+      this.form = Object.assign({}, this.detail)
     },
     onSubmit(){
       this.$refs.form.validate(isValid => {
