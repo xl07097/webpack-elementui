@@ -55,11 +55,11 @@ export default {
   methods:{
     async open(){
       this.loading = true
-      const res = await get(`/sysPrivilege/getPrivilege/${this.id}`)
+      const {code, data:{menuTree, privilegeList}} = await get(`/sysPrivilege/getPrivilege/${this.id}`)
       this.loading = false
-      if(res.code === 200){
-        this.data = res.data.menuTree || []
-        this.checkedKeys = res.data.privilegeList
+      if(code === 200){
+        this.data = Object.freeze(menuTree)
+        this.checkedKeys = Object.freeze(privilegeList)
       }
     },
     onSubmit(){
