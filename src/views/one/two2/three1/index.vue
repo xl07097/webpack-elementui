@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <div style="padding: 10px">
     <XlTable
       :columns="columns"
       :data="data"
       border
-      height="300px"
+      max-height="300px"
     />
   </div>
 </template>
@@ -35,32 +35,26 @@ export default {
           field: 'lplp1',
           title: 'name3',
           sortable: true,
-
         },
         {
           field: 'lplp2',
           title: 'name4',
-
         },
         {
           field: 'lplp3',
           title: 'name5',
-
         },
         {
           field: 'lplp4',
           title: 'name6',
-
         },
         {
           field: 'lplp5',
           title: 'name7',
-
         },
         {
           field: 'lplp6',
           title: 'name8',
-
         },
         {
           field: 'lplp7',
@@ -71,6 +65,19 @@ export default {
           title: 'name10',
           formatter:() => {
             return 'lplp'
+          }
+        },
+        {
+          field: 'action',
+          title: '操作',
+          fixed: 'right',
+          render: (h, {row}) => {
+            return (
+              <div>
+                <el-button type="text" size="mini" onClick={() => this.edit(row)}>编辑</el-button>
+                <el-button type="text" size="mini" onClick={() => this.edit(row)}>删除</el-button>
+              </div>
+            )
           }
         },
       ]),

@@ -11,22 +11,22 @@ export default {
   data() {
     return {
       fields: [{
-        label: '姓名',
+        label: '姓名：',
         prop: 'name'
       },{
-        label: '性别',
+        label: '性别：',
         prop: 'name1'
       },{
-        label: '姓名1',
+        label: '姓名1：',
         prop: 'name2'
       },{
-        label: '姓名2',
+        label: '姓名2：',
         prop: 'name3'
       },{
-        label: '姓名3',
+        label: '姓名3：',
         prop: 'name4'
       },{
-        label: '姓名4',
+        label: '姓名4：',
         prop: 'name5'
       }],
       value:{

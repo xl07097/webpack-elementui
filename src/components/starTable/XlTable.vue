@@ -22,12 +22,17 @@ export default {
       type: Boolean,
       default: true,
     },
+    action: {
+      type: Boolean,
+      default: true,
+    }
   },
   data() {
     return {
       indexColumn: Object.freeze({
         type: 'seq',
         key: 'seqIndex',
+        fixed: 'left',
         title: '序号',
         width: 60,
         align: 'center',
@@ -35,7 +40,15 @@ export default {
       checkColumn: Object.freeze({
         type: 'checkbox',
         key: 'checkbox',
+        fixed: 'left',
         width: 60,
+        align: 'center',
+      }),
+      actionColumn: Object.freeze({
+        key: 'action',
+        fixed: 'left',
+        title: '操作',
+        width: 100,
         align: 'center',
       }),
       selectionList: []
@@ -44,7 +57,6 @@ export default {
   methods: {
     onCheckboxChange({ records }) {
       this.selectionList = Object.freeze(records)
-      console.log(records)
       this.$emit('checkboxChange', records)
     },
   },
