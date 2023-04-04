@@ -1,21 +1,7 @@
-<template>
-  <div class="grid-layout-wrap">
-    <slot>
-      <GridItem
-        v-for="item of fields"
-        :key="item.label"
-        :label="item.label"
-        :value="value[item.prop]"
-      />
-    </slot>
-  </div>
-</template>
-
 <script>
 import GridItem from './GridItem.vue'
 export default {
   name: 'GridLayout',
-  components: { GridItem },
   props: {
     fields: {
       type: Array,
@@ -30,6 +16,22 @@ export default {
       },
     },
   },
+  render(h){
+    const defaults = this.$slots.default
+    const {fields, value} = this.$props
+
+    return (<div class="grid-layout-wrap">
+      {
+        defaults ? defaults: 
+          fields.map(item => {
+            return <GridItem props={{
+              label: item.label,
+              value: value[item.prop],
+            }} />
+          })
+      }
+    </div>)
+  }
 }
 </script>
 

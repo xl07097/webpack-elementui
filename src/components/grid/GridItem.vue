@@ -1,14 +1,3 @@
-<template>
-  <div class="grid-layout-item">
-    <div class="grid-layout-label">
-      {{ label }}
-    </div>
-    <div class="grid-layout-value">
-      {{ value }}
-    </div>
-  </div>
-</template>
-
 <script>
 export default {
   name: 'GridItem',
@@ -22,6 +11,19 @@ export default {
       default: '',
     },
   },
+  render(h){
+    const {label, value} = this.$props
+    return (
+      <div class="grid-layout-item">
+        <div class="grid-layout-label">
+          { label }
+        </div>
+        <div class="grid-layout-value">
+          { value }
+        </div>
+      </div>
+    )
+  }
 }
 </script>
 
