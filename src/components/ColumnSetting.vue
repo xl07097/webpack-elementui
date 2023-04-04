@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { storage } from '@/utils/storage'
+import { baseStorage } from '@/utils/storage'
 import draggable from 'vuedraggable'
 import { deepClone } from '@/utils/commons'
 export default {
@@ -61,9 +61,13 @@ export default {
       columnsList: [],
     }
   },
+  computed:{
+    key(){
+      return this.$route.path.split('/').at(-1)
+    }
+  },
   created() {
-    // debugger
-    const storageColumns = storage.getItem('operationlog') || []
+    const storageColumns = baseStorage.getItem(this.key) || []
     const columns = this.columns
     if (storageColumns.length === 0) {
       this.columnsList = deepClone(columns)
@@ -106,10 +110,6 @@ export default {
   },
   mounted() {
     this.confirm()
-    // this.$emit(
-    //   'confirm',
-    //   this.columnsList.filter((item) => item.select)
-    // )
   },
   methods: {
     changeAll(flag) {
@@ -134,7 +134,7 @@ export default {
       const columns = this.columnsList.filter((item) =>
         checkList.includes(item.field)
       )
-      storage.setItem('operationlog', this.columnsList)
+      baseStorage.setItem(this.key, this.columnsList)
       this.$emit('confirm', columns)
     },
   },

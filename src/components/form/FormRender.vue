@@ -24,7 +24,7 @@
       />
     </el-form-item>
 
-    <el-form-item class="search-form-item">
+    <el-form-item class="search-form-btn">
       <el-button
         v-if="showNumber<fields.length"
         :icon="`${showAll?'el-icon-arrow-up':'el-icon-arrow-down'}`"
@@ -190,7 +190,7 @@ export default {
     // flex-wrap: nowrap;
   }
 
-  .search-form-item {
+  .search-form-btn {
     margin-left: auto;
   }
 
