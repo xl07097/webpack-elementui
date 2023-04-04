@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       columns: Object.freeze([
-        { title: 'title', field: 'field' },
+        { title: 'title', field: 'field', fixed: 'left' },
         { title: 'title1', field: 'field1' },
         { title: 'title2', field: 'field2' },
         { title: 'title3', field: 'field3' },

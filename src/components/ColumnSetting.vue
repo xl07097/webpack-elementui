@@ -2,7 +2,7 @@
   <el-popover
     placement="bottom-end"
     title=""
-    width="200"
+    width="240"
     trigger="click"
     popper-class="table-column-popover"
     content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
@@ -19,15 +19,26 @@
       size="mini"
       @change="changeSingle"
     >
-      <draggable v-model="columnsList" scroll>
+      <draggable
+        v-model="columnsList"
+        scroll
+        handle=".dargBtn"
+        filter=".undraggable"
+      >
         <transition-group>
-          <el-checkbox
+          <div
             v-for="item of columnsList"
             :key="item.field"
-            :label="item.field"
+            :class="[item.fixed ? 'undraggable':'']"
+            style="display:flex;align-items: center;justify-content: space-between;"
           >
-            {{ item.title }}
-          </el-checkbox>
+            <el-checkbox
+              :label="item.field"
+            >
+              {{ item.title }}
+            </el-checkbox>
+            <span v-show="!item.fixed" class="el-icon-sort dargBtn" style="font-size:20px;cursor:move" />
+          </div>
         </transition-group>
       </draggable>
     </el-checkbox-group>
@@ -69,6 +80,7 @@ export default {
   created() {
     const storageColumns = baseStorage.getItem(this.key) || []
     const columns = this.columns
+
     if (storageColumns.length === 0) {
       this.columnsList = deepClone(columns)
       this.checkList = columns.map((item) => item.field)
@@ -101,7 +113,9 @@ export default {
       const filterColumns = storageColumns.filter((item) => {
         return originFields.includes(item.field)
       })
-      this.columnsList = filterColumns
+      this.columnsList = filterColumns.map(item => {    
+        return columns.find(cln => cln.field === item.field)
+      })
       this.checkList = filterColumns
         .filter((item) => item.select)
         .map((item) => item.field)
@@ -155,10 +169,10 @@ export default {
   .table-column-filter {
     display: flex;
     flex-direction: column;
-    max-height: 240px;
+    max-height: 300px;
     overflow-y: auto;
     .el-checkbox {
-      flex: none;
+      flex: 1;
       margin: 0;
       display: flex;
       align-items: center;
@@ -171,6 +185,17 @@ export default {
     }
     .el-checkbox:active {
       cursor: pointer;
+    }
+    .dargBtn{
+      width: 40px;
+      align-self: stretch;
+      vertical-align: middle;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dargBtn:hover{
+      background: #f5f7fa;
     }
   }
   .table-column-popover-footer {

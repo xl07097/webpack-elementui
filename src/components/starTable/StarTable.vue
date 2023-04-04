@@ -29,6 +29,7 @@
         v-if="index"
         key="seqIndex"
         type="seq"
+        fixed="left"
         title="序号"
         align="center"
         width="60"
@@ -37,6 +38,7 @@
         v-if="selection"
         key="checkbox"
         type="checkbox"
+        fixed="left"
         title=""
         align="center"
         width="60"
@@ -44,6 +46,7 @@
       <VxeColumn
         v-if="showAction"
         key="action"
+        fixed="left"
         title="操作"
         :width="actionWidth"
       >
