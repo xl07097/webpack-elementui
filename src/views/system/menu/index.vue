@@ -11,9 +11,9 @@
       <el-table-column prop="title" label="名称" width="180" />
       <el-table-column prop="nodeType" label="类别" width="120">
         <template #default="{ row }">
-          <el-tag v-if="row.nodeType === 1" type="success">菜单</el-tag>
-          <el-tag v-else-if="row.nodeType === 2" type="info">按钮</el-tag>
-          <el-tag v-else-if="row.nodeType === 3" type="warning">目录</el-tag>
+          <el-tag v-if="row.nodeType === 1" type="success">目录</el-tag>
+          <el-tag v-else-if="row.nodeType === 2" type="info">菜单</el-tag>
+          <el-tag v-else-if="row.nodeType === 3" type="warning">按钮</el-tag>
           <el-tag v-else type="danger">未知</el-tag>
         </template>
       </el-table-column>

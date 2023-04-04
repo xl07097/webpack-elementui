@@ -17,8 +17,8 @@
       </el-form-item>
       <el-form-item label="类别" prop="nodeType">
         <el-radio-group v-model="form.nodeType" :disabled="operType==='edit'" size="small">
-          <el-radio-button :label="1">菜单</el-radio-button>
-          <el-radio-button :label="2">目录</el-radio-button>
+          <el-radio-button :label="1">目录</el-radio-button>
+          <el-radio-button :label="2">菜单</el-radio-button>
           <el-radio-button :label="3">按钮</el-radio-button>
         </el-radio-group>
       </el-form-item>
