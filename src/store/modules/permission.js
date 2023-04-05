@@ -67,7 +67,7 @@ export default {
       state.refresh = true
     },
     setShapshot(state, payload) {
-      state.shapshot = Object.freeze(payload || {}) 
+      state.shapshot = Object.freeze(payload || {})
     },
   },
   actions: {
@@ -93,7 +93,7 @@ export default {
     },
     resetLogin() {
       router.push('/login')
-      window.location.reload()
+      // window.location.reload()
     },
   },
 }

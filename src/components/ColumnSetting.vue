@@ -29,15 +29,21 @@
           <div
             v-for="item of columnsList"
             :key="item.field"
-            :class="[item.fixed ? 'undraggable':'']"
-            style="display:flex;align-items: center;justify-content: space-between;"
+            :class="[item.fixed ? 'undraggable' : '']"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            "
           >
-            <el-checkbox
-              :label="item.field"
-            >
+            <el-checkbox :label="item.field">
               {{ item.title }}
             </el-checkbox>
-            <span v-show="!item.fixed" class="el-icon-sort dargBtn" style="font-size:20px;cursor:move" />
+            <span
+              v-show="!item.fixed"
+              class="el-icon-sort dargBtn"
+              style="font-size: 20px; cursor: move"
+            />
           </div>
         </transition-group>
       </draggable>
@@ -72,10 +78,10 @@ export default {
       columnsList: [],
     }
   },
-  computed:{
-    key(){
+  computed: {
+    key() {
       return this.$route.path.split('/').at(-1)
-    }
+    },
   },
   created() {
     const storageColumns = baseStorage.getItem(this.key) || []
@@ -113,8 +119,8 @@ export default {
       const filterColumns = storageColumns.filter((item) => {
         return originFields.includes(item.field)
       })
-      this.columnsList = filterColumns.map(item => {    
-        return columns.find(cln => cln.field === item.field)
+      this.columnsList = filterColumns.map((item) => {
+        return columns.find((cln) => cln.field === item.field)
       })
       this.checkList = filterColumns
         .filter((item) => item.select)
@@ -186,7 +192,7 @@ export default {
     .el-checkbox:active {
       cursor: pointer;
     }
-    .dargBtn{
+    .dargBtn {
       width: 40px;
       align-self: stretch;
       vertical-align: middle;
@@ -194,7 +200,7 @@ export default {
       align-items: center;
       justify-content: center;
     }
-    .dargBtn:hover{
+    .dargBtn:hover {
       background: #f5f7fa;
     }
   }

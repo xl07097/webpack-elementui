@@ -39,7 +39,6 @@ instance.interceptors.response.use(
     }
     // 此时需要重新登录
     if (data.code === 300 || data.code === 1001) {
-      store.dispatch('permission/resetLogin')
       const config = res.config
       const url = res.config.url
       if (!url.includes('/login') && !url.includes('/refreshToken')) {
