@@ -50,6 +50,7 @@ export default {
         // week: 'yyyy 第 WW 周'
       },
       lists: [],
+      isFouce: false,
     };
   },
   computed:{
@@ -75,7 +76,8 @@ export default {
   methods: {
     renderInput(h) {
       return (
-        <el-input value={this.value} style={this.style} on-input={this.input} clearable placeholder={`请输入${this.label}`} />
+        // placeholder={`请输入${this.label}`}
+        <el-input value={this.value} style={this.style} class={{'is-fouce': this.value || this.isFouce}} on-focus={this.onFocus} on-blur={this.onBlur} on-input={this.input} clearable  />
       );
     },
     renderSelect(h) {
@@ -87,9 +89,12 @@ export default {
           on-change={this.change}
           clearable
           filterable
+          class={{'is-fouce': this.value || this.isFouce}} 
+          on-focus={this.onFocus} 
+          on-blur={this.onBlur}
           remote={request.remote}
           remoteMethod={this.remoteMethod}
-          placeholder={placeholder}
+          placeholder={''}
           style={this.style} 
         >
           {this.optionList.map((list) => {
@@ -105,14 +110,16 @@ export default {
         <el-date-picker
           value={this.value}
           type={tag}
-          editable={false}
           clearable
           format={dateFormat[tag]}
           valueFormat={dateFormat[tag]}
           picker-options={pickerOptions}
           onInput={this.input}
           on-change={this.change}
-          placeholder={`请选择${this.label}`}
+          class={{'is-fouce': this.value || this.isFouce}} 
+          on-focus={this.onFocus} 
+          on-blur={this.onBlur}
+          placeholder={''}
           style={this.style} 
         ></el-date-picker>
       );
@@ -133,7 +140,12 @@ export default {
           props={{props}}
           filterable
           clearable
-          on-change={this.change} style={this.style} ></el-cascader>
+          class={{'is-fouce': this.value || this.isFouce}} 
+          on-focus={this.onFocus} 
+          on-blur={this.onBlur}
+          on-change={this.change}
+          placeholder={''}
+          style={this.style}></el-cascader>
       )
     },
     renderAutocomplete(h){
@@ -142,7 +154,10 @@ export default {
         <el-autocomplete
           value={this.value}
           fetch-suggestions={this.querySearch}
-          placeholder={'请输入关键字'}
+          placeholder={''}
+          class={{'is-fouce': this.value || this.isFouce}} 
+          on-focus={this.onFocus} 
+          on-blur={this.onBlur}
           style={this.style} 
         >
           <template v-slot:default="{item}">
@@ -159,6 +174,12 @@ export default {
     },
     selectClear() {
       this.$emit('input', '');
+    },
+    onFocus(){
+      this.isFouce = true
+    },
+    onBlur(){
+      this.isFouce = false
     },
     remoteMethod(keyword){
       const {request={}} = this.config

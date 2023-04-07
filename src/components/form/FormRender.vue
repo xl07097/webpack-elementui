@@ -22,6 +22,7 @@
         :width="width"
         :config="field.config"
       />
+      <span class="inner-label">{{ field.label }}</span>
     </el-form-item>
 
     <el-form-item class="search-form-btn">
@@ -196,6 +197,24 @@ export default {
 
   .form-item-hide {
     display: none;
+  }
+
+  .inner-label{
+    position: absolute;
+    left: 15px;
+    pointer-events: none;
+    color: #6e6f73;;
+    font-size: 13px;
+    line-height: 20px;
+    top: 6px;
+    background: #fff;
+    transition: top 0.1s linear;
+  }
+  .el-date-editor ~ .inner-label{
+    left: 27px;
+  }
+  .is-fouce ~ .inner-label{
+    top: -10px;
   }
 }
 </style>
