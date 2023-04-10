@@ -57,7 +57,7 @@ export default {
   methods: {
     onCheckboxChange({ records }) {
       this.selectionList = Object.freeze(records)
-      this.$emit('checkboxChange', records)
+      this.$emit('selection', records)
     },
   },
   render(h) {

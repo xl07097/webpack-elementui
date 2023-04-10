@@ -1,17 +1,21 @@
 <template>
   <div style="padding: 10px">
+    <Toolbar />
     <XlTable
       :columns="columns"
       :data="data"
       border
       max-height="300px"
+      @selection="selection"
     />
   </div>
 </template>
 <script>
 import XlTable from '@/components/starTable/XlTable.vue'
+import Toolbar from '@/components/toolbar/Index.vue'
+
 export default {
-  components: { XlTable },
+  components: { XlTable,Toolbar },
   data() {
     return {
       columns: Object.freeze([
@@ -105,6 +109,9 @@ export default {
     edit(row) {
       console.log(row)
     },
+    selection(rows){
+      console.log(rows)
+    }
   },
 }
 </script>
