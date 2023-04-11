@@ -1,55 +1,43 @@
 <template>
-  <div>
-    <el-form
-      ref="form"
-      label-width="100px"
-      label-position="right"
-      inline
-      :model="obj"
-      :rules="rules"
+  <div class="sh-tab">
+    <input
+      id="upfile"
+      type="file"
+      multiple
+      @change="change"
     >
-      <el-form-item label="姓名" prop="name"><el-input v-model="obj.name" /></el-form-item>
-      <el-form-item label="密码" prop="pwd"><el-input v-model="obj.pwd" /></el-form-item>
-      <Address v-model="obj.address" />
-      <el-button type="primary" @click="submit"> 获取 </el-button>
-    </el-form>
   </div>
 </template>
 
 <script>
-import Address from './Address'
+import { uploadFiles } from '@/utils/ponyfill'
 export default {
   name: 'NoticeInfo',
-  components:{ Address },
   data(){
     return {
-      
-      obj: {
-        name: '',
-        pwd: '',
-        address: [
-          {
-            provice: '',
-            city: '',
-          },
-        ],
-      },
-      rules: {
-        name: [{ required: true }],
-        pwd: [{ required: true }],
-      },
     }
   },
   methods:{
-    submit() {
-      this.$refs.form.validate((isValid, err) => {
-        console.log(err)
+    change(e) {
+      const files = e.target.files;
+      console.log(files)
+      uploadFiles(files, {}).then(res => {
+        console.log(res)
       })
+
     },
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+.sh-tab{
+  display: flex;
+  align-items: center;
+  .sh-tab-item{
+    padding: 8px 20px;
+  }
+  background: linear-gradient(to right, #f2f2f2 0%, #f2f2f2 100%) left bottom/ 100% 2px no-repeat;
 
+}
 </style>
