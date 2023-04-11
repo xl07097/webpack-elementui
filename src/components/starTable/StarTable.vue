@@ -4,6 +4,7 @@
       <ColumnSetting
         :visible.sync="settingVisible"
         :columns="columns"
+        :active-name="activeName"
         @confirm="confirm"
       />
     </div>
@@ -121,6 +122,10 @@ export default {
         return []
       },
     },
+    activeName:{
+      type: String,
+      default: '',
+    }
   },
   data() {
     return {

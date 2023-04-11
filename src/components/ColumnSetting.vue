@@ -50,7 +50,7 @@
     </el-checkbox-group>
     <div class="table-column-popover-footer">
       <el-button type="text" @click="reset">还原</el-button>
-      <el-button type="text" @click="confirm">确定</el-button>
+      <el-button type="text" @click="confirm(true)">确定</el-button>
     </div>
     <el-button slot="reference">配置</el-button>
   </el-popover>
@@ -69,6 +69,10 @@ export default {
         return []
       },
     },
+    activeName:{
+      type: String,
+      default: '',
+    }
   },
   data() {
     return {
@@ -83,55 +87,62 @@ export default {
       return this.$route.path.split('/').at(-1)
     },
   },
-  created() {
-    const storageColumns = baseStorage.getItem(this.key) || []
-    const columns = this.columns
-
-    if (storageColumns.length === 0) {
-      this.columnsList = deepClone(columns)
-      this.checkList = columns.map((item) => item.field)
-    } else {
-      const originFields = columns.map((item) => item.field)
-      columns.forEach((item, index) => {
-        // debugger
-        const findIndex = storageColumns.findIndex(
-          (sf) => sf.field === item.field
-        )
-        if (findIndex === -1) {
-          if (index === 0) {
-            storageColumns.unshift({
-              ...item,
-              select: true,
-            })
-          } else {
-            const preItem = columns[index - 1]
-            const findPreIndex = storageColumns.findIndex(
-              (sf) => sf.field === preItem.field
-            )
-            storageColumns.splice(findPreIndex + 1, 0, {
-              ...item,
-              select: true,
-            })
-          }
-        }
-      })
-
-      const filterColumns = storageColumns.filter((item) => {
-        return originFields.includes(item.field)
-      })
-      this.columnsList = filterColumns.map((item) => {
-        return columns.find((cln) => cln.field === item.field)
-      })
-      this.checkList = filterColumns
-        .filter((item) => item.select)
-        .map((item) => item.field)
-      this.all = this.checkList.length === filterColumns.length
+  watch:{
+    columns(){
+      this.init()
+      this.confirm()
     }
   },
-  mounted() {
+  created() {
+    this.init()
     this.confirm()
   },
   methods: {
+    init(){
+      const storageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
+      const columns = this.columns
+
+      if (storageColumns.length === 0) {
+        this.columnsList = deepClone(columns)
+        this.checkList = columns.map((item) => item.field)
+      } else {
+        const originFields = columns.map((item) => item.field)
+        columns.forEach((item, index) => {
+        // debugger
+          const findIndex = storageColumns.findIndex(
+            (sf) => sf.field === item.field
+          )
+          if (findIndex === -1) {
+            if (index === 0) {
+              storageColumns.unshift({
+                ...item,
+                select: true,
+              })
+            } else {
+              const preItem = columns[index - 1]
+              const findPreIndex = storageColumns.findIndex(
+                (sf) => sf.field === preItem.field
+              )
+              storageColumns.splice(findPreIndex + 1, 0, {
+                ...item,
+                select: true,
+              })
+            }
+          }
+        })
+
+        const filterColumns = storageColumns.filter((item) => {
+          return originFields.includes(item.field)
+        })
+        this.columnsList = filterColumns.map((item) => {
+          return columns.find((cln) => cln.field === item.field)
+        })
+        this.checkList = filterColumns
+          .filter((item) => item.select)
+          .map((item) => item.field)
+        this.all = this.checkList.length === filterColumns.length
+      }
+    },
     changeAll(flag) {
       if (flag) {
         this.checkList = this.columnsList.map((item) => item.field)
@@ -143,7 +154,7 @@ export default {
       this.all = rows.length === this.columnsList.length
     },
     reset() {},
-    confirm() {
+    confirm(flag) {
       this.$nextTick(() => {
         document.body.click()
       })
@@ -154,8 +165,16 @@ export default {
       const columns = this.columnsList.filter((item) =>
         checkList.includes(item.field)
       )
-      baseStorage.setItem(this.key, this.columnsList)
-      this.$emit('confirm', columns)
+      if(flag == true){
+        baseStorage.setItem(`${this.key}${this.activeName}`, this.columnsList)
+        this.$emit('confirm', columns)
+
+      }else {
+        if(this.columnsList.length > 0){
+          baseStorage.setItem(`${this.key}${this.activeName}`, this.columnsList)
+          this.$emit('confirm', columns)
+        }
+      }
     },
   },
 }
