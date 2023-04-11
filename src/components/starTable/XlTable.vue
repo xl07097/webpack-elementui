@@ -64,7 +64,7 @@ export default {
     const { columns, data, index, checkbox } = this.$props
     const attrs = this.$attrs
     return (
-      <vxe-table data={data} size="small" props={attrs} onCheckbox-change={this.onCheckboxChange} onCheckbox-all={this.onCheckboxChange}>
+      <vxe-table class="xl-table" data={data} size="small" props={attrs} onCheckbox-change={this.onCheckboxChange} onCheckbox-all={this.onCheckboxChange}>
         {index && <TableColumn key="index" columns={this.indexColumn} />}
         {checkbox && <TableColumn key="checkbox" columns={this.checkColumn} />}
         {columns.map((column) => (
@@ -75,3 +75,14 @@ export default {
   },
 }
 </script>
+
+<style lang="sass">
+.xl-table.vxe-table {
+  .vxe-table--header-wrapper{
+    color: #444;
+  }
+  .vxe-table--body-wrapper .vxe-cell{
+    color: #333;
+  }
+}
+</style>

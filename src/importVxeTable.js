@@ -6,7 +6,7 @@ import {
 
   // 功能模块
   // Icon,
-  // Filter,
+  Filter,
   // Menu,
   // Edit,
   // Export,
@@ -55,7 +55,7 @@ VXETable.setup({
 Vue.use(Header)
   .use(Footer)
   // .use(Icon)
-  // .use(Filter)
+  .use(Filter)
   // .use(Edit)
   // .use(Menu)
   // .use(Export)

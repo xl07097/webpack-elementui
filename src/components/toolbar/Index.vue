@@ -2,7 +2,9 @@
   <div class="table-toolbar">
     <div class="table-toolbar-left">
       <slot name="left">
-        <el-button type="primary" size="small" @click="add('add')">primary</el-button>
+        <el-button v-for="button of buttonList" :key="button.functionName" @click="actionMethod(button.functionName)">
+          {{ button.title }}
+        </el-button>
       </slot>
     </div>
     <div class="table-toolbar-right">
@@ -24,7 +26,9 @@ export default {
     }
   },
   computed:{
-
+    buttonList(){
+      return Object.freeze(this.routeInfo.authrity || [])
+    }
   },
   methods:{
     add(prop){

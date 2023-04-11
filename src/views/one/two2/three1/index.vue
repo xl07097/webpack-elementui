@@ -21,52 +21,49 @@ export default {
       columns: Object.freeze([
         {
           field: 'lplp',
-          title: 'name2',
-          sortable: true,
+          title: '姓名',
           align: 'center',
           minWidth: '160px',
           renderHeader(h) {
             return <span style="color:red;">opopop</span>
           },
-          render(h) {
-            return <span style="color:red;border:1px solid red">9090</span>
-          },
-          formatter:() => {
-            return 'lplp'
-          }
         },
         {
           field: 'lplp1',
-          title: 'name3',
+          title: '性别',
+          filters: [
+            {value: 0,label:'女'},
+            {value: 1,label:'男'}
+          ],
           sortable: true,
         },
         {
           field: 'lplp2',
-          title: 'name4',
+          title: '证件号码',
         },
         {
           field: 'lplp3',
-          title: 'name5',
+          title: '证件类型',
         },
         {
           field: 'lplp4',
-          title: 'name6',
+          title: '项目名称',
         },
         {
           field: 'lplp5',
-          title: 'name7',
+          title: '项目编码',
         },
         {
           field: 'lplp6',
-          title: 'name8',
+          title: '运营部门',
         },
         {
           field: 'lplp7',
-          title: 'name9',
+          title: '用户类型',
         },
         {
           field: 'lplp8',
-          title: 'name10',
+          title: '银行卡号',
           formatter:() => {
             return 'lplp'
           }
@@ -88,19 +85,19 @@ export default {
       data: Object.freeze([
         {
           lplp3: 'hahah',
-          lplp1: 1,
+          lplp1: 0,
         },
         {
           lplp3: 'hahah',
-          lplp1: 2,
+          lplp1: 1,
         },
       ]),
     }
   },
   created() {
-    console.time('la')
   },
   mounted() {
+    console.time('la')
     this.$nextTick(() => {
       console.timeEnd('la')
     })
