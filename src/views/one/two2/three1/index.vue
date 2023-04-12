@@ -5,8 +5,10 @@
       :columns="columns"
       :data="data"
       border
-      max-height="300px"
+      max-height="600px"
       @selection="selection"
+      @checkbox-change="selection"
+      @cell-click="cellClick"
     />
   </div>
 </template>
@@ -62,8 +64,120 @@ export default {
           title: '用户类型',
         },
         {
-          field: 'lplp8',
+          field: 'lplp81',
+          title: '外包人员规模（结算人数）',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp82',
           title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp83',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp84',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp85',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp86',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp87',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp88',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp89',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp18',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp28',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp38',
+          title: '银行卡号',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp811',
+          title: '外包人员规模（结算人数）',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp812',
+          title: '外包人员规模（结算人数）',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp813',
+          title: '外包人员规模（结算人数）',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp814',
+          title: '外包人员规模（结算人数）',
+          formatter:() => {
+            return 'lplp'
+          }
+        },
+        {
+          field: 'lplp815',
+          title: '外包人员规模（结算人数）',
           formatter:() => {
             return 'lplp'
           }
@@ -89,7 +203,39 @@ export default {
         },
         {
           lplp3: 'hahah',
-          lplp1: 1,
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
         },
       ]),
     }
@@ -108,6 +254,9 @@ export default {
     },
     selection(rows){
       console.log(rows)
+    },
+    cellClick(){
+      console.log('cellClick')
     }
   },
 }

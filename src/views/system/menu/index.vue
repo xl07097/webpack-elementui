@@ -14,7 +14,7 @@
           <el-tag v-if="row.nodeType === 1" type="success">目录</el-tag>
           <el-tag v-else-if="row.nodeType === 2" type="info">菜单</el-tag>
           <el-tag v-else-if="row.nodeType === 3" type="warning">按钮</el-tag>
-          <el-tag v-else type="danger">未知</el-tag>
+          <el-tag v-else>未知</el-tag>
         </template>
       </el-table-column>
       <el-table-column prop="path" label="路径" />

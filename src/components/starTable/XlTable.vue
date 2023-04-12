@@ -59,12 +59,31 @@ export default {
       this.selectionList = Object.freeze(records)
       this.$emit('selection', records)
     },
+    sortChange(props){
+      this.$emit('sort-change', props)
+    },
+    clearSort(props){
+      this.$emit('clear-sort', props)
+    },
+    resizableChange(props){
+      this.$emit('resizable-change', props)
+    }
   },
   render(h) {
     const { columns, data, index, checkbox } = this.$props
     const attrs = this.$attrs
     return (
-      <vxe-table class="xl-table" data={data} size="small" props={attrs} onCheckbox-change={this.onCheckboxChange} onCheckbox-all={this.onCheckboxChange}>
+      <vxe-table 
+        class="xl-table" 
+        data={data} 
+        size="small" 
+        props={attrs} 
+        onCheckbox-change={this.onCheckboxChange} 
+        onCheckbox-all={this.onCheckboxChange} 
+        onSort-change={this.sortChange} 
+        onClear-sort={this.clearSort}
+        onResizable-change={this.resizableChange}
+      >
         {index && <TableColumn key="index" columns={this.indexColumn} />}
         {checkbox && <TableColumn key="checkbox" columns={this.checkColumn} />}
         {columns.map((column) => (

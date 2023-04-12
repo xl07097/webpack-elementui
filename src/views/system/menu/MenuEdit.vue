@@ -6,7 +6,12 @@
     @open="open"
     @close="close"
   >
-    <el-form ref="form" :model="form" :rules="rules" label-width="110px">
+    <el-form
+      ref="form"
+      :model="form"
+      :rules="rules"
+      label-width="110px"
+    >
       <el-form-item label="名称" prop="title">
         <el-input v-model="form.title" />
       </el-form-item>
