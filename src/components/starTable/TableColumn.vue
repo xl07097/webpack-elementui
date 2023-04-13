@@ -26,7 +26,7 @@ export default {
       <vxe-column
         field={field}
         title={title}
-        minWidth="160px"
+        minWidth={ attrs.minWidth || attrs.width || '160px'}
         props={attrs}
         {...attrs}
       >

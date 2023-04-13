@@ -74,6 +74,7 @@ export default {
     const attrs = this.$attrs
     return (
       <vxe-table 
+        ref="tableRef"
         class="xl-table" 
         data={data} 
         size="small" 
