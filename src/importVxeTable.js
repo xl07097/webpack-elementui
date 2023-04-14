@@ -18,7 +18,7 @@ import {
   // 可选组件
   Column,
   Colgroup,
-  Grid,
+  // Grid,
   // Toolbar,
   // Pager,
   Checkbox,
@@ -65,7 +65,7 @@ Vue.use(Header)
   // 可选组件
   .use(Column)
   .use(Colgroup)
-  .use(Grid)
+  // .use(Grid)
   // .use(Toolbar)
   // .use(Pager)
   .use(Checkbox)

@@ -2,6 +2,8 @@
   <div style="padding: 10px">
     <Toolbar />
     <XlTable
+      ref="tableRef"
+      :key="key"
       :columns="columns"
       :data="data"
       border
@@ -186,6 +188,7 @@ export default {
           field: 'action',
           title: '操作',
           fixed: 'right',
+          width: 120,
           render: (h, {row}) => {
             return (
               <div>
@@ -217,35 +220,20 @@ export default {
           lplp3: 'hahah',
           lplp1: 0,
         },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
       ]),
+      key: 'lplp'
     }
   },
   created() {
   },
   mounted() {
     console.time('la')
+    this.$refs.tableRef.$refs.tableRef.scrollToColumn('lplp814', '200px')
     this.$nextTick(() => {
       console.timeEnd('la')
+      // this.columns.at(-1).key='lp'
+      // this.key = 'poiu'
+      this.$refs.tableRef.$refs.tableRef.scrollToColumn('lplp814', '200px')
     })
   },
   methods: {

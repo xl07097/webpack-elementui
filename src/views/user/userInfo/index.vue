@@ -1,14 +1,12 @@
 <template>
   <div>
-    <ColumnSetting />
+    lp
   </div>
 </template>
 
 <script>
-import ColumnSetting from '@/components/ColumnSetting';
 export default {
   name: 'UserInfo',
-  components:{ColumnSetting},
   mounted(){
     const set1 = new BroadcastChannel('lplp')
 
@@ -24,7 +22,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>
