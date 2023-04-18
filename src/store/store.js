@@ -27,3 +27,9 @@ export default new Vuex.Store({
   // 模块化
   modules: modules,
 })
+
+// 正则提取字符串中的字符
+// const str = 'abc.js'
+// const reg = /(\.\/|\.js)/g
+// const result = str.replace(reg, '')
+// console.log(result)

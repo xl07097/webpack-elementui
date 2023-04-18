@@ -3,9 +3,9 @@
 </template>
 
 <script>
-// import Player from 'xgplayer'
-import 'xgplayer'
-import HlsPlayer from 'xgplayer-hls'
+import Player from 'xgplayer'
+import HlsPlugin from 'xgplayer-hls'
+import 'xgplayer/dist/index.min.css';
 export default {
   props: {
     src: {
@@ -21,37 +21,55 @@ export default {
     }
   },
   mounted() {
-    const intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this.init()
-            intersectionObserver.disconnect()
-          }
-        })
-      },
-      {
-        rootMargin: '16px',
-        threshold: [0],
-      }
-    )
-    intersectionObserver.observe(document.querySelector(`#${this.id}`))
+    // const intersectionObserver = new IntersectionObserver(
+    //   (entries) => {
+    //     entries.forEach((entry) => {
+    //       if (entry.isIntersecting) {
+    //         this.init()
+    //         intersectionObserver.disconnect()
+    //       }
+    //     })
+    //   },
+    //   {
+    //     rootMargin: '16px',
+    //     threshold: [0],
+    //   }
+    // )
+    // intersectionObserver.observe(document.querySelector(`#${this.id}`))
     this.$on('hook:beforeDistroy', () => {
       intersectionObserver.disconnect()
       this.player && this.player.destroy()
     })
-    // this.init()
+    this.init()
   },
   methods: {
     init() {
-      this.player = new HlsPlayer({
-        id: this.id,
-        url: 'https://files.zhiqiuge.com/xiangshuye/m3u8/lp.m3u8 ',
-        lang: 'zh-cn',
-        width: 600,
-        height: 340,
-        videoInit: true,
-      })
+      if (document.createElement('video').canPlayType('application/vnd.apple.mpegurl')) {
+        // 原生支持 hls 播放
+        this.player = new Player({
+          id: this.id,
+          url: 'https://files.zhiqiuge.com/xiangshuye/m3u8/lp.m3u8',
+          lang: 'zh-cn',
+          autoplay: true,
+          playsinline: true,
+          width: 600,
+          height: 340,
+          videoInit: true,
+        })
+      } else if (HlsPlugin.isSupported()) { // 第一步
+        this.player = new Player({
+          id: this.id,
+          isLive: false,
+          url: 'https://files.zhiqiuge.com/xiangshuye/m3u8/lp.m3u8', // hls 流地址
+          plugins: [HlsPlugin],
+          lang: 'zh-cn',
+          autoplay: true,
+          playsinline: true,
+          width: 600,
+          height: 340,
+          videoInit: true, // 第二步
+        })
+      }
     },
   },
 }
