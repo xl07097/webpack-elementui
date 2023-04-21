@@ -32,17 +32,33 @@
       <el-table-column
         prop="action"
         label="操作"
-        width="120"
+        width="160"
         fixed="right"
       >
         <template #default="{ row }">
-          <el-button @click="edit(row)">编辑</el-button>
+          <el-link
+            type="primary"
+            icon="el-icon-edit"
+            :underline="false"
+            @click="edit(row)"
+          >
+            编辑
+          </el-link>&emsp;
+          <el-link 
+            type="danger"
+            :underline="false"
+            icon="el-icon-delete"
+            @click="trash(row)"
+          >
+            删除
+          </el-link>
         </template>
       </el-table-column>
     </el-table>
 
     <MenuEdit
       :detail="detail"
+      :options="tableData"
       :visible.sync="editVisible"
       :oper-type="operType"
       @submit="getData"
@@ -51,9 +67,10 @@
 </template>
 
 <script>
-import { getMenu } from '@/apis/menu' // 从api中引入getMenu方法，用于获取菜单列表数据
+import { getMenu, trashMenu } from '@/apis/menu' // 从api中引入getMenu方法，用于获取菜单列表数据
 
 import MenuEdit from './MenuEdit.vue'
+
 export default {
   name: 'MenuConfig',
   components: { MenuEdit },
@@ -82,6 +99,27 @@ export default {
       this.detail = { ...row, children: null }
       this.operType = 'edit'
       this.editVisible = true
+    },
+    trash(row){
+      this.$confirm('此操作将永久删除该菜单, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await trashMenu(row.id)
+        if(res.code === 200){
+          this.$message({
+            type: 'success',
+            message: '删除成功!'
+          })
+          this.getData()
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
+      })
     },
     headerRowStyle(){
       return 'background-color: rgb(209, 231, 255);'

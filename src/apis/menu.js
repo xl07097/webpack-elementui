@@ -7,3 +7,7 @@ export function getMenu() {
 export function getPrivilegeMenu() {
   return get('/sysMenu/getPrivilegeMenu')
 }
+
+export function trashMenu(id) {
+  return get(`/sysMenu/delete/${id}`)
+}

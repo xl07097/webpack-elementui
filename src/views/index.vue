@@ -1,9 +1,10 @@
 <template>
   <div class="index">
-    <FormRender v-model="searchData" :fields="fields" />
+    <!-- <FormRender v-model="searchData" :fields="fields" />
     <el-button @click="gets"> 获取 </el-button>
     <el-button @click="test">测试</el-button>
-    <el-button @click="gets1">获取</el-button>
+    <el-button @click="gets1">获取</el-button> -->
+    <el-input v-model="lk" type="textarea" rows="6" />
   </div>
 </template>
 <script>
@@ -75,9 +76,12 @@ export default {
         },
         { type: 'date', prop: 'date', label: 'date' },
       ],
+      lk: ''
     }
   },
   mounted() {
+    console.log(this)
+    this.lk = '【成功人力】2023-01-01 —— 2023-01-31 招聘信息\n\n【工作地点】大金制冷苏州有限公司\n【返费规则】男满10打卡日返500元，女满10打卡日返600元\n            男满20打卡日返1000元，女满20打卡日返1500元\n            男满30打卡日返1500元，女满30打卡日返2000元'
     this.$nextTick(() => {
       // this.fields[2].config.lists = [
       //   { label: 'lp', value: 'lp' },

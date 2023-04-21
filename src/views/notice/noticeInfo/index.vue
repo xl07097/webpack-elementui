@@ -1,31 +1,30 @@
 <template>
   <div class="sh-tab">
-    <input
-      id="upfile"
-      type="file"
-      multiple
-      @change="change"
-    >
+    lp
   </div>
 </template>
 
 <script>
-import { uploadFiles } from '@/utils/ponyfill'
 export default {
   name: 'NoticeInfo',
   data(){
     return {
+      request: null
     }
   },
+  mounted(){
+    this.init()
+  },
   methods:{
-    change(e) {
-      const files = e.target.files;
-      console.log(files)
-      uploadFiles(files, {}).then(res => {
-        console.log(res)
-      })
-
-    },
+    init(){
+      this.request = window.indexedDB.open('mydatabase');
+      console.log(this.request)
+      this.request.onsucess = event => {
+      // do something
+        const db = event.target.result;
+        console.log(db)
+      }     
+    }
   }
 }
 </script>

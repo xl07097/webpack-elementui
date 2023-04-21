@@ -45,7 +45,7 @@ export const channelDeepClone = (data) => {
  * @param {*} data
  * @returns
  */
-export const array2Tree = (data, options) => {
+export const array2Tree = (data, options={}) => {
   const tmpMap = {}
   const tree = []
   const key = options.key || 'id'
