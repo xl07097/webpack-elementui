@@ -8,11 +8,9 @@
         :class="{ active: index == active }"
         @click="set(index)"
       >
-        <i class="left" />
         <span class="lplp-item" :class="{ active: index == active }">
           {{ item }}<i class="close-app-tab el-icon-close" @click.stop="close(index)" />
         </span>
-        <i class="right" /> 
       </span>
     </div>
     <ElTree
@@ -78,32 +76,15 @@ export default {
   .wrap{
     position: relative;
   }
-  // .wrap.active{
-  //   .left {
-  //     content: '';
-  //     position: absolute;
-  //     width: 0;
-  //     height: 0;
-  //     border-bottom: 12px solid rgb(2, 57, 63);
-  //     border-right: 12px solid rgb(2, 57, 63);
-  //     left: -12px;
-  //     bottom: 0;
-  //     border-bottom-right-radius: 12px;
-  //     z-index: 2;
-  //   }
-  //   .right {
-  //     content: '';
-  //     position: absolute;
-  //     width: 0;
-  //     height: 0;
-  //     border-bottom: 12px solid rgb(2, 57, 63);
-  //     border-left: 12px solid rgb(2, 57, 63);
-  //     right: -12px;
-  //     bottom: 0;
-  //     border-bottom-left-radius: 12px;
-  //     z-index: 2;
-  //   }
-  // }
+  .wrap::after{
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1px;
+    top: 22%;
+    height: 56%;
+    background: rgba(4, 91, 98, 0.8);
+  }
   .lplp-item {
     display: flex;
     justify-content: space-between;
@@ -113,6 +94,11 @@ export default {
     padding: 6px 10px;
     text-align: center;
     box-sizing: border-box;
+    transition: background-color 0.1s linear;
+  }
+  .lplp-item:not(.active):hover{
+    border-radius: 10px 10px 0 0;
+    background: rgba(4, 91, 98, 0.4);
   }
 
   .lplp-item.active {
@@ -125,20 +111,17 @@ export default {
       bottom: 0;
       width: 10px;
       height: 10px;
-      background-image: radial-gradient(cicle to bottom right, transparent 10px, #045b62 100%);
-      // border-bottom: 12px solid #045b62;
-      // border-right: 12px solid #045b62;
+      background-image: radial-gradient(circle at left top, transparent 72%, #045b62 72%);
       z-index: 1;
     }
     &::after {
       content: '';
       position: absolute;
-      right: -12px;
+      right: -10px;
       bottom: 0;
-      width: 0;
-      height: 0;
-      // border-bottom: 12px solid #045b62;
-      // border-left: 12px solid #045b62;
+      width: 10px;
+      height: 10px;
+      background-image: radial-gradient(circle at right top, transparent 72%, #045b62 72%);
       z-index: 1;
     }
   }
