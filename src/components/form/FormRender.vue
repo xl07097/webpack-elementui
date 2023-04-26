@@ -85,8 +85,8 @@ export default {
       }
     },
     activeName:{
-      type: String,
-      default: '',
+      type: [Number, String],
+      default: '0',
     }
   },
   data() {
@@ -106,6 +106,11 @@ export default {
         this.$emit('input', val)
       },
     },
+  },
+  watch:{
+    activeName(){
+      this.initWidth()
+    }
   },
   mounted() {
     // this.initWidth()

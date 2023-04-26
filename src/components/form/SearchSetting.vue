@@ -104,6 +104,7 @@ export default {
       if (storageColumns.length === 0) {
         this.columnsList = deepClone(columns)
         this.checkList = columns.map((item) => item.prop)
+        this.all = true
       } else {
         const originFields = columns.map((item) => item.prop)
         columns.forEach((item, index) => {
