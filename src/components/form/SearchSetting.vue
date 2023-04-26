@@ -159,9 +159,6 @@ export default {
         document.body.click()
       })
       const checkList = this.checkList
-      this.columnsList.forEach((item) => {
-        item.select = checkList.includes(item.prop)
-      })
       const columns = this.columnsList.filter((item) =>
         checkList.includes(item.prop)
       )
@@ -169,7 +166,7 @@ export default {
         return {
           'label': item.label,
           'prop': item.prop,
-          'select': item.select,
+          'select': checkList.includes(item.prop),
         }
       })
       if(flag == true){

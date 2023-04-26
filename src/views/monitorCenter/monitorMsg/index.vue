@@ -53,7 +53,7 @@ export default {
         { type: 'daterange', label: '最后修改时间', prop: 'updateTimeStart', endProp: 'updateTimeEnd' },
       ]),
       columns: Object.freeze([
-        { title: 'title', field: 'field' },
+        { title: 'title', field: 'field', width: '140px' },
         { title: 'title1', field: 'field1' },
         { title: 'title2', field: 'field2' },
         { title: 'title3', field: 'field3' },

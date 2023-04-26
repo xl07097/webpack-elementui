@@ -160,19 +160,24 @@ export default {
         document.body.click()
       })
       const checkList = this.checkList
-      this.columnsList.forEach((item) => {
-        item.select = checkList.includes(item.field)
+      let list= this.columnsList.map((item) => {
+        return {
+          field:item.field,
+          select: checkList.includes(item.field),
+          fixed: item.fixed,
+          title: item.title,
+        }
       })
       const columns = this.columnsList.filter((item) =>
         checkList.includes(item.field)
       )
       if(flag == true){
-        baseStorage.setItem(`${this.key}${this.activeName}`, this.columnsList)
+        baseStorage.setItem(`${this.key}${this.activeName}`, list)
         this.$emit('confirm', columns)
 
       }else {
         if(this.columnsList.length > 0){
-          baseStorage.setItem(`${this.key}${this.activeName}`, this.columnsList)
+          baseStorage.setItem(`${this.key}${this.activeName}`, list)
           this.$emit('confirm', columns)
         }
       }
