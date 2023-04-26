@@ -32,21 +32,40 @@ export default {
     },
     async upfile(e) {
       const file = e.target.files[0]
-      readXlsxFile(file).then((rows) => {
-        console.log(rows)
-      })
+      // readXlsxFile(file).then((rows) => {
+      //   console.log(rows)
+      // })
+
+      const schema = {
+        '一级损益': {
+          prop: 'P1',
+          type: String
+        },
+        '二级损益': {
+          prop: 'P2',
+          type: String
+        },
+        '三级损益': {
+          prop: 'P3',
+          type: String
+        },
+        '项目管理系统-运营部门': {
+          prop: 'P4',
+          type: String
+        },
+        '是否看下级': {
+          prop: 'P5',
+          type: String
+        },
+      }
+
+      readXlsxFile(file, { schema }).then(({ rows, errors }) => {
+        console.log(rows);
+      });
     },
   },
 }
 </script>
 <style lang="scss">
-@keyframes moveX {
-  to{
-    transform: translateY(200px) translateX(100px);
-  }
-}
-.el-icon-circle-plus-outline{
-  font-size: 22px;
-  animation: moveX 2s cubic-bezier(0.5, -0.5, 1, 1) forwards;
-}
+
 </style>

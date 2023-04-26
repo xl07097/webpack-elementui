@@ -17,6 +17,7 @@
 <script>
 import XlTable from '@/components/starTable/XlTable.vue'
 import Toolbar from '@/components/toolbar/Index.vue'
+import ButtonSet from './ButtonSet.vue'
 
 export default {
   components: { XlTable,Toolbar },
@@ -188,13 +189,14 @@ export default {
           field: 'action',
           title: '操作',
           fixed: 'right',
-          width: 120,
+          width: 240,
           render: (h, {row}) => {
             return (
-              <div>
-                <el-button type="text" size="mini" onClick={() => this.edit(row)}>编辑</el-button>
-                <el-button type="text" size="mini" onClick={() => this.edit(row)}>删除</el-button>
-              </div>
+              <ButtonSet />
+              // <div>
+              //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>编辑</el-button>
+              //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>删除</el-button>
+              // </div>
             )
           }
         },

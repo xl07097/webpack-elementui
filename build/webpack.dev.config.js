@@ -2,6 +2,7 @@ const { merge } = require('webpack-merge')
 const path = require('path')
 const baseConfig = require('./webpack.base.config')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const ModuleFederationPlugin  = require('webpack/lib/container/ModuleFederationPlugin')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -14,6 +15,14 @@ module.exports = merge(baseConfig, {
     new BundleAnalyzerPlugin({
       analyzerPort: 10002,
     }),
+    // new ModuleFederationPlugin({
+    //   name: 'lib_remote',
+    //   filename: 'remoteEntry.js',
+    //   exposes: {
+    //     './formRender': './src/components/form/FormRender.vue'
+    //   },
+    //   shared: ['vue', 'element-ui']
+    // })
   ],
   devServer: {
     historyApiFallback: true,

@@ -79,6 +79,9 @@ export default {
         data={data} 
         size="small" 
         props={attrs} 
+        columnConfig={{
+          resizable: true
+        }}
         onCheckbox-change={this.onCheckboxChange} 
         onCheckbox-all={this.onCheckboxChange} 
         onSort-change={this.sortChange} 
