@@ -153,16 +153,24 @@ export default {
     changeSingle(rows) {
       this.all = rows.length === this.columnsList.length
     },
-    reset() {},
+    reset() {
+      this.checkList = this.columns.map(item => item.prop)
+      this.columnsList = deepClone(this.columns)
+      this.all = true
+      this.$nextTick(() => {
+        this.confirm()
+      })
+    },
     confirm(flag) {
       this.$nextTick(() => {
         document.body.click()
       })
+      const columnsList = this.columnsList
       const checkList = this.checkList
-      const columns = this.columnsList.filter((item) =>
-        checkList.includes(item.prop)
-      )
-      let stage = this.columnsList.map(item => {
+      const columns = checkList.map(prop=> {
+        return columnsList.find(item => item.prop === prop)
+      })
+      let stage = columnsList.map(item => {
         return {
           'label': item.label,
           'prop': item.prop,

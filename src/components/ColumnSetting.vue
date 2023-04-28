@@ -154,13 +154,22 @@ export default {
     changeSingle(rows) {
       this.all = rows.length === this.columnsList.length
     },
-    reset() {},
+    reset() {
+      this.checkList = this.columns.map(item => item.field)
+      this.columnsList = deepClone(this.columns)
+      this.all = true
+      this.$nextTick(() => {
+        this.confirm()
+      })
+    },
     confirm(flag) {
       this.$nextTick(() => {
         document.body.click()
       })
+
       const checkList = this.checkList
-      let list= this.columnsList.map((item) => {
+      const columnsList = this.columnsList
+      let list = columnsList.map((item) => {
         return {
           field:item.field,
           select: checkList.includes(item.field),
@@ -168,9 +177,10 @@ export default {
           title: item.title,
         }
       })
-      const columns = this.columnsList.filter((item) =>
-        checkList.includes(item.field)
-      )
+
+      const columns = checkList.map(field=> {
+        return columnsList.find(item => item.field === field)
+      })
       if(flag == true){
         baseStorage.setItem(`${this.key}${this.activeName}`, list)
         this.$emit('confirm', columns)
