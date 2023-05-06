@@ -3,15 +3,12 @@
     ref="formRender"
     class="search-form"
     size="small"
-    :label-width="`${labelWidth}px`"
     inline
   >
     <el-form-item
       v-for="(field, index) of filnalFields"
       :key="field.prop"
       :class="{ 'form-item-hide': showAll ? false : index > showNumber-1 }"
-      :label="field.label"
-      :label-width="field.labelWidth"
       :prop="field.prop"
     >
       <item-render
@@ -22,7 +19,7 @@
         :width="width"
         :config="field.config"
       />
-      <!-- <span class="inner-label">{{ field.label }}</span> -->
+      <span class="inner-label">{{ field.label }}</span>
     </el-form-item>
 
     <el-form-item class="search-form-btn">
@@ -46,7 +43,6 @@
         :active-name="activeName"
         @confirm="confirm"
       />
-      <!-- <el-button type="text" @click="configuration">自定义配置</el-button> -->
     </el-form-item>
   </el-form>
 </template>
@@ -76,7 +72,7 @@ export default {
     },
     width: {
       type: Number,
-      default: 200,
+      default: 220,
     },
     widthConfig:{
       type: Object,
@@ -159,14 +155,14 @@ export default {
       let totalWidth = 260
       for (let index = 0; index < fields.length; index++) {
         const item = fields[index]
-        const labelWidth = item.labelWidth || this.labelWidth
-        const width = item.width || this.width // widthMap[item.type]
+        const labelWidth = this.labelWidth
+        const width = this.width // widthMap[item.type]
         const margin = 10
-        if (totalWidth + labelWidth + width + margin > searchWidth) {
+        if (totalWidth + width + margin > searchWidth) {
           this.showNumber = index 
           return
         }
-        totalWidth = totalWidth + labelWidth + width + margin
+        totalWidth = totalWidth + width + margin
       }
     },
     expand() {
@@ -240,17 +236,17 @@ export default {
     left: 15px;
     pointer-events: none;
     color: #6e6f73;;
-    font-size: 13px;
-    line-height: 20px;
-    top: 6px;
+    font-size: 12px;
+    line-height: 16px;
+    top: 8px;
     background: #fff;
-    transition: top 0.1s linear;
+    transition: top 0.18s ease-in-out;
   }
   .el-date-editor ~ .inner-label{
     left: 27px;
   }
   .is-fouce ~ .inner-label{
-    top: -10px;
+    top: -8px;
   }
 }
 </style>

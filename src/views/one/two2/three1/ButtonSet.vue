@@ -1,10 +1,19 @@
 <template>
   <div>
-    <el-button v-for="button of preList" :key="button.functionName" @click="action(row.functionName)">
+    <el-button
+      v-for="button of preList"
+      :key="button.functionName"
+      size="mini"
+      @click="action(row.functionName)"
+    >
       {{ button.title }}
     </el-button>
-    <el-dropdown v-if="leftButton.length>0" trigger="click" @command="handleClick">
-      <el-button type="primary">
+    <el-dropdown
+      v-if="leftButton.length>0"
+      trigger="click"
+      @command="handleClick"
+    >
+      <el-button type="primary" size="mini">
         更多<i class="el-icon-arrow-down el-icon--right" />
       </el-button>
       <el-dropdown-menu slot="dropdown">

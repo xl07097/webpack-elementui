@@ -35,7 +35,7 @@ module.exports = merge(baseConfig, {
         // target: 'http://localhost:9087/note',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/',
+          '^/api': '',
         },
       },
     },
