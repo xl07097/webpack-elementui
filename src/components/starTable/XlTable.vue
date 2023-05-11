@@ -78,6 +78,10 @@ export default {
         class="xl-table" 
         data={data} 
         size="small" 
+        stripe
+        rowConfig = {{
+          isHover: true
+        }}
         props={attrs} 
         columnConfig={{
           resizable: true

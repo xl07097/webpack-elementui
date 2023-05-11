@@ -111,7 +111,7 @@ export default {
       if (storageColumns.length === 0) {
         this.columnsList = deepClone(columns).map(item => {
           return {
-            label: item.label,
+            title: item.title,
             field: item.field,
             fixed: item.fixed,
           }
@@ -132,7 +132,7 @@ export default {
             // 8 判断当前字段是否是第一个字段，是第一个字段，直接插入到数组第一个位置，并默认选中
             if (index === 0) {
               storageColumns.unshift({
-                label: item.label,
+                title: item.title,
                 field: item.field,
                 fixed: item.fixed,
                 select: true,
@@ -144,7 +144,7 @@ export default {
                 (sf) => sf.field === preItem.field,
               )
               storageColumns.splice(findPreIndex + 1, 0, {
-                label: item.label,
+                title: item.title,
                 field: item.field,
                 fixed: item.fixed,
                 select: true,
@@ -181,7 +181,7 @@ export default {
       this.checkList = this.columns.map(item => item.field)
       this.columnsList = deepClone(this.columns).map(item => {
         return {
-          label: item.label,
+          title: item.title,
           field: item.field,
           fixed: item.fixed,
         }
@@ -201,7 +201,7 @@ export default {
       // 15. 即将存储到本地的配置
       const storageColumns = this.columnsList.map((item) => {
         return {
-          label: item.label,
+          title: item.title,
           field: item.field,
           fixed: item.fixed,
           select: checkList.includes(item.field),
