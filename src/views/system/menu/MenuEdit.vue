@@ -7,13 +7,13 @@
     @close="close"
   >
     <el-form
-      ref="form"
+      ref="formRef"
       :model="form"
       :rules="rules"
       label-width="110px"
     >
       <el-form-item label="名称" prop="title">
-        <el-input v-model="form.title" />
+        <el-input v-model="form.title" placeholder="名称" />
       </el-form-item>
       <el-form-item label="类别" prop="nodeType">
         <el-radio-group
@@ -38,14 +38,14 @@
         />
       </el-form-item>
       <el-form-item v-if="form.nodeType !== 3" label="路径" prop="path">
-        <el-input v-model="form.path" />
+        <el-input v-model="form.path" placeholder="路径" />
       </el-form-item>
       <el-form-item
         v-if="form.nodeType !== 3"
         label="文件路径"
         prop="component"
       >
-        <el-input v-model="form.component" />
+        <el-input v-model="form.component" placeholder="文件路径" />
       </el-form-item>
       <el-form-item
         v-if="form.nodeType === 3"
@@ -113,7 +113,7 @@ export default {
     return {
       form: {
         title: '',
-        nodeType: '',
+        nodeType: null,
         pid: '',
         path: '',
         component: '',
@@ -197,6 +197,7 @@ export default {
     },
     close() {
       this.$emit('update:visible', false)
+      this.$refs.formRef.resetFields()
     },
   },
 }

@@ -40,6 +40,7 @@
             type="primary"
             icon="el-icon-edit"
             :underline="false"
+            style="font-size:13px;"
             @click="edit(row)"
           >
             编辑
@@ -48,6 +49,7 @@
             type="danger"
             :underline="false"
             icon="el-icon-delete"
+            style="font-size:13px;"
             @click="trash(row)"
           >
             删除
