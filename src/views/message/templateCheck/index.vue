@@ -75,6 +75,9 @@ export default {
 
   .wrap{
     position: relative;
+    &:has(+ .active)::after{
+      width: 0;
+    }
   }
   .wrap::after{
     content: '';

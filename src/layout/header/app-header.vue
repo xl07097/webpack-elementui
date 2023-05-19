@@ -12,15 +12,15 @@
         </el-tag>
       </el-scrollbar>
     </div>
-    <TagsView />
+    <!-- <TagsView /> -->
   </div>
 </template>
 
 <script>
-import TagsView from '../tagsView/Index.vue'
+// import TagsView from '../tagsView/Index.vue'
 export default {
   name: 'AppHeader',
-  components:{TagsView},
+  // components:{TagsView},
   data() {
     return {
       records: [],

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-button @click="add">新建</el-button>
+    <el-button v-auth="'add'" @click="add">新建</el-button>
     <el-table
       :data="tableData"
       style="width: 100%; margin-bottom: 20px"
@@ -37,6 +37,7 @@
       >
         <template #default="{ row }">
           <el-link
+            v-auth="'edit'"
             type="primary"
             icon="el-icon-edit"
             :underline="false"
@@ -46,6 +47,7 @@
             编辑
           </el-link>&emsp;
           <el-link 
+            v-auth="'trash'"
             type="danger"
             :underline="false"
             icon="el-icon-delete"

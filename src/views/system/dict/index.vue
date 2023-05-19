@@ -5,36 +5,26 @@
 </template>
 
 <script>
+import { get } from '@/http/request'
+import { array2Tree } from '@/utils/commons'
 export default {
   data(){
     return {
-      data:[
-        {
-          id: 1,
-          dictName: '系统字典',
-          parentId: 0,
-          children: [
-            {
-              id: 3,
-              dictName: '性别',
-              parentId: 1
-            }
-          ]
-        },
-        {
-          id: 2,
-          dictName: '业务字典',
-          parentId: 0,
-          children: []
-        }
-      ],
+      data:[],
       defaultProps: {
         label: 'dictName',
 
       }
     }
   },
+  created(){
+    this.init()
+  },
   methods:{
+    async init(){
+      const res = await get('/dict/tree')
+      this.data = Object.freeze(array2Tree(res.data, {parentKey: 'parentId'}))
+    },
     handleNodeClick(){
     
     }
