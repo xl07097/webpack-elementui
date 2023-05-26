@@ -1,6 +1,12 @@
 <template>
   <div>
-    <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" />
+    <el-tree
+      :data="data"
+      :props="defaultProps"
+      :expand-on-click-node="false"
+      node-key="id"
+      @node-click="handleNodeClick"
+    />
   </div>
 </template>
 

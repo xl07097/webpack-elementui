@@ -6,7 +6,6 @@
       :key="key"
       :columns="columns"
       :data="data"
-      border
       max-height="600px"
       @selection="selection"
       @checkbox-change="selection"
@@ -41,6 +40,12 @@ export default {
             {value: 1,label:'男'}
           ],
           sortable: true,
+          render(h, {row}) {
+            return {
+              0: '女',
+              1: '男'
+            }[row.lplp1]
+          },
         },
         {
           field: 'lplp2',

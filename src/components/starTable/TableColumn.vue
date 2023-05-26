@@ -10,7 +10,7 @@ export default {
     },
   },
   render(h) {
-    const { field, title, render, renderHeader, renderFooter, ...attrs } = this.columns
+    const { field, title, render, minWidth, width, renderHeader, renderFooter, ...attrs } = this.columns
     const slot = {}
     if (renderHeader) {
       slot.header = (props) => renderHeader(h, props)
@@ -26,7 +26,7 @@ export default {
       <vxe-column
         field={field}
         title={title}
-        minWidth={ attrs.minWidth || attrs.width || '160px'}
+        minWidth={ minWidth || width || '100px'}
         props={attrs}
         {...attrs}
       >
