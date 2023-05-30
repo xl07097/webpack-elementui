@@ -6,6 +6,7 @@
       :key="key"
       :columns="columns"
       :data="data"
+      border
       max-height="600px"
       @selection="selection"
       @checkbox-change="selection"
@@ -24,13 +25,28 @@ export default {
     return {
       columns: Object.freeze([
         {
-          field: 'lplp',
-          title: '姓名',
+          field: 'baseInfo',
+          title: '基础信息',
           align: 'center',
           minWidth: '160px',
-          renderHeader(h) {
-            return <span style="color:red;">opopop</span>
-          },
+          children: [
+            {
+              field: 'lplp',
+              title: '姓名',
+              align: 'center',
+              renderHeader(h) {
+                return <span style="color:red;">opopop</span>
+              },
+            },
+            {
+              field: 'lplp0',
+              title: '姓名',
+              align: 'center',
+              renderHeader(h) {
+                return <span style="color:red;">opopop</span>
+              },
+            },
+          ]
         },
         {
           field: 'lplp1',

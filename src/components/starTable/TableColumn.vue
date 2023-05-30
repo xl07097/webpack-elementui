@@ -10,7 +10,7 @@ export default {
     },
   },
   render(h) {
-    const { field, title, render, minWidth, width, renderHeader, renderFooter, ...attrs } = this.columns
+    const { field, title, render, minWidth, width, renderHeader, renderFooter, children=[], ...attrs } = this.columns
     const slot = {}
     if (renderHeader) {
       slot.header = (props) => renderHeader(h, props)
@@ -22,6 +22,19 @@ export default {
       slot.footer = (props) => renderFooter(h, props)
     }
     attrs.scopedSlots = slot
+    if(children.length>0){
+      return (
+        <vxe-colgroup title={title} field={field} {...attrs} props={attrs}>
+          {
+            children.map(item => {
+              return (
+                <TableColumn columns={item} />
+              )
+            })
+          }
+        </vxe-colgroup>
+      )
+    }
     return (
       <vxe-column
         field={field}
