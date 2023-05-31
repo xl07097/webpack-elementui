@@ -10,7 +10,6 @@ const modules = context.keys().reduce((acc, key) => {
   acc[k] = context(key).default
   return acc
 }, {})
-console.log(modules)
 
 export default new Vuex.Store({
   state: {
