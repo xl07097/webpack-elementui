@@ -10,7 +10,7 @@ module.exports = merge(baseConfig, {
   devtool: false,
   output: {
     path: path.resolve(__dirname, '../dist'),
-    filename: 'js/[name].[hash].js',
+    filename: 'js/[name].[fullhash].js',
     publicPath: '/',
   },
   module: {
@@ -102,8 +102,8 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
-      chunkFilename: 'css/[id].[hash].css',
+      filename: 'css/[name].[fullhash].css',
+      chunkFilename: 'css/[id].[fullhash].css',
     }),
   ],
 });
