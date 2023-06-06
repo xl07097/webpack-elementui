@@ -22,13 +22,13 @@ export default {
       slot.footer = (props) => renderFooter(h, props)
     }
     attrs.scopedSlots = slot
-    if(children.length>0){
+    if(children && children.length>0){
       return (
         <vxe-colgroup title={title} field={field} {...attrs} props={attrs}>
           {
             children.map(item => {
               return (
-                <TableColumn columns={item} />
+                <TableColumn key={item.field} columns={item} />
               )
             })
           }

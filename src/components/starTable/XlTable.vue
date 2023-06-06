@@ -57,7 +57,7 @@ export default {
   methods: {
     onCheckboxChange({ records }) {
       this.selectionList = Object.freeze(records)
-      this.$emit('selection', records)
+      this.$emit('checkbox-change', records)
     },
     sortChange(props){
       this.$emit('sort-change', props)
