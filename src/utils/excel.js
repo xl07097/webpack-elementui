@@ -10,7 +10,7 @@ export const generatorSchema = (columns, option={}) => {
     return {
       column: item[title],
       width: width / 5,
-      height:30,
+      height: 24,
       value: (row) => row[field],
     };
   });

@@ -26,7 +26,8 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 1024 * 5,
-              name: path.posix.join('static', 'img/[name].[fullhash:7].[ext]'),
+              esModule: false,
+              name: path.posix.join('static', 'img/[name].[ext]'),
             },
           },
         ],
@@ -38,6 +39,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 51200,
+              esModule: false,
               name: path.posix.join('static', 'fonts/[name].[ext]'),
             },
           },
@@ -50,6 +52,7 @@ module.exports = {
             loader: 'url-loader',
             options: {
               limit: 51200,
+              esModule: false,
               name: path.posix.join('static', 'media/[name].[ext]'),
             },
           },
