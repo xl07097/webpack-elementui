@@ -22,3 +22,20 @@ this.addEventListener('fetch', function(event) {
     caches.match(event.request)
   );
 });
+
+workbox.routing.registerRoute(
+  /(.js|.css)$/,
+  new workbox.strategies.StaleWhileRevalidate({
+    plugins: [
+      // explicitly allow to cache `401` …
+      new workbox.cacheableResponse.Plugin({ statuses: [0, 200, 401] }),
+      // … but do not return a cached result
+      // in this case (!cachedResponse.ok)
+      {
+        cachedResponseWillBeUsed: ({ cachedResponse }) => {
+          return (cachedResponse && cachedResponse.ok) ? cachedResponse : null;
+        }
+      }
+    ]
+  })
+);

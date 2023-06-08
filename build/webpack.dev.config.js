@@ -11,6 +11,7 @@ module.exports = merge(baseConfig, {
     filename: '[name].js',
     publicPath: '/',
   },
+  watch: true,
   plugins: [
     new BundleAnalyzerPlugin({
       analyzerPort: 10002,
