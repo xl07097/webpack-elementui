@@ -3,7 +3,6 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 
 module.exports = {
   entry: {
@@ -75,40 +74,7 @@ module.exports = {
         { from: path.resolve(__dirname, '../public/static'), to: 'static' },
       ],
     }),
-    // new WorkboxWebpackPlugin.GenerateSW({
-    //   // importWorkboxFrom: 'local',
-    //   // name: 'lp',
-    //   clientsClaim: true, //这些选项帮助快速启用
-    //   skipWaiting: true, //不允许遗留任何“旧的”
-    //   maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
-    //   // swDest: path.join(__dirname, '../src/sw.js'),
-    //   // runtimeCaching: [
-    //   //   {
-    //   //     // To match cross-origin requests, use a RegExp that matches
-    //   //     // the start of the origin:
-    //   //     urlPattern: new RegExp('^https://api'),
-    //   //     handler: 'staleWhileRevalidate',
-    //   //     options: {
-    //   //       // Configure which responses are considered cacheable.
-    //   //       cacheableResponse: {
-    //   //         statuses: [200],
-    //   //       },
-    //   //     },
-    //   //   },
-    //   //   {
-    //   //     urlPattern: new RegExp('^https://cdn'),
-    //   //     // Apply a network-first strategy.
-    //   //     handler: 'networkFirst',
-    //   //     options: {
-    //   //       // Fall back to the cache after 2 seconds.
-    //   //       networkTimeoutSeconds: 2,
-    //   //       cacheableResponse: {
-    //   //         statuses: [200],
-    //   //       },
-    //   //     },
-    //   //   },
-    //   // ],
-    // }),
+
   ],
   resolve: {
     alias: {

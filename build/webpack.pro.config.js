@@ -4,6 +4,9 @@ const baseConfig = require('./webpack.base.config');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
+var SwRegisterWebpackPlugin = require('sw-register-webpack-plugin')
+const workboxConfig = require('../src/config/workbox')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
@@ -105,5 +108,15 @@ module.exports = merge(baseConfig, {
       filename: 'css/[name].[fullhash].css',
       chunkFilename: 'css/[id].[fullhash].css',
     }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      directoryIndex: './dist',
+      // globPatterns: ['**/*.{html,js,css}'],
+      swDest: path.join(__dirname, '../dist/sw.js'),
+      clientsClaim: true,
+      skipWaiting: true,
+    }),
+    new SwRegisterWebpackPlugin({
+      filePath: path.resolve(__dirname, '../src/sw-register.js')
+    })
   ],
 });
