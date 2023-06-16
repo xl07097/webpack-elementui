@@ -54,7 +54,41 @@ export default {
       selectionList: []
     }
   },
+  watch:{
+    data(){
+      this.$nextTick(() => {
+        this.addEvent()
+      })
+    }
+  },
+  mounted(){
+    this.$nextTick(() => {
+     
+    })
+    setTimeout(() => {
+      this.addEvent()
+    }, 1000)
+  },
   methods: {
+    addEvent(){
+      // const el = this.$refs.tableRef.$el.querySelector('.vxe-table--fixed-wrapper')
+      // if(el){
+      //   const body = el.querySelector('.vxe-table--body-wrapper')
+      //   if(body){
+      //     const funs = function(e){
+      //       console.log('lp')
+      //       e.preventDefault();
+      //       e.stopPropagation();
+      //       body.scrollLeft = '0'
+      //     }
+      //     body.removeEventListener('scroll', funs)
+      //     body.addEventListener('scroll', funs)
+      //     this.$on('hook:beforeDestroy', () => {
+      //       body.removeEventListener('scroll', funs)
+      //     })
+      //   }
+      // }
+    },
     onCheckboxChange({ records }) {
       this.selectionList = Object.freeze(records)
       this.$emit('checkbox-change', records)
@@ -111,5 +145,15 @@ export default {
   .vxe-table--body-wrapper .vxe-cell{
     color: #333;
   }
+  
+  // .vxe-table--footer-wrapper{
+  //   margin-top: 0 !important;
+  // }
 }
+// .vxe-table--render-default:not(.is--empty).is--footer.is--scroll-x .vxe-table--body-wrapper {
+//     overflow-x: inherit;
+//   }
+  .vxe-table--render-default:not(.is--empty).is--footer.is--scroll-x .vxe-table--footer-wrapper {
+    margin-top: -20px !important;
+  }
 </style>

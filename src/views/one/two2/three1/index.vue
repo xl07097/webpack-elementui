@@ -7,7 +7,9 @@
       :columns="columns"
       :data="data"
       border
-      max-height="600px"
+      max-height="300px"
+      show-footer
+      :footer-method="footerMethod"
       @selection="selection"
       @checkbox-change="selection"
       @cell-click="cellClick"
@@ -25,6 +27,50 @@ export default {
     return {
       columns: Object.freeze(columns),
       data: Object.freeze([
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
+        {
+          lplp3: 'hahah',
+          lplp1: 0,
+        },
         {
           lplp3: 'hahah',
           lplp1: 0,
@@ -70,6 +116,9 @@ export default {
     },
     cellClick(){
       console.log('cellClick')
+    },
+    footerMethod(){
+      return [['合计', '0', '0']]
     }
   },
 }
