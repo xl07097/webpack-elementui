@@ -48,9 +48,11 @@ if ('serviceWorker' in navigator) {
         switch (installingWorker.state) {
           case 'installed':
             if (navigator.serviceWorker.controller) {
-              var event = document.createEvent('Event');
-              event.initEvent('sw.update', true, true);
-              window.dispatchEvent(event);
+              var event = new Event('sw.update', {
+                bubbles: true,
+                cancelable: true
+              })
+              document.dispatchEvent(event);
             }
             break;
         }
