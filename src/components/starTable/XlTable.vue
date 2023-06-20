@@ -54,41 +54,7 @@ export default {
       selectionList: []
     }
   },
-  watch:{
-    data(){
-      this.$nextTick(() => {
-        this.addEvent()
-      })
-    }
-  },
-  mounted(){
-    this.$nextTick(() => {
-     
-    })
-    setTimeout(() => {
-      this.addEvent()
-    }, 1000)
-  },
   methods: {
-    addEvent(){
-      // const el = this.$refs.tableRef.$el.querySelector('.vxe-table--fixed-wrapper')
-      // if(el){
-      //   const body = el.querySelector('.vxe-table--body-wrapper')
-      //   if(body){
-      //     const funs = function(e){
-      //       console.log('lp')
-      //       e.preventDefault();
-      //       e.stopPropagation();
-      //       body.scrollLeft = '0'
-      //     }
-      //     body.removeEventListener('scroll', funs)
-      //     body.addEventListener('scroll', funs)
-      //     this.$on('hook:beforeDestroy', () => {
-      //       body.removeEventListener('scroll', funs)
-      //     })
-      //   }
-      // }
-    },
     onCheckboxChange({ records }) {
       this.selectionList = Object.freeze(records)
       this.$emit('checkbox-change', records)
@@ -104,6 +70,8 @@ export default {
     }
   },
   render(h) {
+
+    console.log(this.$slots)
     const { columns, data, index, checkbox } = this.$props
     const attrs = this.$attrs
     return (
@@ -131,6 +99,9 @@ export default {
         {columns.map((column) => (
           <TableColumn key={column.field} columns={column} />
         ))}
+        {
+          this.$slots.default
+        }
       </vxe-table>
     )
   },

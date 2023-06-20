@@ -13,7 +13,13 @@
       @selection="selection"
       @checkbox-change="selection"
       @cell-click="cellClick"
-    />
+    >
+      <vxe-column
+        field="hah"
+        title="hah"
+        min-width="100px"
+      />
+    </XlTable>
   </div>
 </template>
 <script>

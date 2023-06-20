@@ -8,7 +8,7 @@ const _toString = Object.prototype.toString
 /**
  * 深克隆
  * ps：循环依赖有问题
- * @param {*} target
+ * @param {object | Array} target
  * @returns
  */
 export const deepClone = (target) => {
@@ -42,10 +42,10 @@ export const channelDeepClone = (data) => {
 
 /**
  * 数组数据转换成tree
- * @param {*} data
- * @returns
+ * @param { Array } data
+ * @returns {Array} 返回值
  */
-export const array2Tree = (data, options={}) => {
+export const array2Tree = (data, options = {}) => {
   const tmpMap = {}
   const tree = []
   const key = options.key || 'id'
@@ -58,7 +58,8 @@ export const array2Tree = (data, options={}) => {
 
   data.forEach((item) => {
     if (tmpMap[item[parentKey]] && item[key] !== item[parentKey]) {
-      if (!tmpMap[item[parentKey]][childKey]) tmpMap[item[parentKey]][childKey] = []
+      if (!tmpMap[item[parentKey]][childKey])
+        tmpMap[item[parentKey]][childKey] = []
       tmpMap[item[parentKey]][childKey].push(item)
     } else {
       tree.push(item)
@@ -124,7 +125,8 @@ export const getUrlParam = function (name) {
 import dayjs from 'dayjs'
 export const copyRightConsole = (packageInfo) => {
   /* 样式代码 */
-  const projectNameStyle = 'font-size: 20px;font-weight: 600;color: rgb(244,167,89);'
+  const projectNameStyle =
+    'font-size: 20px;font-weight: 600;color: rgb(244,167,89);'
   const descriptionStyle =
     'font-style: oblique;font-size:14px;color: rgb(244,167,89);font-weight: 400;'
   const versionStyle = 'color: rgb(30,152,255);padding:8px 0 2px;'
@@ -210,8 +212,8 @@ export const formatSize = function (size, pointLength, units) {
   return (unit === 'B' ? size : size.toFixed(pointLength || 2)) + unit
 }
 
-export const timeAgo = function(time, units){
-  let unit;
+export const timeAgo = function (time, units) {
+  let unit
   units = units || [' minute', ' hour', ' day']
   const between = Date.now() / 1000 - Number(time)
 
