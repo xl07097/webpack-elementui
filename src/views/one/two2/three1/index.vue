@@ -6,19 +6,16 @@
       :key="key"
       :columns="columns"
       :data="data"
-      border
-      max-height="300px"
+      :border="false"
+      size="mini"
+      max-height="400px"
       show-footer
       :footer-method="footerMethod"
       @selection="selection"
       @checkbox-change="selection"
       @cell-click="cellClick"
     >
-      <vxe-column
-        field="hah"
-        title="hah"
-        min-width="100px"
-      />
+      <TableColumn :columns="{ field: 'hah', title: 'hah', minWidth: '100px' }" />
     </XlTable>
   </div>
 </template>
@@ -26,53 +23,14 @@
 import XlTable from '@/components/starTable/XlTable.vue'
 import Toolbar from '@/components/toolbar/Index.vue'
 import columns from './column.js'
+import TableColumn from '@/components/starTable/TableColumn.vue'
 
 export default {
-  components: { XlTable,Toolbar },
+  components: { XlTable,Toolbar, TableColumn },
   data() {
     return {
       columns: Object.freeze(columns),
       data: Object.freeze([
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
-        {
-          lplp3: 'hahah',
-          lplp1: 0,
-        },
         {
           lplp3: 'hahah',
           lplp1: 0,

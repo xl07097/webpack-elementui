@@ -67,30 +67,28 @@ export default {
     },
     resizableChange(props){
       this.$emit('resizable-change', props)
+      this.$nextTick(() => {
+        this.$refs.tableRef.refreshColumn()
+      })
     }
   },
   render(h) {
-
-    console.log(this.$slots)
     const { columns, data, index, checkbox } = this.$props
     const attrs = this.$attrs
     return (
       <vxe-table 
         ref="tableRef"
-        class="xl-table" 
-        data={data} 
-        size="small" 
+        class="xl-table"
+        data={data}
+        size="small"
         stripe
         rowConfig = {{
           isHover: true
         }}
-        props={attrs} 
-        columnConfig={{
-          resizable: true
-        }}
-        onCheckbox-change={this.onCheckboxChange} 
-        onCheckbox-all={this.onCheckboxChange} 
-        onSort-change={this.sortChange} 
+        props={attrs}
+        onCheckbox-change={this.onCheckboxChange}
+        onCheckbox-all={this.onCheckboxChange}
+        onSort-change={this.sortChange}
         onClear-sort={this.clearSort}
         onResizable-change={this.resizableChange}
       >
@@ -116,15 +114,14 @@ export default {
   .vxe-table--body-wrapper .vxe-cell{
     color: #333;
   }
-  
-  // .vxe-table--footer-wrapper{
-  //   margin-top: 0 !important;
-  // }
+
 }
-// .vxe-table--render-default:not(.is--empty).is--footer.is--scroll-x .vxe-table--body-wrapper {
-//     overflow-x: inherit;
-//   }
-  .vxe-table--render-default:not(.is--empty).is--footer.is--scroll-x .vxe-table--footer-wrapper {
-    margin-top: -20px !important;
+  .is--footer .vxe-table--fixed-wrapper .vxe-table--body-wrapper{
+    overflow-x: hidden !important;
+    padding-bottom: 17px;
+  }
+  .is--footer.size--mini .vxe-table--fixed-wrapper .vxe-table--body-wrapper{
+    overflow-x: hidden !important;
+    padding-bottom: 72px;
   }
 </style>
