@@ -123,6 +123,11 @@ export const getUrlParam = function (name) {
   return undefined
 }
 import dayjs from 'dayjs'
+
+/**
+ * 打印美化
+ * @param {*} packageInfo 
+ */
 export const copyRightConsole = (packageInfo) => {
   /* 样式代码 */
   const projectNameStyle =
@@ -212,6 +217,12 @@ export const formatSize = function (size, pointLength, units) {
   return (unit === 'B' ? size : size.toFixed(pointLength || 2)) + unit
 }
 
+/**
+ * 过去时间
+ * @param {*} time 时间
+ * @param {*} units 单位
+ * @returns 
+ */
 export const timeAgo = function (time, units) {
   let unit
   units = units || [' minute', ' hour', ' day']
@@ -240,8 +251,7 @@ export const guid = (function () {
   var counter = 0
 
   return function (prefix) {
-    var guid = (+new Date()).toString(32),
-      i = 0
+    var guid = (+new Date()).toString(32), i = 0;
 
     for (; i < 5; i++) {
       guid += Math.floor(Math.random() * 65535).toString(32)
@@ -250,3 +260,29 @@ export const guid = (function () {
     return (prefix || 'xsy_') + guid + (counter++).toString(32)
   }
 })()
+
+/**
+ * table 表格动态合并单元格数据预处理
+ * @param {Array} data 表格数据
+ * @param {*} field 字段
+ */
+export const mergeExcel = function (data, field) {
+  let count = 0
+  let indexCount = 1
+  while (indexCount < data.length) {
+    let item = data[count]
+    if(!item.merge){
+      item.merge = {}
+    }
+    if (!item.merge.rowspan) {
+      item.merge.rowspan = 1
+    }
+    if (item[field] === data[indexCount][field]) {
+      item.merge.rowspan = item.merge.rowspan + 1
+      data[indexCount].merge.rowspan = 0
+    } else {
+      count = indexCount
+    }
+    indexCount++
+  }
+}
