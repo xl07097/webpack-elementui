@@ -25,7 +25,7 @@ export default {
     action: {
       type: Boolean,
       default: true,
-    }
+    },
   },
   data() {
     return {
@@ -51,7 +51,7 @@ export default {
         width: 100,
         align: 'center',
       }),
-      selectionList: []
+      selectionList: [],
     }
   },
   methods: {
@@ -59,31 +59,31 @@ export default {
       this.selectionList = Object.freeze(records)
       this.$emit('checkbox-change', records)
     },
-    sortChange(props){
+    sortChange(props) {
       this.$emit('sort-change', props)
     },
-    clearSort(props){
+    clearSort(props) {
       this.$emit('clear-sort', props)
     },
-    resizableChange(props){
+    resizableChange(props) {
       this.$emit('resizable-change', props)
       this.$nextTick(() => {
         this.$refs.tableRef.refreshColumn()
       })
-    }
+    },
   },
   render(h) {
     const { columns, data, index, checkbox } = this.$props
     const attrs = this.$attrs
     return (
-      <vxe-table 
+      <vxe-table
         ref="tableRef"
         class="xl-table"
         data={data}
         size="small"
         stripe
-        rowConfig = {{
-          isHover: true
+        rowConfig={{
+          isHover: true,
         }}
         props={attrs}
         onCheckbox-change={this.onCheckboxChange}
@@ -97,31 +97,28 @@ export default {
         {columns.map((column) => (
           <TableColumn key={column.field} columns={column} />
         ))}
-        {
-          this.$slots.default
-        }
+        {this.$slots.default}
       </vxe-table>
     )
   },
 }
 </script>
 
-<style lang="sass">
+<style lang="scss">
 .xl-table.vxe-table {
-  .vxe-table--header-wrapper{
+  .vxe-table--header-wrapper {
     color: #444;
   }
-  .vxe-table--body-wrapper .vxe-cell{
+  .vxe-table--body-wrapper .vxe-cell {
     color: #333;
   }
-
 }
-  .is--footer .vxe-table--fixed-wrapper .vxe-table--body-wrapper{
-    overflow-x: hidden !important;
-    padding-bottom: 17px;
-  }
-  .is--footer.size--mini .vxe-table--fixed-wrapper .vxe-table--body-wrapper{
-    overflow-x: hidden !important;
-    padding-bottom: 72px;
-  }
+.is--footer .vxe-table--fixed-wrapper .vxe-table--body-wrapper {
+  overflow-x: hidden !important;
+  padding-bottom: 76px;
+}
+// .is--footer.size--mini .vxe-table--fixed-wrapper .vxe-table--body-wrapper {
+//   overflow-x: hidden !important;
+//   padding-bottom: 72px;
+// }
 </style>

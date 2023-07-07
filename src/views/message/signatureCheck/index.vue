@@ -1,5 +1,11 @@
 <template>
-  <div />
+  <div>
+    <el-input style="width:200px;">
+      <template #append>
+        <el-button type="primary">哈哈哈</el-button>
+      </template>
+    </el-input>
+  </div>
 </template>
 
 <script>

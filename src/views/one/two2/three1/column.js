@@ -12,7 +12,8 @@ export default [
         field: 'lplp',
         title: '姓名',
         align: 'center',
-        renderHeader(h) {
+        renderHeader(h, prop) {
+          console.log(prop.row)
           return <span style="color:red;">opopop</span>
         },
       },

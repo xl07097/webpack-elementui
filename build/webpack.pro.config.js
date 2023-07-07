@@ -6,7 +6,6 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require('terser-webpack-plugin')
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 var SwRegisterWebpackPlugin = require('sw-register-webpack-plugin')
-const workboxConfig = require('../src/config/workbox')
 
 module.exports = merge(baseConfig, {
   mode: 'production',
