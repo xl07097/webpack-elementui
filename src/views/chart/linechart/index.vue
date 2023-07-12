@@ -1,52 +1,39 @@
 <template>
   <div>
-    <div id="lineChart" />
+    <ChartView :options="options" :width="700" :height="500" />
   </div>
 </template>
 
 <script>
-import * as echarts from 'echarts/core';
-import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
-import { LineChart } from 'echarts/charts';
-import { UniversalTransition } from 'echarts/features';
-import { CanvasRenderer } from 'echarts/renderers';
-
-echarts.use([GridComponent, LineChart, CanvasRenderer, UniversalTransition, TitleComponent, TooltipComponent]);
+import ChartView from '@/components/chart/ChartView'
 
 export default {
-  mounted() {
-    this.init()
-  },
-  methods: {
-    init() {
-      var chartDom = document.getElementById('lineChart');
-      var myChart = echarts.init(chartDom, null, {
-        width: 400,
-        height: 300
-      });
-      var option;
-
-      option = {
+  components: { ChartView },
+  data() {
+    return {
+      options: Object.freeze({
         xAxis: {
           type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
         },
         tooltip: {},
         yAxis: {
-          type: 'value'
+          type: 'value',
         },
         series: [
           {
             data: [150, 230, 224, 218, 135, 147, 260],
-            type: 'line'
-          }
-        ]
-      };
-
-      option && myChart.setOption(option);
-    },
+            type: 'line',
+          },
+        ],
+      }),
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init() {},
   },
 }
 </script>
-
-<style></style>

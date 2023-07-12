@@ -3,10 +3,11 @@
 </template>
 <script>
 import * as echarts from 'echarts';
+let chartInstance = null
 export default {
-  name: 'ChartVue',
+  name: 'ChartView',
   props: {
-    option: {
+    options: {
       type: Object,
       default: function () {
         return {
@@ -47,31 +48,28 @@ export default {
     };
   },
   watch: {
-    option: {
-      handler() {
-        this.drawChart();
-      },
-      deep: true,
-    },
+    options(){
+      this.drawChart();
+    }
   },
   mounted() {
     this.init();
   },
   beforeDestroy() {
-    if (this.chart) {
-      this.chart.distroy();
-      this.chart = null;
+    if (chartInstance) {
+      chartInstance.dispose();
+      chartInstance = null;
     }
   },
   methods: {
     init() {
-      if (!this.chart) {
-        this.chart = echarts.init(document.getElementById(this.id));
+      if (!chartInstance) {
+        chartInstance = echarts.init(document.getElementById(this.id));
       }
       this.drawChart();
     },
     drawChart() {
-      this.chart.setOption(this.option);
+      chartInstance.setOption(this.options);
     },
   },
 };

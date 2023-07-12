@@ -1,53 +1,28 @@
 <template>
   <div>
-    <div id="pieChart" />
+    <ChartView :options="options" :width="700" :height="500" />
   </div>
 </template>
 
 <script>
-import * as echarts from 'echarts/core';
-import {
-  TitleComponent,
-  TooltipComponent,
-  LegendComponent
-} from 'echarts/components';
-import { PieChart } from 'echarts/charts';
-import { LabelLayout } from 'echarts/features';
-import { CanvasRenderer } from 'echarts/renderers';
+import ChartView from '@/components/chart/ChartView'
 
-echarts.use([
-  TitleComponent,
-  TooltipComponent,
-  LegendComponent,
-  PieChart,
-  CanvasRenderer,
-  LabelLayout
-]);
 export default {
-  mounted() {
-    this.init()
-  },
-  methods: {
-    init() {
-      var chartDom = document.getElementById('pieChart');
-      var myChart = echarts.init(chartDom, null, {
-        width: 700,
-        height: 500
-      });
-      var option;
-
-      option = {
+  components: { ChartView },
+  data() {
+    return {
+      options: Object.freeze({
         title: {
           text: 'Referer of a Website',
           subtext: 'Fake Data',
-          left: 'center'
+          left: 'center',
         },
         tooltip: {
-          trigger: 'item'
+          trigger: 'item',
         },
         legend: {
           orient: 'vertical',
-          left: 'left'
+          left: 'left',
         },
         series: [
           {
@@ -59,21 +34,25 @@ export default {
               { value: 735, name: 'Direct' },
               { value: 580, name: 'Email' },
               { value: 484, name: 'Union Ads' },
-              { value: 300, name: 'Video Ads' }
+              { value: 300, name: 'Video Ads' },
             ],
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
                 shadowOffsetX: 0,
-                shadowColor: 'rgba(0, 0, 0, 0.5)'
-              }
-            }
-          }
-        ]
-      };
-
-      option && myChart.setOption(option);
-    },
+                shadowColor: 'rgba(0, 0, 0, 0.5)',
+              },
+            },
+          },
+        ],
+      }),
+    }
+  },
+  mounted() {
+    this.init()
+  },
+  methods: {
+    init() {},
   },
 }
 </script>
