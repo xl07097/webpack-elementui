@@ -7,7 +7,6 @@
       :columns="columns"
       :data="data"
       :border="false"
-      size="mini"
       max-height="400px"
       show-footer
       :footer-method="footerMethod"
@@ -15,7 +14,9 @@
       @checkbox-change="selection"
       @cell-click="cellClick"
     >
-      <TableColumn :columns="{ field: 'hah', title: 'hah', minWidth: '100px' }" />
+      <TableColumn
+        :columns="{ field: 'hah', title: 'hah', minWidth: '100px' }"
+      />
     </XlTable>
   </div>
 </template>
@@ -26,7 +27,7 @@ import columns from './column.js'
 import TableColumn from '@/components/starTable/TableColumn.vue'
 
 export default {
-  components: { XlTable,Toolbar, TableColumn },
+  components: { XlTable, Toolbar, TableColumn },
   data() {
     return {
       columns: Object.freeze(columns),
@@ -56,11 +57,10 @@ export default {
           lplp1: 0,
         },
       ]),
-      key: 'lplp'
+      key: 'lplp',
     }
   },
-  created() {
-  },
+  created() {},
   mounted() {
     // console.time('la')
     // this.$refs.tableRef.$refs.tableRef.scrollToColumn('lplp814', '200px')
@@ -75,15 +75,15 @@ export default {
     edit(row) {
       console.log(row)
     },
-    selection(rows){
+    selection(rows) {
       console.log(rows)
     },
-    cellClick(){
+    cellClick() {
       console.log('cellClick')
     },
-    footerMethod(){
+    footerMethod() {
       return [['合计', '0', '0']]
-    }
+    },
   },
 }
 </script>

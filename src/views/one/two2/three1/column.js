@@ -1,4 +1,3 @@
-
 import ButtonSet from './ButtonSet.vue'
 
 export default [
@@ -25,20 +24,20 @@ export default [
           return <span style="color:red;">opopop</span>
         },
       },
-    ]
+    ],
   },
   {
     field: 'lplp1',
     title: '性别',
     filters: [
-      {value: 0,label:'女'},
-      {value: 1,label:'男'}
+      { value: 0, label: '女' },
+      { value: 1, label: '男' },
     ],
     sortable: true,
-    render(h, {row}) {
+    render(h, { row }) {
       return {
         0: '女',
-        1: '男'
+        1: '男',
       }[row.lplp1]
     },
   },
@@ -69,135 +68,135 @@ export default [
   {
     field: 'lplp81',
     title: '外包人员规模（结算人数）',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp82',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp83',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp84',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp85',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp86',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp87',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp88',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp89',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp18',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp28',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp38',
     title: '银行卡号',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp811',
     title: '外包人员规模（结算人数）',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp812',
     title: '外包人员规模（结算人数）',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp813',
     title: '外包人员规模（结算人数）',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp814',
     title: '外包人员规模（结算人数）',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'lplp815',
     title: '外包人员规模（结算人数）',
-    formatter:() => {
+    formatter: () => {
       return 'lplp'
-    }
+    },
   },
   {
     field: 'action',
     title: '操作',
     fixed: 'right',
     width: 240,
-    render: (h, {row}) => {
+    render: (h, { row }) => {
       return (
         <ButtonSet />
-      // <div>
-      //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>编辑</el-button>
-      //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>删除</el-button>
-      // </div>
+        // <div>
+        //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>编辑</el-button>
+        //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>删除</el-button>
+        // </div>
       )
-    }
+    },
   },
 ]
