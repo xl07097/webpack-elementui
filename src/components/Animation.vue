@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="popping-menu">
-      <input class="checkbox" id="checkbox" type="checkbox" />
+      <input id="checkbox" class="checkbox" type="checkbox">
       <button>手机</button>
       <button>设置</button>
       <button>房子</button>
