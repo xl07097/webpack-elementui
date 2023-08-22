@@ -78,8 +78,8 @@ export default {
     selection(rows) {
       console.log(rows)
     },
-    cellClick() {
-      console.log('cellClick')
+    cellClick({column,row}) {
+      console.log(column)
     },
     footerMethod() {
       return [['合计', '0', '0']]

@@ -66,10 +66,6 @@ export default {
         return []
       },
     },
-    labelWidth: {
-      type: Number,
-      default: 84,
-    },
     width: {
       type: Number,
       default: 220,
@@ -109,7 +105,6 @@ export default {
     }
   },
   mounted() {
-    // this.initWidth()
     this.init()
   },
   methods: {
@@ -141,22 +136,12 @@ export default {
         return
       }
       this.refreshFlag = false
-      // const widthMap = Object.assign({
-      //   input: 200,
-      //   select: 200,
-      //   cascader: 200,
-      //   year: 200,
-      //   date: 200,
-      //   week: 200,
-      //   daterange: 200,
-      // }, this.widthConfig) 
       const fields = this.filnalFields
       // 初始按钮区域宽度
       let totalWidth = 260
       for (let index = 0; index < fields.length; index++) {
-        const item = fields[index]
-        const labelWidth = this.labelWidth
-        const width = this.width // widthMap[item.type]
+        // const item = fields[index]
+        const width = this.width
         const margin = 10
         if (totalWidth + width + margin > searchWidth) {
           this.showNumber = index 
@@ -181,25 +166,16 @@ export default {
           data[item.prop] = value[item.prop]
         }
       })
-      console.log(data)
       this.$emit('search', data)
     },
     reset(){
       const data = {}
       this.fields.forEach(item => {
-        // if(item.endProp){
-        //   const currentData = value[item.prop] || []
-        //   data[item.prop] = currentData[0]
-        //   data[item.endProp] = currentData[1]
-        // }else{
         data[item.prop] = null
-        // }
       })
       this.currentData = data
+      this.$emit('reset', data)
     },
-    // configuration(){
-
-    // },
     confirm(fields) {
       this.filnalFields = Object.freeze(fields)
       this.refreshFlag = true

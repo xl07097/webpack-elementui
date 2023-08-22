@@ -28,10 +28,7 @@ export const downloadHandle = async (res) => {
     const text = await res.data.text()
     const json = JSON.parse(text)
     responseHandle(json)
-    return {
-      code: 1000,
-      message: '',
-    }
+    return json
   } catch (_error) {
     const filename = getExportName(res)
     saveFile(res.data, filename)

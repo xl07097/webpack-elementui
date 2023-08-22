@@ -71,6 +71,9 @@ export default {
         this.$refs.tableRef.refreshColumn()
       })
     },
+    cellClick(props){
+      this.$emit('cell-click', props)
+    }
   },
   render(h) {
     const { columns, data, index, checkbox } = this.$props
@@ -91,6 +94,7 @@ export default {
         onSort-change={this.sortChange}
         onClear-sort={this.clearSort}
         onResizable-change={this.resizableChange}
+        onCell-click={this.cellClick}
       >
         {index && <TableColumn key="index" columns={this.indexColumn} />}
         {checkbox && <TableColumn key="checkbox" columns={this.checkColumn} />}
