@@ -272,17 +272,63 @@ export const mergeExcel = function (data, field) {
   while (indexCount < data.length) {
     let item = data[count]
     if(!item.merge){
-      item.merge = {}
+      item.merge = {
+        colspan: 1
+      }
     }
     if (!item.merge.rowspan) {
       item.merge.rowspan = 1
     }
     if (item[field] === data[indexCount][field]) {
       item.merge.rowspan = item.merge.rowspan + 1
+      data[indexCount].merge = data[indexCount].merge || {colspan: 1}
       data[indexCount].merge.rowspan = 0
     } else {
       count = indexCount
     }
     indexCount++
   }
+}
+
+/**
+ * 数值千分位表示
+ * @param {number|string} value 
+ * @param {number?} fixed 
+ * @returns {string}
+ */
+export const numberFormat = (value, fixed) => {
+  if(fixed || fixed===0){
+    return parseFloat(value).toFixed(fixed).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  }
+  return String(value).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+}
+
+/**
+ * 验证字符串是否符合正则
+ * @param {RegExp} regExp 正则表达式
+ * @param {string} str 验证字符串
+ * @returns 
+ */
+export const regExpMatch = (regExp, str) => {
+  return regExp.test((str||'').toLowerCase())
+}
+
+import router from '../router'
+/**
+ * 路由跳转公共方法
+ * @param {object} link
+ * @returns
+ */
+export const linkRouter = ({query, path, params}) => {
+  if (query) {
+    router.push({
+      path: path,
+      query: query,
+    })
+    return
+  }
+  router.push({
+    name: link.path,
+    params: params,
+  })
 }
