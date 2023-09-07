@@ -1,6 +1,7 @@
 <template>
   <div class="css-wrap">
     <CssTemplate />
+    <XsyTitle title="基本信息" />
   </div>
 </template>
 
@@ -11,9 +12,11 @@ const modules = context.keys().reduce((acc, key) => {
   acc[name] = context(key).default
   return acc
 }, {})
+
+import XsyTitle from '@/components/title/Title'
 export default {
   name: 'ConLog',
-  components:{...modules},
+  components:{...modules, XsyTitle},
   data() {
     return {
       list: [],

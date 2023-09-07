@@ -6,10 +6,11 @@
       :key="key"
       :columns="columns"
       :data="data"
-      :border="false"
+      border
       max-height="400px"
       show-footer
       :footer-method="footerMethod"
+      :span-method="spanMethod"
       @selection="selection"
       @checkbox-change="selection"
       @cell-click="cellClick"
@@ -25,13 +26,14 @@ import XlTable from '@/components/starTable/XlTable.vue'
 import Toolbar from '@/components/toolbar/Index.vue'
 import columns from './column.js'
 import TableColumn from '@/components/starTable/TableColumn.vue'
-
+import { mergeExcel } from '@/utils/commons'
 export default {
   components: { XlTable, Toolbar, TableColumn },
   data() {
     return {
       columns: Object.freeze(columns),
-      data: Object.freeze([
+      data: [],
+      data1: Object.freeze([
         {
           lplp3: 'hahah',
           lplp1: 0,
@@ -62,16 +64,16 @@ export default {
   },
   created() {},
   mounted() {
-    // console.time('la')
-    // this.$refs.tableRef.$refs.tableRef.scrollToColumn('lplp814', '200px')
-    // this.$nextTick(() => {
-    //   console.timeEnd('la')
-    //   // this.columns.at(-1).key='lp'
-    //   // this.key = 'poiu'
-    //   this.$refs.tableRef.$refs.tableRef.scrollToColumn('lplp814', '200px')
-    // })
+    mergeExcel(this.data1, 'lplp3')
+    this.data = this.data1
   },
   methods: {
+    spanMethod({row, column}){
+      if(column.field === 'lplp3'){
+        return row.merge
+      }
+      return { rowspan: 1, colspan: 1}
+    },
     edit(row) {
       console.log(row)
     },
