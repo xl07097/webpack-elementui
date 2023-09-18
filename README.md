@@ -90,3 +90,6 @@ SQLITE3_BINARY_SITE=http://npm.taobao.org/mirrors/sqlite3
         ```
 
     2. `node` 使用 [koa-server 链接](http://192.1.6.46/frontend/web-server "http://192.1.6.46/frontend/web-server") 打包文件放到 `dist/` 文件夹下
+
+
+ffmpeg -i xxx.mp4 -f segment -segment_time 10 -segment_format mpegts -segment_list ./video_name.m3u8 -c copy -bsf:v h264_mp4toannexb -map 0 ./video-folder/course-%04d.ts
