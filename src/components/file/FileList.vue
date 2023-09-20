@@ -3,8 +3,8 @@
     <li v-for="(item, index) of list" :key="index" class="sh-upload-filelist">
       <FileLink
         class="sh-file-name"
-        :url="`${item.url || item.urlPath}`"
-        :name="item.name || item.fileName"
+        :url="`${item.url}`"
+        :name="item.name"
       />
       &emsp;&emsp;
       <ElLink
