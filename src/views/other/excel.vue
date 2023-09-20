@@ -1,15 +1,19 @@
 <template>
   <div>
     <el-button @click="exportExcel"> 导出 </el-button>
-    <input type="file" class="upfile" @change="upfile">
-    <el-button @click="exportExcel"> 上传 </el-button>
+    <input
+      type="file"
+      multiple
+      class="upfile"
+      @change="upfile"
+    >
   </div>
 </template>
 
 <script>
-import LargeFileUpload from '@/utils/LargeFileUpload'
 import writeXlsxFile from 'write-excel-file'
 import { title, row2, row3, row4, row5 } from './excelData'
+import batchRequest from '@/utils/ponyfill'
 
 export default {
   name: 'AppExcel',
@@ -32,9 +36,22 @@ export default {
       })
     },
     async upfile(e) {
-      const file = e.target.files[0]
-      new LargeFileUpload(file, 'http://localhost:3003/upload/chunk', {})
+      const files = e.target.files
+      batchRequest([...files], {
+        request: this.uploadFile
+      }).then(console.log)
     },
+    uploadFile(file){
+      const formData = new FormData()
+      formData.append('upfile', file)
+      return fetch('http://localhost:3003/upload/alioss', {
+        method: 'post',
+        body: formData,
+        headers:{
+          'AuthToken': 'W88G0R46WEUP9JXKOF6H71WI'
+        }
+      }).then((res) => res.json())
+    }
   },
 }
 </script>
