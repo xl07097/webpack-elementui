@@ -49,8 +49,8 @@ export default {
       for (let i = 1; i < 10; i++) {
         let img = document.createElement('img');
         img.className = 'inner';
-        img.src = src.default;
-        img.dataset.src = src1.default;
+        img.src = src;
+        img.dataset.src = src1;
         co.appendChild(img);
       }
       document.querySelector('.outer').appendChild(co);

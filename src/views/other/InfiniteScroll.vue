@@ -51,7 +51,8 @@ export default {
       return this.imgList[index];
     },
     loadItem() {
-      let tmpList = Array.from({ length: 10 }).fill(src.default);
+      console.log(src)
+      let tmpList = Array.from({ length: 10 }).fill(src);
       this.imgList = this.imgList.concat(tmpList);
     },
   },
