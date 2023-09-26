@@ -292,15 +292,26 @@ export const mergeExcel = function (data, field) {
 
 /**
  * 数值千分位表示
- * @param {number|string} value 
- * @param {number?} fixed 
+ * @param {number|string} value
+ * @param {number?} fixed
  * @returns {string}
  */
+// /(\d)(?=(\d{3})+$)/g // 格式化整数
 export const numberFormat = (value, fixed) => {
-  if(fixed || fixed===0){
-    return parseFloat(value).toFixed(fixed).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  if (value === null || value === undefined || value === '') {
+    return ''
   }
-  return String(value).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
+  // 判断是否带小数
+  // let reg = String(value).includes('.') ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+$)/g
+  let reg = /(\d)(?=(\d{3})+\.)/g
+
+  if (typeof value === 'string') {
+    return value.replace(reg, '$1,')
+  }
+  if (fixed || fixed === 0) {
+    return parseFloat(value).toFixed(fixed).replace(reg, '$1,')
+  }
+  return String(value).replace(reg, '$1,')
 }
 
 /**

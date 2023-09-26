@@ -7,6 +7,13 @@
       class="upfile"
       @change="upfile"
     >
+
+    <FileUpload
+      action="http://localhost:3003/upload/alioss"
+      :file-list.sync="list"
+      :limits="10"
+      :headers="headers"
+    />
   </div>
 </template>
 
@@ -14,12 +21,17 @@
 import writeXlsxFile from 'write-excel-file'
 import { title, row2, row3, row4, row5 } from './excelData'
 import batchRequest from '@/utils/ponyfill'
-
+import FileUpload from '@/components/file/FileUpload.vue'
+import { storage } from '@/utils/storage'
 export default {
   name: 'AppExcel',
+  components:{FileUpload},
   data() {
     return {
-      
+      list: [],
+      headers:{
+        AuthToken: 'W88G0R46WEUP9JXKOF6H71WI'
+      }
     }
   },
   methods: {

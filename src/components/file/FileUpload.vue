@@ -6,9 +6,12 @@
       :action="action"
       :show-file-list="false"
       with-credentials
-      name="file"
+      :name="name"
+      :multiple="multiple"
       :before-upload="beforeUpload"
       :accept="accept"
+      :headers="headers"
+      :data="data"
       :on-success="upSuccess"
       :on-error="upError"
       :disabled="isUploading || list.length>=limits"
@@ -24,8 +27,8 @@
         点击上传
       </ElButton>
       <div slot="tip" class="el-upload__tip">
-        {{ `最多可添加 ${ limits } 个附件，单个附件大小不可超过 ${ limits }M，
-        支持${ accept }格式文件` }}
+        {{ `最多可添加 ${ limits } 个附件，单个附件大小不可超过 ${ limits }M，` }} <br>
+        {{ `支持${ accept }格式文件` }}
       </div>
     </ElUpload>
     <FileList :file-list.sync="list" :oper-type="operType" />
@@ -33,9 +36,9 @@
 </template>
 
 <script>
-import { isOutLimit } from '@/utils/validate'
+import validate from '@/utils/validate'
 import FileList from './FileList.vue'
-import { regExpMatch } from '@/utils/common'
+import { regExpMatch } from '@/utils/commons'
 export default {
   components: { FileList },
   props: {
@@ -60,6 +63,26 @@ export default {
     accept:{
       type: String,
       default: '.docx,.doc,.xls,.xlsx,.ppt,.pptx,.pdf,.jpg,.jpeg,.png,.zip,.rar',
+    },
+    name:{
+      type: String,
+      default: 'upfile',
+    },
+    headers:{
+      type: Object,
+      default(){
+        return {}
+      }
+    },
+    multiple:{
+      type: Boolean,
+      default: false
+    },
+    data:{
+      type: Object,
+      default(){
+        return {}
+      }
     }
   },
   data() {
@@ -86,7 +109,7 @@ export default {
         this.$Info.warning('文件格式错误，请检查')
         return false
       }
-      if (isOutLimit(file.size, this.limits)) {
+      if (validate.isOutLimit(file.size, this.limits)) {
         this.$Info.warning(`文件大小超出 ${this.limits}M 限制！`)
         return false
       }
@@ -95,7 +118,7 @@ export default {
     },
     upSuccess(res) {
       this.isUploading = false
-      if (res.code === 0) {
+      if (res.code === 200) {
         let data = res.data || {}
         this.list.push({
           name: data.name,
