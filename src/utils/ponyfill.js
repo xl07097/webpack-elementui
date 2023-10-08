@@ -35,8 +35,7 @@ Queue.prototype._next = function _next() {
 // 控制并发
 export default function batchRequest(datas, options = {}) {
   const { concurrency = 3, request } = options
-  const handle = (data) => request(data)
   const queue = new Queue({ concurrency })
-  return Promise.all(datas.map((data) => queue.add(() => handle(data))))
+  return Promise.all(datas.map((data) => queue.add(() => request(data))))
 }
 

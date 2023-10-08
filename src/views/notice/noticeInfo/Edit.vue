@@ -113,7 +113,7 @@ export default {
       rules: Object.freeze({
         type: { required: true, message: '消息类别必选', trigger: 'change' },
         to: [{ required: true, type: 'array', message: '接收人必填', trigger: 'change' },
-        { type: 'array', defaultField: { type: 'email' }, message: '邮箱格式', }],
+          { type: 'array', defaultField: { type: 'email' }, message: '邮箱格式', }],
         subject: { required: true, message: '主题必填', trigger: 'blur' },
         'content.type': { required: true, message: '内容格式必填', trigger: 'change' },
         'content.value': { required: true, message: '内容必填', trigger: 'blur' },

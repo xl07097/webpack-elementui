@@ -5,6 +5,12 @@
       type="file"
       multiple
       class="upfile"
+      @change="upfiles"
+    >
+    <input
+      type="file"
+      multiple
+      class="upfile"
       @change="upfile"
     >
 
@@ -19,10 +25,10 @@
 
 <script>
 import writeXlsxFile from 'write-excel-file'
+import readXlsxFile from 'read-excel-file'
 import { title, row2, row3, row4, row5 } from './excelData'
 import batchRequest from '@/utils/ponyfill'
 import FileUpload from '@/components/file/FileUpload.vue'
-import { storage } from '@/utils/storage'
 export default {
   name: 'AppExcel',
   components:{FileUpload},
@@ -53,16 +59,62 @@ export default {
         request: this.uploadFile
       }).then(console.log)
     },
-    uploadFile(file){
+    async uploadFile(file){
       const formData = new FormData()
       formData.append('upfile', file)
-      return fetch('http://localhost:3003/upload/alioss', {
+      const res = await fetch('http://localhost:3003/upload/alioss', {
         method: 'post',
         body: formData,
-        headers:{
+        headers: {
           'AuthToken': 'W88G0R46WEUP9JXKOF6H71WI'
         }
-      }).then((res) => res.json())
+      })
+      return await res.json()
+    },
+    upfiles(e){
+      const files = e.target.files
+      const schema = {
+        '名称': {
+          prop: 'name',
+        },
+        '简称': {
+          prop: 'shortName',
+        },
+        '组合名': {
+          prop: 'mergerName',
+        },
+        '层级': {
+          prop: 'levelCode',
+          type: Number
+        },
+        '父级行政代码': {
+          prop: 'parentCode',
+        },
+        '行政代码': {
+          prop: 'areaCode',
+        },
+        '邮政编码': {
+          prop: 'zipCode',
+        },
+        '区号': {
+          prop: 'cityCode',
+        },
+        '拼音': {
+          prop: 'pinyin',
+        },
+        '经度': {
+          prop: 'lng',
+        },
+        '纬度': {
+          prop: 'lat',
+        },
+        
+      }
+      readXlsxFile(files[0], {
+        schema
+      }).then(res => {
+        console.log(res)
+      })
     }
   },
 }
