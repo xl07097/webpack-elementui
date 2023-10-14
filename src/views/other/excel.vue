@@ -1,18 +1,7 @@
 <template>
   <div>
     <el-button @click="exportExcel"> 导出 </el-button>
-    <input
-      type="file"
-      multiple
-      class="upfile"
-      @change="upfiles"
-    >
-    <input
-      type="file"
-      multiple
-      class="upfile"
-      @change="upfile"
-    >
+    <input type="file" multiple class="upfile" @change="upfile" />
 
     <FileUpload
       action="http://localhost:3003/upload/alioss"
@@ -31,13 +20,13 @@ import batchRequest from '@/utils/ponyfill'
 import FileUpload from '@/components/file/FileUpload.vue'
 export default {
   name: 'AppExcel',
-  components:{FileUpload},
+  components: { FileUpload },
   data() {
     return {
       list: [],
-      headers:{
-        AuthToken: 'W88G0R46WEUP9JXKOF6H71WI'
-      }
+      headers: {
+        AuthToken: 'W88G0R46WEUP9JXKOF6H71WI',
+      },
     }
   },
   methods: {
@@ -56,69 +45,22 @@ export default {
     async upfile(e) {
       const files = e.target.files
       batchRequest([...files], {
-        request: this.uploadFile
+        request: this.uploadFile,
       }).then(console.log)
     },
-    async uploadFile(file){
+    async uploadFile(file) {
       const formData = new FormData()
       formData.append('upfile', file)
       const res = await fetch('http://localhost:3003/upload/alioss', {
         method: 'post',
         body: formData,
         headers: {
-          'AuthToken': 'W88G0R46WEUP9JXKOF6H71WI'
-        }
+          AuthToken: 'W88G0R46WEUP9JXKOF6H71WI',
+        },
       })
       return await res.json()
     },
-    upfiles(e){
-      const files = e.target.files
-      const schema = {
-        '名称': {
-          prop: 'name',
-        },
-        '简称': {
-          prop: 'shortName',
-        },
-        '组合名': {
-          prop: 'mergerName',
-        },
-        '层级': {
-          prop: 'levelCode',
-          type: Number
-        },
-        '父级行政代码': {
-          prop: 'parentCode',
-        },
-        '行政代码': {
-          prop: 'areaCode',
-        },
-        '邮政编码': {
-          prop: 'zipCode',
-        },
-        '区号': {
-          prop: 'cityCode',
-        },
-        '拼音': {
-          prop: 'pinyin',
-        },
-        '经度': {
-          prop: 'lng',
-        },
-        '纬度': {
-          prop: 'lat',
-        },
-        
-      }
-      readXlsxFile(files[0], {
-        schema
-      }).then(res => {
-        console.log(res)
-      })
-    }
   },
 }
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
