@@ -1,12 +1,17 @@
 <template>
   <el-drawer
     title="编辑"
-    :visible="true"
+    :visible="visible"
     :wrapper-closable="false"
     @open="open"
     @close="close"
   >
-    <el-form ref="formRef" :model="form" :rules="rules" label-width="110px">
+    <el-form
+      ref="formRef"
+      :model="form"
+      :rules="rules"
+      label-width="110px"
+    >
       <el-form-item label="消息类别" prop="type">
         <el-radio-group v-model="form.type" size="small">
           <el-radio-button label="sms">短信</el-radio-button>
@@ -15,9 +20,9 @@
           <el-radio-button label="dingding">钉钉</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="接收人" prop="to">
+      <el-form-item label="接收人" prop="receiver">
         <el-select
-          v-model="form.to"
+          v-model="form.receiver"
           multiple
           filterable
           allow-create
@@ -88,7 +93,7 @@ export default {
     return {
       form: {
         type: 'email',
-        to: [],
+        receiver: [],
         from: {
           name: '',
           email: '',
@@ -101,7 +106,7 @@ export default {
       },
       rules: Object.freeze({
         type: { required: true, message: '消息类别必选', trigger: 'change' },
-        to: [
+        receiver: [
           {
             required: true,
             type: 'array',
@@ -147,7 +152,7 @@ export default {
           method: 'POST',
           body: JSON.stringify({
             ...this.form,
-            to: this.form.to.map((item) => {
+            receiver: this.form.receiver.map((item) => {
               return {
                 name: '',
                 email: item,
@@ -173,6 +178,7 @@ export default {
     },
     close() {
       this.$emit('close')
+      this.$refs.formRef.resetFields()
     },
   },
 }

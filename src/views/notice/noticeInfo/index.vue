@@ -1,7 +1,7 @@
 <template>
   <div id="hahh" ref="haha">
     <el-button @click="edit">消息发送</el-button>
-    <Edit v-if="openType==='edit'" @close="close" />
+    <Edit :visible.sync="visible" @close="close" />
   </div>
 </template>
 
@@ -13,15 +13,16 @@ export default {
   components: { Edit },
   data(){
     return {
-      openType: null
+      openType: null,
+      visible: false
     }
   },
   methods:{
     edit(){
-      this.openType = 'edit'
+      this.visible = true
     },
     close(){
-      this.openType = ''
+      this.visible = false
     },
     pl(){
       // toPng(document.querySelector('#hahh')).then(function (dataUrl) {
