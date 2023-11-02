@@ -1,5 +1,7 @@
 <template>
   <div style="padding: 10px">
+    <el-button @click="hide">hide</el-button>
+    <el-button @click="show">show</el-button>
     <Toolbar />
     <XlTable
       ref="tableRef"
@@ -86,6 +88,12 @@ export default {
     footerMethod() {
       return [['合计', '0', '0']]
     },
+    hide(){
+      this.$refs.tableRef.hideColumn('lplp2')
+    },
+    show(){
+      this.$refs.tableRef.showColumn('lplp2')
+    }
   },
 }
 </script>

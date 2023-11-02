@@ -73,7 +73,13 @@ export default {
     },
     cellClick(props){
       this.$emit('cell-click', props)
-    }
+    },
+    hideColumn(fieldOrColumn) {
+      this.$refs.tableRef.hideColumn(fieldOrColumn)
+    },
+    showColumn(fieldOrColumn) {
+      this.$refs.tableRef.showColumn(fieldOrColumn)
+    },
   },
   render(h) {
     const { columns, data, index, checkbox } = this.$props

@@ -82,7 +82,7 @@ export default {
     },
     renderSelect(h) {
       const {request={}} = this.config
-      const placeholder = request.remote? '请输入关键字':`请选择${this.label}`
+      // const placeholder = request.remote? '请输入关键字':`请选择${this.label}`
       return (
         <el-select
           value={this.value}

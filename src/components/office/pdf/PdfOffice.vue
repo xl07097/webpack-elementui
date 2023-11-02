@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      pdf: 'http://static.shanhuxueyuan.com/test.pdf' //设置文档地址
+      pdf: 'https://files.zhiqiuge.com/xiangshuye/31.pdf' //设置文档地址
     }
   },
   methods: {

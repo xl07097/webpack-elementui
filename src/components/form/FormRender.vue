@@ -12,7 +12,7 @@
       :prop="field.prop"
     >
       <item-render
-        v-model="currentData[field.prop]"
+        v-model="form[field.prop]"
         :tag="field.type"
         :field="field.field"
         :label="field.label"
@@ -86,22 +86,23 @@ export default {
       showNumber: 10,
       showAll: false,
       filnalFields: [],
-      refreshFlag: false
+      refreshFlag: false,
+      form: {},
     }
-  },
-  computed: {
-    currentData: {
-      get() {
-        return this.value
-      },
-      set(val) {
-        this.$emit('input', val)
-      },
-    },
   },
   watch:{
     activeName(){
       this.initWidth()
+    },
+    value(val){
+      this.form = {
+        ...val
+      }
+    }
+  },
+  created(){
+    this.form = {
+      ...this.value
     }
   },
   mounted() {
@@ -113,7 +114,7 @@ export default {
     },
     init() {
       let timer = null
-      const observe = new ResizeObserver((entries) => {
+      let observe = new ResizeObserver((entries) => {
         for (let entry of entries) {
           clearTimeout(timer)
           timer = setTimeout(() => {
@@ -125,6 +126,7 @@ export default {
       observe.observe(formRender);
       this.$on('hook:beforeDestroy', () => {
         observe.disconnect()
+        observe = null
       })
     },
     initWidth(){
@@ -140,7 +142,6 @@ export default {
       // 初始按钮区域宽度
       let totalWidth = 260
       for (let index = 0; index < fields.length; index++) {
-        // const item = fields[index]
         const width = this.width
         const margin = 10
         if (totalWidth + width + margin > searchWidth) {
@@ -156,14 +157,14 @@ export default {
     search(){
       const fields = this.filnalFields
       let data = {}
-      const value = this.value
+      const form = this.form
       fields.forEach(item => {
         if(item.endProp){
-          const currentData = value[item.prop] || []
+          const currentData = form[item.prop] || []
           data[item.prop] = currentData[0]
           data[item.endProp] = currentData[1]
         }else{
-          data[item.prop] = value[item.prop]
+          data[item.prop] = form[item.prop]
         }
       })
       this.$emit('search', data)
@@ -173,7 +174,7 @@ export default {
       this.fields.forEach(item => {
         data[item.prop] = null
       })
-      this.currentData = data
+      this.form = data
       this.$emit('reset', data)
     },
     confirm(fields) {
@@ -195,8 +196,6 @@ export default {
 
   .el-form-item {
     margin-bottom: 10px;
-    // display: inline-flex;
-    // flex-wrap: nowrap;
   }
 
   .search-form-btn {
