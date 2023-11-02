@@ -1,5 +1,5 @@
 <script>
-import TableColumn from '@/components/starTable/TableColumn.vue'
+import TableColumn from './TableColumn.vue'
 export default {
   props: {
     columns: {

@@ -24,10 +24,10 @@
   </div>
 </template>
 <script>
-import XlTable from '@/components/starTable/XlTable.vue'
+import XlTable from '@/components/table/XlTable.vue'
 import Toolbar from '@/components/toolbar/Index.vue'
 import columns from './column.js'
-import TableColumn from '@/components/starTable/TableColumn.vue'
+import TableColumn from '@/components/table/TableColumn.vue'
 import { mergeExcel } from '@/utils/commons'
 export default {
   components: { XlTable, Toolbar, TableColumn },
