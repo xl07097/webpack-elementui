@@ -71,7 +71,7 @@ export default {
         this.$refs.tableRef.refreshColumn()
       })
     },
-    cellClick(props){
+    cellClick(props) {
       this.$emit('cell-click', props)
     },
     hideColumn(fieldOrColumn) {

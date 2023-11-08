@@ -1,10 +1,10 @@
 <template>
   <el-pagination
     :current-page="pageNo"
-    :page-sizes="pageSizes"
     :page-size="pageSize"
     :layout="layout"
     :total="total"
+    :page-sizes="pageSizes"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"
   />
@@ -36,12 +36,27 @@ export default {
       default: 'total, sizes, prev, pager, next, jumper'
     }
   },
+  data(){
+    return {
+      pageThrottle: false
+    }
+  },
   methods: {
     handleSizeChange(size) {
-      this.$emit('pageSize', this.pageNo, size)
+      this.pageSizeSearch(1, size)
     },
     handleCurrentChange(page) {
-      this.$emit('pageSize', page, this.pageSize)
+      this.pageSizeSearch(page, this.pageSize)
+    },
+    pageSizeSearch(page, pageSize) {
+      if (this.pageThrottle === true) {
+        return
+      }
+      this.pageThrottle = true
+      this.$emit('update:pageNo', page)
+      this.$emit('update:pageSize', pageSize)
+      this.$emit('pageSizeSearch', page, pageSize)
+      this.pageThrottle = false
     },
   },
 }
