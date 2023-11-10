@@ -126,7 +126,7 @@ import dayjs from 'dayjs'
 
 /**
  * 打印美化
- * @param {*} packageInfo 
+ * @param {*} packageInfo
  */
 export const copyRightConsole = (packageInfo) => {
   /* 样式代码 */
@@ -221,7 +221,7 @@ export const formatSize = function (size, pointLength, units) {
  * 过去时间
  * @param {*} time 时间
  * @param {*} units 单位
- * @returns 
+ * @returns
  */
 export const timeAgo = function (time, units) {
   let unit
@@ -251,7 +251,8 @@ export const guid = (function () {
   var counter = 0
 
   return function (prefix) {
-    var guid = (+new Date()).toString(32), i = 0;
+    var guid = (+new Date()).toString(32),
+      i = 0
 
     for (; i < 5; i++) {
       guid += Math.floor(Math.random() * 65535).toString(32)
@@ -271,9 +272,9 @@ export const mergeExcel = function (data, field) {
   let indexCount = 1
   while (indexCount < data.length) {
     let item = data[count]
-    if(!item.merge){
+    if (!item.merge) {
       item.merge = {
-        colspan: 1
+        colspan: 1,
       }
     }
     if (!item.merge.rowspan) {
@@ -281,7 +282,7 @@ export const mergeExcel = function (data, field) {
     }
     if (item[field] === data[indexCount][field]) {
       item.merge.rowspan = item.merge.rowspan + 1
-      data[indexCount].merge = data[indexCount].merge || {colspan: 1}
+      data[indexCount].merge = data[indexCount].merge || { colspan: 1 }
       data[indexCount].merge.rowspan = 0
     } else {
       count = indexCount
@@ -296,32 +297,46 @@ export const mergeExcel = function (data, field) {
  * @param {number?} fixed
  * @returns {string}
  */
-// /(\d)(?=(\d{3})+$)/g // 格式化整数
 export const numberFormat = (value, fixed) => {
   if (value === null || value === undefined || value === '') {
     return ''
   }
-  // 判断是否带小数
-  // let reg = String(value).includes('.') ? /(\d)(?=(\d{3})+\.)/g : /(\d)(?=(\d{3})+$)/g
-  let reg = /(\d)(?=(\d{3})+\.)/g
+  // 保留小数位，格式化浮点数
+  if (fixed) {
+    return formatFloat(value, fixed)
+  }
 
-  if (typeof value === 'string') {
-    return value.replace(reg, '$1,')
-  }
-  if (fixed || fixed === 0) {
-    return parseFloat(value).toFixed(fixed).replace(reg, '$1,')
-  }
-  return String(value).replace(reg, '$1,')
+  // 不保留小数位，格式化整数
+  return formatInteger(Number(value).toFixed(0))
+}
+
+/**
+ * 数值千分位，格式化整数
+ * @param {number|string} value
+ */
+export const formatInteger = (value) => {
+  return value.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+}
+
+/**
+ * 数值千分位，格式化浮点数
+ * @param {number|string} value
+ * @param {number} fixed
+ */
+export const formatFloat = (value, fixed) => {
+  return Number(value)
+    .toFixed(fixed)
+    .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
 }
 
 /**
  * 验证字符串是否符合正则
  * @param {RegExp} regExp 正则表达式
  * @param {string} str 验证字符串
- * @returns 
+ * @returns
  */
 export const regExpMatch = (regExp, str) => {
-  return regExp.test((str||'').toLowerCase())
+  return regExp.test((str || '').toLowerCase())
 }
 
 import router from '../router'
@@ -330,7 +345,7 @@ import router from '../router'
  * @param {object} link
  * @returns
  */
-export const linkRouter = ({query, path, params}) => {
+export const linkRouter = ({ query, path, params }) => {
   if (query) {
     router.push({
       path: path,
