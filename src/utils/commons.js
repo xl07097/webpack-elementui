@@ -232,13 +232,6 @@ export const timeAgo = function (time, units) {
     unit = ~~(between / 60)
   }
   return between + unit + 's'
-  // if (between < 3600) {
-  //   return pluralize(~~(between / 60), ' minute')
-  // } else if (between < 86400) {
-  //   return pluralize(~~(between / 3600), ' hour')
-  // } else {
-  //   return pluralize(~~(between / 86400), ' day')
-  // }
 }
 
 /**
@@ -307,7 +300,7 @@ export const numberFormat = (value, fixed) => {
   }
 
   // 不保留小数位，格式化整数
-  return formatInteger(Number(value).toFixed(0))
+  return formatInteger(value)
 }
 
 /**
@@ -315,7 +308,7 @@ export const numberFormat = (value, fixed) => {
  * @param {number|string} value
  */
 export const formatInteger = (value) => {
-  return value.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+  return Number(value).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1,')
 }
 
 /**

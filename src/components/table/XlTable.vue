@@ -125,7 +125,7 @@ export default {
 }
 .is--footer .vxe-table--fixed-wrapper .vxe-table--body-wrapper {
   overflow-x: hidden !important;
-  padding-bottom: 76px;
+  padding-bottom: 17px;
 }
 // .is--footer.size--mini .vxe-table--fixed-wrapper .vxe-table--body-wrapper {
 //   overflow-x: hidden !important;
