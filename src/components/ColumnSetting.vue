@@ -58,7 +58,8 @@
 </template>
 
 <script>
-import { baseStorage } from '@/utils/storage'
+// import { baseStorage } from '@/utils/storage'
+import localforage from 'localforage'
 import Draggable from 'vuedraggable'
 import { deepClone } from '@/utils/commons'
 export default {
@@ -88,23 +89,22 @@ export default {
       return `${path.at(-2)}_${path.at(-1)}`
     },
     keys() {
-      return this.activeName || '99' // this.columnsList.map((item) => item.field).join('')
+      return this.activeName || '99'
     },
   },
   watch: {
     columns() {
-      this.init()
-      this.confirm()
+      this.init().then(this.confirm)
     },
   },
   created() {
-    this.init()
-    this.confirm()
+    this.init().then(this.confirm)
   },
   methods: {
-    init() {
+    async init() {
       // 1. 获取本地存储的table字段
-      const storageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
+      // const storageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
+      const storageColumns = await localforage.getItem(`${this.key}${this.activeName}`) || []
       // 2. 获取页面传递的table字段
       const columns = this.columns
       // 3. 判断本地存储数据，为0 代表没有存储，直接使用页面传递进来的，并全选
@@ -213,11 +213,13 @@ export default {
         return originColumns.find(oc => oc.field === item.field)
       })
       if (flag == true) {
-        baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
+        // baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
+        localforage.setItem(`${this.key}${this.activeName}`, storageColumns)
         this.$emit('confirm', columns)
 
       } else if (this.columnsList.length > 0) {
-        baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
+        // baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
+        localforage.setItem(`${this.key}${this.activeName}`, storageColumns)
         this.$emit('confirm', columns)
       }
     },

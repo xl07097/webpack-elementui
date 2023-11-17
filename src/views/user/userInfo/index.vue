@@ -9,7 +9,7 @@
 export default {
   name: 'UserInfo',
   mounted(){
-    const ws = new WebSocket('wss://note.zhiqiuge.com/websocket/userChat/9087')
+    const ws = new WebSocket('ws://localhost:9088/note/websocket/userChat/9087')
     ws.onopen = () => {
       ws.send(JSON.stringify({
         'receiverId': '9086',

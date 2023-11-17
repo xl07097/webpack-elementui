@@ -125,6 +125,10 @@ export default {
     activeName:{
       type: String,
       default: '',
+    },
+    setting:{
+      type: Boolean,
+      default: true
     }
   },
   data() {
@@ -154,7 +158,9 @@ export default {
     },
   },
   created() {
-    this.tableColumns = Object.freeze(this.columns)
+    if(!this.setting){
+      this.tableColumns = Object.freeze(this.columns)
+    }
   },
   methods: {
     selectionChange({ records }) {
@@ -186,9 +192,9 @@ export default {
         this.$refs.tableRef.refreshColumn()
       })
     },
-    setting() {
-      this.settingVisible = true
-    },
+    // settings() {
+    //   this.settingVisible = true
+    // },
     confirm(columns) {
       this.tableColumns = Object.freeze(columns)
     },
