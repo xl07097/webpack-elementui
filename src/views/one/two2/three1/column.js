@@ -1,5 +1,8 @@
 import ButtonSet from './ButtonSet.vue'
-
+import {Input}  from 'element-ui'
+const oninput = (e) => {
+  console.log(e)
+}
 export default [
   {
     field: 'baseInfo',
@@ -43,6 +46,10 @@ export default [
   {
     field: 'lplp2',
     title: '证件号码',
+    editRender: {autofocus: '.el-input__inner'},
+    renderEdit: (h, scope) => {
+      return <Input value={scope.row.lplp2} on-input={e => scope.row.lplp2 = e}></Input>
+    },
   },
   {
     field: 'lplp3',

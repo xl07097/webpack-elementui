@@ -13,6 +13,7 @@
       show-footer
       :footer-method="footerMethod"
       :span-method="spanMethod"
+      :edit-config="{trigger: 'click', mode: 'cell'}"
       @selection="selection"
       @checkbox-change="selection"
       @cell-click="cellClick"
@@ -35,7 +36,7 @@ export default {
     return {
       columns: Object.freeze(columns),
       data: [],
-      data1: Object.freeze([
+      data1: [
         {
           lplp3: 'hahah',
           lplp1: 0,
@@ -60,7 +61,7 @@ export default {
           lplp3: 'hahah',
           lplp1: 0,
         },
-      ]),
+      ],
       key: 'lplp',
     }
   },

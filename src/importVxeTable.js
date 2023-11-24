@@ -8,7 +8,7 @@ import {
   // Icon,
   Filter,
   // Menu,
-  // Edit,
+  Edit,
   // Export,
   // Keyboard,
   // Validator,
@@ -56,7 +56,7 @@ Vue.use(Header)
   .use(Footer)
   // .use(Icon)
   .use(Filter)
-  // .use(Edit)
+  .use(Edit)
   // .use(Menu)
   // .use(Export)
   // .use(Keyboard)
