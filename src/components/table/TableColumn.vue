@@ -19,6 +19,7 @@ export default {
       renderHeader,
       renderFooter,
       renderEdit,
+      renderContent,
       children = [],
       ...attrs
     } = this.columns
@@ -34,6 +35,9 @@ export default {
     }
     if (renderEdit) {
       slot.edit = (props) => renderEdit(h, props)
+    }
+    if (renderContent) {
+      slot.content = (props) => renderContent(h, props)
     }
     attrs.scopedSlots = slot
     if (children && children.length > 0) {

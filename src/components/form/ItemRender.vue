@@ -1,6 +1,6 @@
-<!-- eslint-disable no-unused-vars -->
 <script>
 import * as obj from '@/http/request'
+import { delay } from '@/utils/commons'
 const cacheRequest = {
 
 }
@@ -64,19 +64,25 @@ export default {
       }
     },
   },
-  mounted(){
-    const {request={}} = this.config
-    if(request.url){
-      const method = request.method || 'get'
-      obj[method](request.url, request.data).then(this.handleRes)
-    }else if(request.cacheRequest){
-      cacheRequest[request.cacheRequest](request.data).then(this.handleRes)
-    }
+  created(){
+    this.init()
   },
   methods: {
+    async init(){
+      const {request={}, delayTimeOut} = this.config
+      // 请求延时
+      if(delayTimeOut){
+        await delay(delayTimeOut)
+      }
+      if(request.url){
+        const method = request.method || 'get'
+        obj[method](request.url, request.data).then(this.handleRes)
+      }else if(request.cacheRequest){
+        cacheRequest[request.cacheRequest](request.data).then(this.handleRes)
+      }
+    },
     renderInput(h) {
       return (
-        // placeholder={`请输入${this.label}`}
         <el-input value={this.value} style={this.style} class={{'is-fouce': this.value || this.isFouce}} on-focus={this.onFocus} on-blur={this.onBlur} on-input={this.input} clearable  />
       );
     },

@@ -205,7 +205,9 @@ export default {
   .form-item-hide {
     display: none;
   }
-
+  .el-input__inner{
+    color: #222;
+  }
   .inner-label{
     position: absolute;
     left: 15px;

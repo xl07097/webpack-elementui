@@ -44,12 +44,12 @@ import {
   // 表格
   Table,
 } from 'vxe-table';
-import zhCN from 'vxe-table/lib/locale/lang/zh-CN';
+// import zhCN from 'vxe-table/lib/locale/lang/zh-CN';
 
 // 按需加载的方式默认是不带国际化的，自定义国际化需要自行解析占位符 '{0}'，例如：
-VXETable.setup({
-  i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhCN, key), args),
-});
+// VXETable.setup({
+//   i18n: (key, args) => XEUtils.toFormatString(XEUtils.get(zhCN, key), args),
+// });
 
 // 表格功能
 Vue.use(Header)
@@ -96,3 +96,9 @@ Vue.use(Header)
 // Vue.prototype.$XPrint = VXETable.print
 // Vue.prototype.$XSaveFile = VXETable.saveFile
 // Vue.prototype.$XReadFile = VXETable.readFile
+
+VXETable.formats.add('formatAmount', {
+  cellFormatMethod ({ cellValue }, digits = 2) {
+    return XEUtils.commafy(XEUtils.toNumber(cellValue), { digits })
+  }
+})

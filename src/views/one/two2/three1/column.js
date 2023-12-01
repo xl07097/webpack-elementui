@@ -54,6 +54,7 @@ export default [
   {
     field: 'lplp3',
     title: '证件类型',
+    formatter: 'formatAmount'
   },
   {
     field: 'lplp4',
