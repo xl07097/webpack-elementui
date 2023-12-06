@@ -351,3 +351,14 @@ export const linkRouter = ({ query, path, params }) => {
     params: params,
   })
 }
+
+/**
+ * 临时id生成器
+ */
+export const useId = (() => {
+  let id = 0
+  return () => {
+    id++
+    return 'T' + id
+  }
+})()
