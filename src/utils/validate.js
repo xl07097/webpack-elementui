@@ -61,3 +61,31 @@ export default class Validate {
     })
   }
 }
+
+/**
+ * 表单验证通用函数
+ * @param { object } formRef form表单的ref
+ * @param {string[]} validPropArr 验证字段的数组
+ * @param {Function} cb 回调函数
+ */
+export const formValidate = (formRef, validPropArr, cb) => {
+  if (validPropArr.length === 0) {
+    cb()
+    return
+  }
+  let count = 0
+  let flag = false
+  formRef.validateField(validPropArr, (err) => {
+    count++
+    if (err) {
+      flag = true
+    }
+    if (count === validPropArr.length) {
+      if (flag) {
+        $Info.warning('请填写完整表单')
+        return
+      }
+      cb()
+    }
+  })
+}
