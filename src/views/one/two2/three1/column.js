@@ -1,8 +1,5 @@
 import ButtonSet from './ButtonSet.vue'
 import {Input}  from 'element-ui'
-const oninput = (e) => {
-  console.log(e)
-}
 export default [
   {
     field: 'baseInfo',
@@ -36,11 +33,14 @@ export default [
       { value: 1, label: '男' },
     ],
     sortable: true,
-    render(h, { row }) {
+    formatter: ({cellValue}) => {
       return {
         0: '女',
         1: '男',
-      }[row.lplp1]
+      }[cellValue]
+    },
+    render(h, { row }) {
+      
     },
   },
   {
@@ -54,7 +54,7 @@ export default [
   {
     field: 'lplp3',
     title: '证件类型',
-    formatter: 'formatAmount'
+    formatter: 'formatMoney'
   },
   {
     field: 'lplp4',
