@@ -122,9 +122,12 @@ export default {
   .vxe-table--body-wrapper .vxe-cell {
     color: #333;
   }
-  &.is--footer .vxe-table--fixed-wrapper .vxe-table--body-wrapper {
-    overflow-x: hidden !important;
-    padding-bottom: 17px;
+  // &.is--footer .vxe-table--fixed-wrapper .vxe-table--body-wrapper {
+  //   overflow-x: hidden !important;
+  //   padding-bottom: 17px;
+  // }
+  .vxe-table--fixed-left-wrapper .vxe-table--body-wrapper{
+    width: auto;
   }
 }
 
