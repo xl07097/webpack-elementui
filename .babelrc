@@ -16,7 +16,7 @@
     ]
   ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-transform-object-rest-spread",
     "@babel/plugin-syntax-jsx",
     "@vue/babel-plugin-transform-vue-jsx",
     // [
@@ -30,7 +30,7 @@
     [
       "import",
       {
-        "libraryName": "vxe-table",
+        "libraryName": "vxe-table/packages",
         "style": false // 样式是否也按需加载
       },
       "vxe-table"
