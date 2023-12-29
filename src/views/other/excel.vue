@@ -1,7 +1,12 @@
 <template>
   <div>
     <el-button @click="exportExcel"> 导出 </el-button>
-    <input type="file" multiple class="upfile" @change="upfile" />
+    <input
+      type="file"
+      multiple
+      class="upfile"
+      @change="upfile"
+    >
 
     <FileUpload
       action="http://localhost:3003/upload/alioss"
@@ -43,11 +48,53 @@ export default {
       })
     },
     async upfile(e) {
-      const files = e.target.files
-      batchRequest([...files], {
-        request: this.uploadFile,
-      }).then(console.log)
+      const file = e.target.files[0]
+      const schema = {
+        '名称': {
+          prop: 'name',
+        },
+        '简称': {
+          prop: 'shortName',
+        },
+        '组合名': {
+          prop: 'mergerName',
+        },
+        '层级': {
+          prop: 'levelCode',
+          type: Number
+        },
+        '父级行政代码': {
+          prop: 'parentCode',
+        },
+        '行政代码': {
+          prop: 'areaCode',
+        },
+        '邮政编码': {
+          prop: 'zipCode',
+        },
+        '区号': {
+          prop: 'cityCode',
+        },
+        '拼音': {
+          prop: 'pinyin',
+        },
+        '经度': {
+          prop: 'lng',
+        },
+        '纬度': {
+          prop: 'lat',
+        },
+      }
+      readXlsxFile(file).then((rows) => {
+        console.log(rows)
+      })
     },
+    // async upfile(e) {
+    //   const files = e.target.files
+    //   batchRequest([...files], {
+    //     request: this.uploadFile,
+    //   }).then(console.log)
+    // },
     async uploadFile(file) {
       const formData = new FormData()
       formData.append('upfile', file)

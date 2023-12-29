@@ -308,7 +308,9 @@ export const numberFormat = (value, fixed) => {
  * @param {number|string} value
  */
 export const formatInteger = (value) => {
-  return Number(value).toFixed(0).replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+  return Number(value)
+    .toFixed(0)
+    .replace(/(\d)(?=(\d{3})+$)/g, '$1,')
 }
 
 /**
@@ -362,3 +364,35 @@ export const useId = (() => {
     return 'T' + id
   }
 })()
+
+export const numberToChinese = function numberToChinese(num) {
+  const chineseNumber = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
+  const chineseUnit = ['', '拾', '佰', '仟', '万', '亿']
+  //对应小数部分单位
+  var cnDecUnits = ['角', '分', '毫', '厘']
+  
+  let result = ''
+  let unitIndex = 0 
+  // 处理特殊情况：零 
+  if (num === 0) { 
+    return chineseNumber[num]; 
+  }
+  // 处理负数 
+  if (num < 0) { 
+    result += '负'; 
+    num = Math.abs(num); 
+  }
+  // 转换为字符串，便于逐位处理 
+  const numString = num.toString();
+  for (let i = numString.length - 1; i >= 0; i--) {
+    const digit = parseInt(numString[i])
+    let digitResult = ''
+    if (digit > 0) {
+      digitResult += chineseNumber[digit]
+      digitResult += chineseUnit[unitIndex]
+    }
+    result = digitResult + result
+    unitIndex++
+  }
+  return result
+}
