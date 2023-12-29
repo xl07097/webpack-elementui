@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FormRender v-model="searchData" :fields="fields" :label-width="100" />
+    <FormRender v-model="searchData" :fields="fields" />
     <StarTable :columns="columns" :table-data="data" />
   </div>
 </template>
@@ -22,42 +22,16 @@ export default {
       },
       fields: Object.freeze([
         { type: 'input', label: '项目名称', prop: 'name' },
-        { type: 'select',  prop: 'businessType1', label: '产品类型', },
-        { type: 'select',  prop: 'businessType2', label: '产品类型', },
-        { type: 'select',  prop: 'businessType3', label: '产品类型', },
-        { type: 'select',  prop: 'businessType4', label: '产品类型', },
-        { type: 'select',  prop: 'businessType5', label: '产品类型', },
-        { type: 'select',  prop: 'businessType6', label: '产品类型', },
-        { type: 'select',  prop: 'businessType7', label: '产品类型', },
-        { type: 'select',  prop: 'businessType8', label: '产品类型', },
-        { type: 'select',  prop: 'businessType9', label: '产品类型', },
-        { type: 'select',  prop: 'businessType0', label: '产品类型', },
-        { type: 'select',  prop: 'businessType11', label: '产品类型', },
-        { type: 'select',  prop: 'businessType22', label: '产品类型', },
-        { type: 'select',  prop: 'businessType33', label: '产品类型', },
-        { type: 'select',  prop: 'businessType44', label: '产品类型', },
-        { type: 'select',  prop: 'businessType55', label: '产品类型', },
-        { type: 'select',  prop: 'businessType66', label: '产品类型', },
-        { type: 'select',  prop: 'businessType77', label: '产品类型', },
-        { type: 'select',  prop: 'businessType88', label: '产品类型', },
-        { type: 'select',  prop: 'businessType99', label: '产品类型', },
-        { type: 'select',  prop: 'businessType00', label: '产品类型', },
-        { type: 'select',  prop: 'businessType111', label: '产品类型', },
-        { type: 'select',  prop: 'businessType222', label: '产品类型', },
-        { type: 'select',  prop: 'businessType333', label: '产品类型', },
-        { type: 'select',  prop: 'businessType444', label: '产品类型', },
-        { type: 'select',  prop: 'businessType555', label: '产品类型', },
-        { type: 'select',  prop: 'businessType666', label: '产品类型', },
-        { type: 'select',  prop: 'businessType777', label: '产品类型', },
-        { type: 'select',  prop: 'businessType888', label: '产品类型', },
-        { type: 'select',  prop: 'businessType999', label: '产品类型', },
-        { type: 'select',  prop: 'businessType000', label: '产品类型', },
-        { type: 'select',  prop: 'businessType12', label: '产品类型', },
-        { type: 'select',  prop: 'businessType13', label: '产品类型', },
-        { type: 'select',  prop: 'businessType14', label: '产品类型', },
-        { type: 'select',  prop: 'businessType16', label: '产品类型', },
-        { type: 'select',  prop: 'businessType15', label: '产品类型', },
-
+        { type: 'select',  prop: 'businessType1', label: '产品类型', config:{
+          list: [
+            { value: '1', label: '产品1' },
+          ]} 
+        },
+        { type: 'month', label: '月份', prop: 'month1' },
+        { type: 'date', label: '日期', prop: 'date1' },
+        { type: 'daterange', label: '日期范围', prop: 'daterangeStart', endProp: 'daterangeEnd' },
+        { type: 'monthrange', label: '月份范围', prop: 'monthStart', endProp: 'monthEnd' },
+        { type: 'cascader', label: '部门', prop: 'cascader1' },
       ]),
       columns: Object.freeze([
         { title: 'title', field: 'field', minWidth: '140px' },

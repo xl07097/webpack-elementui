@@ -2,29 +2,24 @@
   <el-form
     ref="formRender"
     class="search-form"
-    size="small"
     inline
+    :label-width="`${labelWidth}px`"
   >
-    <el-form-item
-      v-for="(field, index) of filnalFields"
+    <item-render
+      v-for="(field, index) of fields"
       :key="field.prop"
+      v-model="form[field.prop]"
+      :tag="field.type"
+      :label="field.label"
+      :width="width"
+      :label-width="labelWidth"
+      :config="field.config"
       :class="{ 'form-item-hide': showAll ? false : index > showNumber-1 }"
-      :prop="field.prop"
-    >
-      <item-render
-        v-model="form[field.prop]"
-        :tag="field.type"
-        :field="field.field"
-        :label="field.label"
-        :width="width"
-        :config="field.config"
-      />
-      <span class="inner-label">{{ field.label }}</span>
-    </el-form-item>
+    />
 
     <el-form-item class="search-form-btn">
       <el-button
-        v-if="showNumber<filnalFields.length"
+        v-if="showNumber<fields.length"
         type="text"
         @click="expand"
       >
@@ -38,21 +33,24 @@
       <el-button @click="reset">
         重置
       </el-button>
-      <SearchSetting
+      <!-- <SearchSetting
         :columns="fields"
         :active-name="activeName"
         @confirm="confirm"
-      />
+      /> -->
     </el-form-item>
   </el-form>
 </template>
 <script>
 import ItemRender from './ItemRender'
-import SearchSetting from './SearchSetting.vue'
+// import SearchSetting from './SearchSetting.vue'
 
 export default {
   name: 'FormRender',
-  components: { ItemRender, SearchSetting },
+  components: { 
+    ItemRender, 
+    // SearchSetting
+  },
   props: {
     value: {
       type: Object,
@@ -70,16 +68,20 @@ export default {
       type: Number,
       default: 220,
     },
-    widthConfig:{
-      type: Object,
-      default(){
-        return {}
-      }
+    labelWidth: {
+      type: Number,
+      default: 88,
     },
-    activeName:{
-      type: [Number, String],
-      default: '0',
-    }
+    // widthConfig:{
+    //   type: Object,
+    //   default(){
+    //     return {}
+    //   }
+    // },
+    // activeName:{
+    //   type: [Number, String],
+    //   default: '0',
+    // }
   },
   data() {
     return {
@@ -90,10 +92,20 @@ export default {
       form: {},
     }
   },
+  computed: {
+    _form:{
+      get(){
+        return this.value
+      },
+      set(val){
+        this.$emit('input', val)
+      }
+    }
+  },
   watch:{
-    activeName(){
-      this.initWidth()
-    },
+    // activeName(){
+    //   this.initWidth()
+    // },
     value(val){
       this.form = {
         ...val
@@ -138,11 +150,11 @@ export default {
         return
       }
       this.refreshFlag = false
-      const fields = this.filnalFields
+      const fields = this.fields
       // 初始按钮区域宽度
-      let totalWidth = 260
+      let totalWidth = 190
       for (let index = 0; index < fields.length; index++) {
-        const width = this.width
+        const width = this.width + this.labelWidth
         const margin = 10
         if (totalWidth + width + margin > searchWidth) {
           this.showNumber = index 

@@ -11,10 +11,6 @@ export default {
       type: String,
       default: 'input',
     },
-    field: {
-      type: String,
-      default: '',
-    },
     value: {
       type: [String, Boolean, Object, Array, Number, Date],
       default() {
@@ -29,7 +25,7 @@ export default {
       type: Object,
       default() {
         return {
-          lists: [],
+          list: [],
           props: {},
         };
       },
@@ -49,13 +45,13 @@ export default {
         daterange: 'yyyy-MM-dd',
         // week: 'yyyy 第 WW 周'
       },
-      lists: [],
+      list: [],
       isFouce: false,
     };
   },
   computed:{
-    optionList(){
-      return this.config.lists || this.lists || []
+    options(){
+      return this.config.list || this.list || []
     },
     style() {
       let styleWidth = this.config.width || this.width
@@ -103,8 +99,8 @@ export default {
           placeholder={''}
           style={this.style} 
         >
-          {this.optionList.map((list) => {
-            return <el-option key={list.value} label={list.label} value={list.value} />;
+          {this.options.map((item) => {
+            return <el-option key={item.value} label={item.label} value={item.value} />;
           })}
         </el-select>
       );
@@ -142,7 +138,7 @@ export default {
         <el-cascader
           value={this.value}
           showAllLevels={false}
-          options={this.optionList}
+          options={this.options}
           props={{props}}
           filterable
           clearable
@@ -208,16 +204,19 @@ export default {
     handleRes(res){
       const {request={}} = this.config
       if(request.handleData){
-        this.lists = Object.freeze(request.handleData(res))
+        this.list = Object.freeze(request.handleData(res))
       }else {
-        this.lists = Object.freeze(res.data)
+        this.list = Object.freeze(res.data)
       }
     }
   },
   render(h) {
     const tag = this.tag;
+    const label = this.label
     if (tag === 'select') {
-      return this.renderSelect(h);
+      return <el-form-item label={label}>
+        {this.renderSelect(h)}
+      </el-form-item>
     }
     if (
       [
@@ -232,15 +231,15 @@ export default {
         'monthrange',
       ].includes(tag)
     ) {
-      return this.renderDate(h);
+      return <el-form-item label={label}> {this.renderDate(h)} </el-form-item>
     }
     if(tag === 'cascader'){
-      return this.renderCascader(h);
+      return <el-form-item label={label}> {this.renderCascader(h)} </el-form-item>
     }
     if(tag === 'autocomplete'){
-      return this.renderAutocomplete(h);
+      return <el-form-item label={label}> {this.renderAutocomplete(h)} </el-form-item>
     }
-    return this.renderInput(h);
+    return <el-form-item label={label}> {this.renderInput(h)} </el-form-item>
   },
 };
 </script>
