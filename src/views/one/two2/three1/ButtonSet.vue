@@ -4,7 +4,7 @@
       v-for="button of preList"
       :key="button.functionName"
       size="mini"
-      @click="action(row.functionName)"
+      @click="action(button.functionName)"
     >
       {{ button.title }}
     </el-button>

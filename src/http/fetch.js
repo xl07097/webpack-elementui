@@ -22,6 +22,7 @@ instance.interceptors.request.use((config) => {
   const token = storage.getItem('token')
   if (token) {
     config.headers.token = token
+    config.headers['AuthToken'] = token
   }
   return config
 })

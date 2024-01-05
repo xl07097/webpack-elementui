@@ -32,8 +32,8 @@ module.exports = merge(baseConfig, {
     port: '9810',
     proxy: {
       '/api': {
-        // target: 'https://note.zhiqiuge.com',
-        target: 'http://localhost:9088/note',
+        target: 'http://localhost:3003',
+        // target: 'http://localhost:9088/note',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',
