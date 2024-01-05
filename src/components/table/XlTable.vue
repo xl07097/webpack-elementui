@@ -25,10 +25,11 @@ export default {
     action: {
       type: Boolean,
       default: true,
-    },
+    }
   },
   data() {
     return {
+      key: '9090',
       indexColumn: Object.freeze({
         type: 'seq',
         key: 'seqIndex',
@@ -52,6 +53,11 @@ export default {
         align: 'center',
       }),
       selectionList: [],
+    }
+  },
+  watch:{
+    columns(){
+      this.key = Date.now().toString(32)
     }
   },
   methods: {
@@ -80,6 +86,15 @@ export default {
     showColumn(fieldOrColumn) {
       this.$refs.tableRef.showColumn(fieldOrColumn)
     },
+    refreshColumn(){
+      this.$refs.tableRef.refreshColumn()
+    },
+    reloadColumn(columns){
+      this.$refs.tableRef.reloadColumn(columns)
+    },
+    loadColumn(columns){
+      this.$refs.tableRef.loadColumn(columns)
+    },
   },
   render(h) {
     const { columns, data, index, checkbox } = this.$props
@@ -87,6 +102,7 @@ export default {
     return (
       <vxe-table
         ref="tableRef"
+        key= {this.key}
         class="xl-table"
         data={data}
         size="small"

@@ -27,6 +27,30 @@ export default {
             { value: '1', label: '产品1' },
           ]} 
         },
+        { type: 'select',  prop: 'GENDER', label: '产品类型', config:{
+          request:{
+            remote: true,
+            remoteMethod: async () => {
+              return fetch('http://localhost:3003/dict/options', {
+                method: 'POST',
+                headers:{
+                  'AuthToken': 'W88G0R46WEUP9JXKOF6H71WI',
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(['GENDER'])
+              }).then(res => res.json())
+            },
+            handleData: (res) => {
+              return res.data.GENDER.map(item => {
+                return {
+                  value: item.dictValue,
+                  label: item.dictName
+                }
+              })
+            }
+          },
+        }
+        },
         { type: 'month', label: '月份', prop: 'month1' },
         { type: 'date', label: '日期', prop: 'date1' },
         { type: 'daterange', label: '日期范围', prop: 'daterangeStart', endProp: 'daterangeEnd' },
