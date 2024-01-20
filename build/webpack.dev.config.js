@@ -1,8 +1,9 @@
 const { merge } = require('webpack-merge')
 const path = require('path')
 const baseConfig = require('./webpack.base.config')
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
-const ModuleFederationPlugin  = require('webpack/lib/container/ModuleFederationPlugin')
+const BundleAnalyzerPlugin =
+  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const ModuleFederationPlugin = require('webpack/lib/container/ModuleFederationPlugin')
 
 module.exports = merge(baseConfig, {
   mode: 'development',
@@ -33,7 +34,7 @@ module.exports = merge(baseConfig, {
     proxy: {
       '/api': {
         target: 'http://localhost:3003',
-        // target: 'http://localhost:9088/note',
+        // target: 'http://localhost:9087/note',
         changeOrigin: true,
         pathRewrite: {
           '^/api': '',

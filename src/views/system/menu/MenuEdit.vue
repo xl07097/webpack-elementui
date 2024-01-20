@@ -6,12 +6,7 @@
     @open="open"
     @close="close"
   >
-    <el-form
-      ref="formRef"
-      :model="form"
-      :rules="rules"
-      label-width="110px"
-    >
+    <el-form ref="formRef" :model="form" :rules="rules" label-width="110px">
       <el-form-item label="名称" prop="title">
         <el-input v-model="form.title" placeholder="名称" />
       </el-form-item>
@@ -20,7 +15,11 @@
           v-model="form.nodeType"
           :disabled="operType === 'edit'"
           size="small"
-          @change="() => {form.pid=''}"
+          @change="
+            () => {
+              form.pid = ''
+            }
+          "
         >
           <el-radio-button :label="1">目录</el-radio-button>
           <el-radio-button :label="2">菜单</el-radio-button>
@@ -30,10 +29,10 @@
       <el-form-item label="父级菜单" prop="pid">
         <el-cascader
           v-model="form.pid"
-          :disabled="operType!='add'"
+          :disabled="operType != 'add'"
           :options="cascaderOption"
           :props="props"
-          style="width:100%"
+          style="width: 100%"
           clearable
         />
       </el-form-item>
@@ -131,45 +130,47 @@ export default {
       loading: false,
     }
   },
-  computed:{
-    cascaderList(){
+  computed: {
+    cascaderList() {
       const options = deepClone(this.options)
-      
+
       return Object.freeze(tree2Array(options))
     },
-    cascader1(){
-      let list = this.cascaderList.filter(item => item.nodeType === 1)
+    cascader1() {
+      let list = this.cascaderList.filter((item) => item.nodeType === 1)
       return Object.freeze(array2Tree(deepClone(list)))
     },
-    cascader2(){
-      let list = this.cascaderList.filter(item => item.nodeType === 1|| item.nodeType === 2)
+    cascader2() {
+      let list = this.cascaderList.filter(
+        (item) => item.nodeType === 1 || item.nodeType === 2
+      )
       return Object.freeze(array2Tree(deepClone(list)))
     },
-    cascaderOption(){
+    cascaderOption() {
       const nodeType = this.form.nodeType
       // 目录
-      if(nodeType === 1 || nodeType === 2){
+      if (nodeType === 1 || nodeType === 2) {
         return this.cascader1
-      }else if(nodeType === 3){
+      } else if (nodeType === 3) {
         // 菜单
         return this.cascader2
       }
       return Object.freeze([])
     },
-    props(){
+    props() {
       return {
         checkStrictly: this.form.nodeType !== 3,
         label: 'title',
-        value: 'id'
+        value: 'id',
       }
-    }
+    },
   },
   methods: {
     open() {
       this.form = Object.assign({}, this.detail)
     },
     onSubmit() {
-      this.$refs.form.validate((isValid) => {
+      this.$refs.formRef.validate((isValid) => {
         if (!isValid) return
         this.loading = true
         let url = '/sysMenu/update'
@@ -177,14 +178,14 @@ export default {
           url = '/sysMenu/add'
         }
         let pid = this.form.pid
-        if(Array.isArray(pid) || pid.at(-1)){
+        if (Array.isArray(pid) || pid.at(-1)) {
           pid = pid.at(-1)
-        }else {
+        } else {
           pid = pid || '0'
         }
         post(url, {
-          ...this.form, 
-          pid: pid
+          ...this.form,
+          pid: pid,
         }).then((res) => {
           this.loading = false
           if (res.code === 200) {
