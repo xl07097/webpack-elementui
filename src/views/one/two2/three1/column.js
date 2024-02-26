@@ -1,5 +1,4 @@
-import ButtonSet from './ButtonSet.vue'
-import {Input}  from 'element-ui'
+import { Input } from 'element-ui'
 export default [
   {
     field: 'baseInfo',
@@ -33,28 +32,30 @@ export default [
       { value: 1, label: '男' },
     ],
     sortable: true,
-    formatter: ({cellValue}) => {
+    formatter: ({ cellValue }) => {
       return {
         0: '女',
         1: '男',
       }[cellValue]
     },
-    render(h, { row }) {
-      
-    },
   },
   {
     field: 'lplp2',
     title: '证件号码',
-    editRender: {autofocus: '.el-input__inner'},
+    editRender: { autofocus: '.el-input__inner' },
     renderEdit: (h, scope) => {
-      return <Input value={scope.row.lplp2} on-input={e => scope.row.lplp2 = e}></Input>
+      return (
+        <Input
+          value={scope.row.lplp2}
+          on-input={(e) => (scope.row.lplp2 = e)}
+        ></Input>
+      )
     },
   },
   {
     field: 'lplp3',
     title: '证件类型',
-    formatter: 'formatMoney'
+    formatter: 'formatMoney',
   },
   {
     field: 'lplp4',
@@ -191,23 +192,7 @@ export default [
       return 'lplp'
     },
   },
-  {
-    field: 'action',
-    title: '操作',
-    fixed: 'right',
-    width: 240,
-    render: (h, { row }) => {
-      return (
-        <ButtonSet />
-        // <div>
-        //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>编辑</el-button>
-        //   <el-button type="text" size="mini" onClick={() => this.edit(row)}>删除</el-button>
-        // </div>
-      )
-    },
-  },
 ]
-
 
 export const column1 = [
   {
@@ -242,28 +227,31 @@ export const column1 = [
       { value: 1, label: '男' },
     ],
     sortable: true,
-    formatter: ({cellValue}) => {
+    formatter: ({ cellValue }) => {
       return {
         0: '女',
         1: '男',
       }[cellValue]
     },
-    render(h, { row }) {
-      
-    },
+    render(h, { row }) {},
   },
   {
     field: 'lplp2',
     title: '证件号码',
-    editRender: {autofocus: '.el-input__inner'},
+    editRender: { autofocus: '.el-input__inner' },
     renderEdit: (h, scope) => {
-      return <Input value={scope.row.lplp2} on-input={e => scope.row.lplp2 = e}></Input>
+      return (
+        <Input
+          value={scope.row.lplp2}
+          on-input={(e) => (scope.row.lplp2 = e)}
+        ></Input>
+      )
     },
   },
   {
     field: 'lplp3',
     title: '证件类型',
-    formatter: 'formatMoney'
+    formatter: 'formatMoney',
   },
   {
     field: 'lplp5',

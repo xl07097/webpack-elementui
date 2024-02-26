@@ -49,44 +49,44 @@ export default {
     },
     async upfile(e) {
       const file = e.target.files[0]
-      const schema = {
-        '名称': {
-          prop: 'name',
-        },
-        '简称': {
-          prop: 'shortName',
-        },
-        '组合名': {
-          prop: 'mergerName',
-        },
-        '层级': {
-          prop: 'levelCode',
-          type: Number
-        },
-        '父级行政代码': {
-          prop: 'parentCode',
-        },
-        '行政代码': {
-          prop: 'areaCode',
-        },
-        '邮政编码': {
-          prop: 'zipCode',
-        },
-        '区号': {
-          prop: 'cityCode',
-        },
-        '拼音': {
-          prop: 'pinyin',
-        },
-        '经度': {
-          prop: 'lng',
-        },
-        '纬度': {
-          prop: 'lat',
-        },
-      }
+      // const schema = {
+      //   '名称': {
+      //     prop: 'name',
+      //   },
+      //   '简称': {
+      //     prop: 'shortName',
+      //   },
+      //   '组合名': {
+      //     prop: 'mergerName',
+      //   },
+      //   '层级': {
+      //     prop: 'levelCode',
+      //     type: Number
+      //   },
+      //   '父级行政代码': {
+      //     prop: 'parentCode',
+      //   },
+      //   '行政代码': {
+      //     prop: 'areaCode',
+      //   },
+      //   '邮政编码': {
+      //     prop: 'zipCode',
+      //   },
+      //   '区号': {
+      //     prop: 'cityCode',
+      //   },
+      //   '拼音': {
+      //     prop: 'pinyin',
+      //   },
+      //   '经度': {
+      //     prop: 'lng',
+      //   },
+      //   '纬度': {
+      //     prop: 'lat',
+      //   },
+      // }
       readXlsxFile(file).then((rows) => {
-        console.log(rows)
+        console.table(rows)
       })
     },
     // async upfile(e) {

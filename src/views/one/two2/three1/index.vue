@@ -35,19 +35,32 @@
           />
         </template>
       </vxe-column>
+      <vxe-column
+        field="action"
+        title="操作"
+        fixed="right"
+        min-width="240px" 
+      >
+        <template #default="{ row }">
+          <ButtonSet />
+        </template>
+      </vxe-column>
     </XlTable>
   </div>
 </template>
 <script>
+
 import XlTable from '@/components/table/XlTable.vue'
 import Toolbar from '@/components/toolbar/Index.vue'
 import columns, {column1} from './column.js'
 // import TableColumn from '@/components/table/TableColumn.vue'
 import { mergeExcel } from '@/utils/commons'
+import ButtonSet from './ButtonSet.vue'
 export default {
   components: { 
     XlTable, 
-    Toolbar, 
+    Toolbar,
+    ButtonSet,
     // TableColumn 
   },
   data() {
