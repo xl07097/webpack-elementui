@@ -1,6 +1,6 @@
 <template>
   <el-link 
-    :href="`${OSSURIPrefix}${url}`"
+    :href="`${prefix || OSSURIPrefix}${url}`"
     target="_blank"
     icon="el-icon-document"
     :download="name"
@@ -13,6 +13,10 @@
 // import { OSSURIPrefix } from '@/http/urls'
 export default {
   props: {
+    prefix:{
+      type: String,
+      default: '',
+    },
     url: {
       type: String,
       default: '',
