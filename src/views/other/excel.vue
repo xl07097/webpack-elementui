@@ -21,7 +21,7 @@
 import writeXlsxFile from 'write-excel-file'
 import readXlsxFile from 'read-excel-file'
 import { title, row2, row3, row4, row5 } from './excelData'
-import batchRequest from '@/utils/ponyfill'
+import batchRequest from '@/utils/batch'
 import FileUpload from '@/components/file/FileUpload.vue'
 export default {
   name: 'AppExcel',
