@@ -235,96 +235,6 @@ export const timeAgo = function (time, units) {
 }
 
 /**
- * 生成唯一的ID
- * @method guid
- * @grammar guid() => String
- * @grammar guid( prefx ) => String
- */
-export const guid = (function () {
-  var counter = 0
-
-  return function (prefix) {
-    var guid = (+new Date()).toString(32),
-      i = 0
-
-    for (; i < 5; i++) {
-      guid += Math.floor(Math.random() * 65535).toString(32)
-    }
-
-    return (prefix || 'xsy_') + guid + (counter++).toString(32)
-  }
-})()
-
-/**
- * table 表格动态合并单元格数据预处理
- * @param {Array} data 表格数据
- * @param {*} field 字段
- */
-export const mergeExcel = function (data, field) {
-  let count = 0
-  let indexCount = 1
-  while (indexCount < data.length) {
-    let item = data[count]
-    if (!item.merge) {
-      item.merge = {
-        colspan: 1,
-      }
-    }
-    if (!item.merge.rowspan) {
-      item.merge.rowspan = 1
-    }
-    if (item[field] === data[indexCount][field]) {
-      item.merge.rowspan = item.merge.rowspan + 1
-      data[indexCount].merge = data[indexCount].merge || { colspan: 1 }
-      data[indexCount].merge.rowspan = 0
-    } else {
-      count = indexCount
-    }
-    indexCount++
-  }
-}
-
-/**
- * 数值千分位表示
- * @param {number|string} value
- * @param {number?} fixed
- * @returns {string}
- */
-export const numberFormat = (value, fixed) => {
-  if (value === null || value === undefined || value === '') {
-    return ''
-  }
-  // 保留小数位，格式化浮点数
-  if (fixed) {
-    return formatFloat(value, fixed)
-  }
-
-  // 不保留小数位，格式化整数
-  return formatInteger(value)
-}
-
-/**
- * 数值千分位，格式化整数
- * @param {number|string} value
- */
-export const formatInteger = (value) => {
-  return Number(value)
-    .toFixed(0)
-    .replace(/(\d)(?=(\d{3})+$)/g, '$1,')
-}
-
-/**
- * 数值千分位，格式化浮点数
- * @param {number|string} value
- * @param {number} fixed
- */
-export const formatFloat = (value, fixed) => {
-  return Number(value)
-    .toFixed(fixed)
-    .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
-}
-
-/**
  * 验证字符串是否符合正则
  * @param {RegExp} regExp 正则表达式
  * @param {string} str 验证字符串
@@ -355,6 +265,27 @@ export const linkRouter = ({ query, path, params }) => {
 }
 
 /**
+ * 生成唯一的ID
+ * @method guid
+ * @grammar guid() => String
+ * @grammar guid( prefx ) => String
+ */
+export const guid = (function () {
+  var counter = 0
+
+  return function (prefix) {
+    var guid = (+new Date()).toString(32),
+      i = 0
+
+    for (; i < 5; i++) {
+      guid += Math.floor(Math.random() * 65535).toString(32)
+    }
+
+    return (prefix || 'xsy_') + guid + (counter++).toString(32)
+  }
+})()
+
+/**
  * 临时id生成器
  */
 export const useId = (() => {
@@ -366,24 +297,35 @@ export const useId = (() => {
 })()
 
 export const numberToChinese = function numberToChinese(num) {
-  const chineseNumber = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖']
+  const chineseNumber = [
+    '零',
+    '壹',
+    '贰',
+    '叁',
+    '肆',
+    '伍',
+    '陆',
+    '柒',
+    '捌',
+    '玖',
+  ]
   const chineseUnit = ['', '拾', '佰', '仟', '万', '亿']
   //对应小数部分单位
   var cnDecUnits = ['角', '分', '毫', '厘']
-  
+
   let result = ''
-  let unitIndex = 0 
-  // 处理特殊情况：零 
-  if (num === 0) { 
-    return chineseNumber[num]; 
+  let unitIndex = 0
+  // 处理特殊情况：零
+  if (num === 0) {
+    return chineseNumber[num]
   }
-  // 处理负数 
-  if (num < 0) { 
-    result += '负'; 
-    num = Math.abs(num); 
+  // 处理负数
+  if (num < 0) {
+    result += '负'
+    num = Math.abs(num)
   }
-  // 转换为字符串，便于逐位处理 
-  const numString = num.toString();
+  // 转换为字符串，便于逐位处理
+  const numString = num.toString()
   for (let i = numString.length - 1; i >= 0; i--) {
     const digit = parseInt(numString[i])
     let digitResult = ''
