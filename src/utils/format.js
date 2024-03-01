@@ -62,6 +62,8 @@ export const numberFormat = (value, fixed) => {
   return formatInteger(value)
 }
 
+//==========  /\B(?=(\d{3})+(?!\d))/g
+
 /**
  * 数值千分位，格式化整数
  * @param {number|string} value
