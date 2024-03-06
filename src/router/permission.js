@@ -1,6 +1,6 @@
 import router from './index'
 import store from '../store/store'
-import { storage } from '@/utils/storage'
+import { storage, baseStorage } from '@/utils/storage'
 
 router.beforeEach((to, _from, next) => {
   store.commit('permission/setShapshot', to.meta)
@@ -10,7 +10,7 @@ router.beforeEach((to, _from, next) => {
     return
   }
 
-  const token = storage.getItem('token')
+  const token = baseStorage.getItem('token')
   if (!token) {
     next('/login')
     return

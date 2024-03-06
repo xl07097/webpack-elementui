@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { showMessage } from '@/utils/message'
-import { storage } from '@/utils/storage'
+import { baseStorage } from '@/utils/storage'
 import store from '@/store/store'
 
 let isRefresh = false // 是否在重新自动登录
@@ -19,7 +19,7 @@ const instance = axios.create({
 })
 
 instance.interceptors.request.use((config) => {
-  const token = storage.getItem('token')
+  const token = baseStorage.getItem('token')
   if (token) {
     config.headers.token = token
     config.headers['AuthToken'] = token
@@ -78,26 +78,23 @@ instance.interceptors.response.use(
 
 export default instance
 
-function retryLogin(config) {
-  const accessToken = storage.getItem('accessToken')
+async function retryLogin(config) {
+  const accessToken = baseStorage.getItem('accessToken')
   if (!accessToken) {
     store.dispatch('permission/resetLogin')
     return
   }
-  return instance
-    .get('/refreshToken', {
-      params: {
-        accessToken: accessToken,
-      },
-    })
-    .then((res) => {
-      if (res.code === 200) {
-        storage.setItem('token', res.data)
-        isRefresh = false
-        retryQueue.forEach((cb) => cb())
-        retryQueue = []
-        return instance.request(config)
-      }
-      store.dispatch('permission/resetLogin')
-    })
+  const res = await instance.get('/refreshToken', {
+    params: {
+      accessToken: accessToken,
+    },
+  })
+  if (res.code === 200) {
+    baseStorage.setItem('token', res.data)
+    isRefresh = false
+    retryQueue.forEach((cb) => cb())
+    retryQueue = []
+    return instance.request(config)
+  }
+  store.dispatch('permission/resetLogin')
 }

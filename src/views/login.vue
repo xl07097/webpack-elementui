@@ -1,18 +1,18 @@
 <template>
   <div>
-    <input v-model="name" type="text" placeholder="用户名称">
+    <input v-model="name" type="text" placeholder="用户名称" />
     <button type="button" @click="login">登录</button>
   </div>
 </template>
 
 <script>
 import { post } from '@/http/request'
-import { storage } from '@/utils/storage'
+import { baseStorage } from '@/utils/storage'
 export default {
   name: 'Login',
-  data(){
+  data() {
     return {
-      name: ''
+      name: '',
     }
   },
   methods: {
@@ -22,8 +22,8 @@ export default {
         password: '28b064f575db2448c49c1db52e067d6d',
       }).then((res) => {
         if (res.code === 200) {
-          storage.setItem('token', res.data.token)
-          storage.setItem('accessToken', res.data.accessToken)
+          baseStorage.setItem('token', res.data.token)
+          baseStorage.setItem('accessToken', res.data.accessToken)
           this.$store.commit('setLoginUser', res.data.user)
           this.$router.push('/excel')
         }
@@ -33,6 +33,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
