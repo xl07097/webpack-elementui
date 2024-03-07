@@ -66,14 +66,14 @@ module.exports = {
       title: 'vue 练习',
       filename: path.resolve(__dirname, '../dist/index.html'),
       template: path.resolve(__dirname, '../public/index.html'),
-      chunks: 'app', // 生成了 html 文件后会自动加载对应的 JS
+      chunks: ['app'], // 生成了 html 文件后会自动加载对应的 JS
       // inject: true
     }),
     new HtmlWebpackPlugin({
       title: 'vue admin',
       filename: path.resolve(__dirname, '../dist/admin.html'),
       template: path.resolve(__dirname, '../public/index.html'),
-      chunks: 'admin', // 生成了 html 文件后会自动加载对应的 JS
+      chunks: ['admin'], // 生成了 html 文件后会自动加载对应的 JS
       // inject: true
     }),
     new VueLoaderPlugin(),

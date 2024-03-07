@@ -16,7 +16,7 @@ export default {
   },
   data() {
     return {
-      pdf: 'https://files.zhiqiuge.com/xiangshuye/31.pdf' //设置文档地址
+      pdf: 'https://xiangshuye.oss-cn-shanghai.aliyuncs.com//31.pdf' //设置文档地址
     }
   },
   methods: {

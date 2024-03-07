@@ -48,7 +48,7 @@ export default {
         // 原生支持 hls 播放
         this.player = new Player({
           id: this.id,
-          url: 'https://files.zhiqiuge.com/video/m3u8/lp.m3u8',
+          url: 'https://xiangshuye.oss-cn-shanghai.aliyuncs.com/video/m3u8/lp.m3u8',
           lang: 'zh-cn',
           autoplay: false,
           playsinline: true,
@@ -60,7 +60,7 @@ export default {
         this.player = new Player({
           id: this.id,
           isLive: false,
-          url: 'https://files.zhiqiuge.com/video/m3u8/lp.m3u8', // hls 流地址
+          url: 'https://xiangshuye.oss-cn-shanghai.aliyuncs.com/video/m3u8/lp.m3u8', // hls 流地址
           plugins: [HlsPlugin],
           lang: 'zh-cn',
           autoplay: false,
