@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 module.exports = {
   entry: {
     app: path.resolve(__dirname, '../src/index.js'),
+    admin: path.resolve(__dirname, '../src/admin.js'),
   },
   module: {
     rules: [
@@ -68,6 +69,13 @@ module.exports = {
       chunks: 'app', // 生成了 html 文件后会自动加载对应的 JS
       // inject: true
     }),
+    new HtmlWebpackPlugin({
+      title: 'vue admin',
+      filename: path.resolve(__dirname, '../dist/admin.html'),
+      template: path.resolve(__dirname, '../public/index.html'),
+      chunks: 'admin', // 生成了 html 文件后会自动加载对应的 JS
+      // inject: true
+    }),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new CopyWebpackPlugin({
@@ -75,7 +83,6 @@ module.exports = {
         { from: path.resolve(__dirname, '../public/static'), to: 'static' },
       ],
     }),
-
   ],
   resolve: {
     alias: {
