@@ -12,6 +12,10 @@
       :columns="columns"
       :footer-method="footerMethod"
       :span-method="spanMethod"
+      :column-config="{
+        resizable: true,
+        useKey: 'id'
+      }"
       :edit-config="{trigger: 'click', mode: 'cell'}"
       @selection="selection"
       @checkbox-change="selection"
@@ -29,6 +33,7 @@
         <template #edit="{ row, column, rowIndex }">
           <el-input-number
             v-model="row.hah"
+            style="width: 100%"
             controls-position="right"
             :precision="2"
             @change="(value) => change(value, column, rowIndex)"

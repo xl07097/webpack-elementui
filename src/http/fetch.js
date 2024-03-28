@@ -8,7 +8,7 @@ let isRefresh = false // 是否在重新自动登录
 let retryQueue = [] // 需要重新请求的队列
 
 const instance = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://localhost:3003',
   // timeout: 10000,
   withCredentials: true,
   headers: {
