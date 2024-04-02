@@ -1,6 +1,6 @@
 <template>
   <div v-loading="loading" class="sh-container">
-    <ShHeader :header-prop="title" @back="close" />
+    <ShHeader :title="title" @back="close" />
     <slot />
 
     <slot name="footer">

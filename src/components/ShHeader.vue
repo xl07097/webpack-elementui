@@ -5,7 +5,6 @@
 </template>
 
 <script>
-// import { mapState } from 'vuex'
 export default {
   name: 'ShHeader',
   props: {
@@ -13,11 +12,6 @@ export default {
       type: String,
       default: '',
     },
-  },
-  computed: {
-    // ...mapState({
-    //   header: state => state.menu.routerParmsNow.title,
-    // }),
   },
   methods: {
     back() {
