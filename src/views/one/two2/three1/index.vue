@@ -58,7 +58,6 @@
 import XlTable from '@/components/table/XlTable.vue'
 import Toolbar from '@/components/toolbar/Index.vue'
 import columns, {column1} from './column.js'
-// import TableColumn from '@/components/table/TableColumn.vue'
 import { mergeExcel } from '@/utils/excel'
 import ButtonSet from './ButtonSet.vue'
 export default {
@@ -66,7 +65,6 @@ export default {
     XlTable, 
     Toolbar,
     ButtonSet,
-    // TableColumn 
   },
   data() {
     return {
