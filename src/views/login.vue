@@ -23,7 +23,7 @@ export default {
       }).then((res) => {
         if (res.code === 200) {
           baseStorage.setItem('token', res.data.token)
-          baseStorage.setItem('accessToken', res.data.accessToken)
+          baseStorage.setItem('refreshToken', res.data.refreshToken)
           this.$store.commit('setLoginUser', res.data.user)
           this.$router.push('/excel')
         }

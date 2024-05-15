@@ -80,14 +80,14 @@ instance.interceptors.response.use(
 export default instance
 
 async function retryLogin(config) {
-  const accessToken = baseStorage.getItem('accessToken')
-  if (!accessToken) {
+  const refreshToken = baseStorage.getItem('refreshToken')
+  if (!refreshToken) {
     store.dispatch('permission/resetLogin')
     return
   }
   const res = await instance.get('/refreshToken', {
     params: {
-      accessToken: accessToken,
+      refreshToken: refreshToken,
     },
   })
   if (res.code === 200) {
