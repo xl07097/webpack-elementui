@@ -6,14 +6,18 @@
     @open="open"
     @close="close"
   >
-    <el-form ref="formRef" :model="form" :rules="rules" label-width="110px">
+    <el-form
+      ref="formRef"
+      :model="form"
+      :rules="rules"
+      label-width="110px"
+    >
       <el-form-item label="名称" prop="title">
         <el-input v-model="form.title" placeholder="名称" />
       </el-form-item>
       <el-form-item label="类别" prop="nodeType">
         <el-radio-group
           v-model="form.nodeType"
-          :disabled="operType === 'edit'"
           size="small"
           @change="
             () => {
@@ -26,7 +30,7 @@
           <el-radio-button :label="3">按钮</el-radio-button>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="父级菜单" prop="pid">
+      <el-form-item label="父级菜单" prop="pid" :rules="pidRule">
         <el-cascader
           v-model="form.pid"
           :disabled="operType != 'add'"
@@ -131,6 +135,12 @@ export default {
     }
   },
   computed: {
+    pidRule(){
+      if(this.nodeType === '1'){
+        return null
+      }
+      return { required: false, message: '必选', trigger: 'change' }
+    },
     cascaderList() {
       const options = deepClone(this.options)
 
