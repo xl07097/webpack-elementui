@@ -14,25 +14,17 @@
       :width="width"
       :label-width="labelWidth"
       :config="field.config"
-      :class="{ 'form-item-hide': showAll ? false : index > showNumber-1 }"
+      :class="{ 'form-item-hide': showAll ? false : index > showNumber - 1 }"
     />
 
     <el-form-item class="search-form-btn">
-      <el-button
-        v-if="showNumber<fields.length"
-        type="text"
-        @click="expand"
-      >
-        {{ showAll ? '收起':'展开' }}
+      <el-button v-if="showNumber < fields.length" type="text" @click="expand">
+        {{ showAll ? '收起' : '展开' }}
         <i v-if="showAll" class="el-icon-arrow-up" />
         <i v-else class="el-icon-arrow-down" />
       </el-button>
-      <el-button type="primary" @click="search">
-        查询
-      </el-button>
-      <el-button @click="reset">
-        重置
-      </el-button>
+      <el-button type="primary" @click="search"> 查询 </el-button>
+      <el-button @click="reset"> 重置 </el-button>
       <!-- <SearchSetting
         :columns="fields"
         :active-name="activeName"
@@ -47,8 +39,8 @@ import ItemRender from './ItemRender'
 
 export default {
   name: 'FormRender',
-  components: { 
-    ItemRender, 
+  components: {
+    ItemRender,
     // SearchSetting
   },
   props: {
@@ -85,7 +77,7 @@ export default {
   },
   data() {
     return {
-      showNumber: 10,
+      showNumber: 3,
       showAll: false,
       filnalFields: [],
       refreshFlag: false,
@@ -93,36 +85,37 @@ export default {
     }
   },
   computed: {
-    _form:{
-      get(){
+    _form: {
+      get() {
         return this.value
       },
-      set(val){
+      set(val) {
         this.$emit('input', val)
-      }
-    }
+      },
+    },
   },
-  watch:{
+  watch: {
     // activeName(){
     //   this.initWidth()
     // },
-    value(val){
+    value(val) {
       this.form = {
-        ...val
+        ...val,
       }
-    }
+    },
   },
-  created(){
+  created() {
     this.form = {
-      ...this.value
+      ...this.value,
     }
   },
   mounted() {
     this.init()
   },
   methods: {
-    getWidth(){
-      return document.querySelector('.search-form').getBoundingClientRect().width
+    getWidth() {
+      return document.querySelector('.search-form').getBoundingClientRect()
+        .width
     },
     init() {
       let timer = null
@@ -134,18 +127,18 @@ export default {
           }, 300)
         }
       })
-      const formRender =  this.$refs.formRender.$el
-      observe.observe(formRender);
+      const formRender = this.$refs.formRender.$el
+      observe.observe(formRender)
       this.$on('hook:beforeDestroy', () => {
         observe.disconnect()
         observe = null
       })
     },
-    initWidth(){
+    initWidth() {
       const searchWidth = this.getWidth()
       this.handleWidth(searchWidth)
     },
-    handleWidth(searchWidth){
+    handleWidth(searchWidth) {
       if (this.showAll && !this.refreshFlag) {
         return
       }
@@ -157,7 +150,7 @@ export default {
         const width = this.width + this.labelWidth
         const margin = 10
         if (totalWidth + width + margin > searchWidth) {
-          this.showNumber = index 
+          this.showNumber = index
           return
         }
         totalWidth = totalWidth + width + margin
@@ -166,24 +159,24 @@ export default {
     expand() {
       this.showAll = !this.showAll
     },
-    search(){
+    search() {
       const fields = this.filnalFields
       let data = {}
       const form = this.form
-      fields.forEach(item => {
-        if(item.endProp){
+      fields.forEach((item) => {
+        if (item.endProp) {
           const currentData = form[item.prop] || []
           data[item.prop] = currentData[0]
           data[item.endProp] = currentData[1]
-        }else{
+        } else {
           data[item.prop] = form[item.prop]
         }
       })
       this.$emit('search', data)
     },
-    reset(){
+    reset() {
       const data = {}
-      this.fields.forEach(item => {
+      this.fields.forEach((item) => {
         data[item.prop] = null
       })
       this.form = data
@@ -217,24 +210,24 @@ export default {
   .form-item-hide {
     display: none;
   }
-  .el-input__inner{
+  .el-input__inner {
     color: #222;
   }
-  .inner-label{
+  .inner-label {
     position: absolute;
     left: 15px;
     pointer-events: none;
-    color: #6e6f73;;
+    color: #6e6f73;
     font-size: 12px;
     line-height: 16px;
     top: 8px;
     background: #fff;
     transition: top 0.18s ease-in-out;
   }
-  .el-date-editor ~ .inner-label{
+  .el-date-editor ~ .inner-label {
     left: 27px;
   }
-  .is-fouce ~ .inner-label{
+  .is-fouce ~ .inner-label {
     top: -8px;
   }
 }
