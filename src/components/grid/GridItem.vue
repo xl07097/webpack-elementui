@@ -10,16 +10,32 @@ export default {
       type: [String, Number],
       default: '',
     },
+    labelWidth:{
+      type: [String, Number],
+      default: null
+    }
+  },
+  computed:{
+    style(){
+      const obj = {}
+      const {labelWidth} = this.$props
+      if(labelWidth){
+        obj.width = typeof labelWidth === 'number' ? `${labelWidth}px` : labelWidth
+      }
+      return obj
+    }
   },
   render(h){
     const {label, value} = this.$props
+    const defaultsSlot = this.$slots.default
+    const labelSlot = this.$slots.label
     return (
       <div class="grid-layout-item">
-        <div class="grid-layout-label">
-          { label }
+        <div class="grid-layout-label" style={this.style}>
+          { labelSlot || label }
         </div>
         <div class="grid-layout-value">
-          { value }
+          { defaultsSlot || value }
         </div>
       </div>
     )
@@ -39,6 +55,11 @@ export default {
 
   .grid-layout-label {
     flex: none;
+    display: inline-flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    text-align: right;
+    padding-right: 10px;
   }
 
   .grid-layout-value {

@@ -1,5 +1,7 @@
 node_modules
 /dist
+/public/test
+
 
 package-lock.json
 .idea

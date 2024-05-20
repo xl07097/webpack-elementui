@@ -15,16 +15,21 @@ export default {
         return {}
       },
     },
+    labelWidth:{
+      type: [String, Number],
+      default: null
+    }
   },
   render(h){
     const defaults = this.$slots.default
-    const {fields, value} = this.$props
+    const {fields, value, labelWidth} = this.$props
 
     return (<div class="grid-layout-wrap">
       {
         defaults ? defaults: 
           fields.map(item => {
             return <GridItem props={{
+              labelWidth: labelWidth,
               label: item.label,
               value: value[item.prop],
             }} />

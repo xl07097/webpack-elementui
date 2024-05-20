@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GridLayout :fields="fields" :value="value" />
+    <GridLayout :fields="fields" :value="value" label-width="100px" />
   </div>
 </template>
 
