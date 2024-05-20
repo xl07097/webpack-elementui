@@ -22,7 +22,7 @@ export default {
           return
         }
         this.hasDialog = true
-        this.$alert('因版本更新，页面需重新载入以加载对应资源！', '提示', {
+        this.$alert('因版本更新，页面需重新载入以加载对应资源！', this.$t('tip'), {
           confirmButtonText: '确定',
           callback: () => {
             window.location.reload(true)

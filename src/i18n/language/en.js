@@ -1,6 +1,7 @@
-module.exports =  {
-  dialog:{
+export default {
+  dialog: {
     confirm: 'Confirm',
-    cancel:'Cancel'
-  }
+    cancel: 'Cancel',
+  },
+  tip: 'tip',
 }
