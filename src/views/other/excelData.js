@@ -1,6 +1,6 @@
 export const title = [
   {
-    value: '成功人力资源集团服务计算单\n计算单',
+    value: '成功人力资源集团服务计算单',
     rowSpan: 1,
     span: 9,
     height: 30,
@@ -9,7 +9,7 @@ export const title = [
     align: 'center',
     fontWeight: 'normal',
     alignVertical: 'center',
-    backgroundColor: '#ff0000'
+    backgroundColor: '#ff0000',
   },
 ]
 
@@ -31,7 +31,9 @@ export const row2 = [
     fontSize: 20,
     align: 'left',
     alignVertical: 'center',
-  },null,null,
+  },
+  null,
+  null,
   {
     value: '生成日期',
     rowSpan: 1,
@@ -49,7 +51,7 @@ export const row2 = [
     fontSize: 11,
     align: 'left',
     alignVertical: 'center',
-  }
+  },
 ]
 
 export const row3 = [
@@ -71,7 +73,9 @@ export const row3 = [
     fontSize: 11,
     align: 'left',
     alignVertical: 'center',
-  },null,null,
+  },
+  null,
+  null,
   {
     value: '结算期间',
     rowSpan: 1,
@@ -89,7 +93,10 @@ export const row3 = [
     fontSize: 11,
     align: 'left',
     alignVertical: 'center',
-  },null,null,null,
+  },
+  null,
+  null,
+  null,
 ]
 
 export const row4 = [
@@ -100,7 +107,7 @@ export const row4 = [
     height: 20,
     align: 'center',
     alignVertical: 'center',
-  }
+  },
 ]
 export const row5 = [
   {
@@ -109,5 +116,5 @@ export const row5 = [
     span: 9,
     height: 20,
     alignVertical: 'center',
-  }
+  },
 ]

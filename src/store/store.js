@@ -1,15 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { storage } from '@/utils/storage'
+import app from './modules/app'
+import permission from './modules/permission'
+import tagsView from './modules/tagsView'
 
 Vue.use(Vuex)
 
-const context = require.context('./modules', false, /\.js$/)
-const modules = context.keys().reduce((acc, key) => {
-  const k = key.replace(/(\.\/|\.js)/g, '')
-  acc[k] = context(key).default
-  return acc
-}, {})
+// const context = require.context('./modules', false, /\.js$/)
+// const modules = context.keys().reduce((acc, key) => {
+//   const k = key.replace(/(\.\/|\.js)/g, '')
+//   acc[k] = context(key).default
+//   return acc
+// }, {})
 
 export default new Vuex.Store({
   state: {
@@ -24,7 +27,11 @@ export default new Vuex.Store({
     },
   },
   // 模块化
-  modules: modules,
+  modules: {
+    app,
+    permission,
+    tagsView,
+  },
 })
 
 // 正则提取字符串中的字符

@@ -3,7 +3,7 @@ import { baseStorage, storage } from '@/utils/storage'
 export default {
   namespaced: true,
   state: {
-    locale: baseStorage.getItem('lang') || 'zh', // 菜单树
+    locale: baseStorage.getItem('lang'),
   },
   getters: {
     getAppData: (state) => (type) => {
@@ -12,11 +12,11 @@ export default {
   },
   mutations: {
     setLocale(state, payload) {
-      state.locale = payload || 'zh'
+      state.locale = payload
     },
-    setAppData(state, {type, data}){
+    setAppData(state, { type, data }) {
       state[type] = data
       storage.setItem(type, data)
-    }
+    },
   },
 }
