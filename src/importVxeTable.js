@@ -13,8 +13,8 @@ import {
   // Export,
   // Keyboard,
   // Validator,
-  Header,
-  Footer,
+  // Header,
+  // Footer,
 
   // 可选组件
   Column,
@@ -53,8 +53,9 @@ import {
 // });
 
 // 表格功能
-Vue.use(Header)
-  .use(Footer)
+Vue
+  // .use(Header)
+  // .use(Footer)
   // .use(Icon)
   .use(Filter)
   .use(Edit)
