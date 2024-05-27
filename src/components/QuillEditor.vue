@@ -4,6 +4,7 @@
 
 <script>
 import Quill from 'quill'
+import QuillBetterTable from 'quill-better-table'
 import 'quill/dist/quill.core.css'
 import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
@@ -32,6 +33,7 @@ export default {
           [{ color: [] }, { background: [] }], // 字体颜色、字体背景颜色
           [{ align: [] }], // 对齐方式
           ['link', 'image'], // 链接、图片、视频
+          ['better-table']
         ]
       },
     },
@@ -57,9 +59,26 @@ export default {
     }
   },
   mounted() {
+    Quill.register({
+      'modules/better-table': QuillBetterTable
+    }, true)
+
     const options = {
       theme: this.theme,
       modules: {
+        table: false,  // disable table module
+        'better-table': {
+          operationMenu: {
+            items: {
+              unmergeCells: {
+                text: 'Another unmerge cells name'
+              }
+            }
+          }
+        },
+        keyboard: {
+          bindings: QuillBetterTable.keyboardBindings
+        },
         toolbar: this.toolbar,
       },
       placeholder: this.placeholder,
