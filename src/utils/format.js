@@ -43,25 +43,6 @@ export const customerCalc = (columnList, param) => {
   return sums
 }
 
-/**
- * 数值千分位表示
- * @param {number|string} value
- * @param {number?} fixed
- * @returns {string}
- */
-export const numberFormat = (value, fixed) => {
-  if (value === null || value === undefined || value === '') {
-    return ''
-  }
-  // 保留小数位，格式化浮点数
-  if (fixed) {
-    return formatFloat(value, fixed)
-  }
-
-  // 不保留小数位，格式化整数
-  return formatInteger(value)
-}
-
 //==========  /\B(?=(\d{3})+(?!\d))/g
 
 /**
@@ -85,6 +66,25 @@ export const formatFloat = (value, fixed) => {
     .replace(/(\d)(?=(\d{3})+\.)/g, '$1,')
 }
 
+/**
+ * 数值千分位表示
+ * @param {number|string} value
+ * @param {number?} fixed
+ * @returns {string}
+ */
+export const numberFormat = (value, fixed) => {
+  if (value === null || value === undefined || value === '') {
+    return ''
+  }
+  // 保留小数位，格式化浮点数
+  if (fixed) {
+    return formatFloat(value, fixed)
+  }
+
+  // 不保留小数位，格式化整数
+  return formatInteger(value)
+}
+
 export const commonFormatter = (cellValue) => {
   if (cellValue || cellValue === 0) {
     const value = String(cellValue)
@@ -98,9 +98,11 @@ export const commonFormatter = (cellValue) => {
 
 /**
  * 格式化百分比
- * @param {*} cellValue
- * @param {*} fixed
+ * @param {String | Number} cellValue
+ * @param {number} fixed=2
  * @returns
+ *
+ * @example formatPercent(0.123456, 2) => 12.35%
  */
 export const formatPercent = (cellValue, fixed = 2) => {
   if (cellValue || cellValue === 0) {

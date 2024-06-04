@@ -49,7 +49,7 @@
     "vue-router": "^3.5.2",
     "vuedraggable": "^2.24.3",
     "vuex": "^3.6.2",
-    "vxe-table": "^3.8.6",
+    "vxe-table": "^3.8.7",
     "write-excel-file": "^2.0.1",
     "xe-utils": "^3.5.26",
     "xgplayer": "^3.0.17",
