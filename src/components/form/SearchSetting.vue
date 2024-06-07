@@ -49,11 +49,9 @@
               </el-checkbox>
               <span
                 v-show="!item.fixed"
-                class="dargBtn"
+                class="el-icon-sort dargBtn"
                 style="font-size: 20px; cursor: move"
-              >
-                <img style="width:20px;height:20px;" src="@/assets/images/unordered-list.png" alt="unordered">
-              </span>
+              />
             </div>
           </transition-group>
         </Draggable>
