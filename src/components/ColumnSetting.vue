@@ -1,69 +1,93 @@
 <template>
   <el-popover
-    :key="keys"
     placement="bottom-end"
     title=""
-    width="240"
+    width="260"
     trigger="click"
     popper-class="table-column-popover"
-    content="这是一段内容,这是一段内容,这是一段内容,这是一段内容。"
+    content="表头字段设置"
+    @after-leave="afterLeave"
   >
-    <el-checkbox
-      v-model="checkAll"
-      class="table-column-all-check"
-      label="全选"
-      @change="changeAll"
-    />
-    <el-checkbox-group
-      v-model="checkList"
-      class="table-column-filter"
-      size="mini"
-      @change="changeSingle"
-    >
-      <Draggable
-        v-model="columnsList"
-        scroll
-        handle=".dargBtn"
-        filter=".undraggable"
+    <div class="el-popover__title">
+      自定义设置
+    </div>
+    <div class="el-popover__sub-title">
+      可以设置常用字段，保存设置
+    </div>
+    <div :key="keys" class="table-column-check">
+      <el-checkbox
+        v-model="checkAll"
+        class="table-column-all-check"
+        label="全选"
+        @change="changeAll"
+      />
+      <el-checkbox-group
+        v-model="checkList"
+        class="table-column-filter"
+        size="mini"
+        @change="changeSingle"
       >
-        <transition-group>
-          <div
-            v-for="item of columnsList"
-            :key="item.field"
-            :class="[item.fixed ? 'undraggable' : '']"
-            style="
+        <Draggable
+          v-model="columnsList"
+          scroll
+          handle=".dargBtn"
+          filter=".undraggable"
+        >
+          <transition-group>
+            <div
+              v-for="item of columnsList"
+              :key="item.field"
+              :class="[item.fixed ? 'undraggable' : '']"
+              style="
               display: flex;
               align-items: center;
               justify-content: space-between;
             "
-          >
-            <el-checkbox :label="item.field">
-              {{ item.title }}
-            </el-checkbox>
-            <span
-              v-show="!item.fixed"
-              class="el-icon-sort dargBtn"
-              style="font-size: 20px; cursor: move"
-            />
-          </div>
-        </transition-group>
-      </Draggable>
-    </el-checkbox-group>
-    <div class="table-column-popover-footer">
-      <el-button type="text" @click="reset">还原</el-button>
-      <el-button type="text" @click="confirm(true)">确定</el-button>
+            >
+              <el-checkbox :label="item.field">
+                {{ item.title }}
+              </el-checkbox>
+              <span
+                v-show="!item.fixed"
+                class="dargBtn"
+                style="font-size: 20px; cursor: move"
+              >
+                <img style="width:20px;height:20px;" src="@/assets/images/unordered-list.png" alt="unordered">
+              </span>
+            </div>
+          </transition-group>
+        </Draggable>
+      </el-checkbox-group>
     </div>
-    <el-button slot="reference">配置</el-button>
+    <div class="table-column-popover-footer">
+      <el-link :underline="false" @click="reset">
+        重置
+      </el-link>
+      <el-link type="primary" :underline="false" @click="confirm(true)">
+        确定
+      </el-link>
+    </div>
+    <el-tooltip
+      slot="reference"
+      effect="dark"
+      content="表头字段设置"
+      placement="top"
+    >
+      <el-button
+        style="padding: 8px 10px;font-size:14px;"
+        icon="el-icon-setting"
+        plain
+        size="mini"
+      />
+    </el-tooltip>
   </el-popover>
 </template>
 
 <script>
-// import { baseStorage } from '@/utils/storage'
-import localforage from 'localforage'
-import Draggable from 'vuedraggable'
-import { deepClone } from '@/utils/commons'
+import { baseStorage } from '@/utils/storage'
+import draggable from 'vuedraggable'
 export default {
-  components: { Draggable: Draggable },
+  components: { Draggable: draggable },
   props: {
     columns: {
       type: Array,
@@ -72,7 +96,7 @@ export default {
       },
     },
     activeName: {
-      type: String,
+      type: [String, Number],
       default: '',
     },
   },
@@ -89,27 +113,39 @@ export default {
       return `${path.at(-2)}_${path.at(-1)}`
     },
     keys() {
-      return this.activeName || '99'
+      return this.activeName || '99' // this.columnsList.map((item) => item.field).join('')
     },
   },
   watch: {
     columns() {
-      this.init().then(this.confirm)
+      this.init()
+      this.confirm()
     },
   },
   created() {
-    this.init().then(this.confirm)
+    this.init()
+    this.confirm()
   },
   methods: {
-    async init() {
+    init() {
       // 1. 获取本地存储的table字段
-      // const storageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
-      const storageColumns = await localforage.getItem(`${this.key}${this.activeName}`) || []
+      let storageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
       // 2. 获取页面传递的table字段
       const columns = this.columns
+
+      storageColumns = storageColumns.map((item) => {
+        const findItem 
+        = columns.find((sf) => sf.field === item.field)
+        let title = findItem ? findItem.title : item.title
+        return {
+          ...item,
+          title,
+        }
+      })
+      
       // 3. 判断本地存储数据，为0 代表没有存储，直接使用页面传递进来的，并全选
       if (storageColumns.length === 0) {
-        this.columnsList = deepClone(columns).map(item => {
+        this.columnsList = columns.map(item => {
           return {
             title: item.title,
             field: item.field,
@@ -120,7 +156,7 @@ export default {
         this.checkAll = true
       } else {
         // 4. 备份页面传递进来的 field 数组
-        const originProps = columns.map((item) => item.field)
+        const originFields = columns.map((item) => item.field)
         // 5. 页面传递的配置遍历，进行字段的增删
         columns.forEach((item, index) => {
         // 6. 判断当前字段在本地存储是否存在
@@ -152,10 +188,10 @@ export default {
             }
           }
         })
-
         // 10. 本地存储的配置遍历，进行字段的删
-        const filterColumns = storageColumns.filter((item) => {
-          return originProps.includes(item.field)
+        const baseFieldsList = [...new Set(storageColumns.map(item => item.field))]
+        const filterColumns =  storageColumns.filter((item) => {
+          return originFields.includes(item.field) && (baseFieldsList.length && baseFieldsList.includes(item.field))
         })
         this.columnsList = filterColumns
         // 11. 获取选中的字段
@@ -179,7 +215,7 @@ export default {
     },
     reset() {
       this.checkList = this.columns.map(item => item.field)
-      this.columnsList = deepClone(this.columns).map(item => {
+      this.columnsList = this.columns.map(item => {
         return {
           title: item.title,
           field: item.field,
@@ -187,6 +223,7 @@ export default {
         }
       })
       this.checkAll = true
+      baseStorage.removeItem(`${this.key}${this.activeName}`)
       this.$nextTick(() => {
         this.confirm()
       })
@@ -212,25 +249,17 @@ export default {
       const columns = this.columnsList.filter((item) => checkList.includes(item.field)).map(item => {
         return originColumns.find(oc => oc.field === item.field)
       })
-      if (flag == true) {
-        // baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
-        localforage.setItem(`${this.key}${this.activeName}`, storageColumns)
+      if (flag == true || this.columnsList.length > 0) {
         this.$emit('confirm', columns)
-
-      } else if (this.columnsList.length > 0) {
-        // baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
-        localforage.setItem(`${this.key}${this.activeName}`, storageColumns)
-        this.$emit('confirm', columns)
+        // 1. 获取本地存储的table字段
+        const originStorageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
+        if (originStorageColumns.length || flag) {
+          baseStorage.setItem(`${this.key}${this.activeName}`, storageColumns)
+        }
       }
     },
     afterLeave() {
-      // 17. 这个函数判断是否点击确认按钮，否：重置排序
-      // const storageColumns = baseStorage.getItem(`${this.key}${this.activeName}`) || []
-      // const storageKey = storageColumns.map(item => item.field).join('')
-      // const columnsKey = this.columnsList.map(item => item.field).join('')
-      // if (storageKey !== columnsKey) {
       this.init()
-      // }
     },
   },
 }
@@ -239,19 +268,35 @@ export default {
 <style lang="scss">
 .table-column-popover {
   padding: 0;
+  .el-popover__title {
+    margin-bottom: 0;
+    margin-top: 10px;
+    padding: 0 14px;
+  }
+  .el-popover__sub-title {
+    margin-top: 4px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #929292;
+    padding: 0 14px 6px;
+    border-bottom: 1px solid #e3e3e3;
+  }
+  .table-column-check {
+    max-height: 300px;
+    overflow-y: auto;
+  }
   .table-column-all-check {
     display: flex;
     align-items: center;
-    height: 44px;
+    height: 34px;
     padding: 0 1em;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #dadce0;
+    // margin-bottom: 4px;
+    // border-bottom: 1px solid #dadce0;
   }
   .table-column-filter {
     display: flex;
     flex-direction: column;
-    max-height: 300px;
-    overflow-y: auto;
+
     .el-checkbox {
       flex: 1;
       margin: 0;
@@ -259,24 +304,23 @@ export default {
       align-items: center;
       height: 34px;
       padding: 0 1em;
-    }
-    .el-checkbox:hover {
-      background: #f5f7fa;
       cursor: pointer;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
-    .el-checkbox:active {
-      cursor: pointer;
+    .el-checkbox__label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     .dargBtn {
-      width: 40px;
+      width: 36px;
       align-self: stretch;
       vertical-align: middle;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-    }
-    .dargBtn:hover {
-      background: #f5f7fa;
     }
   }
   .table-column-popover-footer {
@@ -284,7 +328,7 @@ export default {
     justify-content: space-between;
     margin-top: 4px;
     border-top: 1px solid #dadce0;
-    .el-button {
+    .el-link {
       padding: 10px 16px;
       font-size: 14px;
       flex: 1;
