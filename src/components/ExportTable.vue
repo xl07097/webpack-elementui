@@ -8,33 +8,19 @@
     :visible="visible"
     @close="close"
   >
-    <div v-if="button.length === 0">
-      <ElButton :loading="loading" type="primary" @click="exportData(1)">
-        导出所有数据
-      </ElButton>
+    <ElButton :loading="loading" type="primary" @click="exportData(1)">
+      导出所有数据
+    </ElButton>
       &emsp;
-      <ElButton
-        :loading="loading"
-        :disabled="selectIds.length == 0"
-        @click="exportData(2)"
-      >
-        导出表格所选数据
-      </ElButton>
-    </div>
-    <template v-else>
-      <ElButton
-        v-for="item of buttons"
-        :key="item.name"
-        :loading="loading"
-        :type="item.type"
-        :disabled="
-          item.selectDisable ? (selectIds.length===0) : false
-        "
-        @click="custom(item)"
-      >
-        {{ item.name }}
-      </ElButton>
-    </template>
+    <ElButton
+      :loading="loading"
+      :disabled="selectIds.length == 0"
+      @click="exportData(2)"
+    >
+      导出表格所选数据
+    </ElButton>
+
+    <slot name="extend" />
   </ElDialog>
 </template>
 <script>
@@ -81,12 +67,6 @@ export default {
       type: String,
       default: 'downloadPost',
     },
-    buttons: {
-      type: Array,
-      default() {
-        return []
-      },
-    },
   },
   data() {
     return {
@@ -109,34 +89,20 @@ export default {
         ...this.data,
       }
       if (item.flag === 2) {
-        req[item.selectName || this.selectName] = this.selectIds
+        req[item.selectName] = this.selectIds
       }
       this.loading = true
-      // 文件流下载
-      if (item.stream) {
-        http[item.method](item.url, req)
-          .then(({ code }) => {
-            this.loading = false
-            if (code === 0) {
-              this.close()
-            }
-          })
-          .catch(() => {
-            this.loading = false
-          })
-        return
-      }
-      // 文件路径
-      http
-        .post(item.url, req)
+      http[item.method](item.url, req)
         .then(({ code, data }) => {
           if (code === 0) {
-            http.downloadData('open/file/download', data)
+            // 返回的是文件路径，不是文件流
+            if (!item.stream) {
+              http.downloadData('open/file/download', data)
+            }
             this.close()
           }
-          this.loading = false
         })
-        .catch(() => {
+        .finally(() => {
           this.loading = false
         })
     },
