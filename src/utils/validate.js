@@ -25,11 +25,15 @@ export default class Validate {
   }
 
   static isIdCard(value) {
-    return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value)
+    return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(
+      value
+    )
   }
 
-  static isEmail(value){
-    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(value)
+  static isEmail(value) {
+    return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      value
+    )
   }
 
   static isExcel(name) {
@@ -45,7 +49,10 @@ export default class Validate {
   }
 
   static isOutTimeInteval(end, start, limit) {
-    return new Date(end).getTime() - new Date(start).getTime() > limit * 1000 * 24 * 60 * 60
+    return (
+      new Date(end).getTime() - new Date(start).getTime() >
+      limit * 1000 * 24 * 60 * 60
+    )
   }
 
   static fileChanged(file) {
@@ -74,18 +81,18 @@ export const formValidate = (formRef, validPropArr, cb) => {
     return
   }
   let count = 0
-  let flag = false
+  let isValid = true // 是否验证通过
   formRef.validateField(validPropArr, (err) => {
     count++
     if (err) {
-      flag = true
+      isValid = true
     }
     if (count === validPropArr.length) {
-      if (flag) {
+      if (isValid) {
+        cb()
+      } else {
         $Info.warning('请填写完整表单')
-        return
       }
-      cb()
     }
   })
 }
