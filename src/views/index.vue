@@ -2,16 +2,23 @@
   <div class="index">
     <!-- <FormRender v-model="searchData" :fields="fields" />
     <el-button @click="gets"> 获取 </el-button>
-    <el-button @click="test">测试</el-button>
-    <el-button @click="gets1">获取</el-button> -->
+    <el-button @click="test">测试</el-button> -->
+    <el-button @click="gets1">获取</el-button>
+    <Verify
+      ref="verify"
+      :captcha-type="'blockPuzzle'"
+      :img-size="{ width: '400px', height: '200px' }"
+      @success="login"
+    />
   </div>
 </template>
 <script>
 import FormRender from '@/components/form/FormRender'
 import { post } from '@/http/request'
+import Verify from '@/components/verifition/Verify.vue'
 export default {
   name: 'AppIndex',
-  components: { FormRender },
+  components: { Verify },
   data() {
     return {
       searchData: {
@@ -57,7 +64,7 @@ export default {
           config: {
             request: {
               url: 'sysMenu/tree',
-            }
+            },
           },
         },
         { type: 'year', prop: 'year', label: '年' },
@@ -75,18 +82,16 @@ export default {
         },
         { type: 'date', prop: 'date', label: 'date' },
       ],
-      lk: ''
+      lk: '',
     }
   },
-  mounted() {
-
-  },
+  mounted() {},
   methods: {
     gets() {
       console.log(this.searchData)
     },
-    test(){
-      const key =  `id_${~~(Math.random()*100000)}`
+    test() {
+      const key = `id_${~~(Math.random() * 100000)}`
       localStorage.setItem(key, key)
       // console.log(this.$store)
       // this.$store.commit('app/setAppData', {
@@ -94,9 +99,11 @@ export default {
       //   data: []
       // })
     },
-    gets1(){
-      console.log(this.$store.getters['app/getAppData']('dict'))
-    }
+    gets1() {
+      this.$refs.verify.show()
+      // console.log(this.$store.getters['app/getAppData']('dict'))
+    },
+    login() {},
   },
 }
 </script>
