@@ -13,8 +13,8 @@
     "SharedArrayBuffer": "readonly"
   },
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "parser": "babel-eslint",
+    "ecmaVersion": 2024,
+    "parser": "@typescript-eslint/parser",
     "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
