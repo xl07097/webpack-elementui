@@ -4,21 +4,21 @@
     <el-button @click="gets"> 获取 </el-button>
     <el-button @click="test">测试</el-button> -->
     <el-button @click="gets1">获取</el-button>
-    <Verify
+    <!-- <Verify
       ref="verify"
       :captcha-type="'blockPuzzle'"
       :img-size="{ width: '400px', height: '200px' }"
       @success="login"
-    />
+    /> -->
   </div>
 </template>
 <script>
 import FormRender from '@/components/form/FormRender'
 import { post } from '@/http/request'
-import Verify from '@/components/verifition/Verify.vue'
+// import Verify from '@/components/verifition/Verify.vue'
 export default {
   name: 'AppIndex',
-  components: { Verify },
+  // components: { Verify },
   data() {
     return {
       searchData: {
