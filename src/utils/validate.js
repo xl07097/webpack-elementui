@@ -85,7 +85,7 @@ export const formValidate = (formRef, validPropArr, cb) => {
   formRef.validateField(validPropArr, (err) => {
     count++
     if (err) {
-      isValid = true
+      isValid = false
     }
     if (count === validPropArr.length) {
       if (isValid) {
