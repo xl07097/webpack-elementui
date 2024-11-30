@@ -25,7 +25,7 @@ export default {
     action: {
       type: Boolean,
       default: true,
-    }
+    },
   },
   data() {
     return {
@@ -55,10 +55,10 @@ export default {
       selectionList: [],
     }
   },
-  watch:{
-    columns(){
+  watch: {
+    columns() {
       this.key = Date.now().toString(32)
-    }
+    },
   },
   methods: {
     onCheckboxChange({ records }) {
@@ -86,13 +86,13 @@ export default {
     showColumn(fieldOrColumn) {
       this.$refs.tableRef.showColumn(fieldOrColumn)
     },
-    refreshColumn(){
+    refreshColumn() {
       this.$refs.tableRef.refreshColumn()
     },
-    reloadColumn(columns){
+    reloadColumn(columns) {
       this.$refs.tableRef.reloadColumn(columns)
     },
-    loadColumn(columns){
+    loadColumn(columns) {
       this.$refs.tableRef.loadColumn(columns)
     },
   },
@@ -102,7 +102,7 @@ export default {
     return (
       <vxe-table
         ref="tableRef"
-        key= {this.key}
+        key={this.key}
         class="xl-table"
         data={data}
         size="small"
@@ -142,7 +142,7 @@ export default {
   //   overflow-x: hidden !important;
   //   padding-bottom: 17px;
   // }
-  .vxe-table--fixed-left-wrapper .vxe-table--body-wrapper{
+  .vxe-table--fixed-left-wrapper .vxe-table--body-wrapper {
     width: auto;
   }
 }

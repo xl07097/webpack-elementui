@@ -6,10 +6,14 @@ import store from '@/store/store'
 
 import './directives/auth'
 
-import './styles/theme-variable.scss';
+import './styles/theme-variable.scss'
 import './importComponent'
 import './importVxeTable'
-import './styles/vxe-table.scss'
+import 'vxe-table/lib/style.css'
+// 导入主题变量，也可以重写主题变量
+// import 'vxe-table/styles/index.scss'
+// import 'vxe-pc-ui/styles/cssvar.scss'
+
 import App from './App'
 import './router/permission'
 import alert from './components/MessageBox/alert'

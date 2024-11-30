@@ -30,10 +30,18 @@
     [
       "import",
       {
-        "libraryName": "vxe-table/packages",
-        "style": false // 样式是否也按需加载
+        "libraryName": "vxe-table",
+        "style": true
       },
       "vxe-table"
+    ],
+    [
+      "import",
+      {
+        "libraryName": "vxe-pc-ui",
+        "style": true
+      },
+      "vxe-pc-ui"
     ]
   ]
 }
