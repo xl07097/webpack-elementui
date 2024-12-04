@@ -29,6 +29,7 @@
     "docx": "^9.0.2",
     "echarts": "^5.5.1",
     "element-ui": "^2.15.14",
+    "es-toolkit": "^1.29.0",
     "exceljs": "^4.4.0",
     "gsap": "^3.12.5",
     "html-to-image": "^1.11.11",
